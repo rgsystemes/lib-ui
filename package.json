@@ -1,0 +1,81 @@
+{
+  "name": "@rgsystem/lib-ui",
+  "version": "1.0.0",
+  "description": "React components library for the dashboard",
+  "main": "lib/index.js",
+  "browser": "lib/index.umd.js",
+  "module": "lib/index.es.js",
+  "files": [
+    "/lib"
+  ],
+  "scripts": {
+    "lint": "eslint --ext .js --ext .jsx src/",
+    "storybook": "start-storybook -p 6006",
+    "test": "jest",
+    "prepublishOnly": "rm -rf lib && npm run build",
+    "prebuild": "npm run test:generate-output",
+    "build": "build-storybook -o docs/ && rollup -c",
+    "postbuild": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgsystemes/lib-ui.git"
+  },
+  "keywords": [
+    "react",
+    "rgsystem",
+    "components",
+    "ui"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rgsystemes/lib-ui/issues"
+  },
+  "homepage": "https://github.com/rgsystemes/lib-ui#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-a11y": "^5.2.1",
+    "@storybook/addon-actions": "^5.2.1",
+    "@storybook/addon-jest": "^5.2.1",
+    "@storybook/addon-knobs": "^5.2.1",
+    "@storybook/addon-links": "^5.2.1",
+    "@storybook/addon-notes": "^5.2.1",
+    "@storybook/addons": "^5.2.1",
+    "@storybook/react": "^5.2.1",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
+    "core-js": "^3.2.1",
+    "eslint": "^6.5.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.15.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^24.9.0",
+    "plop": "^2.4.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "rollup": "^1.22.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-uglify": "^6.0.3",
+    "styled-components": "^4.4.0",
+    "styled-system": "^5.1.2"
+  },
+  "peerDependencies": {
+    "react": "^16.x",
+    "react-dom": "^16.x",
+    "styled-components": "^4.x",
+    "styled-system": "^5.x"
+  },
+  "dependencies": {}
+}

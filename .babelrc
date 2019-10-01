@@ -1,0 +1,14 @@
+{
+  "presets": [
+    ["@babel/preset-react"],
+    [
+      "@babel/preset-env",
+      {
+        "forceAllTransforms": true,
+        "useBuiltIns":        "usage",
+        "corejs":             { "version": 3 }
+      }
+    ]
+  ],
+  "plugins": [["styled-components", { "fileName": false, "pure": true }]]
+}
