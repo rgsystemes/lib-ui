@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
-import {{ pascalCase name }} from './index'
+import Pagination from './index'
 
-// TODO: implement test for {{ pascalCase name }}
-it.todo('{{ pascalCase name }} should be tested')
+// TODO: implement test for Pagination
+it.todo('Pagination')

@@ -7,7 +7,7 @@ import {{ pascalCase name }} from './index'
 import markdown from './README.md'
 
 export default {
-  title: '{{ pascalCase name }}',
+  title: '{{ type }}/{{ pascalCase name }}',
 }
 
 export const {{ camelCase name }} = () => (

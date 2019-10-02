@@ -6,4 +6,4 @@ import userEvent from '@testing-library/user-event'
 import Button from './index'
 
 // TODO: implement test for Button
-it.todo('Button')
+it.todo('Button should be tested')
