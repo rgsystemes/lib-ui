@@ -8,6 +8,11 @@
   "files": [
     "/lib"
   ],
+  "storybook-deployer": {
+    "gitUsername": "Mesteche",
+    "gitEmail": "meztchek@gmail.com",
+    "commitMessage": "Deploy Storybook to GitHub Pages"
+  },
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "lint": "eslint --ext .js --ext .jsx src/",
