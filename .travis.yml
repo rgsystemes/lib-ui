@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "node"
+
+after_success:
+  - git config --global user.name "mesteche"
+  - git config --global user.email "mesteche@users.noreply.github.com"
+  - npm run deploy
