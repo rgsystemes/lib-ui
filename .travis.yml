@@ -5,4 +5,6 @@ node_js:
 after_success:
   - git config --global user.name "mesteche"
   - git config --global user.email "mesteche@users.noreply.github.com"
+  - git remote rm origin
+  - git remote add origin https://mesteche:${GH_TOKEN}@github.com/mesteche/lib-ui.git
   - npm run deploy
