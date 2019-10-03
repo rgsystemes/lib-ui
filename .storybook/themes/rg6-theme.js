@@ -10,3 +10,7 @@ export const colors = {
   midgray:    '#adadad',
   gray:       '#777',
 }
+
+export const shadows = {
+  m: '0 4px 16px rgba(0,0,0,.175)',
+}

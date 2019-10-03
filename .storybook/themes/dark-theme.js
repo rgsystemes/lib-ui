@@ -6,7 +6,7 @@ export const colors = {
   primary:    '#009cb4',
   secondary:  '#fff',
   highlight:  '#00ddff',
-  gray:       '#222',
+  gray:       '#333',
   lightgray:  '#111',
-  midgray:    '#ddd',
+  midgray:    '#222',
 }

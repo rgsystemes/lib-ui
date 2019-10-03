@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { color, border, space } from 'styled-system'
+import { color, border, space, typography } from 'styled-system'
 
 const Input = styled.input`
   box-sizing: border-box;
@@ -7,6 +7,7 @@ const Input = styled.input`
   ${color}
   ${border}
   ${space}
+  ${typography}
 `
 
 Input.defaultProps = {
@@ -16,6 +17,7 @@ Input.defaultProps = {
   px:           'l',
   py:           'm',
   borderRadius: '1',
+  lineHeight:   '1',
 }
 
 export default Input

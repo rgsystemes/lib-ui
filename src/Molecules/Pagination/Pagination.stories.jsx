@@ -10,16 +10,34 @@ export default {
   title: 'Molecules/Pagination',
 }
 
-export const pagination = () => (
+export const pagination = () => <>
   <Pagination
-    onPrevious={action('previous')}
-    onFirst={action('first')}
-    onNext={action('Next')}
+    DisplayValue={({ from, to, total }) => `${from} - ${to} sur ${total}`}
+    DisplayOption={({ count }) => `${count} par page`}
+
+    onPageChange={action('page changed')}
+    onSizeChange={action('size changed')}
+
     size={number('Page size', 10, { min: 1, step: 1 })}
     total={number('Result count', 10, { min: 1, step: 1 })}
     currentPage={number('Current page', 1, { min: 1, step: 1 })}
+    sizeOptions={['10', '20', '30', '40']}
   />
-)
+  <br/>
+  <Pagination
+    DisplayValue={({ from, to, total }) => `${from} - ${to} of ${total}`}
+    DisplayOption={({ count }) => `${count} per page`}
+
+    onPageChange={action('page changed')}
+    onSizeChange={action('size changed')}
+
+    size={number('Page size', 10, { min: 1, step: 1 })}
+    total={number('Result count', 10, { min: 1, step: 1 })}
+    currentPage={number('Current page', 1, { min: 1, step: 1 })}
+    sizeOptions={['10', '20', '30', '40']}
+  />
+</>
+
 pagination.story = {
   parameters: {
     notes: { markdown },
