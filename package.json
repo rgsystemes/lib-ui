@@ -9,14 +9,15 @@
     "/lib"
   ],
   "scripts": {
-    "lint": "eslint --ext .js --ext .jsx src/",
     "storybook": "start-storybook -p 6006",
+    "lint": "eslint --ext .js --ext .jsx src/",
     "test": "jest",
-    "prepublishOnly": "rm -rf lib && npm run build",
-    "prebuild": "npm run test:generate-output",
-    "build": "build-storybook -o docs/ && rollup -c",
+    "build": "rollup -c",
     "postbuild": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-    "test:generate-output": "jest --json --outputFile=.jest-test-results.json"
+    "prepublishOnly": "rm -rf lib && npm run build",
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
+    "predeploy": "npm run test:generate-output",
+    "deploy": "storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "@storybook/addon-notes": "^5.2.1",
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.2.0",
     "@testing-library/react-hooks": "^2.0.1",
