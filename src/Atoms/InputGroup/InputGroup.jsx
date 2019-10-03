@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { border } from 'styled-system'
+import { border, color } from 'styled-system'
 
 import Input from '../Input'
 
@@ -7,6 +7,7 @@ const InputGroup = styled.div`
   display:  inline-block;
   border:   1px solid;
   ${border}
+  ${color}
 
   & > ${Input} {
     border-width:  0;
