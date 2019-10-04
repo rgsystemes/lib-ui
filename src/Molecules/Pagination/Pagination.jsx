@@ -1,21 +1,22 @@
 import React from 'react'
 import { InputGroup, Button, Select } from '../../Atoms'
 
-const display = ({ from, to, total }) => `${from} - ${to} of ${total}`
+const displayValue = ({ from, to, total }) => `${from} - ${to} of ${total}`
+const displayOption = ({ count }) => `${count} per page`
 
 const Pagination = ({
   onPageChange,
   onSizeChange,
-  DisplayValue = display,
-  DisplayOption,
+  DisplayValue = displayValue,
+  DisplayOption = displayOption,
   currentPage = 1,
   size = 0,
   total = 0,
   sizeOptions = [],
 }) => (
   <InputGroup>
-    <Button onClick={() => onPageChange(1)}>«</Button>
-    <Button onClick={() => onPageChange(currentPage - 1)}>‹</Button>
+    <Button data-testid='first' onClick={() => onPageChange(1)}>«</Button>
+    <Button data-testid='prev' onClick={() => onPageChange(currentPage - 1)}>‹</Button>
     <Select
       color='highlight'
       onChange={onSizeChange}
@@ -29,7 +30,7 @@ const Pagination = ({
         Component: ({ children }) => <DisplayOption count={children} />,
       }))}
     />
-    <Button onClick={() => onPageChange(currentPage + 1)}>›</Button>
+    <Button data-testid='next' onClick={() => onPageChange(currentPage + 1)}>›</Button>
   </InputGroup>
 )
 

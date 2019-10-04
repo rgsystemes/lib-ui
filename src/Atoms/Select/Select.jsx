@@ -40,7 +40,7 @@ Options.defaultProps = {
   bg:           'background',
 }
 
-const Selector = ({
+const Select = ({
   displayValue, options = [], openOnTop, onChange,
   ...props
 }) => {
@@ -48,11 +48,11 @@ const Selector = ({
   const ref = useOnClickOutside(() => setOpen(false))
 
   return (
-    <Container {...props} ref={ref} onClick={() => setOpen(!open)}>
+    <Container data-testid='select' {...props} ref={ref} onClick={() => setOpen(!open)}>
       {displayValue}
       <Options open={open} openOnTop={openOnTop}>
         {options.map(props => (
-          <Option {...props} onChange={value => {
+          <Option key={props.value} {...props} onChange={value => {
             onChange(value)
             setOpen(false)
           }} />
@@ -62,4 +62,4 @@ const Selector = ({
   )
 }
 
-export default Selector
+export default Select

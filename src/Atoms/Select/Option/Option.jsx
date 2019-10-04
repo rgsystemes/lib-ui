@@ -18,7 +18,7 @@ Container.defaultProps = {
 const DefaultOptionRender = ({ children }) => <>{children}</>
 
 const Option = ({ onChange, Component = DefaultOptionRender, value }) => (
-  <Container onClick={() => onChange(value)}>
+  <Container data-testid={`option-${value}`} onClick={() => onChange(value)}>
     <Component>{ value }</Component>
   </Container>
 )
