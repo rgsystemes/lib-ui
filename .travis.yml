@@ -5,6 +5,8 @@ node_js:
 script:
   - npm run lint
   - npm test -- --coverage
+
+before_deploy:
   - npm run build
   - npm run build:storybook
 
@@ -17,12 +19,3 @@ deploy:
     on:
       branch: master
       repo: mesteche/lib-ui
-  # - provider: npm
-  #   email: "$NPM_EMAIL"
-  #   api_key: "$NPM_TOKEN"
-  #   tag: next
-  #   skip_cleanup: true
-  #   keep_history: true
-  #   on:
-  #     branch: master
-  #     repo: mesteche/lib-ui
