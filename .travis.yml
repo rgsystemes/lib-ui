@@ -12,7 +12,6 @@ before_deploy:
 
 deploy:
   - provider: pages
-    github_token: $GH_TOKEN
     skip_cleanup: true
     keep_history: true
     local_dir: docs
