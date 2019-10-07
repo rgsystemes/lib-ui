@@ -2,17 +2,27 @@ language: node_js
 node_js:
   - "node"
 
-cache:
-  directories:
-    - node_modules
-
 script:
   - npm run lint
   - npm test -- --coverage
+  - npm run build
+  - npm run build:storybook
 
-after_success:
-  - git config --global user.name "mesteche"
-  - git config --global user.email "mesteche@users.noreply.github.com"
-  - git remote rm origin
-  - git remote add origin https://mesteche:${GH_TOKEN}@github.com/mesteche/lib-ui.git
-  - npm run deploy
+deploy:
+  - provider: pages
+    github_token: $GH_TOKEN
+    skip_cleanup: true
+    keep_history: true
+    local_dir: docs
+    on:
+      branch: master
+      repo: mesteche/lib-ui
+  # - provider: npm
+  #   email: "$NPM_EMAIL"
+  #   api_key: "$NPM_TOKEN"
+  #   tag: next
+  #   skip_cleanup: true
+  #   keep_history: true
+  #   on:
+  #     branch: master
+  #     repo: mesteche/lib-ui
