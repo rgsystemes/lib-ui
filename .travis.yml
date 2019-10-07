@@ -8,7 +8,7 @@ cache:
 
 script:
   - npm run lint
-  - npm test
+  - npm test -- --coverage
 
 after_success:
   - git config --global user.name "mesteche"
