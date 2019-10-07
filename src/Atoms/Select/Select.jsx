@@ -41,21 +41,23 @@ Options.defaultProps = {
 }
 
 const Select = ({
-  displayValue, options = [], openOnTop, onChange,
-  ...props
+  label, options = [], openOnTop, onChange, ...props
 }) => {
   const [open, setOpen] = useState(false)
   const ref = useOnClickOutside(() => setOpen(false))
+  const select = option => {
+    onChange(option)
+    setOpen(false)
+  }
 
   return (
     <Container data-testid='select' {...props} ref={ref} onClick={() => setOpen(!open)}>
-      {displayValue}
+      {label}
       <Options open={open} openOnTop={openOnTop}>
-        {options.map(props => (
-          <Option key={props.value} {...props} onChange={value => {
-            onChange(value)
-            setOpen(false)
-          }} />
+        {options.map(option => (
+          <Option key={option} data-testid={`option-${option}`} onClick={() => select(option)}>
+            { option }
+          </Option>
         ))}
       </Options>
     </Container>

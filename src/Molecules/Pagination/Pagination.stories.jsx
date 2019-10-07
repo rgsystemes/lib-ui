@@ -1,6 +1,7 @@
+import styled from 'styled-components'
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { number } from '@storybook/addon-knobs'
+import { boolean, text } from '@storybook/addon-knobs'
 
 import Pagination from './index'
 
@@ -10,33 +11,29 @@ export default {
   title: 'Molecules/Pagination',
 }
 
-export const pagination = () => <>
-  <Pagination
-    DisplayValue={({ from, to, total }) => `${from} - ${to} sur ${total}`}
-    DisplayOption={({ count }) => `${count} par page`}
+const Container = styled.div`
+  ${({ openOnTop }) => openOnTop ? 'margin-top: 200px;' : ''}
+`
 
-    onPageChange={action('page changed')}
-    onSizeChange={action('size changed')}
+export const pagination = () => {
+  const label = text('label', '1 - 10 of 250')
+  const openOnTop = boolean('open on top', false)
 
-    size={number('Page size', 10, { min: 1, step: 1 })}
-    total={number('Result count', 10, { min: 1, step: 1 })}
-    currentPage={number('Current page', 1, { min: 1, step: 1 })}
-    sizeOptions={['10', '20', '30', '40']}
-  />
-  <br/>
-  <Pagination
-    DisplayValue={({ from, to, total }) => `${from} - ${to} of ${total}`}
-    DisplayOption={({ count }) => `${count} per page`}
+  return (
+    <Container openOnTop={openOnTop}>
+      <Pagination
+        label={label}
+        openOnTop={openOnTop}
 
-    onPageChange={action('page changed')}
-    onSizeChange={action('size changed')}
+        currentPage={1}
+        sizeOptions={['10', '20', '30', '40']}
 
-    size={number('Page size', 10, { min: 1, step: 1 })}
-    total={number('Result count', 10, { min: 1, step: 1 })}
-    currentPage={number('Current page', 1, { min: 1, step: 1 })}
-    sizeOptions={['10', '20', '30', '40']}
-  />
-</>
+        onPageChange={action('page changed')}
+        onSizeChange={action('size changed')}
+      />
+    </Container>
+  )
+}
 
 pagination.story = {
   parameters: {

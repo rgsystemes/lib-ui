@@ -17,11 +17,7 @@ it('should call onChange when user select another option', async () => {
 
   const { getByTestId, findByTestId } = render(
     <Wrapper>
-      <Select options={[
-        { value: 10 },
-        { value: 20 },
-        { value: 30 },
-      ]} onChange={onChange} />
+      <Select options={[10, 20, 30]} onChange={onChange} />
     </Wrapper>
   )
 
