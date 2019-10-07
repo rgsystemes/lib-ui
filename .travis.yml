@@ -18,4 +18,4 @@ deploy:
     local_dir: docs
     on:
       branch: master
-      repo: mesteche/lib-ui
+      repo: rgsystemes/lib-ui
