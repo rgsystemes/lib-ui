@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "node"
+
+script:
+  - npm run lint
+  - npm test -- --coverage
+
+before_deploy:
+  - npm run build
+  - npm run build:storybook
+
+deploy:
+  - provider: pages
+    github_token: $GH_TOKEN
+    skip_cleanup: true
+    keep_history: true
+    local_dir: docs
+    on:
+      branch: master
+      repo: rgsystemes/lib-ui
