@@ -25,5 +25,21 @@ const base = {
   }
 }
 
-export const rg6 = { ...base, ...rg6Theme }
-export const dark = { ...base, ...darkTheme }
+const colors = {
+  error  : { bg: '#a94442' },
+  warning: '#8a6d3b',
+  success: '#3c763d',
+  info   : '#31708f',
+}
+
+export const rg6 = {
+  ...base,
+  ...rg6Theme,
+  colors: { ...colors, ...rg6Theme.colors }
+}
+
+export const dark = {
+  ...base,
+  ...darkTheme,
+  colors: { ...colors, ...darkTheme.colors }
+}
