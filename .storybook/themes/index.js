@@ -41,6 +41,7 @@ fontSizes.s = fontSizes[1]
 fontSizes.m = fontSizes[2]
 fontSizes.l = fontSizes[3]
 fontSizes.xl = fontSizes[4]
+fontSizes.body = fontSizes[1]
 
 const base = {
   space,
