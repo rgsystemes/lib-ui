@@ -17,7 +17,7 @@ export const banner = () => (
       warning: 'warning',
       success: 'success',
       info:    'info',
-    }, 'error')}
+    }, 'info')}
     title={text('title', 'some title')}
     children={text('message', 'Text message')}
   />
