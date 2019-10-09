@@ -11,14 +11,17 @@ const lineHeights = [0.25, 1, 1.25, 1.75]
 lineHeights.heading = lineHeights[2]
 lineHeights.body =    lineHeights[3]
 
+const fontSizes = [12, 14, 16, 18, 24, 32, 48, 64, 72]
+fontSizes.body = fontSizes[1]
+
 const base = {
   space,
   radii: [0, 4],
+  fontSizes,
   fonts:            {
     body:      'sans-serif',
     monospace: 'monospace',
   },
-  fontSizes:   [12, 14, 16, 18, 24, 32, 48, 64, 72],
   lineHeights,
   shadows: {
     m: '0 4px 16px rgba(0,0,0,.175)'
