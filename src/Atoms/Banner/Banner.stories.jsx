@@ -1,8 +1,8 @@
 import React from 'react'
 // import { action } from '@storybook/addon-actions'
-import { text } from '@storybook/addon-knobs'
+import { text, select } from '@storybook/addon-knobs'
 
-import Banner from './index'
+import Container from './index'
 
 import markdown from './README.md'
 
@@ -11,7 +11,16 @@ export default {
 }
 
 export const banner = () => (
-  <Banner title={text('title', 'some title')}>{text('message', 'Text message')}</Banner>
+  <Container
+    level={select('level', {
+      error:   'error',
+      warning: 'warning',
+      success: 'success',
+      info:    'info',
+    }, 'error')}
+    title={text('title', 'some title')}
+    children={text('message', 'Text message')}
+  />
 )
 
 banner.story = {

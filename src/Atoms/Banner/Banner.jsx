@@ -1,24 +1,38 @@
+import React from 'react'
 import styled from 'styled-components'
-import { color, space, border, typography } from 'styled-system'
+import { variant, border, space, typography } from 'styled-system'
 
-const Banner = styled.div`
-  box-sizing: border-box;
-  border: 1px solid;
-  ${color}
-  ${border}
-  ${space}
+const Title = styled.h4`
+  margin-top: 0;
   ${typography}
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`
+Title.defaultProps = {
+  fontSize:   'l',
+  fontWeight: '500',
+}
+const Container = styled.div`
+  ${typography}
+  ${border}
+  /* border: 1px solid; */
+  ${space}
+  ${variant({ prop: 'level', scale: 'levels' })}
 `
 
-Banner.defaultProps = {
-  fontFamily:   'body',
-  color:        'text',
-  bg:           'background',
-  borderColor:  'error',
-  px:           'l',
-  py:           'l',
+Container.defaultProps = {
   borderRadius: '1',
-  lineHeight:   '1',
+  p:            'l',
+  fontFamily:   'body',
+  fontSize:     's',
 }
+
+const Banner = ({ level, title, children }) => (
+  <Container level={level}>
+    {title && <Title>{title}</Title>}
+    {children}
+  </Container>
+)
 
 export default Banner
