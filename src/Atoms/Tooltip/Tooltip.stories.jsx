@@ -1,6 +1,6 @@
 import React from 'react'
-// import { action } from '@storybook/addon-actions'
-import {  } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
+import styled from 'styled-components'
 
 import Tooltip from './index'
 
@@ -10,8 +10,22 @@ export default {
   title: 'Atoms/Tooltip',
 }
 
+const Wrapper = styled.div`
+  margin: 50px;
+`
+
+const Element = styled.div`
+  display      : inline-block;
+  border       : 1px solid black;
+  padding      : 5px;
+`
+
 export const tooltip = () => (
-  <Tooltip />
+  <Wrapper>
+    <Tooltip text={text('tip', 'tip')}>
+      <Element>Element</Element>
+    </Tooltip>
+  </Wrapper>
 )
 tooltip.story = {
   parameters: {
