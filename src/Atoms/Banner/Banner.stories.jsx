@@ -1,5 +1,5 @@
 import React from 'react'
-// import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions'
 import { text, select } from '@storybook/addon-knobs'
 
 import Container from './index'
@@ -26,6 +26,25 @@ export const banner = () => (
 banner.story = {
   parameters: {
     notes: { markdown },
-    jest:  ['Banner.test.jsx'],
+  },
+}
+
+export const closableBanner = () => (
+  <Container
+    onClose={action('close')}
+    level={select('level', {
+      error:   'error',
+      warning: 'warning',
+      success: 'success',
+      info:    'info',
+    }, 'info')}
+    title={text('message', 'Text message')}
+    children={text('title', 'some title')}
+  />
+)
+
+closableBanner.story = {
+  parameters: {
+    notes: { markdown },
   },
 }
