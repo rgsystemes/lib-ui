@@ -9,7 +9,7 @@
     "/lib"
   ],
   "publishConfig": {
-    "acces": "public"
+    "access": "public"
   },
   "storybook-deployer": {
     "gitUsername": "Mesteche",
@@ -22,7 +22,6 @@
     "test": "jest --json --outputFile=.jest-test-results.json",
     "build": "rollup -c",
     "build:storybook": "build-storybook -o docs",
-    "postbuild": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "prepublishOnly": "rm -rf lib && npm run build",
     "deploy": "storybook-to-ghpages"
   },
