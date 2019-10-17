@@ -1,25 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Select, Typo } from '../../../../Atoms'
+import { Select } from '../../../../Atoms'
 
 const StyledSelect = styled(Select)`
-  cursor: pointer;
-
   &:hover {
     background-color: transparent;
   }
+
+  cursor: ${({ pointer }) => pointer ? 'pointer' : 'auto'}
 `
 
 const Breadcrumb = ({ children, siblings = [], icon, onSiblingSelect = () => {} }) =>
-  <Typo>
-    {siblings.length > 0 ? <StyledSelect
-      bg="transparent"
-      border="0"
-      label={children}
-      onChange={onSiblingSelect}
-      options={siblings.map(({ name }) => name)}
-    /> :
-    <span>{children}</span>}
-  </Typo>
+  <StyledSelect
+    bg="transparent"
+    border="0"
+    pointer={siblings.length > 0}
+    label={children}
+    onChange={onSiblingSelect}
+    options={siblings.map(({ name }) => name)}
+  />
 
 export default Breadcrumb

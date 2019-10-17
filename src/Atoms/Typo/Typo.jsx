@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { typography, color } from 'styled-system'
+import { typography, color, space } from 'styled-system'
 
 const Typo = styled.span`
   ${typography}
   ${color}
+  ${space}
 `
 
 Typo.defaultProps = {

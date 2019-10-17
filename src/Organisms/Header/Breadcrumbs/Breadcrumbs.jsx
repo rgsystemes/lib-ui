@@ -4,6 +4,8 @@ import { Typo } from '../../../Atoms'
 
 const Container = styled.ol`
   display: flex;
+  padding: 0;
+  margin: 0;
 
   & li {
     list-style: none;
@@ -15,7 +17,7 @@ const insertSeparators = (items, separator) =>
     if (index < items.length - 1) {
       acc = acc.concat(
         current,
-        <Typo key={`separator-${index}`}>
+        <Typo key={`separator-${index}`} lineHeight={'header'}>
           {separator}
         </Typo>,
       )
@@ -26,7 +28,7 @@ const insertSeparators = (items, separator) =>
     return acc
   }, [])
 
-const Breadcrumbs = ({ children, separator = '>', collapse = 7 }) => (
+const Breadcrumbs = ({ children, separator = '>', collapse = 5 }) => (
   <Container>
     {insertSeparators(
       React.Children.toArray(children).map(
