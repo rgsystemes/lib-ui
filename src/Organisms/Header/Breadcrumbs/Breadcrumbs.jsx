@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Typo } from '../../../Atoms'
+import { Separator } from '../../../Atoms'
 
 const Container = styled.ol`
   display: flex;
@@ -17,9 +17,9 @@ const insertSeparators = (items, separator) =>
     if (index < items.length - 1) {
       acc = acc.concat(
         current,
-        <Typo key={`separator-${index}`} lineHeight={'header'}>
+        <Separator key={`separator-${index}`}>
           {separator}
-        </Typo>,
+        </Separator>
       )
     } else {
       acc.push(current)
