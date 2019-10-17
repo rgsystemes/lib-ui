@@ -24,7 +24,7 @@ export const select = () => {
         openOnTop={openOnTop}
         label={text('label', 'Select...')}
         onChange={action('change')}
-        options={['1', '2', '3', '4', '5'].map(n => `option ${n}`)}
+        options={['1', '2', '3', '4', '5'].map(n => ({ value: n, label: `option ${n}` }))}
       />
     </Container>
   )

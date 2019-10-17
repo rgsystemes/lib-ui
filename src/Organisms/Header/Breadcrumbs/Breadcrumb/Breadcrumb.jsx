@@ -17,7 +17,7 @@ const Breadcrumb = ({ children, siblings = [], icon, onSiblingSelect = () => {} 
     pointer={siblings.length > 0}
     label={children}
     onChange={onSiblingSelect}
-    options={siblings.map(({ name }) => name)}
+    options={siblings.map(({ id, name }) => ({ value: id, label: name }))}
   />
 
 export default Breadcrumb
