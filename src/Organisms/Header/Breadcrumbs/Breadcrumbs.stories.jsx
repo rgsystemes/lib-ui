@@ -53,6 +53,6 @@ export const breadcrumbs = () => (
 breadcrumbs.story = {
   parameters: {
     notes: { markdown },
-    // jest:  ['Breadcrumbs.test.jsx'],
+    jest:  ['Breadcrumbs.test.jsx'],
   },
 }
