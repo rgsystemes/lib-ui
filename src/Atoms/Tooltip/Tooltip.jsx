@@ -54,8 +54,8 @@ Content.defaultProps = {
   left:         '50%',
 }
 
-export const Tooltip = ({ text, children }) => (
-  <Container data-testid={'container'}>
+export const Tooltip = ({ text, children, ...props }) => (
+  <Container data-testid={'container'} {...props}>
     {children}
     <Content data-testid={'tooltip'}>
       {text}
