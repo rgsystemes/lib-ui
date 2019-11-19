@@ -38,8 +38,8 @@ export const closableBanner = () => (
       success: 'success',
       info:    'info',
     }, 'info')}
-    title={text('message', 'Text message')}
-    children={text('title', 'some title')}
+    title={text('title', 'some title')}
+    children={text('message', 'Text message')}
   />
 )
 
