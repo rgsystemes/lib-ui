@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import { variant } from 'styled-system'
 import { createPortal } from 'react-dom'
 
-import { LEVEL_SUCCESS } from './index'
+export const LEVEL_INFO = 'info'
+export const LEVEL_SUCCESS = 'success'
+export const LEVEL_ERROR = 'error'
+export const LEVEL_WARNING = 'warning'
 
 const Container = styled.div`
   padding: 15px;
@@ -36,7 +39,7 @@ const Head = styled.div`
 
 const Notification = ({
   children,
-  level = LEVEL_SUCCESS,
+  level = LEVEL_INFO,
   show = false,
   onClose = () => {},
   title,
