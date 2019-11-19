@@ -4,23 +4,32 @@ import { variant } from 'styled-system'
 import { LEVEL_SUCCESS } from './index'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
   ${variant({ scale: 'levels' })}
-
-  & strong {
-    padding-right: 10px;
-  }
 `
 
 const CloseIcon = styled.span`
   justify-content: flex-end;
   cursor: pointer;
+
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+`
+
+const Head = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  & > h4 {
+    margin: 0;
+  }
 `
 
 const Notification = ({
@@ -32,20 +41,21 @@ const Notification = ({
 }) => (
   !!show &&
     <Container
-      className={`alert alert-${level}`}
       role="alert"
       variant={level}
-      data-testid={`notification-${level}`}
+      data-testid="notification-alert"
     >
-      <div>
-        <strong>
+      <Head>
+        <h4 data-testid="notification-title">
           {title}
-        </strong>
+        </h4>
+        <CloseIcon data-testid="close-notification" onClick={onClose}>
+          &times;
+        </CloseIcon>
+      </Head>
+      <p data-testid="notification-message">
         {children}
-      </div>
-      <CloseIcon data-testid="close-notification" onClick={onClose}>
-        &times;
-      </CloseIcon>
+      </p>
     </Container>
 )
 

@@ -4,17 +4,29 @@ import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { ThemeProvider } from 'styled-components'
 
-import BaseNotification, {
-  LEVEL_INFO,
-  LEVEL_ERROR,
-  LEVEL_WARNING,
-  LEVEL_SUCCESS,
-} from './index'
+import BaseNotification from './index'
 
 const Notification = props =>
   <ThemeProvider theme={global.theme}>
     <BaseNotification {...props}/>
   </ThemeProvider>
+
+it('should show a notification with a message on it', () => {
+  const { getByTestId } = render(
+    <Notification title="Hello" show={true}>
+      It's me. I was wondering if after all these years you'd like to meet
+    </Notification>
+  )
+
+  expect(getByTestId('notification-title')).toHaveTextContent('Hello')
+  expect(getByTestId('notification-message')).toHaveTextContent("It's me. I was wondering if after all these years you'd like to meet")
+})
+
+it('should not show a notification when show prop is false', () => {
+  const { queryAllByTestId } = render(<Notification show={false}/>)
+
+  expect(queryAllByTestId('notification-alert').length).toBe(0)
+})
 
 it('should call onClose when clicking on close button', () => {
   const onClose = jest.fn()
@@ -27,21 +39,4 @@ it('should call onClose when clicking on close button', () => {
   userEvent.click(getByTestId('close-notification'))
 
   expect(onClose).toHaveBeenCalledTimes(1)
-})
-
-it('should have the right class depending on level', () => {
-  [
-    LEVEL_SUCCESS,
-    LEVEL_WARNING,
-    LEVEL_INFO,
-    LEVEL_ERROR,
-  ].forEach(level => {
-    const { queryByTestId } = render(
-      <Notification show={true} level={level}>
-        Hi, I am a notification - {level}
-      </Notification>
-    )
-
-    expect(queryByTestId(`notification-${level}`)).not.toBe(null)
-  })
 })
