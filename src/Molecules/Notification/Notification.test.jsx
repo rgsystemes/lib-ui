@@ -32,7 +32,7 @@ it('should call onClose when clicking on close button', () => {
   const onClose = jest.fn()
   const { getByTestId } = render(
     <Notification show={true} onClose={onClose}>
-        Hi, I am a notification
+      Hi, I am a notification
     </Notification>
   )
 

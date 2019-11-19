@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
+import { createPortal } from 'react-dom'
+
 import { LEVEL_SUCCESS } from './index'
 
 const Container = styled.div`
@@ -38,8 +40,10 @@ const Notification = ({
   show = false,
   onClose = () => {},
   title,
+  at = document.body,
 }) => (
   !!show &&
+  createPortal(
     <Container
       role="alert"
       variant={level}
@@ -56,7 +60,9 @@ const Notification = ({
       <p data-testid="notification-message">
         {children}
       </p>
-    </Container>
+    </Container>,
+    at
+  )
 )
 
 export default Notification
