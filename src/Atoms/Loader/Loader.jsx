@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
 const Container = styled.div`
   width: 75px;
   height: 15px;
@@ -44,7 +43,6 @@ const Container = styled.div`
     60% { opacity: 0; }
   }
 `
-
 
 const BallOne = styled.div`
   animation-delay: 0.1s;
