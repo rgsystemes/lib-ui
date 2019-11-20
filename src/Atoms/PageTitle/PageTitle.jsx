@@ -13,7 +13,6 @@ const IconWrapper = styled.div`
   width: 38px;
   height: 38px;
   box-sizing: border-box;
-  padding: 5px;
   border-radius: 50%;
   border-style: solid;
   border-width: 2px;
@@ -23,7 +22,7 @@ const IconWrapper = styled.div`
 
 const PageTitle = ({ children, icon }) => (
   <Container>
-    <IconWrapper marginRight='m'>
+    <IconWrapper marginRight="m" p="m">
       {icon}
     </IconWrapper>
     <Typo fontFamily="title" fontSize="title" lineHeight="title">
