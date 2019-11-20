@@ -7,9 +7,10 @@ const space    = [0, 4, 8, 16, 32].map(value => `${value}px`)
       space.l  = space[3]
       space.xl = space[4]
 
-const lineHeights         = [0.25, 1, 1.25, 1.75]
-      lineHeights.heading = lineHeights[2]
-      lineHeights.body    = lineHeights[3]
+const lineHeights         = [0.25, 1, 1.1, 1.25, 1.75]
+      lineHeights.heading = lineHeights[3]
+      lineHeights.body    = lineHeights[4]
+      lineHeights.title = lineHeights[2]
 
 const levels = {
   error  : {
@@ -37,6 +38,7 @@ const levels = {
 const fontSizes = [12, 14, 16, 18, 24, 32, 48, 64, 72]
 fontSizes.xs = fontSizes[0]
 fontSizes.body = fontSizes[1]
+fontSizes.title = fontSizes[3]
 fontSizes.s = fontSizes[1]
 fontSizes.m = fontSizes[2]
 fontSizes.l = fontSizes[3]
@@ -49,6 +51,7 @@ const base = {
   fontSizes,
   fonts: {
     body:      '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    title:     '"roboto-regular", "Helvetica Neue", Helvetica, Arial, sans-serif',
     monospace: 'monospace',
   },
   lineHeights,
