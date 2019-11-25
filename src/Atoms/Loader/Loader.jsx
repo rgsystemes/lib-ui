@@ -22,26 +22,6 @@ const Container = styled.div`
     0%, 100% { opacity: 1; }
     60% { opacity: 0; }
   }
-
-  @-webkit-keyframes opacity {
-    0%, 100% { opacity: 1; }
-    60% { opacity: 0; }
-  }
-
-  @-moz-keyframes opacity {
-    0%, 100% { opacity: 1; }
-    60% { opacity: 0; }
-  }
-
-  @-ms-keyframes opacity {
-    0%, 100% { opacity: 1; }
-    60% { opacity: 0; }
-  }
-
-  @-o-keyframes opacity {
-    0%, 100% { opacity: 1; }
-    60% { opacity: 0; }
-  }
 `
 
 const BallOne = styled.div`
