@@ -22,7 +22,7 @@ const Element = styled.div`
 
 export const tooltip = () => (
   <Wrapper>
-    <Tooltip text={text('tip', 'tip')}>
+    <Tooltip title={text('tip', 'tip')}>
       <Element>Element</Element>
     </Tooltip>
   </Wrapper>
