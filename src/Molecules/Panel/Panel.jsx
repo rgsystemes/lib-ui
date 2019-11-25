@@ -50,8 +50,9 @@ const Panel = ({
   header, actions,
   children,
   opened, onToggleOpen,
+  ...props
 }) => (
-  <Container>
+  <Container {...props}>
     <Header>
       <HeaderContent>{header}</HeaderContent>
       <InputGroup>
