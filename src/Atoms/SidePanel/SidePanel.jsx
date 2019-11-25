@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
+const SidePanel = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -11,8 +10,8 @@ const Container = styled.div`
   background-color: #f5f5f5;
 `
 
-const SidePanel = ({ show = false, ...props }) => (
-  <Container show={show} {...props}/>
-)
+SidePanel.defaultProps = {
+  show: false,
+}
 
 export default SidePanel
