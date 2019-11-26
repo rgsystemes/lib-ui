@@ -4,7 +4,7 @@ import { border, color } from 'styled-system'
 import Input from '../Input'
 
 const InputGroup = styled.div`
-  display:  inline-block;
+  display:  inline-flex;
   border:   1px solid;
   ${border}
   ${color}
