@@ -57,7 +57,7 @@ const Panel = ({
       <HeaderContent>{header}</HeaderContent>
       <InputGroup>
         {actions}
-        <Button px="s" py="s" onClick={onToggleOpen} data-testid="toggle-open">
+        <Button px="m" onClick={onToggleOpen} data-testid="toggle-open">
           {opened ? <AngleUp size={16} /> : <AngleDown size={16} />}
         </Button>
       </InputGroup>
