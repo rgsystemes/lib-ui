@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { color, border, space, typography } from 'styled-system'
 import { InputGroup, Button } from '../../Atoms'
-import { KeyboardArrowDown, KeyboardArrowUp } from 'styled-icons/material'
+import { AngleDown, AngleUp } from 'styled-icons/fa-solid'
 
 const Container = styled.div`
   display: flex;
@@ -57,8 +57,8 @@ const Panel = ({
       <HeaderContent>{header}</HeaderContent>
       <InputGroup>
         {actions}
-        <Button px="s" py={0} onClick={onToggleOpen} data-testid="toggle-open">
-          {opened ? <KeyboardArrowUp size={26} /> : <KeyboardArrowDown size={26} />}
+        <Button px="s" py="s" onClick={onToggleOpen} data-testid="toggle-open">
+          {opened ? <AngleUp size={16} /> : <AngleDown size={16} />}
         </Button>
       </InputGroup>
     </Header>
