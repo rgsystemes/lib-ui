@@ -1,7 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
-import { boolean, text } from '@storybook/addon-knobs'
 
 import Select from './index'
 
@@ -11,24 +9,22 @@ export default {
   title: 'Atoms/Select',
 }
 
-const Container = styled.div`
-  ${({ openOnTop }) => openOnTop ? 'margin-top: 200px;' : ''}
-`
-
-export const select = () => {
-  const openOnTop = boolean('open on top', false)
-
-  return (
-    <Container openOnTop={openOnTop}>
-      <Select
-        openOnTop={openOnTop}
-        label={text('label', 'Select...')}
-        onChange={action('change')}
-        options={['1', '2', '3', '4', '5'].map(n => `option ${n}`)}
-      />
-    </Container>
-  )
-}
+export const select = () => (
+  <Select onChange={action('change')}>
+    <option value="0">
+        Choose an option
+    </option>
+    <option>
+        Option 1
+    </option>
+    <option>
+        Option 2
+    </option>
+    <option>
+        Option 3
+    </option>
+  </Select>
+)
 
 select.story = {
   parameters: {

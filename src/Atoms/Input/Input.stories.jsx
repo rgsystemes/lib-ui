@@ -1,4 +1,5 @@
 import React from 'react'
+import { text, boolean } from '@storybook/addon-knobs'
 
 import Input from './index'
 
@@ -9,7 +10,7 @@ export default {
 }
 
 export const input = () => (
-  <Input />
+  <Input placeholder={text('Placeholder', 'Placeholder')} name="input" error={boolean('Error')}/>
 )
 input.story = {
   parameters: {

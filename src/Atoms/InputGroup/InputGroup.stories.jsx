@@ -3,6 +3,7 @@ import React from 'react'
 import InputGroup from './index'
 
 import Button from '../Button'
+import Input from '../Input'
 
 import markdown from './README.md'
 
