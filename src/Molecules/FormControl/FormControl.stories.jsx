@@ -18,9 +18,6 @@ export default {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  & > .MuiFormControl-root {
-    margin-top: 15px;
-  }
 `
 
 export const formControl = () => {
