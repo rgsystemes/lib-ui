@@ -1,5 +1,6 @@
-import React from 'react'
-import { InputGroup, Button, Select } from '../../Atoms'
+import React, { useState } from 'react'
+
+import { ButtonGroup, Button, Menu, MenuItem } from '../../Atoms'
 
 const Pagination = ({
   onPageChange,
@@ -8,19 +9,28 @@ const Pagination = ({
   openOnTop,
   currentPage = 1,
   sizeOptions = [],
-}) => (
-  <InputGroup>
+}) => {
+  const [anchorEl, setAnchorEl] = useState()
+  const handleSizeChange = size => {
+    onSizeChange(size)
+    setAnchorEl(null)
+  }
+
+  return <ButtonGroup size="small">
     <Button data-testid='first' onClick={() => onPageChange(1)}>«</Button>
     <Button data-testid='prev' onClick={() => onPageChange(currentPage - 1)}>‹</Button>
-    <Select
-      openOnTop={openOnTop}
-      color='highlight'
-      onChange={onSizeChange}
-      label={label}
-      options={sizeOptions}
-    />
+    <Button onClick={event => setAnchorEl(event.currentTarget)}>{label}</Button>
+    <Menu
+      anchorOrigin={{ vertical: openOnTop ? 'top' : 'bottom' }}
+      transformOrigin={{ vertical: openOnTop ? 'bottom' : 'top' }}
+      open={Boolean(anchorEl)}
+      onClose={() => setAnchorEl(null)}
+      anchorEl={anchorEl}
+    >
+      {sizeOptions.map(size => <MenuItem onClick={() => handleSizeChange(size)}>{size}</MenuItem>)}
+    </Menu>
     <Button data-testid='next' onClick={() => onPageChange(currentPage + 1)}>›</Button>
-  </InputGroup>
-)
+  </ButtonGroup>
+}
 
 export default Pagination

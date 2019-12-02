@@ -78,9 +78,10 @@ const Button = styled(BaseButton)`
 `
 
 Button.defaultProps = {
-  disableRipple: true,
-  color:         'default',
-  variant:       'outlined',
+  disableRipple:      true,
+  disableFocusRipple: true,
+  color:              'default',
+  variant:            'outlined',
 }
 
 export default Button

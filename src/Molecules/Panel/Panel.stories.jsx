@@ -21,8 +21,9 @@ export const panel = () => {
       <Select
         label="Actions"
         onChange={action('action selected')}
-        options={['1', '2', '3', '4', '5'].map(n => `action ${n}`)}
-      />,
+      >
+        {['1', '2', '3', '4', '5'].map(n => <option>action {n}</option>)}
+      </Select>,
     ]}
   >
     Content
