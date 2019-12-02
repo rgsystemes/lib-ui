@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { boolean } from '@storybook/addon-knobs'
 
