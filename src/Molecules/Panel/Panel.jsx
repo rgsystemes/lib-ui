@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { color, border, space, typography } from 'styled-system'
-import { InputGroup, Button } from '../../Atoms'
+import { ButtonGroup, Button } from '../../Atoms'
 import { AngleDown, AngleUp } from 'styled-icons/fa-solid'
 
 const Container = styled.div`
@@ -55,12 +55,12 @@ const Panel = ({
   <Container {...props}>
     <Header>
       <HeaderContent>{header}</HeaderContent>
-      <InputGroup>
+      <ButtonGroup>
         {actions}
         <Button px="m" onClick={onToggleOpen} data-testid="toggle-open">
           {opened ? <AngleUp size={16} /> : <AngleDown size={16} />}
         </Button>
-      </InputGroup>
+      </ButtonGroup>
     </Header>
     {opened && <Content>{children}</Content>}
   </Container>

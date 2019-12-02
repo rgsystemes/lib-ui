@@ -42,18 +42,23 @@ fontSizes.m = fontSizes[2]
 fontSizes.l = fontSizes[3]
 fontSizes.xl = fontSizes[4]
 
+const fontWeights = ['lighter', 'normal', 'bold']
+fontWeights.body = fontWeights[1]
+fontWeights.title = fontWeights[2]
+
 const base = {
   space,
   levels,
   radii: [0, 4],
   fontSizes,
+  fontWeights,
   fonts: {
     body:      '"Helvetica Neue", Helvetica, Arial, sans-serif',
     monospace: 'monospace',
   },
   lineHeights,
   shadows: {
-    m: '0 4px 16px rgba(0,0,0,.175)'
+    m: '0 4px 16px rgba(0,0,0,.175)',
   }
 }
 

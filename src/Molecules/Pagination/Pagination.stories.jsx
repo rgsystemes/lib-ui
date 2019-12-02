@@ -26,7 +26,7 @@ export const pagination = () => {
         openOnTop={openOnTop}
 
         currentPage={1}
-        sizeOptions={['10', '20', '30', '40']}
+        sizeOptions={['10', '20', '30', '40'].map(size => `${size} per page`)}
 
         onPageChange={action('page changed')}
         onSizeChange={action('size changed')}
