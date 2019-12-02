@@ -15,7 +15,12 @@ const Menu = styled(BaseMenu)`
 Menu.defaultProps = {
   elevation:    6,
   anchorOrigin: {
-    vertical: 'bottom',
+    vertical:   'bottom',
+    horizontal: 'left',
+  },
+  transformOrigin: {
+    vertical:   'top',
+    horizontal: 'left',
   },
   getContentAnchorEl: null,
 }

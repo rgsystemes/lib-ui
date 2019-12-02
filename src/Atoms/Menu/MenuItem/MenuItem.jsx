@@ -9,8 +9,7 @@ const MenuItem = styled(BaseMenuItem)`
 `
 
 MenuItem.defaultProps = {
-  disableRipple:      true,
-  disableFocusRipple: true,
+  disableRipple: true,
 }
 
 export default MenuItem

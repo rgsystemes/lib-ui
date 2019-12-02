@@ -12,16 +12,16 @@ export default {
 export const select = () => (
   <Select onChange={action('change')}>
     <option value="0">
-        Choose an option
+      Choose an option
     </option>
     <option>
-        Option 1
+      Option 1
     </option>
     <option>
-        Option 2
+      Option 2
     </option>
     <option>
-        Option 3
+      Option 3
     </option>
   </Select>
 )
