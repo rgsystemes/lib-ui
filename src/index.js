@@ -12,3 +12,9 @@ export { Tooltip } from './Atoms'
 export { Byte } from './Atoms'
 export { FormControl } from './Molecules'
 export { Menu } from './Atoms'
+export {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+  ExpansionPanelActions,
+} from './Molecules'
