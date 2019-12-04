@@ -1,15 +1,21 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import BaseFormLabel from '@material-ui/core/FormLabel'
-import { css } from '@styled-system/css'
+import { css as systemCss } from '@styled-system/css'
 
-const FormLabel = styled(BaseFormLabel)`
+export const formLabelStyles = css`
   &.MuiFormLabel-root {
+    position: unset;
+    transform: scale(1);
     &.Mui-focused:not(.Mui-error) {
-      ${css({ color: 'text' })};
+      ${systemCss({ color: 'text' })};
     }
 
-    ${css({ fontSize: 'body', fontWeight: 'bold', color: 'text' })};
+    ${systemCss({ fontSize: 'body', fontWeight: 'bold', color: 'text' })};
   }
+`
+
+const FormLabel = styled(BaseFormLabel)`
+  ${formLabelStyles}
 `
 
 export default FormLabel

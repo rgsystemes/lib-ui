@@ -60,6 +60,12 @@ const variants = {
   },
 }
 
+export const iconButtonStyles = css`
+  .MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+`
+
 export const defaultButtonStyles = css`
   &.MuiButton {
     &-root {

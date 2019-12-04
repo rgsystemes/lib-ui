@@ -1,37 +1,61 @@
-import styled from 'styled-components'
-import { space, typography } from 'styled-system'
-import { css } from '@styled-system/css'
-import InputBase from '@material-ui/core/InputBase'
+import styled, { css } from 'styled-components'
+import { css as systemCss } from '@styled-system/css'
+import BaseInput from '@material-ui/core/Input'
 
-const Input = styled(InputBase)`
+const sizes = {
+  large: css`
+    & {
+      height: 46px;
+    }
+    .MuiInputBase-input {
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.3333333;
+      border-radius: 6px;
+    }
+  `,
+  small: css`
+    & {
+      height: 30px;
+    }
+    .MuiInputBase-input {
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      border-radius: 3px;
+    }
+  `,
+}
+
+export const inputStyles = ({ size }) => css`
   label + & {
-    ${css({ marginTop: 'm' })};
+    ${systemCss({ marginTop: 'm' })};
   }
 
-  .MuiInputBase-input {
-    &:focus {
-      ${css({ boxShadow: '0 0px 8px #66afe9', borderColor: '#66afe9' })}
+  &.MuiInputBase-root  {
+    .MuiInputBase-input {
+      ${systemCss({ px: 'l', py: 'm', lineHeight: '1', fontSize: 'body' })}
+    }
+    &.Mui-focused {
+      ${systemCss({ boxShadow: '0 0px 8px #66afe9', borderColor: '#66afe9' })}
     }
     &.Mui-disabled {
-      ${(css({ color: 'lightgrey' }))};
+      ${(systemCss({ color: 'lightgrey' }))};
     }
   }
 
-  &.Mui-error {
-    .MuiInputBase-input {
-      ${css({ color: '#a94442', borderColor: '#a94442' })}
-      &:focus {
-        ${css({ boxShadow: '0 0 8px #a94442' })}
-      }
+  &.Mui-error.MuiInputBase-root {
+    ${systemCss({ color: '#a94442', borderColor: '#a94442' })}
+    &.Mui-focused {
+      ${systemCss({ boxShadow: '0 0 8px #a94442' })}
     }
   }
 
-  .MuiInputBase-input {
+  &.MuiInputBase-root {
+    height: 35px;
     transition: all 0.1s ease-out;
     transition-property: box-shadow, border-color, color;
-    ${space};
-    ${typography};
-    ${css({
+    ${systemCss({
     position:     'relative',
     borderRadius: '1',
     border:       '1px solid',
@@ -39,12 +63,20 @@ const Input = styled(InputBase)`
     color:        'text',
   })};
   }
+
+  &.MuiInput-underline {
+    &:after, &:before, &.MuiInput-underline:hover:before, &.MuiInput-underline:hover:after {
+      border: 0;
+    }
+  }
+
+  &.MuiInputBase-root {
+    ${size in sizes ? sizes[size] : ''};
+  }
 `
 
-Input.defaultProps = {
-  px:         'l',
-  py:         'm',
-  lineHeight: '1',
-}
+const Input = styled(BaseInput)`
+  ${inputStyles}
+`
 
 export default Input

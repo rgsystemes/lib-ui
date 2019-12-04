@@ -1,19 +1,21 @@
-import styled from 'styled-components'
-import { css } from '@styled-system/css'
+import styled, { css } from 'styled-components'
+import { css as systemCss } from '@styled-system/css'
 import BaseFormHelperText from '@material-ui/core/FormHelperText'
 
-const FormHelperText = styled(BaseFormHelperText)`
-  &.MuiFormHelperText {
-    &-root {
-      ${css({
+export const formHelperTextStyles = css`
+  &.MuiFormHelperText-root {
+    ${systemCss({
     marginTop:    'm',
     marginBottom: 'm',
     color:        'text',
     fontFamily:   'body',
     fontSize:     'body',
   })};
-    }
   }
+`
+
+const FormHelperText = styled(BaseFormHelperText)`
+  ${formHelperTextStyles}
 `
 
 export default FormHelperText
