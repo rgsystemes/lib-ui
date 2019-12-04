@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { variant } from 'styled-system'
+import { css as systemCss } from '@styled-system/css'
 import BaseButton from '@material-ui/core/Button'
 
 const variants = {
@@ -59,9 +60,15 @@ const variants = {
   },
 }
 
-const Button = styled(BaseButton)`
+export const defaultButtonStyles = css`
   &.MuiButton {
     &-root {
+      padding: 6px 12px;
+
+      & > .MuiButton-label {
+        ${systemCss({ fontFamily: 'body' })};
+      }
+
       &.Mui-disabled {
         ${variant({ prop: 'color', variants })};
         opacity: 0.65;
@@ -75,6 +82,28 @@ const Button = styled(BaseButton)`
       }
     }
   }
+`
+export const smallButtonStyles =  css`
+  &.MuiButton-sizeSmall {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+  }
+`
+export const largeButtonStyles = css`
+  &.MuiButton-sizeLarge {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+  }
+`
+
+const Button = styled(BaseButton)`
+  ${defaultButtonStyles}
+  ${largeButtonStyles}
+  ${smallButtonStyles}
 `
 
 Button.defaultProps = {
