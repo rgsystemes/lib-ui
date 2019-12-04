@@ -25,7 +25,7 @@ export const expansionPanel = () => (
     <ExpansionPanelActions>
       <ButtonGroup>
         <Button size="small">Cancel</Button>
-        <Button size="small" color="primary">Save</Button>
+        <Button size="small" color="success">Save</Button>
       </ButtonGroup>
     </ExpansionPanelActions>
   </ExpansionPanel>
