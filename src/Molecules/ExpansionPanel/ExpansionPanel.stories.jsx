@@ -31,7 +31,9 @@ export const expansionPanel = () => (
   </ExpansionPanel>
 )
 
-const Toggle = styled(Button).attrs(props => ({
+const Toggle = styled(
+  ({ expanded, ...props }) => <Button { ...props } />
+).attrs(props => ({
   children: props.expanded ? 'Fold' : 'Expand',
   ...props,
 }))`
@@ -54,7 +56,7 @@ export const controledExpansionPanel = () => {
     <ExpansionPanel expanded={expanded} onChange={action('internal panel toggle called')} >
       <Summary>
         Summary
-        <Toggle expanded={expanded} onClick={toggle} />
+        <Toggle expanded={expanded || undefined} onClick={toggle} />
       </Summary>
       <ExpansionPanelDetails>
         Details
