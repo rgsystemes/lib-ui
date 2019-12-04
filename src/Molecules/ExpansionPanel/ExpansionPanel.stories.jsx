@@ -56,7 +56,7 @@ export const controledExpansionPanel = () => {
     <ExpansionPanel expanded={expanded} onChange={action('internal panel toggle called')} >
       <Summary>
         Summary
-        <Toggle expanded={expanded || undefined} onClick={toggle} />
+        <Toggle expanded={expanded} onClick={toggle} />
       </Summary>
       <ExpansionPanelDetails>
         Details
