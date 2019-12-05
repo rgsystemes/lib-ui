@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
@@ -25,7 +25,6 @@ export const formControl = () => {
   const label = text('Label', 'Label')
   const helpText = text('Help text', 'Help text')
   const disabled = boolean('Disabled', false)
-  const [date, setDate] = useState(new Date())
 
   return <Container>
     <FormControl error={errorState} disabled={disabled}>
