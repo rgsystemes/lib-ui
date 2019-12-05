@@ -8,7 +8,6 @@ import FormHelperText from './FormHelperText'
 import InputLabel from './InputLabel'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
-import DateTimePicker from '../../Atoms/DateTimePicker'
 
 import markdown from './README.md'
 
@@ -60,14 +59,6 @@ export const formControl = () => {
         {helpText}
       </FormHelperText>
     </FormControl>
-    <DateTimePicker
-      label={label}
-      error={errorState}
-      disabled={disabled}
-      helperText={helpText}
-      value={date}
-      onChange={setDate}
-    />
   </Container>
 }
 formControl.story = {
