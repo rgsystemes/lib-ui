@@ -10,6 +10,10 @@ export const formLabelStyles = css`
       ${systemCss({ color: 'text' })};
     }
 
+    &.Mui-error {
+      color: #a94442;
+    }
+
     ${systemCss({ fontSize: 'body', fontWeight: 'bold', color: 'text' })};
   }
 `

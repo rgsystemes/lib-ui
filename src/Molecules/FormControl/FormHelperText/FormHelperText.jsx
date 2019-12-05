@@ -11,6 +11,10 @@ export const formHelperTextStyles = css`
     fontFamily:   'body',
     fontSize:     'body',
   })};
+
+    &.Mui-error {
+      color: #a94442;
+    }
   }
 `
 

@@ -47,7 +47,7 @@ export const inputStyles = ({ size }) => css`
   &.Mui-error.MuiInputBase-root {
     ${systemCss({ color: '#a94442', borderColor: '#a94442' })}
     &.Mui-focused {
-      ${systemCss({ boxShadow: '0 0 8px #a94442' })}
+      ${systemCss({ boxShadow: '0 0 8px #ce8483' })}
     }
   }
 
