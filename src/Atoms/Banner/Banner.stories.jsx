@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { action } from '@storybook/addon-actions'
 import { text, select } from '@storybook/addon-knobs'
 
-import Container from './index'
+import Banner from './index'
 
 import markdown from './README.md'
 
@@ -11,7 +11,7 @@ export default {
 }
 
 export const banner = () => (
-  <Container
+  <Banner
     level={select('level', {
       error:   'error',
       warning: 'warning',
@@ -29,9 +29,21 @@ banner.story = {
   },
 }
 
-export const closableBanner = () => (
-  <Container
-    onClose={action('close')}
+export const closableBanner = () => {
+  const [closed, setClosed] = useState(false)
+  useEffect(
+    () => {
+      const intervalID = setInterval(() => setClosed(false), 5000)
+      return () => clearInterval(intervalID)
+    },
+    []
+  )
+
+  return !closed && <Banner
+    onClose={() => {
+      action('close')
+      setClosed(true)
+    }}
     level={select('level', {
       error:   'error',
       warning: 'warning',
@@ -41,7 +53,7 @@ export const closableBanner = () => (
     title={text('title', 'some title')}
     children={text('message', 'Text message')}
   />
-)
+}
 
 closableBanner.story = {
   parameters: {

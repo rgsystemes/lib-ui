@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { css as systemCss } from '@styled-system/css'
 import BaseInputAdornment from '@material-ui/core/InputAdornment'
-import { iconButtonStyles } from '../../Button'
 
 export const inputAdornmentStyles = css`
   &.MuiInputAdornment-root {
@@ -24,8 +23,6 @@ export const inputAdornmentStyles = css`
     }
 
     ${systemCss({ borderColor: 'lightgrey' })};
-
-    ${iconButtonStyles};
   }
 `
 
