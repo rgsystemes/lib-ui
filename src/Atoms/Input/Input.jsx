@@ -28,10 +28,6 @@ const sizes = {
 }
 
 export const inputStyles = ({ size }) => css`
-  label + & {
-    ${systemCss({ marginTop: 'm' })};
-  }
-
   &.MuiInputBase-root  {
     .MuiInputBase-input {
       ${systemCss({ px: 'l', py: 'm', lineHeight: '1', fontSize: 'body' })}

@@ -9,7 +9,7 @@ import { formControlStyles } from '../../Molecules/FormControl'
 const TextField = styled(BaseTextField)`
   & > {
     ${inputStyles};
-    
+
     &.MuiInput-root > {
       ${inputAdornmentStyles};
     }
