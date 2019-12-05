@@ -1,5 +1,4 @@
 import React from 'react'
-import { action } from '@storybook/addon-actions'
 import { boolean, text } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 
@@ -34,6 +33,6 @@ export const textField = () =>
 textField.story = {
   parameters: {
     notes: { markdown },
-    jest:  ['TextField.test.jsx'],
+    jest:  [],
   },
 }
