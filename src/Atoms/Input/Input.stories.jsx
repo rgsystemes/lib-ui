@@ -1,5 +1,5 @@
 import React from 'react'
-import { text, boolean } from '@storybook/addon-knobs'
+import { boolean } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 import IconButton from '../IconButton'
 import { Search } from 'styled-icons/material/Search'

@@ -9,7 +9,6 @@ import {
   position,
 } from 'styled-system'
 import Typo from '../Typo'
-import IconButton from '../IconButton'
 
 const Title = styled(Typo)`
   ${space}
