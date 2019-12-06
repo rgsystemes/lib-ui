@@ -24,6 +24,14 @@
     "build:storybook": "build-storybook -o docs",
     "prepublishOnly": "rm -rf lib && npm run build"
   },
+  "peerDependencies": {
+    "@material-ui/core": "^4.7.0",
+    "react": "^16.x",
+    "react-dom": "^16.x",
+    "styled-components": "^4.x",
+    "styled-icons": "^9.0.1",
+    "styled-system": "^5.x"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -98,14 +106,6 @@
     "styled-components": "^4.4.0",
     "styled-icons": "^9.0.1",
     "styled-system": "^5.1.2"
-  },
-  "peerDependencies": {
-    "@material-ui/core": "^4.7.0",
-    "react": "^16.x",
-    "react-dom": "^16.x",
-    "styled-components": "^4.x",
-    "styled-icons": "^9.0.1",
-    "styled-system": "^5.x"
   },
   "dependencies": {}
 }
