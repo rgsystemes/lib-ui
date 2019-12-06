@@ -26,6 +26,7 @@ export const input = () =>
   <Container>
     {sizes.map(size =>
       <Input
+        key={size}
         placeholder={`${size} placeholder`}
         name="input"
         disabled={boolean('Disabled')}

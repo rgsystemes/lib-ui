@@ -15,8 +15,8 @@ export default {
 const Icons = [Heart, Star, Home]
 
 export const iconButton = () => (
-  Icons.map(Icon =>
-    <IconButton onClick={action('icon clicked')}>
+  Icons.map((Icon, index) =>
+    <IconButton key={index} onClick={action('icon clicked')}>
       <Icon size={20} />
     </IconButton>
   )

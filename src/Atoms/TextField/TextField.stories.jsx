@@ -20,6 +20,7 @@ export const textField = () =>
   <Container>
     {sizes.map(size =>
       <TextField
+        key={size}
         error={boolean('Error', false)}
         disabled={boolean('Disabled', false)}
         label={text('Label', 'Label')}

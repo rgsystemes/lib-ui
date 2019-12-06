@@ -23,7 +23,7 @@ const Container = styled.div`
 export const buttonGroup = () => (
   <Container>
     {sizes.map(size =>
-      <ButtonGroup size={size}>
+      <ButtonGroup key={size} size={size}>
         <Button>{size}</Button>
         <Button color="info">{size}</Button>
         <Button color="success">{size}</Button>
