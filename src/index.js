@@ -14,3 +14,9 @@ export { FormControl } from './Molecules'
 export { Menu } from './Atoms'
 export { TextField } from './Atoms'
 export { IconButton } from './Atoms'
+export {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+  ExpansionPanelActions,
+} from './Molecules'
