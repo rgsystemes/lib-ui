@@ -33,10 +33,11 @@ export const closableBanner = () => {
   const [closed, setClosed] = useState(false)
   useEffect(
     () => {
-      const intervalID = setInterval(() => setClosed(false), 5000)
-      return () => clearInterval(intervalID)
+      if (closed) {
+        setTimeout(() => setClosed(false), 5000)
+      }
     },
-    []
+    [closed]
   )
 
   return !closed && <Banner
