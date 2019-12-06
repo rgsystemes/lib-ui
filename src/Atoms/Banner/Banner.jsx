@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  variant, border, color, space, typography, position,
+  variant,
+  border,
+  color,
+  space,
+  typography,
+  position,
 } from 'styled-system'
 import Typo from '../Typo'
 
@@ -22,11 +27,12 @@ Title.defaultProps = {
   bg:         'transparent',
 }
 
-const Close = styled.button`
+const Close = styled.div`
   ${border}
   ${color}
   ${typography}
   ${position}
+  ${space}
   position: absolute;
   cursor: pointer;
 `
@@ -39,6 +45,8 @@ Close.defaultProps = {
   fontWeight: 'bold',
   top:        0,
   right:      0,
+  px:         'l',
+  py:         'm',
 
 }
 
