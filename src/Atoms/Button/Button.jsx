@@ -64,6 +64,8 @@ export const defaultButtonStyles = css`
   &.MuiButton {
     &-root {
       padding: 6px 12px;
+      ${systemCss({ fontSize: 'body' })};
+      line-height: 1.42857143;
 
       & > .MuiButton-label {
         ${systemCss({ fontFamily: 'body' })};

@@ -48,7 +48,7 @@ export const inputStyles = ({ size }) => css`
   }
 
   &.MuiInputBase-root {
-    height: 35px;
+    height: 34px;
     transition: all 0.1s ease-out;
     transition-property: box-shadow, border-color, color;
     ${systemCss({
