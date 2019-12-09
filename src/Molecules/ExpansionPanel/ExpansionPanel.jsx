@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { border } from 'styled-system'
+import { css } from '@styled-system/css'
 
 import ExpansionPanelBase from '@material-ui/core/ExpansionPanel'
 
@@ -11,6 +12,9 @@ const ExpansionPanel = styled(ExpansionPanelBase)`
   }
   &&::before {
     display: none;
+  }
+  &.MuiExpansionPanel-root.Mui-expanded, &.MuiExpansionPanel-root, &.MuiExpansionPanel-root.Mui-expanded:first-child {
+    ${css({ my: 'm' })};
   }
 `
 
