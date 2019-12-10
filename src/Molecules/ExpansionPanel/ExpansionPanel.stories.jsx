@@ -24,8 +24,8 @@ const panels = [
   ['Title #2', 'Details #2'],
 ]
 
-export const expansionPanel = () => panels.map(([summary, details]) =>
-  <ExpansionPanel defaultExpanded>
+export const expansionPanel = () => panels.map(([summary, details], index) =>
+  <ExpansionPanel defaultExpanded key={index}>
     <ExpansionPanelSummary>
       <Typo>
         {summary}
@@ -60,7 +60,7 @@ export const controledExpansionPanel = () => {
     setAnchorEl(null)
   }
 
-  return panels.map(panel =>
+  return (
     <ExpansionPanel expanded={expanded} onChange={action('internal panel toggle called')} >
       <ExpansionPanelSummary>
         <Typo>
