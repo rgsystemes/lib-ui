@@ -1,5 +1,4 @@
 export { default as Pagination } from './Pagination'
-export { default as Panel } from './Panel'
 export { default as FormControl } from './FormControl'
 export { default as FormHelperText } from './FormControl/FormHelperText'
 export { default as FormLabel } from './FormControl/FormLabel'

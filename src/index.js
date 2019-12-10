@@ -1,6 +1,5 @@
 export { Button } from './Atoms'
 export { Pagination } from './Molecules'
-export { Panel } from './Molecules'
 export { Input } from './Atoms'
 export { ButtonGroup } from './Atoms'
 export { Select } from './Atoms'
