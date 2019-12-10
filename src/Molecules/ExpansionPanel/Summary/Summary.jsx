@@ -14,6 +14,7 @@ const Summary = styled(SummaryBase)`
   }
   && .MuiExpansionPanelSummary-content {
     margin: 0;
+    justify-content: space-between;
   }
   && .MuiIconButton-root {
     padding: 0;
@@ -21,7 +22,7 @@ const Summary = styled(SummaryBase)`
 `
 Summary.defaultProps = {
   bg:              'secondary',
-  px:              'l',
+  px:              'm',
   py:              's',
   IconButtonProps: {
     disableRipple:      true,
