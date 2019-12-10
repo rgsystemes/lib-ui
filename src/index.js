@@ -12,6 +12,7 @@ export { Tooltip } from './Atoms'
 export { Byte } from './Atoms'
 export { FormControl } from './Molecules'
 export { Menu } from './Atoms'
+export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
 export { IconButton } from './Atoms'
 export {
