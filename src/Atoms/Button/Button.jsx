@@ -69,6 +69,7 @@ export const defaultButtonStyles = css`
 
       & > .MuiButton-label {
         ${systemCss({ fontFamily: 'body' })};
+        display: inline;
       }
 
       &.Mui-disabled {
