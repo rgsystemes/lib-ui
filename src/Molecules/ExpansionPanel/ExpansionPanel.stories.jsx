@@ -67,21 +67,21 @@ export const controledExpansionPanel = () => {
           Summary
         </Typo>
         <ExpansionPanelActions>
+          <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
+            <MenuItem onClick={handleMenuItemClick}>
+                Action
+            </MenuItem>
+            <MenuItem onClick={handleMenuItemClick}>
+                AnotherAction
+            </MenuItem>
+            <MenuItem onClick={handleMenuItemClick}>
+                Something else here
+            </MenuItem>
+          </Menu>
           <ButtonGroup size="small">
             <Button size="small" onClick={event => setAnchorEl(event.currentTarget)}>
               <MoreHoriz size={14}/>
             </Button>
-            <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-              <MenuItem onClick={handleMenuItemClick}>
-                Action
-              </MenuItem>
-              <MenuItem onClick={handleMenuItemClick}>
-                AnotherAction
-              </MenuItem>
-              <MenuItem onClick={handleMenuItemClick}>
-                Something else here
-              </MenuItem>
-            </Menu>
             <Toggle expanded={expanded} onClick={toggle} />
           </ButtonGroup>
         </ExpansionPanelActions>
