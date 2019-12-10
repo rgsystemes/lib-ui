@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import BaseButtonGroup from '@material-ui/core/ButtonGroup'
 
 const ButtonGroup = styled(BaseButtonGroup)`
+  & > .MuiButtonGroup-grouped {
+    min-width: 0px;
+  }
+
   & > .MuiInputBase-root  {
     &:first-child > .MuiInputBase-input {
       border-top-right-radius: 0;
