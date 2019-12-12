@@ -54,14 +54,17 @@ Toggle.defaultProps = {
 export const controledExpansionPanel = () => {
   const [expanded, setExpanded] = useState(false)
   const [anchorEl, setAnchorEl] = useState()
-  const toggle = () => setExpanded(!expanded)
+  const toggle = () => {
+    action('internal panel toggle called')
+    setExpanded(!expanded)
+  }
   const handleMenuItemClick = e => {
     action('Menu item clicke')(e)
     setAnchorEl(null)
   }
 
   return (
-    <ExpansionPanel expanded={expanded} onChange={action('internal panel toggle called')} >
+    <ExpansionPanel expanded={expanded} onChange={toggle} >
       <ExpansionPanelSummary>
         <Typo>
           Summary
