@@ -6,14 +6,22 @@ import { css } from '@styled-system/css'
 import Input from '../Input'
 
 const Select = styled(NativeSelect)`
-  .MuiNativeSelect-select {
-    &.MuiInputBase-input {
-      ${css({ paddingRight: 'xl' })};
+  .MuiNativeSelect {
+    &-root { 
+      ${css({ bg: 'background' })};
     }
 
-    &:focus {
-      background-color: transparent;
+    &-select {
       ${css({ borderRadius: '1' })};
+
+      &.MuiInputBase-input {
+        ${css({ paddingRight: 'xl' })};
+      }
+
+      &:focus {
+        ${css({ bg: 'background' })};
+        ${css({ borderRadius: '1' })};
+      }
     }
   }
 `
