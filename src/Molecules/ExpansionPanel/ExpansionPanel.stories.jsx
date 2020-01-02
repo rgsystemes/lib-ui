@@ -51,6 +51,19 @@ Toggle.defaultProps = {
   size: 'small',
 }
 
+const LineHeightTypo = styled(Typo)`
+  line-height: 2;
+`
+
+const DisabledSummary = styled(ExpansionPanelSummary)`
+  && {
+    cursor: initial;
+  }
+  &&&:hover {
+    cursor: initial;
+  }
+`
+
 export const controledExpansionPanel = () => {
   const [expanded, setExpanded] = useState(false)
   const [anchorEl, setAnchorEl] = useState()
@@ -62,10 +75,8 @@ export const controledExpansionPanel = () => {
 
   return (
     <ExpansionPanel expanded={expanded} onChange={action('internal panel toggle called')} >
-      <ExpansionPanelSummary>
-        <Typo>
-          Summary
-        </Typo>
+      <DisabledSummary>
+        <LineHeightTypo>Summary</LineHeightTypo>
         <ExpansionPanelActions>
           <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
             <MenuItem onClick={handleMenuItemClick}>
@@ -85,7 +96,7 @@ export const controledExpansionPanel = () => {
             <Toggle expanded={expanded} onClick={toggle} />
           </ButtonGroup>
         </ExpansionPanelActions>
-      </ExpansionPanelSummary>
+      </DisabledSummary>
       <ExpansionPanelDetails>
         <Typo>
           Details
