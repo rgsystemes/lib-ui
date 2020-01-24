@@ -66,8 +66,14 @@ Container.defaultProps = {
   fontSize:     's',
 }
 
-const Banner = ({ level, title, children, onClose }) => (
-  <Container level={level}>
+const Banner = ({
+  level,
+  title,
+  children,
+  onClose,
+  ...props
+}) => (
+  <Container level={level} {...props}>
     {onClose && <Close onClick={onClose}>×</Close>}
     {title && <Title level={level} as='h4'>{title}</Title>}
     {children}
