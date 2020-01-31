@@ -11,7 +11,7 @@ export default {
 }
 
 const Wrapper = styled.div`
-  margin: 50px;
+  margin: 150px;
 `
 
 const Element = styled.div`
@@ -22,7 +22,7 @@ const Element = styled.div`
 
 export const tooltip = () => (
   <Wrapper>
-    <Tooltip title={text('tip', 'tip')}>
+    <Tooltip title={text('tip', 'tip')} open={true} placement="top">
       <Element>Element</Element>
     </Tooltip>
   </Wrapper>
