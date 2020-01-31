@@ -43,28 +43,26 @@ const Row = ({
   cols,
   details,
   onSelect = () => {},
-}) => (
-  <>
-    <TableRow
-      details={details}
-      selected={selected}
-      onClick={() => onSelect(selected ? null : id)}
-      hover={true}
-    >
-      { children }
+}) => <>
+  <TableRow
+    details={details}
+    selected={selected}
+    onClick={() => onSelect(selected ? null : id)}
+    hover={true}
+  >
+    { children }
+  </TableRow>
+  { !!details &&
+    <TableRow selected={selected}>
+      <DetailsCell colSpan={ cols }>
+        <AnimateHeight height={selected ? 'auto' : 0}>
+          <Details>
+            { details }
+          </Details>
+        </AnimateHeight>
+      </DetailsCell>
     </TableRow>
-    { !!details &&
-      <TableRow selected={selected}>
-        <DetailsCell colSpan={ cols }>
-          <AnimateHeight height={selected ? 'auto' : 0}>
-            <Details>
-              { details }
-            </Details>
-          </AnimateHeight>
-        </DetailsCell>
-      </TableRow>
-    }
-  </>
-)
+  }
+</>
 
 export default Row
