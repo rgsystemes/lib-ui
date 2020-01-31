@@ -5,7 +5,7 @@ const InputLabel = styled(FormLabel)`
 `
 
 InputLabel.defaultProps = {
-  shrink: true,
+  shrink: 'true',
 }
 
 export default InputLabel
