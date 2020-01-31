@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { css } from '@styled-system/css'
 import { Download } from 'styled-icons/boxicons-regular/Download'
