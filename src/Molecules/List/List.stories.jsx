@@ -1,5 +1,4 @@
 import React from 'react'
-import {  } from '@storybook/addon-knobs'
 import ListItem from '@material-ui/core/ListItem'
 import { Baseball } from 'styled-icons/boxicons-regular/Baseball'
 
