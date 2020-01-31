@@ -46,6 +46,7 @@ it('should call onSort when clicking on the column', () => {
   )
 
   userEvent.click(getByTestId('column-fruit'))
+
   expect(onSort).toBeCalledTimes(1)
 })
 
@@ -69,12 +70,13 @@ it('should call onSort cycling', () => {
   const { getByTestId } = render(<Wrapper />)
 
   userEvent.click(getByTestId('column-fruit'))
+  userEvent.click(getByTestId('column-fruit'))
+  userEvent.click(getByTestId('column-fruit'))
+  userEvent.click(getByTestId('column-fruit'))
+
   expect(onSort).toHaveBeenNthCalledWith(1, 'fruit', 'desc')
-  userEvent.click(getByTestId('column-fruit'))
   expect(onSort).toHaveBeenNthCalledWith(2, 'fruit', 'asc')
-  userEvent.click(getByTestId('column-fruit'))
   expect(onSort).toHaveBeenNthCalledWith(3, null, null)
-  userEvent.click(getByTestId('column-fruit'))
   expect(onSort).toHaveBeenNthCalledWith(4, 'fruit', 'desc')
   expect(onSort).toBeCalledTimes(4)
 })
@@ -101,12 +103,12 @@ it('should reset sorting when clicking on another column', () => {
   const { getByTestId } = render(<Wrapper />)
 
   userEvent.click(getByTestId('column-fruit'))
-  expect(onSort).toHaveBeenNthCalledWith(1, 'fruit', 'desc')
   userEvent.click(getByTestId('column-burger'))
+  userEvent.click(getByTestId('column-veggie'))
+  userEvent.click(getByTestId('column-veggie'))
+
+  expect(onSort).toHaveBeenNthCalledWith(1, 'fruit', 'desc')
   expect(onSort).toHaveBeenNthCalledWith(2, 'burger', 'desc')
-  userEvent.click(getByTestId('column-veggie'))
   expect(onSort).toHaveBeenNthCalledWith(3, 'veggie', 'desc')
-  userEvent.click(getByTestId('column-veggie'))
   expect(onSort).toHaveBeenNthCalledWith(4, 'veggie', 'asc')
-  expect(onSort).toBeCalledTimes(4)
 })

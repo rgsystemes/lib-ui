@@ -39,6 +39,7 @@ it('should call onAdd when clicking on add button', () => {
   act(() => {
     fireEvent.click(queryByTestId('add-button'))
   })
+
   expect(queryByTestId('add-button')).not.toBeNull()
   expect(onAdd).toHaveBeenCalled()
 })
@@ -60,6 +61,7 @@ it('should call onSearch when clicking on search button', () => {
   act(() => {
     fireEvent.click(queryByTestId('search-button'))
   })
+
   expect(queryByTestId('search-button')).not.toBeNull()
   expect(onSearch).toHaveBeenCalled()
 })

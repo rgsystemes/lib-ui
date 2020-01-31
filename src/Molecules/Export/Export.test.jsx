@@ -27,6 +27,7 @@ it('should not call onExport when the filename is empty', () => {
 
   fireEvent.change(getByTestId('export-filename'), { target: { value: '' } })
   userEvent.click(getByTestId('export-button'))
+
   expect(onExport).toHaveBeenCalledTimes(0)
 })
 
@@ -38,6 +39,7 @@ it('should call onExport with the filename only', () => {
 
   fireEvent.change(getByTestId('export-filename'), { target: { value: 'test' } })
   userEvent.click(getByTestId('export-button'))
+
   expect(onExport).toHaveBeenCalledWith('test', '', '')
 })
 
@@ -50,6 +52,7 @@ it('should call onExport with the filename, format', () => {
   fireEvent.change(getByTestId('export-filename'), { target: { value: 'test' } })
   fireEvent.change(getByTestId('export-format'), { target: { value: 'json' } })
   userEvent.click(getByTestId('export-button'))
+
   expect(onExport).toHaveBeenCalledWith('test', 'json', '')
 })
 
@@ -59,7 +62,6 @@ it('should call onExport with the filename, format and extra options', () => {
     { label: 'Current node', value: 'current' },
     { label: 'Child node', value: 'children' },
   ]
-
   const { getByTestId } = render(
     <Export onExport={onExport} formats={exportFormats} extraOptions={options}/>
   )
@@ -68,10 +70,6 @@ it('should call onExport with the filename, format and extra options', () => {
   fireEvent.change(getByTestId('export-format'), { target: { value: 'json' } })
   userEvent.click(getByTestId('export-extra-option-children'))
   userEvent.click(getByTestId('export-button'))
-  expect(onExport).toHaveBeenNthCalledWith(1, 'test', 'json', 'children')
 
-  fireEvent.change(getByTestId('export-format'), { target: { value: 'txt' } })
-  userEvent.click(getByTestId('export-extra-option-current'))
-  userEvent.click(getByTestId('export-button'))
-  expect(onExport).toHaveBeenNthCalledWith(2, 'test', 'txt', 'current')
+  expect(onExport).toHaveBeenNthCalledWith(1, 'test', 'json', 'children')
 })

@@ -36,9 +36,10 @@ it('should show/hide columns when clicking on checkboxes', () => {
   const { getByTestId } = render(<Wrapper />)
 
   userEvent.click(getByTestId('toggle-column-fruit'))
-  expect(onChange).toHaveBeenNthCalledWith(1, 'fruit', false)
   userEvent.click(getByTestId('toggle-column-fruit'))
-  expect(onChange).toHaveBeenNthCalledWith(2, 'fruit', true)
   userEvent.click(getByTestId('toggle-column-burger'))
+
+  expect(onChange).toHaveBeenNthCalledWith(1, 'fruit', false)
+  expect(onChange).toHaveBeenNthCalledWith(2, 'fruit', true)
   expect(onChange).toHaveBeenNthCalledWith(3, 'burger', true)
 })
