@@ -155,6 +155,9 @@ export const tableList = () => {
     columns={columns}
     way={way}
     sort={sort}
+    selected={selected}
+    onSelect={setSelected}
+    Details={Details}
     onSort={(sortedColumn, sortedWay) => {
       setSort(sortedColumn)
       setWay(sortedWay)
