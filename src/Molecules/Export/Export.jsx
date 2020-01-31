@@ -130,7 +130,11 @@ const Export = (
         color="success"
         data-testid="export-button"
         onClick={() => onExport(filename, format, exportScope)}
-        disabled={filename === '' || (formats.length > 0 && format == null) || (extraOptions.length > 0 && exportScope == null)}
+        disabled={
+          filename === '' ||
+          (formats.length > 0 && format == null) ||
+          (extraOptions.length > 0 && exportScope == null)
+        }
       >
         <Trans transKey="global.export.actionExport"/>
       </Button>
