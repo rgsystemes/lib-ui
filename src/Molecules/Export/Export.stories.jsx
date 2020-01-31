@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import {  } from '@storybook/addon-knobs'
 
 import Export from './index'
+import FormControl, { FormLabel, FormControlLabel } from '../../Molecules/FormControl'
+import Radio from '../../Atoms/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
 
 import markdown from './README.md'
 
@@ -19,14 +22,60 @@ const exportFormats = [
   { value: 'txt', label: 'Text' },
 ]
 
-export const exportStory = () => (
-  <Export
-    fileNameLabel="Nom du fichier"
-    formatLabel="Format du fichier"
-    onExport={action('export action')}
+const extraOptions = [
+  { label: 'Choose red pill', value: 'red' },
+  { label: 'Choose blue pill', value: 'blue' },
+]
+
+const ExtraOptions = ({ value, onChange }) =>
+  <FormControl component="fieldset">
+    <FormLabel component="legend">
+      Extra option
+    </FormLabel>
+    <RadioGroup
+      aria-label="exportScope"
+      name="extraOption"
+      value={value}
+      onChange={event => {
+        onChange(event.target.value)
+        action('extra option changed')(event.target.value)
+      }}
+    >
+      {extraOptions.map(({ label, value }) =>
+        <FormControlLabel
+          key={value}
+          value={value}
+          control={<Radio />}
+          label={label}
+        />
+      )}
+    </RadioGroup>
+  </FormControl>
+
+export const exportStory = () => {
+  const [value, setValue] = useState({ format: '' })
+
+  return <Export
+    value={value}
+    disabled={value.extraOption == null}
+    onChange={newValue => {
+      setValue({ ...value, ...newValue })
+      action('export value changed')(newValue)
+    }}
+    onClose={action('export canceled')}
+    onExport={action('export launched')}
     formats={exportFormats}
+    extraOptions={
+      <ExtraOptions
+        value={value.extraOption}
+        onChange={extraOption => {
+          setValue({ ...value, extraOption })
+        }}
+      />
+    }
   />
-)
+}
+
 exportStory.story = {
   parameters: {
     notes: { markdown },

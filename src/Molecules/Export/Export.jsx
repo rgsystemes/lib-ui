@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { css } from '@styled-system/css'
-import RadioGroup from '@material-ui/core/RadioGroup'
 import { Download } from 'styled-icons/boxicons-regular/Download'
 
 import Trans, { useTranslation } from '../../Atoms/Trans'
-import Radio from '../../Atoms/Radio'
-import FormControl, { FormLabel, FormControlLabel } from '../../Molecules/FormControl'
+import FormControl from '../../Molecules/FormControl'
 import InputLabel from '../../Molecules/FormControl/InputLabel'
 import Input from '../../Atoms/Input'
-import Select from '../../Atoms/Select'
 import Typo from '../../Atoms/Typo'
 import Button from '../../Atoms/Button'
+
+import Formats from './Formats'
 
 const Body = styled.div`
   display: flex;
@@ -41,21 +40,20 @@ const DownloadIcon = styled(Download)`
   ${css({ mr: 's' })}
 `
 
-const Export = (
-  {
-    descriptionText = <Trans transKey="global.export.description"/>,
-    onExport = () => {},
-    onClose = () => {},
-    extraOptions = [],
-    formats = [],
-    ...props
-  }
-) => {
+const Export = ({
+  descriptionText = <Trans transKey="global.export.description"/>,
+  onExport = () => {},
+  value = {},
+  onChange = () => {},
+  onClose = () => {},
+  extraOptions = null,
+  formats = [],
+  disabled = false,
+  ...props
+}) => {
   const t = useTranslation()
   const { defaultName = t('global.export.defaultFilename') } = props
-  const [format, setFormat] = useState('')
-  const [exportScope, setExportScope] = useState('')
-  const [filename, setFilename] = useState(defaultName)
+  const { format = '', filename = defaultName } = value
 
   return <>
     <Body>
@@ -73,52 +71,11 @@ const Export = (
             'data-testid': 'export-filename',
           }}
           value={filename}
-          onChange={event => setFilename(event.target.value)}
+          onChange={event => onChange({ filename: event.target.value, format })}
         />
       </FormControl>
-      {
-        formats.length > 0 &&
-          <FormControl>
-            <InputLabel>
-              <Trans transKey="global.export.format"/>
-            </InputLabel>
-            <Select
-              inputProps={{
-                'data-testid': 'export-format',
-              }}
-              value={format}
-              onChange={event => setFormat(event.target.value)}
-            >
-              <option value="" disabled>
-                {t('global.chooseOption')}
-              </option>
-              {formats.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
-            </Select>
-          </FormControl>
-      }
-      {
-        extraOptions.length > 0 &&
-          <FormControl component="fieldset">
-            <FormLabel component="legend">
-              <Trans transKey="global.export.dataToExportLabel"/>
-            </FormLabel>
-            <RadioGroup
-              aria-label="exportScope"
-              name="exportScope"
-              value={exportScope}
-              onChange={event => setExportScope(event.target.value)}
-            >
-              {extraOptions.map(({ label, value }) =>
-                <FormControlLabel
-                  key={value}
-                  value={value}
-                  control={<Radio inputProps={{ 'data-testid': `export-extra-option-${value}` }}/>}
-                  label={label}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-      }
+      <Formats formats={formats} value={format} onChange={newFormat => onChange({ filename, format: newFormat })} />
+      {extraOptions}
     </Body>
     <Actions>
       <Button onClick={onClose}>
@@ -127,11 +84,11 @@ const Export = (
       <Button
         color="success"
         data-testid="export-button"
-        onClick={() => onExport(filename, format, exportScope)}
+        onClick={onExport}
         disabled={
           filename === '' ||
-          (formats.length > 0 && format == null) ||
-          (extraOptions.length > 0 && exportScope == null)
+          (formats.length > 0 && (format == null || format === '')) ||
+          disabled
         }
       >
         <Trans transKey="global.export.actionExport"/>

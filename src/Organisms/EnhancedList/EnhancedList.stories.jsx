@@ -193,13 +193,8 @@ export const enhancedList = () => {
       label:        '1-10 of 250',
     }}
     ExportProps={{
-      onExport:     action('Export button clicked'),
-      defaultName:  'Quota du noeud ...',
-      formats:      exportFormats,
-      extraOptions: [
-        { label: 'Tout exporter', value: 'all' },
-        { label: 'Exporter uniquement la vue', value: 'viewonly' },
-      ],
+      onExport: action('Export button clicked'),
+      formats:  exportFormats,
     }}
     EditColumnsProps={{
       onChange: setColumnShown,
