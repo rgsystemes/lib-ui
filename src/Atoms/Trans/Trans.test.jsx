@@ -6,14 +6,14 @@ import Trans, { TransProvider } from './index'
 
 const translations = {
   global: {
-    tamer: 'Bonsoir',
+    translatedText: 'Bonsoir',
   },
 }
 
 it('should trans', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
-      <Trans transKey="global.tamer"/>
+      <Trans transKey="global.translatedText"/>
     </TransProvider>
   )
 
@@ -23,9 +23,9 @@ it('should trans', () => {
 it('should return transKey when not defined', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
-      <Trans transKey="global.noel.mamer"/>
+      <Trans transKey="global.notTranslatedText"/>
     </TransProvider>
   )
 
-  expect(getByText('global.noel.mamer')).toBeInTheDocument()
+  expect(getByText('global.notTranslatedText')).toBeInTheDocument()
 })
