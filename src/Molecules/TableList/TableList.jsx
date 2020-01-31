@@ -5,6 +5,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
 
+import Trans from '../../Atoms/Trans'
 import TableCell from './TableCell'
 import BaseColumn from './SortedColumn'
 import Row from './Row'
@@ -49,8 +50,7 @@ export const TableList = ({
               way={ way }
               {...ColumnProps}
             >
-              {/* { $.rg('trans', translationKey) } */}
-              {translationKey}
+              <Trans transKey={translationKey} />
             </Column>
           )) }
         </TableRow>
