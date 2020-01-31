@@ -63,9 +63,7 @@ const Export = (
         <DownloadIcon size={20} />
         <Trans transKey="global.export.title" />
       </Typo>
-      <Typo>
-        {descriptionText}
-      </Typo>
+      <Typo>{descriptionText}</Typo>
       <FormControl>
         <InputLabel>
           <Trans transKey="global.export.filename" />

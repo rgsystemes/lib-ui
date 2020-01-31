@@ -45,9 +45,7 @@ const EditColumns = ({
       <ColumnsIcon size={24} />
       <Trans transKey="global.editColumns.title" />
     </Title>
-    <Typo>
-      {descriptionText}
-    </Typo>
+    <Typo>{descriptionText}</Typo>
     {enabledColumns.length > 0 &&
         <List
           dense={true}
