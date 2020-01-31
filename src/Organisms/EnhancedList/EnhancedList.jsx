@@ -67,20 +67,18 @@ const EnhancedList = ({
       <SearchWrapper>
         <Pagination {...PaginationProps}/>
         {onSearch != null &&
-          <>
-            <SearchInput
-              value={searchTerm}
-              onChange={event => setSearchTerm(event.target.value)}
-              endAdornment={
-                <InputAdornment>
-                  <IconButton data-testid="search-button" onClick={() => onSearch(searchTerm)}>
-                    <Search size={18}/>
-                  </IconButton>
-                </InputAdornment>
-              }
-              {...SearchInputProps}
-            />
-          </>
+          <SearchInput
+            value={searchTerm}
+            onChange={event => setSearchTerm(event.target.value)}
+            endAdornment={
+              <InputAdornment>
+                <IconButton data-testid="search-button" onClick={() => onSearch(searchTerm)}>
+                  <Search size={18}/>
+                </IconButton>
+              </InputAdornment>
+            }
+            {...SearchInputProps}
+          />
         }
       </SearchWrapper>
       <div>
