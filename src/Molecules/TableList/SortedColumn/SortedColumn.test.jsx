@@ -62,7 +62,7 @@ it('should call onSort cycling', () => {
       setWay(way)
     })
 
-    return <SortedColumn name="fruit" sort={sort} way={way} onSort={onSort}>
+    return <SortedColumn name="fruit" sort={sort === 'fruit' && way} onSort={onSort}>
       Fruit
     </SortedColumn>
   }
@@ -94,7 +94,7 @@ it('should reset sorting when clicking on another column', () => {
     })
 
     return columns.map(col =>
-      <SortedColumn name={col} sort={sort} way={way} onSort={onSort} key={col}>
+      <SortedColumn name={col} sort={sort === col && way} onSort={onSort} key={col}>
         {col}
       </SortedColumn>
     )

@@ -46,8 +46,7 @@ export const TableList = ({
               key={ name }
               onSort={ onSort }
               name={ name }
-              sort={ sort }
-              way={ way }
+              sort={ sort === name && way }
               {...ColumnProps}
             >
               <Trans transKey={translationKey} />

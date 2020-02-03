@@ -63,9 +63,9 @@ const switchOrder = (name, order, onSort) => {
   )
 }
 
-const computeOrder = (current, sort, way) => (
-  current === sort && way === 'desc' ? DESC :
-  current === sort && way === 'asc'  ? ASC :
+const computeOrder = sort => (
+  sort === 'desc' ? DESC :
+  sort === 'asc'  ? ASC :
   NONE
 )
 
@@ -74,11 +74,10 @@ const SortedColumn = ({
   name,
   onSort = null,
   sort,
-  way,
   onFilter = null,
   Filter = () => null,
 }) => {
-  const order = computeOrder(name, sort, way)
+  const order = computeOrder(sort)
   const [filterAnchorEl, setFilterAnchorEl] = useState(null)
 
   return (
@@ -98,7 +97,7 @@ const SortedColumn = ({
         >
           {children}
           {!(onSort == null) &&
-            <SortIcon data-testid={`sort-column-${name}`} size="small" currentSort={sort === name}>
+            <SortIcon data-testid={`sort-column-${name}`} size="small" currentSort={!!sort}>
               {[<DownArrowAlt size={16} />, <UpArrowAlt size={16} />, <DownArrowAlt size={16} />][order]}
             </SortIcon>
           }
