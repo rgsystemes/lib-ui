@@ -57,6 +57,7 @@ export const inputStyles = ({ size }) => css`
     border:       '1px solid',
     borderColor:  'lightgrey',
     color:        'text',
+    fontWeight:   'normal',
   })};
   }
 
