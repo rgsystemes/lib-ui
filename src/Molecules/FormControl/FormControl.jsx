@@ -7,7 +7,7 @@ export const formControlStyles = css`
     margin-top: 15px;
   }
 
-  label + .MuiInputBase-root {
+  label > .MuiInputBase-root, label + .MuiInputBase-root {
     ${systemCss({ marginTop: 's' })};
   }
 `
