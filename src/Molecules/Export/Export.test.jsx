@@ -83,8 +83,8 @@ it('should call onChange when filename has changed', async () => {
 
   const { getByLabelText } = render(<Wrapper formats={exportFormats} />)
 
-  fireEvent.change(getByLabelText('global.export.filename'), { target: { value: 'test' } })
-  userEvent.selectOptions(getByLabelText('global.export.format'), 'json')
+  fireEvent.change(getByLabelText(/global\.export\.filename/), { target: { value: 'test' } })
+  userEvent.selectOptions(getByLabelText(/global\.export\.format/), 'json')
 
   expect(onChange).toHaveBeenNthCalledWith(1, { filename: 'test', format: 'xls' })
   expect(onChange).toHaveBeenNthCalledWith(2, { filename: 'test', format: 'json' })
