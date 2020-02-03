@@ -8,7 +8,7 @@ import { Search } from 'styled-icons/material/Search'
 import { Plus } from 'styled-icons/boxicons-regular/Plus'
 
 import { useTranslation } from '../../Atoms/Trans'
-import Pagination from '../../Molecules/Pagination'
+import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
 import BaseEditColumns from './EditColumns'
 import Menu from '../../Atoms/Menu'
@@ -44,16 +44,14 @@ const ActionGroup = styled(ButtonGroup)`
 `
 
 const EnhancedList = ({
-  Export = BaseExport,
-  ExportProps = {},
-  EditColumns = BaseEditColumns,
-  EditColumnsProps = {},
   onSearch = null,
   onAdd = null,
   columns,
-  View = TableList,
   actions = [],
-  PaginationProps = {},
+  Export = BaseExport,
+  EditColumns = BaseEditColumns,
+  View = TableList,
+  Pagination = BasePagination,
   SearchInputProps = {},
   ...props
 }) => {
@@ -65,7 +63,7 @@ const EnhancedList = ({
   return <>
     <Toolbar component={Paper}>
       <SearchWrapper>
-        <Pagination {...PaginationProps}/>
+        <Pagination/>
         {onSearch != null &&
           <SearchInput
             value={searchTerm}
@@ -121,7 +119,7 @@ const EnhancedList = ({
         anchorEl={exportAnchorEl}
         onClose={() => setExportAnchorEl(null)}
       >
-        <Export {...ExportProps} onClose={() => setExportAnchorEl(null)}/>
+        <Export onClose={() => setExportAnchorEl(null)}/>
       </Menu>
     }
     {!!EditColumns &&
@@ -130,7 +128,7 @@ const EnhancedList = ({
         anchorEl={editColumnsAnchorEl}
         onClose={() => setEditColumnsAnchorEl(null)}
       >
-        <EditColumns columns={columns} {...EditColumnsProps}/>
+        <EditColumns columns={columns} />
       </Menu>
     }
   </>

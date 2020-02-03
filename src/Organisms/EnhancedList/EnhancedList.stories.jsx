@@ -6,9 +6,12 @@ import { BarChart } from 'styled-icons/boxicons-regular/BarChart'
 import { MultilineChart } from 'styled-icons/material/MultilineChart'
 
 import EnhancedList from './index'
+import BasePagination from '../../Molecules/Pagination'
 import Button from '../../Atoms/Button'
 import Tooltip from '../../Atoms/Tooltip'
 import EmptyPlaceholder from '../../Molecules/EmptyPlaceholder'
+import BaseExport from '../../Molecules/Export'
+import EditColumns from './EditColumns'
 
 import markdown from './README.md'
 
@@ -140,6 +143,17 @@ const exportFormats = [
   { value: 'txt', label: 'Text' },
 ]
 
+const Export = props =>
+  <BaseExport onExport={action('Export button clicked')} formats={exportFormats} {...props}/>
+
+const Pagination = props => <BasePagination
+  currentPage={1}
+  sizeOptions={['10', '20', '30', '40'].map(size => `${size} per page`)}
+  onPageChange={action('page changed')}
+  onSizeChange={action('size changed')}
+  label="1-10 of 250"
+/>
+
 export const enhancedList = () => {
   const [columns, setColumns] = useState([
     { name: 'id', translationKey: 'ID', description: 'Unique id identifying the object' },
@@ -185,20 +199,9 @@ export const enhancedList = () => {
     SearchInputProps={{
       placeholder: 'Search ...',
     }}
-    PaginationProps={{
-      currentPage:  1,
-      sizeOptions:  ['10', '20', '30', '40'].map(size => `${size} per page`),
-      onPageChange: action('page changed'),
-      onSizeChange: action('size changed'),
-      label:        '1-10 of 250',
-    }}
-    ExportProps={{
-      onExport: action('Export button clicked'),
-      formats:  exportFormats,
-    }}
-    EditColumnsProps={{
-      onChange: setColumnShown,
-    }}
+    Pagination={Pagination}
+    Export={Export}
+    EditColumns={props => <EditColumns onChange={setColumnShown} {...props} />}
     actions={[
       [
         <Tooltip title="Switch to graph view">
