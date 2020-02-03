@@ -9,3 +9,4 @@ export {
   ExpansionPanelDetails,
   ExpansionPanelActions,
 } from './ExpansionPanel'
+export { default as Breadcrumb } from './Breadcrumb'

@@ -20,3 +20,4 @@ export {
   ExpansionPanelDetails,
   ExpansionPanelActions,
 } from './Molecules'
+export { Breadcrumb } from './Molecules'
