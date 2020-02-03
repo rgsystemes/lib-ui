@@ -11,6 +11,10 @@ import TableCell from '../TableCell'
 import Menu from '../../../Atoms/Menu'
 import Typo from '../../../Atoms/Typo'
 
+const DESC = 0
+const ASC = 1
+const NONE = 2
+
 const FilterIcon = styled(BaseFilterIcon)`
   display: flex;
   opacity: 0;
@@ -52,18 +56,17 @@ const SortIcon = styled.span`
 const switchOrder = (name, order, onSort) => {
   order = (order + 1) % 3
   onSort(
-    order === 2 ? null : name,
-    order === 2 ? null      :
-    order === 0 ? 'desc'    :
+    order === NONE ? null   : name,
+    order === NONE ? null   :
+    order === DESC ? 'desc' :
     'asc'
   )
 }
 
-// order : 0 => DESC, 1 => ASC, 2 => NONE
 const computeOrder = (current, sort, way) => (
-  current === sort && way === 'desc' ? 0 :
-  current === sort && way === 'asc'  ? 1 :
-  2
+  current === sort && way === 'desc' ? DESC :
+  current === sort && way === 'asc'  ? ASC :
+  NONE
 )
 
 const SortedColumn = ({
