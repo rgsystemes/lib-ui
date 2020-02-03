@@ -12,6 +12,8 @@ import Button from '../../Atoms/Button'
 
 import Formats from './Formats'
 
+const isAllowedFormat = (formats, format) => formats.some(({ value } = {}) => format === value)
+
 const Body = styled.div`
   display: flex;
   flex-direction: column;
@@ -74,7 +76,7 @@ const Export = ({
           onChange={event => onChange({ filename: event.target.value, format })}
         />
       </FormControl>
-      <Formats formats={formats} value={format} onChange={newFormat => onChange({ filename, format: newFormat })} />
+      <Formats formats={formats} value={format} onChange={format => onChange({ filename, format })} />
       {extraOptions}
     </Body>
     <Actions>
@@ -87,7 +89,7 @@ const Export = ({
         onClick={onExport}
         disabled={
           filename === '' ||
-          (formats.length > 0 && (format == null || format === '')) ||
+          !isAllowedFormat(formats, format) ||
           disabled
         }
       >
