@@ -65,15 +65,13 @@ const Export = ({
       </Typo>
       <Typo>{descriptionText}</Typo>
       <FormControl>
-        <InputLabel htmlFor="export-filename">
+        <InputLabel>
           <Trans transKey="global.export.filename" />
+          <Input
+            value={filename}
+            onChange={event => onChange({ filename: event.target.value, format })}
+          />
         </InputLabel>
-        <Input
-          value={filename}
-          id="export-filename"
-          name="export-filename"
-          onChange={event => onChange({ filename: event.target.value, format })}
-        />
       </FormControl>
       <Formats formats={formats} value={format} onChange={format => onChange({ filename, format })} />
       {extraOptions}

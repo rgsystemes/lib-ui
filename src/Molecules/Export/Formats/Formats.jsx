@@ -10,20 +10,15 @@ const Formats = ({ formats, value, onChange }) => {
 
   return formats.length > 0 &&
     <FormControl>
-      <InputLabel htmlFor="export-format">
+      <InputLabel>
         <Trans transKey="global.export.format"/>
+        <Select value={value} onChange={event => onChange(event.target.value)}>
+          <option value="" disabled data-testid={`export-format-${value}`}>
+            {t('global.chooseOption')}
+          </option>
+          {formats.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
+        </Select>
       </InputLabel>
-      <Select
-        id="export-format"
-        name="export-format"
-        value={value}
-        onChange={event => onChange(event.target.value)}
-      >
-        <option value="" disabled data-testid={`export-format-${value}`}>
-          {t('global.chooseOption')}
-        </option>
-        {formats.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
-      </Select>
     </FormControl>
 }
 

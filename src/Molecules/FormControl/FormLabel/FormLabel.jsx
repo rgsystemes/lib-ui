@@ -4,6 +4,8 @@ import { css as systemCss } from '@styled-system/css'
 
 export const formLabelStyles = css`
   &.MuiFormLabel-root {
+    display: inline-flex;
+    flex-direction: column;
     position: unset;
     transform: scale(1);
     &.Mui-focused:not(.Mui-error) {

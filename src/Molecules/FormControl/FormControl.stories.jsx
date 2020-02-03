@@ -40,8 +40,8 @@ export const formControl = () => {
     <FormControl error={errorState} disabled={disabled}>
       <InputLabel>
         {label}
+        <Input placeholder="Placeholder" onChange={action('Input changed')}/>
       </InputLabel>
-      <Input placeholder="Placeholder" onChange={action('Input changed')}/>
       <FormHelperText>
         {helpText}
       </FormHelperText>
@@ -49,13 +49,13 @@ export const formControl = () => {
     <FormControl error={errorState} disabled={disabled}>
       <InputLabel>
         {label}
-      </InputLabel>
-      <Select onChange={action('Select changed')}>
-        <option value="0">
+        <Select onChange={action('Select changed')}>
+          <option value="0">
           Choose an option
-        </option>
-        {options.map(({ value, label }) => <option value={value}>{label}</option>)}
-      </Select>
+          </option>
+          {options.map(({ value, label }) => <option value={value}>{label}</option>)}
+        </Select>
+      </InputLabel>
       <FormHelperText>
         {helpText}
       </FormHelperText>
