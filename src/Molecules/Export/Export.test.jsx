@@ -4,11 +4,15 @@ import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
+import { TransProvider } from '../../Atoms/Trans'
 import BaseExport from './index'
 
-const Export = props => <ThemeProvider theme={{}}>
-  <BaseExport {...props} />
-</ThemeProvider>
+const Export = props =>
+  <TransProvider value={{}}>
+    <ThemeProvider theme={{}}>
+      <BaseExport {...props} />
+    </ThemeProvider>
+  </TransProvider>
 
 const exportFormats = [
   { value: 'xls', label: 'Excel' },
@@ -21,40 +25,40 @@ const exportFormats = [
 
 it('should not call onExport when the filename is empty', () => {
   const onExport = jest.fn()
-  const { getByTestId } = render(
+  const { getByText } = render(
     <Export value={{ filename: '' }} onExport={onExport}/>
   )
 
-  userEvent.click(getByTestId('export-button'))
+  userEvent.click(getByText('global.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
 
 it('should not call onExport when the format is empty', () => {
   const onExport = jest.fn()
-  const { getByTestId } = render(
+  const { getByText } = render(
     <Export value={{ format: '' }} formats={exportFormats} onExport={onExport}/>
   )
 
-  userEvent.click(getByTestId('export-button'))
+  userEvent.click(getByText('global.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
 
 it('should call onExport when the filename and format are filled', () => {
   const onExport = jest.fn()
-  const { getByTestId } = render(
+  const { getByText } = render(
     <Export onExport={onExport} formats={exportFormats} value={{ filename: 'toto', format: 'xls' }}/>
   )
 
-  userEvent.click(getByTestId('export-button'))
+  userEvent.click(getByText('global.export.actionExport'))
 
   expect(onExport).toHaveBeenCalled()
 })
 
 it('should call onExport when filename and format are filled in but disabled is true', () => {
   const onExport = jest.fn()
-  const { getByTestId } = render(
+  const { getByText } = render(
     <Export
       onExport={onExport}
       formats={exportFormats}
@@ -63,7 +67,7 @@ it('should call onExport when filename and format are filled in but disabled is 
     />
   )
 
-  userEvent.click(getByTestId('export-button'))
+  userEvent.click(getByText('global.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
@@ -77,10 +81,10 @@ it('should call onChange when filename has changed', async () => {
     return <Export value={value} onChange={onChange} {...props}/>
   }
 
-  const { getByTestId } = render(<Wrapper formats={exportFormats} />)
+  const { getByLabelText } = render(<Wrapper formats={exportFormats} />)
 
-  fireEvent.change(getByTestId('export-filename'), { target: { value: 'test' } })
-  userEvent.selectOptions(getByTestId('export-format'), 'json')
+  fireEvent.change(getByLabelText('global.export.filename'), { target: { value: 'test' } })
+  userEvent.selectOptions(getByLabelText('global.export.format'), 'json')
 
   expect(onChange).toHaveBeenNthCalledWith(1, { filename: 'test', format: 'xls' })
   expect(onChange).toHaveBeenNthCalledWith(2, { filename: 'test', format: 'json' })

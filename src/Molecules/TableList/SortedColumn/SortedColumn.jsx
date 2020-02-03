@@ -93,7 +93,6 @@ const SortedColumn = ({
       <CellWrapper>
         <Column
           as="strong"
-          data-testid={`column-${name}`}
           onClick={ () => !(onSort == null) && switchOrder(name, order, onSort) }
           disableSort={onSort == null}
         >

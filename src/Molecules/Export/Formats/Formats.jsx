@@ -10,13 +10,12 @@ const Formats = ({ formats, value, onChange }) => {
 
   return formats.length > 0 &&
     <FormControl>
-      <InputLabel>
+      <InputLabel htmlFor="export-format">
         <Trans transKey="global.export.format"/>
       </InputLabel>
       <Select
-        inputProps={{
-          'data-testid': 'export-format',
-        }}
+        id="export-format"
+        name="export-format"
         value={value}
         onChange={event => onChange(event.target.value)}
       >

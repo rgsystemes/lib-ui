@@ -65,14 +65,13 @@ const Export = ({
       </Typo>
       <Typo>{descriptionText}</Typo>
       <FormControl>
-        <InputLabel>
+        <InputLabel htmlFor="export-filename">
           <Trans transKey="global.export.filename" />
         </InputLabel>
         <Input
-          inputProps={{
-            'data-testid': 'export-filename',
-          }}
           value={filename}
+          id="export-filename"
+          name="export-filename"
           onChange={event => onChange({ filename: event.target.value, format })}
         />
       </FormControl>
@@ -85,7 +84,6 @@ const Export = ({
       </Button>
       <Button
         color="success"
-        data-testid="export-button"
         onClick={onExport}
         disabled={
           filename === '' ||

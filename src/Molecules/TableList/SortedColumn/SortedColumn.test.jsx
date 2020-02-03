@@ -39,13 +39,13 @@ it('should not show the sort icon when onSort is not defined', () => {
 
 it('should call onSort when clicking on the column', () => {
   const onSort = jest.fn()
-  const { getByTestId } = render(
+  const { getByText } = render(
     <SortedColumn name="fruit" onSort={onSort}>
       Fruit
     </SortedColumn>
   )
 
-  userEvent.click(getByTestId('column-fruit'))
+  userEvent.click(getByText('Fruit'))
 
   expect(onSort).toBeCalledTimes(1)
 })
@@ -67,12 +67,12 @@ it('should call onSort cycling', () => {
     </SortedColumn>
   }
 
-  const { getByTestId } = render(<Wrapper />)
+  const { getByText } = render(<Wrapper />)
 
-  userEvent.click(getByTestId('column-fruit'))
-  userEvent.click(getByTestId('column-fruit'))
-  userEvent.click(getByTestId('column-fruit'))
-  userEvent.click(getByTestId('column-fruit'))
+  userEvent.click(getByText('Fruit'))
+  userEvent.click(getByText('Fruit'))
+  userEvent.click(getByText('Fruit'))
+  userEvent.click(getByText('Fruit'))
 
   expect(onSort).toHaveBeenNthCalledWith(1, 'fruit', 'desc')
   expect(onSort).toHaveBeenNthCalledWith(2, 'fruit', 'asc')
@@ -100,12 +100,12 @@ it('should reset sorting when clicking on another column', () => {
     )
   }
 
-  const { getByTestId } = render(<Wrapper />)
+  const { getByText } = render(<Wrapper />)
 
-  userEvent.click(getByTestId('column-fruit'))
-  userEvent.click(getByTestId('column-burger'))
-  userEvent.click(getByTestId('column-veggie'))
-  userEvent.click(getByTestId('column-veggie'))
+  userEvent.click(getByText('fruit'))
+  userEvent.click(getByText('burger'))
+  userEvent.click(getByText('veggie'))
+  userEvent.click(getByText('veggie'))
 
   expect(onSort).toHaveBeenNthCalledWith(1, 'fruit', 'desc')
   expect(onSort).toHaveBeenNthCalledWith(2, 'burger', 'desc')
