@@ -7,12 +7,13 @@ const Breadcrumb = (
   {
     path = [],
     Item = BaseItem,
+    className = '',
     ...props
   }
 ) => (
-  <Breadcrumbs aria-label="breadcrumb" data-testid="breadcrumb">
+  <Breadcrumbs aria-label="breadcrumb" data-testid="breadcrumb" {...props}>
     {path.map(({ id, ...pathProps }) =>
-      <Item key={id} id={id} { ...pathProps} {...props} />
+      <Item key={id} id={id} { ...pathProps} />
     )}
   </Breadcrumbs>
 )
