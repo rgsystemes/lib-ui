@@ -22,7 +22,6 @@ export {
 } from './Molecules'
 export { EnhancedList } from './Organisms'
 export { TableList } from './Molecules'
-export { Ellipsis } from './Molecules'
 export { Export } from './Molecules'
 export { Checkbox } from './Atoms'
 export { Radio } from './Atoms'
