@@ -9,9 +9,7 @@ export {
   ExpansionPanelDetails,
   ExpansionPanelActions,
 } from './ExpansionPanel'
-export { default as SortedColumn } from './SortedColumn'
 export { default as TableList } from './TableList'
-export { default as Ellipsis } from './Ellipsis'
 export { default as Export } from './Export'
 export { default as List } from './List'
 export { default as EmptyPlaceholder } from './EmptyPlaceholder'
