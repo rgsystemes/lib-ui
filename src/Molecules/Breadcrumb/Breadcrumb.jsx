@@ -7,7 +7,6 @@ const Breadcrumb = (
   {
     path = [],
     Item = BaseItem,
-    className = '',
     ...props
   }
 ) => (
