@@ -9,12 +9,12 @@ import ColumnGroup from './ColumnGroup'
 import Typo from '../../../Atoms/Typo'
 
 const ColumnsIcon = styled(Columns)`
-  ${css({ mr: 'm' })}
+  ${css({ mr: 'm', color: 'primary' })}
 `
 
 const Container = styled.div`
   width: 270px;
-  ${css({ px: 'xl', color: 'primary' })}
+  ${css({ px: 'xl' })}
 `
 
 const Title = styled.div`
