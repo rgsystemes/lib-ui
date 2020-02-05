@@ -14,14 +14,13 @@ const ColumnsIcon = styled(Columns)`
 
 const Container = styled.div`
   width: 270px;
-  ${css({ px: 'xl' })}
+  ${css({ px: 'xl', color: 'primary' })}
 `
 
-const Title = styled(Typo)`
+const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${css({ mb: 'm' })};
 `
 
 const EditColumns = ({
@@ -34,9 +33,11 @@ const EditColumns = ({
   const disabledColumns = columns.filter(({ show }) => !show)
 
   return <Container>
-    <Title as="h2" fontSize="l" color="primary">
+    <Title>
       <ColumnsIcon size={24} />
-      <Trans transKey="global.editColumns.title" />
+      <Typo as="h2" fontSize="title" fontFamily="title" color="primary">
+        <Trans transKey="global.editColumns.title" />
+      </Typo>
     </Title>
     <Typo>{descriptionText}</Typo>
     {enabledColumns.length > 0 &&
@@ -49,7 +50,7 @@ const EditColumns = ({
     }
     {disabledColumns.length > 0 &&
       <ColumnGroup
-        label={<Trans transKey="global.editColumns.enabledColumns"/>}
+        label={<Trans transKey="global.editColumns.disabledColumns"/>}
         columns={disabledColumns}
         onChange={onChange}
         checked={false}

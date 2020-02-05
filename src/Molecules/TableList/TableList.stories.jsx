@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 
 import TableList from './index'
+import Typo from '../../Atoms/Typo'
 
 import markdown from './README.md'
 
@@ -141,9 +142,9 @@ const columns = [
   { name: 'favoriteFruit', translationKey: 'Favorite fruit' },
 ]
 
-const Details = ({ id }) => <div>
+const Details = ({ id }) => <Typo>
   Bonsoir je suis {id}
-</div>
+</Typo>
 
 export const tableList = () => {
   const [sort, setSort] = useState()

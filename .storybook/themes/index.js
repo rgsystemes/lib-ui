@@ -39,6 +39,7 @@ fontSizes.xs = fontSizes[0]
 fontSizes.body = fontSizes[1]
 fontSizes.s = fontSizes[1]
 fontSizes.m = fontSizes[2]
+fontSizes.title = fontSizes[2]
 fontSizes.l = fontSizes[3]
 fontSizes.xl = fontSizes[4]
 
@@ -54,6 +55,7 @@ const base = {
   fontWeights,
   fonts: {
     body:      '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    title:     'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
     monospace: 'monospace',
   },
   lineHeights,
