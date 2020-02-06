@@ -47,6 +47,11 @@ const fontWeights = ['lighter', 'normal', 'bold']
 fontWeights.body = fontWeights[1]
 fontWeights.title = fontWeights[2]
 
+const iconSizes = [16, 22]
+iconSizes.small = iconSizes[0]
+iconSizes.medium = iconSizes[0]
+iconSizes.large = iconSizes[1]
+
 const base = {
   space,
   levels,
@@ -61,7 +66,8 @@ const base = {
   lineHeights,
   shadows: {
     m: '0 4px 16px rgba(0,0,0,.175)',
-  }
+  },
+  iconSizes,
 }
 
 export const rg6 = { ...base, ...rg6Theme }
