@@ -11,7 +11,7 @@ const translations = {
   },
 }
 
-it('should trans', () => {
+it('should translate', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans transKey="global.translatedText"/>
@@ -31,7 +31,7 @@ it('should return transKey when not defined', () => {
   expect(getByText('global.notTranslatedText')).toBeInTheDocument()
 })
 
-it('should trans with parameters', () => {
+it('should translate with parameters', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans transKey="global.translatedTextWithParameters" dude="bro" verb="lift"/>
