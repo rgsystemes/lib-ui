@@ -18,10 +18,6 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   ${css({ px: 'xl' })}
-
-  ${FormControl} {
-    ${css({ mt: 'xl' })}
-  }
 `
 
 const Actions = styled.div`
@@ -84,12 +80,13 @@ const Export = ({
       {extraOptions}
     </Body>
     <Actions>
-      <Button onClick={onClose}>
+      <Button onClick={onClose} size="small">
         <Trans transKey="global.cancel"/>
       </Button>
       <Button
         color="success"
         onClick={onExport}
+        size="small"
         disabled={
           filename === '' ||
           !isAllowedFormat(formats, format) ||
