@@ -6,7 +6,7 @@ import BaseButton from '../Button'
 
 const Button = styled(BaseButton)`
   &.MuiButton-root {
-    min-width: fit-content;
+    min-width: min-content;
   }
 `
 
