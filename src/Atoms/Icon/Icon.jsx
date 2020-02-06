@@ -13,7 +13,7 @@ const Button = styled(BaseButton)`
 // this component needs to be able to hold a ref for possible Tooltip uses
 // see https://material-ui.com/api/tooltip/
 const Icon = forwardRef(({ Component, size = 'medium', button = false, ...props }, ref) => {
-  const { iconSizes } = useContext(ThemeContext)
+  const { iconSizes = {} } = useContext(ThemeContext)
   const Wrapper = button ? Button : IconButton
 
   return <Wrapper size={size} {...props} ref={ref}>
