@@ -30,15 +30,15 @@ const ButtonGroups = styled.div`
   flex-direction: row;
 
   ${ButtonGroup} {
-    margin: 10px 10px;
+    margin: 10px; 
   }
 `
 
 export const buttonGroup = () => (
   <Container>
     {sizes.map(size =>
-      <ButtonGroups>
-        <ButtonGroup key={size} size={size}>
+      <ButtonGroups key={size}>
+        <ButtonGroup size={size}>
           <Button>{size}</Button>
           <Button color="info">{size}</Button>
           <Button color="success">{size}</Button>
