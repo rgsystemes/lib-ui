@@ -11,7 +11,7 @@ import { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
 import BaseEditColumns from './EditColumns'
-import Menu from '../../Atoms/Menu'
+import BaseMenu from '../../Atoms/Menu'
 import Tooltip from '../../Atoms/Tooltip'
 import ButtonGroup from '../../Atoms/ButtonGroup'
 import IconButton from '../../Atoms/IconButton'
@@ -32,6 +32,12 @@ const SearchWrapper = styled.div`
 
   & > * {
     ${css({ mx: 's' })};
+  }
+`
+
+const Menu = styled(BaseMenu)`
+  .MuiMenu-paper {
+    width: 350px;
   }
 `
 
@@ -118,6 +124,14 @@ const EnhancedList = ({
         open={Boolean(exportAnchorEl)}
         anchorEl={exportAnchorEl}
         onClose={() => setExportAnchorEl(null)}
+        anchorOrigin={{
+          vertical:   'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical:   'top',
+          horizontal: 'right',
+        }}
       >
         <Export onClose={() => setExportAnchorEl(null)}/>
       </Menu>
@@ -127,6 +141,14 @@ const EnhancedList = ({
         open={Boolean(editColumnsAnchorEl)}
         anchorEl={editColumnsAnchorEl}
         onClose={() => setEditColumnsAnchorEl(null)}
+        anchorOrigin={{
+          vertical:   'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical:   'top',
+          horizontal: 'right',
+        }}
       >
         <EditColumns columns={columns} />
       </Menu>

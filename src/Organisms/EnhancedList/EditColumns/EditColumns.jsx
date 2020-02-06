@@ -13,8 +13,9 @@ const ColumnsIcon = styled(Columns)`
 `
 
 const Container = styled.div`
-  width: 270px;
-  ${css({ px: 'xl' })}
+  & > * {
+    ${css({ px: 'l' })}
+  }
 `
 
 const Title = styled.div`
@@ -39,7 +40,7 @@ const EditColumns = ({
         <Trans transKey="global.editColumns.title" />
       </Typo>
     </Title>
-    <Typo>{descriptionText}</Typo>
+    <Typo as="div">{descriptionText}</Typo>
     {enabledColumns.length > 0 &&
       <ColumnGroup
         label={<Trans transKey="global.editColumns.enabledColumns"/>}

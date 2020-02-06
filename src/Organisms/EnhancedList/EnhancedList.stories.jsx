@@ -172,9 +172,9 @@ export const enhancedList = () => {
     { name: 'favoriteFruit', translationKey: 'Favorite fruit', description: 'Favorite fruit of the person. This tells a lot about one\'s state of mind' },
   ].map(c => ({ show: true, ...c })))
 
-  const setColumnShown = (columnName, willShow) => {
+  const setColumnShown = columnName => {
     setColumns(columns.map(({ name, show, ...column }) => (
-      { name, ...column, show: name === columnName ? willShow : show }
+      { name, ...column, show: name === columnName ? !show : show }
     )))
   }
 

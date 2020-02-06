@@ -18,7 +18,6 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   ${css({ px: 'xl' })}
-  width: 250px;
 
   ${FormControl} {
     ${css({ mt: 'xl' })}
