@@ -30,8 +30,13 @@ const EditColumns = ({
   onChange = () => {},
   ...props
 }) => {
-  const enabledColumns = columns.filter(({ show }) => show)
-  const disabledColumns = columns.filter(({ show }) => !show)
+  const { enabledColumns, disabledColumns } = columns.reduce(
+    (groups, column) => {
+      groups[column.show ? 'enabledColumns' : 'disabledColumns'].push(column)
+      return groups
+    },
+    { enabledColumns: [], disabledColumns: [] }
+  )
 
   return <Container>
     <Title>
