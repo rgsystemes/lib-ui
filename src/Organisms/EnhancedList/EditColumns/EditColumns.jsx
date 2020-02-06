@@ -45,7 +45,7 @@ const EditColumns = ({
       <ColumnGroup
         label={<Trans transKey="global.editColumns.enabledColumns"/>}
         columns={enabledColumns}
-        onChange={onChange}
+        onChange={name => onChange(name, false)}
         checked={true}
       />
     }
@@ -53,7 +53,7 @@ const EditColumns = ({
       <ColumnGroup
         label={<Trans transKey="global.editColumns.disabledColumns"/>}
         columns={disabledColumns}
-        onChange={onChange}
+        onChange={name => onChange(name, true)}
         checked={false}
       />
     }
