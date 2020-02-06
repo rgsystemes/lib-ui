@@ -24,7 +24,7 @@ const Pagination = ({
       onClose={() => setAnchorEl(null)}
       anchorEl={anchorEl}
     >
-      {sizeOptions.map(size => <MenuItem key={size} data-testid={`option-${size}`} onClick={() => handleSizeChange(size)}>{size}</MenuItem>)}
+      {sizeOptions.map(({ size, label }) => <MenuItem key={size} data-testid={`option-${size}`} onClick={() => handleSizeChange(size)}>{label}</MenuItem>)}
     </Menu>
     <ButtonGroup size="small">
       <Button data-testid='first' onClick={() => onPageChange(1)}>«</Button>
