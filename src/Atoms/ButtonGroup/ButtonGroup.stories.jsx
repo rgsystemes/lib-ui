@@ -8,6 +8,7 @@ import { Home } from 'styled-icons/feather/Home'
 import ButtonGroup from './index'
 
 import Button from '../Button'
+import Icon from '../Icon'
 
 import markdown from './README.md'
 
@@ -24,28 +25,33 @@ const Container = styled.div`
   }
 `
 
+const ButtonGroups = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  ${ButtonGroup} {
+    margin: 10px 10px;
+  }
+`
+
 export const buttonGroup = () => (
   <Container>
     {sizes.map(size =>
-      <ButtonGroup key={size} size={size}>
-        <Button>{size}</Button>
-        <Button color="info">{size}</Button>
-        <Button color="success">{size}</Button>
-        <Button color="warning">{size}</Button>
-        <Button color="danger">{size}</Button>
-      </ButtonGroup>
+      <ButtonGroups>
+        <ButtonGroup key={size} size={size}>
+          <Button>{size}</Button>
+          <Button color="info">{size}</Button>
+          <Button color="success">{size}</Button>
+          <Button color="warning">{size}</Button>
+          <Button color="danger">{size}</Button>
+        </ButtonGroup>
+        <ButtonGroup size={size}>
+          <Icon button Component={Heart} />
+          <Icon button Component={Star} />
+          <Icon button Component={Home} />
+        </ButtonGroup>
+      </ButtonGroups>
     )}
-    <ButtonGroup size="small">
-      <Button variant="outlined">
-        <Heart size={18} />
-      </Button>
-      <Button variant="outlined">
-        <Star size={18} />
-      </Button>
-      <Button variant="outlined">
-        <Home size={18} />
-      </Button>
-    </ButtonGroup>
   </Container>
 )
 ButtonGroup.story = {
