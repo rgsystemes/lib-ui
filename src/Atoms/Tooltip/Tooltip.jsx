@@ -3,17 +3,17 @@ import BaseTooltip from '@material-ui/core/Tooltip'
 
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStylesBootstrap = makeStyles(theme => ({
+const useBootstrapStyles = makeStyles({
   arrow: {
     color: 'black',
   },
   tooltip: {
     backgroundColor: 'black',
   },
-}))
+})
 
 const Tooltip = props => {
-  const classes = useStylesBootstrap()
+  const classes = useBootstrapStyles()
 
   return <BaseTooltip classes={classes} {...props} />
 }
