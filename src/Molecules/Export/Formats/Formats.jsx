@@ -11,7 +11,7 @@ const Formats = ({ formats, value, onChange }) => {
   return formats.length > 0 &&
     <FormControl>
       <InputLabel>
-        <Trans transKey="global.export.format"/>
+        <Trans transKey="global.export.format.label"/>
         <Select value={value} onChange={event => onChange(event.target.value)}>
           <option value="" disabled data-testid={`export-format-${value}`}>
             {t('global.chooseOption')}
