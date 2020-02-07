@@ -9,7 +9,13 @@ export { Title } from './Atoms'
 export { CodeBlock } from './Atoms'
 export { Tooltip } from './Atoms'
 export { Byte } from './Atoms'
-export { FormControl } from './Molecules'
+export {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  FormLabel,
+  FormControlLabel,
+} from './Molecules'
 export { Menu } from './Atoms'
 export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
@@ -21,11 +27,12 @@ export {
   ExpansionPanelActions,
 } from './Molecules'
 export { EnhancedList } from './Organisms'
+export { EditColumns } from './Organisms/EnhancedList'
 export { TableList } from './Molecules'
 export { Export } from './Molecules'
 export { Checkbox } from './Atoms'
 export { Radio } from './Atoms'
 export { List } from './Molecules'
 export { EmptyPlaceholder } from './Molecules'
-export { Trans } from './Atoms'
+export { Trans, useTranslation, TransProvider } from './Atoms'
 export { Breadcrumb } from './Molecules'
