@@ -16,30 +16,34 @@ const columns = [
   { name: 'burger', translationKey: 'Burger', show: false },
 ]
 
+const Wrapper = () => {
+  const [cols, setCols] = useState(columns)
+
+  const onChange =
+    columnName =>
+      setCols(
+        cols.map(({ name, show, ...column }) => (
+          { name, ...column, show: name === columnName ? !show : show }
+        ))
+      )
+
+  return <EditColumns columns={cols} onChange={onChange}/>
+}
+
 it('should show/hide columns when clicking on checkboxes', () => {
-  const onChange = jest.fn()
-  const Wrapper = () => {
-    const [cols, setCols] = useState(columns)
+  const { getByText } = render(<EditColumns columns={columns} />)
 
-    onChange.mockImplementation(
-      (columnName, willShow) =>
-        setCols(
-          cols.map(({ name, show, ...column }) => (
-            { name, ...column, show: name === columnName ? willShow : show }
-          ))
-        )
-    )
+  expect(getByText('global.editColumns.enabledColumns').closest('ul')).toHaveTextContent(/Fruit/i)
+  expect(getByText('global.editColumns.enabledColumns').closest('ul')).toHaveTextContent(/Veggie/i)
+  expect(getByText('global.editColumns.disabledColumns').closest('ul')).toHaveTextContent(/Burger/i)
+})
 
-    return <EditColumns columns={cols} onChange={onChange}/>
-  }
+it('should show/hide columns when clicking on checkboxes', () => {
+  const { getByText } = render(<Wrapper />)
 
-  const { getByTestId } = render(<Wrapper />)
+  userEvent.click(getByText('Fruit'))
+  userEvent.click(getByText('Burger'))
 
-  userEvent.click(getByTestId('toggle-column-fruit'))
-  userEvent.click(getByTestId('toggle-column-fruit'))
-  userEvent.click(getByTestId('toggle-column-burger'))
-
-  expect(onChange).toHaveBeenNthCalledWith(1, 'fruit', false)
-  expect(onChange).toHaveBeenNthCalledWith(2, 'fruit', true)
-  expect(onChange).toHaveBeenNthCalledWith(3, 'burger', true)
+  expect(getByText('global.editColumns.disabledColumns').closest('ul')).toHaveTextContent(/Fruit/i)
+  expect(getByText('global.editColumns.enabledColumns').closest('ul')).toHaveTextContent(/Burger/i)
 })
