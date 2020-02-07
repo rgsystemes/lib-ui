@@ -56,7 +56,7 @@ it('should call onSizeChange when user select another size', async () => {
 
   const { getByTestId, findByTestId } = render(
     <Wrapper>
-      <Pagination sizeOptions={[{ size: 10 }, { size: 20 }, { size: 30 }]} onSizeChange={onSizeChange} />
+      <Pagination sizeOptions={[10, 20, 30]} onSizeChange={onSizeChange} />
     </Wrapper>
   )
 
