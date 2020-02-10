@@ -9,19 +9,19 @@ import ColumnGroup from './ColumnGroup'
 import Typo from '../../../Atoms/Typo'
 
 const ColumnsIcon = styled(Columns)`
-  ${css({ mr: 'm' })}
+  ${css({ mr: 'm', color: 'primary' })}
 `
 
 const Container = styled.div`
-  width: 270px;
-  ${css({ px: 'xl' })}
+  & > * {
+    ${css({ px: 'l' })}
+  }
 `
 
-const Title = styled(Typo)`
+const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${css({ mb: 'm' })};
 `
 
 const EditColumns = ({
@@ -30,15 +30,22 @@ const EditColumns = ({
   onChange = () => {},
   ...props
 }) => {
-  const enabledColumns = columns.filter(({ show }) => show)
-  const disabledColumns = columns.filter(({ show }) => !show)
+  const { enabledColumns, disabledColumns } = columns.reduce(
+    (groups, column) => {
+      groups[column.show ? 'enabledColumns' : 'disabledColumns'].push(column)
+      return groups
+    },
+    { enabledColumns: [], disabledColumns: [] }
+  )
 
   return <Container>
-    <Title as="h2" fontSize="l" color="primary">
+    <Title>
       <ColumnsIcon size={24} />
-      <Trans transKey="global.editColumns.title" />
+      <Typo as="h2" fontSize="title" fontFamily="title" color="primary">
+        <Trans transKey="global.editColumns.title" />
+      </Typo>
     </Title>
-    <Typo>{descriptionText}</Typo>
+    <Typo as="div">{descriptionText}</Typo>
     {enabledColumns.length > 0 &&
       <ColumnGroup
         label={<Trans transKey="global.editColumns.enabledColumns"/>}
@@ -49,7 +56,7 @@ const EditColumns = ({
     }
     {disabledColumns.length > 0 &&
       <ColumnGroup
-        label={<Trans transKey="global.editColumns.enabledColumns"/>}
+        label={<Trans transKey="global.editColumns.disabledColumns"/>}
         columns={disabledColumns}
         onChange={onChange}
         checked={false}

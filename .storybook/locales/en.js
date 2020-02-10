@@ -2,6 +2,9 @@ export default {
   global: {
     cancel: 'Cancel',
     add: 'Add',
+    pagination: {
+      perPage: '%count% per page',
+    },
     export: {
       title: 'Export',
       description: 'You will receive an email containing a link that contains the export',

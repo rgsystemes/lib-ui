@@ -148,7 +148,7 @@ const Export = props =>
 
 const Pagination = props => <BasePagination
   currentPage={1}
-  sizeOptions={['10', '20', '30', '40'].map(size => `${size} per page`)}
+  sizeOptions={['10', '20', '30', '40']}
   onPageChange={action('page changed')}
   onSizeChange={action('size changed')}
   label="1-10 of 250"
@@ -172,9 +172,9 @@ export const enhancedList = () => {
     { name: 'favoriteFruit', translationKey: 'Favorite fruit', description: 'Favorite fruit of the person. This tells a lot about one\'s state of mind' },
   ].map(c => ({ show: true, ...c })))
 
-  const setColumnShown = (columnName, willShow) => {
+  const setColumnShown = columnName => {
     setColumns(columns.map(({ name, show, ...column }) => (
-      { name, ...column, show: name === columnName ? willShow : show }
+      { name, ...column, show: name === columnName ? !show : show }
     )))
   }
 

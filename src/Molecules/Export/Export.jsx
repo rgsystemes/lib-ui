@@ -18,11 +18,6 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   ${css({ px: 'xl' })}
-  width: 250px;
-
-  ${FormControl} {
-    ${css({ mt: 'xl' })}
-  }
 `
 
 const Actions = styled.div`
@@ -39,7 +34,13 @@ const Actions = styled.div`
 `
 
 const DownloadIcon = styled(Download)`
-  ${css({ mr: 's' })}
+  ${css({ mr: 's', color: 'primary' })}
+`
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 const Export = ({
@@ -59,10 +60,12 @@ const Export = ({
 
   return <>
     <Body>
-      <Typo as="h2" fontSize="l" color="primary">
-        <DownloadIcon size={20} />
-        <Trans transKey="global.export.title" />
-      </Typo>
+      <Title>
+        <DownloadIcon size={20} color="primary"/>
+        <Typo as="h2" fontSize="title" fontFamily="title" color="primary">
+          <Trans transKey="global.export.title" />
+        </Typo>
+      </Title>
       <Typo>{descriptionText}</Typo>
       <FormControl>
         <InputLabel>
@@ -77,12 +80,13 @@ const Export = ({
       {extraOptions}
     </Body>
     <Actions>
-      <Button onClick={onClose}>
+      <Button onClick={onClose} size="small">
         <Trans transKey="global.cancel"/>
       </Button>
       <Button
         color="success"
         onClick={onExport}
+        size="small"
         disabled={
           filename === '' ||
           !isAllowedFormat(formats, format) ||

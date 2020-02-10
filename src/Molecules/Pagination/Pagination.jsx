@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 
-import { ButtonGroup, Button, Menu, MenuItem } from '../../Atoms'
+import {
+  useTranslation,
+  ButtonGroup,
+  Button,
+  Menu,
+  MenuItem,
+} from '../../Atoms'
 
 const Pagination = ({
   onPageChange,
@@ -11,6 +17,7 @@ const Pagination = ({
   sizeOptions = [],
 }) => {
   const [anchorEl, setAnchorEl] = useState()
+  const t = useTranslation()
   const handleSizeChange = size => {
     onSizeChange(size)
     setAnchorEl(null)
@@ -24,7 +31,15 @@ const Pagination = ({
       onClose={() => setAnchorEl(null)}
       anchorEl={anchorEl}
     >
-      {sizeOptions.map(size => <MenuItem key={size} data-testid={`option-${size}`} onClick={() => handleSizeChange(size)}>{size}</MenuItem>)}
+      {sizeOptions.map(size =>
+        <MenuItem
+          key={size}
+          data-testid={`option-${size}`}
+          onClick={() => handleSizeChange(size)}
+        >
+          {t('global.pagination.perPage', { count: size })}
+        </MenuItem>
+      )}
     </Menu>
     <ButtonGroup size="small">
       <Button data-testid='first' onClick={() => onPageChange(1)}>«</Button>

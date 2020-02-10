@@ -11,11 +11,10 @@ import { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
 import BaseEditColumns from './EditColumns'
-import Menu from '../../Atoms/Menu'
+import BaseMenu from '../../Atoms/Menu'
 import Tooltip from '../../Atoms/Tooltip'
 import ButtonGroup from '../../Atoms/ButtonGroup'
-import IconButton from '../../Atoms/IconButton'
-import Button from '../../Atoms/Button'
+import Icon from '../../Atoms/Icon'
 import Input from '../../Atoms/Input'
 import InputAdornment from '../../Atoms/Input/InputAdornment'
 
@@ -32,6 +31,12 @@ const SearchWrapper = styled.div`
 
   & > * {
     ${css({ mx: 's' })};
+  }
+`
+
+const Menu = styled(BaseMenu)`
+  .MuiMenu-paper {
+    width: 350px;
   }
 `
 
@@ -66,13 +71,12 @@ const EnhancedList = ({
         <Pagination/>
         {onSearch != null &&
           <SearchInput
+            size="small"
             value={searchTerm}
             onChange={event => setSearchTerm(event.target.value)}
             endAdornment={
               <InputAdornment>
-                <IconButton data-testid="search-button" onClick={() => onSearch(searchTerm)}>
-                  <Search size={18}/>
-                </IconButton>
+                <Icon Component={Search} data-testid="search-button" onClick={() => onSearch(searchTerm)} />
               </InputAdornment>
             }
             {...SearchInputProps}
@@ -80,33 +84,27 @@ const EnhancedList = ({
         }
       </SearchWrapper>
       <div>
-        <ActionGroup>
+        <ActionGroup size="small">
           {onAdd != null &&
             <Tooltip title={t('global.add')}>
-              <Button data-testid="add-button" onClick={onAdd}>
-                <Plus size={16} />
-              </Button>
+              <Icon button Component={Plus} data-testid="add-button" onClick={onAdd} />
             </Tooltip>
           }
         </ActionGroup>
-        <ActionGroup>
+        <ActionGroup size="small">
           {!!Export &&
             <Tooltip title={t('global.export.title')}>
-              <Button onClick={event => setExportAnchorEl(event.currentTarget)}>
-                <Download size={16} />
-              </Button>
+              <Icon button Component={Download} onClick={event => setExportAnchorEl(event.currentTarget)} />
             </Tooltip>
           }
           {!!EditColumns &&
             <Tooltip title={t('global.editColumns.title')}>
-              <Button onClick={event => setEditColumnsAnchorEl(event.currentTarget)}>
-                <Columns size={16} />
-              </Button>
+              <Icon button Component={Columns} onClick={event => setEditColumnsAnchorEl(event.currentTarget)} />
             </Tooltip>
           }
         </ActionGroup>
         {actions.map(actionGroup =>
-          <ActionGroup>
+          <ActionGroup size="small">
             {actionGroup.map(action => action)}
           </ActionGroup>
         )}
@@ -118,6 +116,14 @@ const EnhancedList = ({
         open={Boolean(exportAnchorEl)}
         anchorEl={exportAnchorEl}
         onClose={() => setExportAnchorEl(null)}
+        anchorOrigin={{
+          vertical:   'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical:   'top',
+          horizontal: 'right',
+        }}
       >
         <Export onClose={() => setExportAnchorEl(null)}/>
       </Menu>
@@ -127,6 +133,14 @@ const EnhancedList = ({
         open={Boolean(editColumnsAnchorEl)}
         anchorEl={editColumnsAnchorEl}
         onClose={() => setEditColumnsAnchorEl(null)}
+        anchorOrigin={{
+          vertical:   'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical:   'top',
+          horizontal: 'right',
+        }}
       >
         <EditColumns columns={columns} />
       </Menu>
