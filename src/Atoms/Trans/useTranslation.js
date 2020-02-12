@@ -5,7 +5,7 @@ export const { Provider } = Context
 export default () => {
   const translations = useContext(Context) || {}
 
-  return (transKey, parameters = {}) => {
+  return (transKey = '', parameters = {}) => {
     let translated = transKey
       .split('.')
       .reduce(
