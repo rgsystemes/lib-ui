@@ -20,6 +20,7 @@ export { Menu } from './Atoms'
 export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
 export { IconButton } from './Atoms'
+export { Icon } from './Atoms'
 export {
   ExpansionPanel,
   ExpansionPanelSummary,
