@@ -24,7 +24,7 @@ const EnhancedList = props => <ThemeProvider theme={{}}>
 
 it('should hide add button when onAdd is not defined', () => {
   const { queryByTestId } = render(
-    <EnhancedList/>
+    <EnhancedList/>,
   )
 
   expect(queryByTestId('add-button')).toBeNull()
@@ -33,7 +33,7 @@ it('should hide add button when onAdd is not defined', () => {
 it('should call onAdd when clicking on add button', () => {
   const onAdd = jest.fn()
   const { queryByTestId } = render(
-    <EnhancedList onAdd={onAdd}/>
+    <EnhancedList onAdd={onAdd}/>,
   )
 
   act(() => {
@@ -46,7 +46,7 @@ it('should call onAdd when clicking on add button', () => {
 
 it('should hide search button when onSearch is not defined', () => {
   const { queryByTestId } = render(
-    <EnhancedList/>
+    <EnhancedList/>,
   )
 
   expect(queryByTestId('search-button')).toBeNull()
@@ -55,7 +55,7 @@ it('should hide search button when onSearch is not defined', () => {
 it('should call onSearch when clicking on search button', () => {
   const onSearch = jest.fn()
   const { queryByTestId } = render(
-    <EnhancedList onSearch={onSearch}/>
+    <EnhancedList onSearch={onSearch}/>,
   )
 
   act(() => {

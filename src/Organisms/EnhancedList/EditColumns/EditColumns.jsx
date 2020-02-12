@@ -35,7 +35,7 @@ const EditColumns = ({
       groups[column.show ? 'enabledColumns' : 'disabledColumns'].push(column)
       return groups
     },
-    { enabledColumns: [], disabledColumns: [] }
+    { enabledColumns: [], disabledColumns: [] },
   )
 
   return <Container>

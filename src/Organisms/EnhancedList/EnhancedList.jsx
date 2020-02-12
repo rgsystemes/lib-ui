@@ -106,7 +106,7 @@ const EnhancedList = ({
         {actions.map(actionGroup =>
           <ActionGroup size="small">
             {actionGroup.map(action => action)}
-          </ActionGroup>
+          </ActionGroup>,
         )}
       </div>
     </Toolbar>

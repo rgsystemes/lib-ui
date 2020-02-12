@@ -21,7 +21,7 @@ const useOnClickOutside = (onClikOutside, deps = []) => {
       }
     },
     // Add ref and handler to effect dependencies
-    [ref, handler]
+    [ref, handler],
   )
 
   return ref

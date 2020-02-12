@@ -21,7 +21,7 @@ it('should not show the filter icon when onFilter is not defined', () => {
   const { queryByTestId } = render(
     <SortedColumn name="fruit">
       Fruit
-    </SortedColumn>
+    </SortedColumn>,
   )
 
   expect(queryByTestId('filter-column-fruit')).toBeNull()
@@ -31,7 +31,7 @@ it('should not show the sort icon when onSort is not defined', () => {
   const { queryByTestId } = render(
     <SortedColumn name="fruit">
       Fruit
-    </SortedColumn>
+    </SortedColumn>,
   )
 
   expect(queryByTestId('sort-column-fruit')).toBeNull()
@@ -42,7 +42,7 @@ it('should call onSort when clicking on the column', () => {
   const { getByText } = render(
     <SortedColumn name="fruit" onSort={onSort}>
       Fruit
-    </SortedColumn>
+    </SortedColumn>,
   )
 
   userEvent.click(getByText('Fruit'))
@@ -96,7 +96,7 @@ it('should reset sorting when clicking on another column', () => {
     return columns.map(col =>
       <SortedColumn name={col} sort={sort === col && way} onSort={onSort} key={col}>
         {col}
-      </SortedColumn>
+      </SortedColumn>,
     )
   }
 

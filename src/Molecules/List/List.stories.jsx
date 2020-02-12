@@ -28,7 +28,7 @@ export const list = () =>
         <ListItemText>
           {league}
         </ListItemText>
-      </ListItem>
+      </ListItem>,
     )}
   </List>
 list.story = {

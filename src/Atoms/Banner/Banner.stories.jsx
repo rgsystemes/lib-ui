@@ -37,7 +37,7 @@ export const closableBanner = () => {
         setTimeout(() => setClosed(false), 5000)
       }
     },
-    [closed]
+    [closed],
   )
 
   return !closed && <Banner

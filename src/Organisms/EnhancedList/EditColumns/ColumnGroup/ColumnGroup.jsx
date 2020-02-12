@@ -23,7 +23,7 @@ const ColumnGroup = ({ label, columns, onChange = () => {}, checked }) =>
           secondary={<Trans>{description}</Trans>}
         />
         <ListItemSecondaryAction />
-      </ListItem>
+      </ListItem>,
     )}
   </List>
 

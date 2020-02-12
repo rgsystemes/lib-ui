@@ -47,7 +47,7 @@ const ExtraOptions = ({ value, onChange }) =>
           value={value}
           control={<Radio />}
           label={label}
-        />
+        />,
       )}
     </RadioGroup>
   </FormControl>

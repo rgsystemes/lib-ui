@@ -41,7 +41,7 @@ const Pagination = ({
           onClick={() => handleSizeChange(size)}
         >
           {t('global.pagination.perPage', { count: size })}
-        </MenuItem>
+        </MenuItem>,
       )}
     </Menu>
     <ButtonGroup size="small">
