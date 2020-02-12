@@ -15,8 +15,8 @@ export default {
 export const emptyPlaceholder = () => (
   <EmptyPlaceholder
     icon={<MailOutline size={98} />}
-    primaryText="Il n'y a pas encore de quotas définis sur ce noeud"
-    secondaryText="Les quotas que vous allez créer sur ce noeud vont apparaitre ici"
+    primaryText="Il n'y a pas encore de jedis définis sur ce monde"
+    secondaryText="Les jedis que vous allez créer sur ce monde vont apparaitre ici"
     action={
       <Button onClick={action('Empty placeholder button clicked')} color="success" size="large">
         Do something

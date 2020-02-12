@@ -187,8 +187,8 @@ export const enhancedList = () => {
     emptyPlaceholder={
       <EmptyPlaceholder
         icon={<MultilineChart size={98} />}
-        primaryText="Il n\'y a pas encore de quotas définis sur ce noeud"
-        secondaryText="Les quotas que vous allez créer sur ce noeud vont apparaitre ici"
+        primaryText="Il n\'y a pas encore de personnes définis sur ce groupe"
+        secondaryText="Les personnes que vous allez créer sur ce groupe vont apparaitre ici"
         action={
           <Button onClick={action('Empty placeholder button clicked')} color="success" size="large">
             Do something
