@@ -36,11 +36,11 @@ export const expansionPanel = () => panels.map(([summary, details], index) =>
         {details}
       </Typo>
     </ExpansionPanelDetails>
-  </ExpansionPanel>
+  </ExpansionPanel>,
 )
 
 const Toggle = styled(
-  ({ expanded, ...props }) => <Button { ...props } />
+  ({ expanded, ...props }) => <Button { ...props } />,
 ).attrs(props => ({
   children: props.expanded ? <KeyboardArrowUp size={14}/> : <KeyboardArrowDown size={14}/>,
   ...props,

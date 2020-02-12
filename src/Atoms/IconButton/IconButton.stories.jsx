@@ -18,7 +18,7 @@ export const iconButton = () => (
   Icons.map((Icon, index) =>
     <IconButton key={index} onClick={action('icon clicked')}>
       <Icon size={20} />
-    </IconButton>
+    </IconButton>,
   )
 )
 iconButton.story = {

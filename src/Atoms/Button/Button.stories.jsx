@@ -36,9 +36,9 @@ export const button = () => (
         {colors.map(color =>
           <Button onClick={action('clicked')} color={color} size={size} disabled={boolean('Disabled', false)}>
             {size.charAt(0).toUpperCase() + size.slice(1)} button
-          </Button>
+          </Button>,
         )}
-      </Row>
+      </Row>,
     )}
   </Container>
 )

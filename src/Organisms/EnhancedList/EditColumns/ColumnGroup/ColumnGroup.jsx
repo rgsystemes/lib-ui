@@ -18,7 +18,7 @@ const ColumnGroup = ({ label, columns, onChange = () => {}, checked }) =>
         </ListItemIcon>
         <ListItemText id={name} primary={translationKey} secondary={description} />
         <ListItemSecondaryAction />
-      </ListItem>
+      </ListItem>,
     )}
   </List>
 

@@ -26,7 +26,7 @@ const exportFormats = [
 it('should not call onExport when the filename is empty', () => {
   const onExport = jest.fn()
   const { getByText } = render(
-    <Export value={{ filename: '' }} onExport={onExport}/>
+    <Export value={{ filename: '' }} onExport={onExport}/>,
   )
 
   userEvent.click(getByText('global.export.actionExport'))
@@ -37,7 +37,7 @@ it('should not call onExport when the filename is empty', () => {
 it('should not call onExport when the format is empty', () => {
   const onExport = jest.fn()
   const { getByText } = render(
-    <Export value={{ format: '' }} formats={exportFormats} onExport={onExport}/>
+    <Export value={{ format: '' }} formats={exportFormats} onExport={onExport}/>,
   )
 
   userEvent.click(getByText('global.export.actionExport'))
@@ -48,7 +48,7 @@ it('should not call onExport when the format is empty', () => {
 it('should call onExport when the filename and format are filled', () => {
   const onExport = jest.fn()
   const { getByText } = render(
-    <Export onExport={onExport} formats={exportFormats} value={{ filename: 'toto', format: 'xls' }}/>
+    <Export onExport={onExport} formats={exportFormats} value={{ filename: 'toto', format: 'xls' }}/>,
   )
 
   userEvent.click(getByText('global.export.actionExport'))
@@ -64,7 +64,7 @@ it('should call onExport when filename and format are filled in but disabled is 
       formats={exportFormats}
       value={{ filename: 'toto', format: 'xls' }}
       disabled={true}
-    />
+    />,
   )
 
   userEvent.click(getByText('global.export.actionExport'))

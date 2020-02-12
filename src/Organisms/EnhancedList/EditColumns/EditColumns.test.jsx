@@ -24,7 +24,7 @@ const Wrapper = () => {
       setCols(
         cols.map(({ name, show, ...column }) => (
           { name, ...column, show: name === columnName ? !show : show }
-        ))
+        )),
       )
 
   return <EditColumns columns={cols} onChange={onChange}/>

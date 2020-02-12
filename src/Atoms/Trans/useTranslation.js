@@ -10,7 +10,7 @@ export default () => {
       .split('.')
       .reduce(
         (acc, k) => acc[k] || transKey,
-        translations
+        translations,
       )
 
     Object.entries(parameters).forEach(([key, value]) => {

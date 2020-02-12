@@ -50,7 +50,7 @@ export const buttonGroup = () => (
           <Icon button Component={Star} />
           <Icon button Component={Home} />
         </ButtonGroup>
-      </ButtonGroups>
+      </ButtonGroups>,
     )}
   </Container>
 )
