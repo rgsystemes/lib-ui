@@ -28,7 +28,13 @@ export {
 } from './Molecules'
 export { EnhancedList } from './Organisms'
 export { EditColumns } from './Organisms/EnhancedList'
-export { TableList } from './Molecules'
+export {
+  TableList,
+  Table,
+  TableCell,
+  SortedColumn,
+  Row,
+} from './Molecules'
 export { Export } from './Molecules'
 export { Checkbox } from './Atoms'
 export { Radio } from './Atoms'
