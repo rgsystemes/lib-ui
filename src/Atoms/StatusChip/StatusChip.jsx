@@ -19,7 +19,7 @@ const StatusChip = ({ status = '', ...props }) => (
     borderRadius={10}
     color={
       VALID_STATUS.includes(status) ? `${status}.contrastText` :
-      'grey.contrastText'
+      'black'
     }
     px={1}
     minWidth='18px'

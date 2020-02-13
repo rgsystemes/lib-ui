@@ -6,7 +6,7 @@ export default createMuiTheme({
   palette: {
     primary: { main: '#009cb4' },
     success: { main: '#5CB85C', contrastText: 'white' },
-    info:    { main: '#0069A1' },
+    info:    { main: '#337AB7' },
     warning: { main: '#F0AD4E' },
     error:   { main: '#D9534F' },
   },
