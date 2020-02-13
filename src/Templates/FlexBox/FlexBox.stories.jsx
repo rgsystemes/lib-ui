@@ -44,9 +44,9 @@ export const flexBox = () => {
         />
       </label>
       <FlexBox flexDirection={direction} gap={gap} p={padding} border='1px solid black'>
-        <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
-        <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
-        <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
+        <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
+        <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
+        <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
       </FlexBox>
     </FlexBox>
   )
@@ -79,10 +79,10 @@ export const LayoutExample = () => {
           <FlexBox minWidth={300} minHeight={300} bgcolor='grey.300'/>
           <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
         </FlexBox>
-        <FlexBox gap={gap} flexDirection='column' minWidth={300} minHeight={200}>
+        <FlexBox gap={gap} flexGrow={1} flexDirection='column' minWidth={300} minHeight={200}>
           <FlexBox gap={gap} minWidth={300} minHeight={200}>
-            <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
-            <FlexBox minWidth={300} minHeight={200} bgcolor='grey.300'/>
+            <FlexBox flexGrow={2} minWidth={300} minHeight={200} bgcolor='grey.300'/>
+            <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
           </FlexBox>
           <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
         </FlexBox>

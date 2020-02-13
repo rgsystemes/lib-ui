@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Box from '@material-ui/core/Box'
+import Box from '../../Atoms/Box'
 import { useTheme } from '@material-ui/core'
 
 const GappedBox = styled(Box)`
