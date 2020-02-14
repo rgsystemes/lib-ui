@@ -2,6 +2,7 @@ export default {
   global: {
     cancel: 'Cancel',
     add: 'Add',
+    dateFormat: 'dd/MM/yyyy hh:mm',
     pagination: {
       perPage: '%count% per page',
     },
