@@ -23,10 +23,18 @@ it('should call onChange on blur', () => {
       value=""
       translationKey="Input"
       onChange={onChange}
-    />
+    />,
   )
 
   userEvent.type(getByLabelText('Input'), 'Bonsoir')
   fireEvent.blur(getByLabelText('Input'))
   expect(onChange).toBeCalledWith('Bonsoir')
+})
+
+it('should call on clear when clicking on trash icon', () => {
+  const onClear = jest.fn()
+  const { getByText } = render(<Filter onClear={onClear}/>)
+
+  userEvent.click(getByText('global.remove'))
+  expect(onClear).toHaveBeenCalled()
 })

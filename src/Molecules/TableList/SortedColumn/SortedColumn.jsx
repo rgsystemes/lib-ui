@@ -10,7 +10,7 @@ import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
 
 import BaseFilter from '../../../Molecules/Filter'
 import TableCell from '../TableCell'
-import FilterWrapper from '../../../Molecules/FilterWrapper'
+import Filter from '../../../Molecules/Filter'
 import Typo from '../../../Atoms/Typo'
 import Icon from '../../../Atoms/Icon'
 
@@ -95,20 +95,18 @@ const SortedColumn = ({
         onClose={() => setFilterAnchorEl(null)}
         anchorEl={filterAnchorEl}
       >
-        <FilterWrapper onClear={() => {
+        <Filter onClear={() => {
           setFilterAnchorEl(null)
           onClear(name)
-        }}>
-          <Filter
-            onChange={onFilter}
-            placeholder={placeholder}
-            value={filter}
-            name={name}
-            type={type}
-            options={options}
-            translationKey={translationKey}
-          />
-        </FilterWrapper>
+        }}
+        onChange={onFilter}
+        placeholder={placeholder}
+        value={filter}
+        name={name}
+        type={type}
+        options={options}
+        translationKey={translationKey}
+        />
       </Popover>
       <CellWrapper>
         <Column

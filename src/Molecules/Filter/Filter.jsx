@@ -1,10 +1,30 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+import { css } from '@styled-system/css'
 
+import Icon from '../../Atoms/Icon'
+import { Trash } from 'styled-icons/boxicons-solid/Trash'
 import DateRange from '../../Molecules/DateRange'
-import { Trans, useTranslation } from '../../Atoms'
+import Trans, { useTranslation } from '../../Atoms/Trans'
 import FormControl, { InputLabel } from '../../Molecules/FormControl'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
+import Typo from '../../Atoms/Typo'
+
+const Container = styled.div`
+  min-width: 200px;
+  .MuiFormControl-root {
+    ${css({ px: 'l', py: 'm' })};
+  }
+`
+
+const Clear = styled.span`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-top: 1px solid lightgrey;
+  ${css({ mt: 'm', px: 'l', py: 'm' })};
+`
 
 const Filter = ({
   type,
@@ -70,4 +90,15 @@ const InnerInput = ({
   )
 }
 
-export default Filter
+const FilterWrapper = ({ children, onClear, ...props }) =>
+  <Container>
+    <Filter {...props}/>
+    <Clear onClick={onClear}>
+      <Icon Component={Trash} size="small"/>
+      <Typo color="gray">
+        <Trans>global.remove</Trans>
+      </Typo>
+    </Clear>
+  </Container>
+
+export default FilterWrapper
