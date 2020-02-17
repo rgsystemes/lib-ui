@@ -6,7 +6,7 @@ const useByte = (units, value = 0, accuracy) => {
 
   const scales = useMemo(
     () => units.map((unit, power) => ({ unit, scale: Math.pow(1024, power) })),
-    [units]
+    [units],
   )
 
   const { scale, unit } = useMemo(
@@ -14,12 +14,12 @@ const useByte = (units, value = 0, accuracy) => {
       scales.length ? scales.reduce((acc, obj) => value >= obj.scale ? obj : acc) :
       { scale: 1, unit: '' }
     ),
-    [scales, value]
+    [scales, value],
   )
 
   const bytes = useMemo(
     () => Math.round(value * roundFactor / scale) / roundFactor,
-    [value, roundFactor, scale]
+    [value, roundFactor, scale],
   )
   return { bytes, unit }
 }

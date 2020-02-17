@@ -15,7 +15,7 @@ it('should translate', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans transKey="global.translatedText"/>
-    </TransProvider>
+    </TransProvider>,
   )
 
   expect(getByText('Bonsoir')).toBeInTheDocument()
@@ -25,7 +25,7 @@ it('should return transKey when not defined', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans transKey="global.notTranslatedText" dude="Bro"/>
-    </TransProvider>
+    </TransProvider>,
   )
 
   expect(getByText('global.notTranslatedText')).toBeInTheDocument()
@@ -35,7 +35,7 @@ it('should translate with the transKey passed as a child', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans dude="bro" verb="lift">global.translatedTextWithParameters</Trans>
-    </TransProvider>
+    </TransProvider>,
   )
 
   expect(getByText('Bonsoir bro ! Est-ce que tu lift ?')).toBeInTheDocument()
@@ -45,7 +45,7 @@ it('should translate with parameters', () => {
   const { getByText } = render(
     <TransProvider value={translations}>
       <Trans transKey="global.translatedTextWithParameters" dude="bro" verb="lift"/>
-    </TransProvider>
+    </TransProvider>,
   )
 
   expect(getByText('Bonsoir bro ! Est-ce que tu lift ?')).toBeInTheDocument()

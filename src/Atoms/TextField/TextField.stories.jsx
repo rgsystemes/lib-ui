@@ -27,7 +27,7 @@ export const textField = () =>
         helperText={`${size} text field`}
         placeholder="Placeholder"
         size={size}
-      />
+      />,
     )}
   </Container>
 

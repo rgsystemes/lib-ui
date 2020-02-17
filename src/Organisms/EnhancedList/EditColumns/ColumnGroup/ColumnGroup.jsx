@@ -5,6 +5,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 
 import { ListItemIcon, ListItemText, ListSubheader, ListItem } from '../../../../Molecules/List'
 import Checkbox from '../../../../Atoms/Checkbox'
+import Trans from '../../../../Atoms/Trans'
 
 const ColumnGroup = ({ label, columns, onChange = () => {}, checked }) =>
   <List
@@ -16,9 +17,13 @@ const ColumnGroup = ({ label, columns, onChange = () => {}, checked }) =>
         <ListItemIcon>
           <Checkbox checked={checked} color="default" />
         </ListItemIcon>
-        <ListItemText id={name} primary={translationKey} secondary={description} />
+        <ListItemText
+          id={name}
+          primary={<Trans>{translationKey}</Trans>}
+          secondary={<Trans>{description}</Trans>}
+        />
         <ListItemSecondaryAction />
-      </ListItem>
+      </ListItem>,
     )}
   </List>
 

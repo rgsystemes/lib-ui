@@ -17,7 +17,7 @@ it('should call onPageChange when user clicks first', () => {
   const { getByTestId } = render(
     <Wrapper>
       <Pagination onPageChange={onPageChange} />
-    </Wrapper>
+    </Wrapper>,
   )
 
   user.click(getByTestId('first'))
@@ -30,7 +30,7 @@ it('should call onPageChange when user clicks prev', () => {
   const { getByTestId } = render(
     <Wrapper>
       <Pagination currentPage={12} onPageChange={onPageChange} />
-    </Wrapper>
+    </Wrapper>,
   )
 
   user.click(getByTestId('prev'))
@@ -43,7 +43,7 @@ it('should call onPageChange when user clicks next', () => {
   const { getByTestId } = render(
     <Wrapper>
       <Pagination onPageChange={onPageChange} />
-    </Wrapper>
+    </Wrapper>,
   )
 
   user.click(getByTestId('next'))
@@ -57,7 +57,7 @@ it('should call onSizeChange when user select another size', async () => {
   const { getByTestId, findByTestId } = render(
     <Wrapper>
       <Pagination sizeOptions={[10, 20, 30]} onSizeChange={onSizeChange} />
-    </Wrapper>
+    </Wrapper>,
   )
 
   user.click(getByTestId('select'))

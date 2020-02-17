@@ -15,6 +15,9 @@ const Pagination = ({
   openOnTop,
   currentPage = 1,
   sizeOptions = [],
+  disabledPrevious = false,
+  disabledNext = false,
+  disabledFirst = false,
 }) => {
   const [anchorEl, setAnchorEl] = useState()
   const t = useTranslation()
@@ -38,14 +41,14 @@ const Pagination = ({
           onClick={() => handleSizeChange(size)}
         >
           {t('global.pagination.perPage', { count: size })}
-        </MenuItem>
+        </MenuItem>,
       )}
     </Menu>
     <ButtonGroup size="small">
-      <Button data-testid='first' onClick={() => onPageChange(1)}>«</Button>
-      <Button data-testid='prev' onClick={() => onPageChange(currentPage - 1)}>‹</Button>
+      <Button data-testid='first' onClick={() => onPageChange(1)} disabled={disabledFirst}>«</Button>
+      <Button data-testid='prev' onClick={() => onPageChange(currentPage - 1)} disabled={disabledPrevious}>‹</Button>
       <Button data-testid="select" onClick={event => setAnchorEl(event.currentTarget)}>{label}</Button>
-      <Button data-testid='next' onClick={() => onPageChange(currentPage + 1)}>›</Button>
+      <Button data-testid='next' onClick={() => onPageChange(currentPage + 1)} disabled={disabledNext}>›</Button>
     </ButtonGroup>
   </>
 }

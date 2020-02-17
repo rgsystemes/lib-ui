@@ -33,7 +33,7 @@ export const input = () =>
         error={boolean('Error')}
         endAdornment={<InputAdornment><IconButton><Search size={20}/></IconButton></InputAdornment>}
         size={size}
-      />
+      />,
     )}
   </Container>
 input.story = {

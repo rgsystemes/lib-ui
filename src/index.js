@@ -20,6 +20,7 @@ export { Menu } from './Atoms'
 export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
 export { IconButton } from './Atoms'
+export { Icon } from './Atoms'
 export {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -28,7 +29,13 @@ export {
 } from './Molecules'
 export { EnhancedList } from './Organisms'
 export { EditColumns } from './Organisms/EnhancedList'
-export { TableList } from './Molecules'
+export {
+  TableList,
+  Table,
+  TableCell,
+  SortedColumn,
+  Row,
+} from './Molecules'
 export { Export } from './Molecules'
 export { Checkbox } from './Atoms'
 export { Radio } from './Atoms'

@@ -70,7 +70,7 @@ export const formControl = () => {
         onChange={action('Radio group changed')}
       >
         {options.map(({ value, label }) =>
-          <FormControlLabel value={value} control={<Radio />} label={label} />
+          <FormControlLabel value={value} control={<Radio />} label={label} />,
         )}
       </RadioGroup>
     </FormControl>
@@ -85,7 +85,7 @@ export const formControl = () => {
           <FormControlLabel
             control={<Checkbox value={value} onChange={action('Checkbox changed')}/>}
             label={label}
-          />
+          />,
         )}
       </FormGroup>
     </FormControl>

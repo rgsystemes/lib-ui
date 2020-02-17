@@ -61,7 +61,7 @@ const switchOrder = (name, order, onSort) => {
     order === NONE ? null   : name,
     order === NONE ? null   :
     order === DESC ? 'desc' :
-    'asc'
+    'asc',
   )
 }
 
