@@ -12,7 +12,6 @@ import Tooltip from '../../Atoms/Tooltip'
 import EmptyPlaceholder from '../../Molecules/EmptyPlaceholder'
 import BaseExport from '../../Molecules/Export'
 import EditColumns from './EditColumns'
-import Trans, { useTranslation } from '../../Atoms/Trans'
 
 import markdown from './README.md'
 
@@ -147,7 +146,7 @@ const exportFormats = [
 const Export = props =>
   <BaseExport onExport={action('Export button clicked')} formats={exportFormats} {...props}/>
 
-const Pagination = props => <BasePagination
+const Pagination = () => <BasePagination
   currentPage={1}
   sizeOptions={['10', '20', '30', '40']}
   onPageChange={action('page changed')}
