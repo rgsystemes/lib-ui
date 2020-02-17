@@ -3,7 +3,7 @@ import { css as systemCss } from '@styled-system/css'
 import BaseFormControl from '@material-ui/core/FormControl'
 
 export const formControlStyles = css`
-  &.MuiFormControl-root {
+  &.MuiFormControl-root:not(:first-child) {
     margin-top: 15px;
   }
 

@@ -25,6 +25,9 @@ const Wrapper = styled.div`
 export const TableList = ({
   data = [],
   onSort = null,
+  filters = {},
+  onFilter = () => {},
+  onClear = () => {},
   onSelect = () => {},
   Details = () => null,
   selected,
@@ -41,12 +44,19 @@ export const TableList = ({
     <Table {...props}>
       <Head>
         <TableRow>
-          { columns.map(({ name, translationKey }) => (
+          { columns.map(({ name, translationKey, ...column }) => (
             <Column
-              key={ name }
-              onSort={ onSort }
-              name={ name }
-              sort={ sort === name && way }
+              key={name}
+              onSort={onSort}
+              sort={sort === name && way}
+              filter={filters[name]}
+              onFilter={value => {
+                onFilter({ ...filters, [name]: value })
+              }}
+              onClear={name => onClear({ ...filters, [name]: null })}
+              name={name}
+              translationKey={translationKey}
+              {...column}
               {...ColumnProps}
             >
               <Trans transKey={translationKey} />
