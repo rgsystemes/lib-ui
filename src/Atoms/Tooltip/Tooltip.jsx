@@ -9,6 +9,7 @@ const useBootstrapStyles = makeStyles({
   },
   tooltip: {
     backgroundColor: 'black',
+    fontSize:        '12px', // TODO: Replace me using the material theme
   },
 })
 
