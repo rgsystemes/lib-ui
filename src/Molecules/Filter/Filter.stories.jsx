@@ -1,6 +1,5 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import {  } from '@storybook/addon-knobs'
 import styled from 'styled-components'
 
 import Filter from './index'

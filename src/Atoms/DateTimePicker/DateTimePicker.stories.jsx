@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import {  } from '@storybook/addon-knobs'
 
 import DateTimePicker from './index'
 
