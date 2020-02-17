@@ -9,12 +9,6 @@ import packageJSON from './package.json'
 
 const input = './src/index.js'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js')
-const commonJs = commonjs({
-  include:      'node_modules/**',
-  namedExports: {
-    'node_modules/react-is/index.js': ['ForwardRef'],
-  },
-})
 
 export default [
   // CommonJS
@@ -33,7 +27,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
     ],
   },
   {
@@ -51,7 +45,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
       uglify(),
     ],
   },
@@ -77,7 +71,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
     ],
   },
   {
@@ -101,7 +95,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
       terser(),
     ],
   },
@@ -122,7 +116,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
     ],
   },
   {
@@ -141,7 +135,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx', '.json'],
       }),
-      commonJs,
+      commonjs(),
       terser(),
     ],
   },
