@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { variant } from 'styled-system'
 import { css as systemCss } from '@styled-system/css'
@@ -103,7 +104,9 @@ export const largeButtonStyles = css`
   }
 `
 
-const Button = styled(BaseButton)`
+const UncoloredButton = ({ color, ...props }) => <BaseButton {...props} />
+
+const Button = styled(UncoloredButton)`
   ${defaultButtonStyles}
   ${largeButtonStyles}
   ${smallButtonStyles}

@@ -1,142 +1,60 @@
 import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
-import { uglify } from 'rollup-plugin-uglify'
 
 import packageJSON from './package.json'
 
 const input = './src/index.js'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js')
 
+const output = [{
+  file:      packageJSON.main,
+  format:    'cjs',
+  sourcemap: true,
+}, {
+  file:      packageJSON.browser,
+  format:    'umd',
+  sourcemap: true,
+  name:      'libUi',
+  globals:   { react: 'React' },
+}, {
+  file:      packageJSON.module,
+  format:    'es',
+  sourcemap: true,
+  exports:   'named',
+}]
+
+const plugins = [
+  babel({ exclude: 'node_modules/**' }),
+  external(),
+  resolve({ extensions: ['.js', '.jsx', '.json'] }),
+  commonjs({
+    include:      'node_modules/**',
+    namedExports: {
+      react: [
+        'cloneElement',
+        'createContext',
+        'Component',
+        'createElement',
+      ],
+      'react-dom':  ['render', 'hydrate'],
+      'prop-types': ['elementType'],
+      'react-is':   [
+        'isElement',
+        'isValidElementType',
+        'ForwardRef',
+      ],
+    },
+  }),
+]
+
 export default [
-  // CommonJS
+  { input, output, plugins },
   {
     input,
-    output: {
-      file:      packageJSON.main,
-      format:    'cjs',
-      sourcemap: true,
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-    ],
-  },
-  {
-    input,
-    output: {
-      file:      minifyExtension(packageJSON.main),
-      format:    'cjs',
-      sourcemap: true,
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-      uglify(),
-    ],
-  },
-  // UMD
-  {
-    input,
-    output: {
-      file:      packageJSON.browser,
-      format:    'umd',
-      sourcemap: true,
-      name:      'reactSampleComponentsLibrary',
-      globals:   {
-        react:             'React',
-        '@emotion/styled': 'styled',
-        '@emotion/core':   'core',
-      },
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-    ],
-  },
-  {
-    input,
-    output: {
-      file:      minifyExtension(packageJSON.browser),
-      format:    'umd',
-      sourcemap: true,
-      name:      'reactSampleComponentsLibrary',
-      globals:   {
-        react:             'React',
-        '@emotion/styled': 'styled',
-        '@emotion/core':   'core',
-      },
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-      terser(),
-    ],
-  },
-  // ES
-  {
-    input,
-    output: {
-      file:      packageJSON.module,
-      format:    'es',
-      sourcemap: true,
-      exports:   'named',
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-    ],
-  },
-  {
-    input,
-    output: {
-      file:      minifyExtension(packageJSON.module),
-      format:    'es',
-      sourcemap: true,
-      exports:   'named',
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
-      external(),
-      resolve({
-        extensions: ['.js', '.jsx', '.json'],
-      }),
-      commonjs(),
-      terser(),
-    ],
+    output:  output.map(({ file, ...output }) => ({ ...output, file: minifyExtension(file) })),
+    plugins: [...plugins, terser()],
   },
 ]
