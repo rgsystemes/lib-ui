@@ -10,7 +10,6 @@ import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
 
 import BaseFilter from '../../../Molecules/Filter'
 import TableCell from '../TableCell'
-import Filter from '../../../Molecules/Filter'
 import Typo from '../../../Atoms/Typo'
 import Icon from '../../../Atoms/Icon'
 
