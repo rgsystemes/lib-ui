@@ -1,5 +1,6 @@
 import * as rg6Theme from './rg6-theme'
 import * as darkTheme from './dark-theme'
+import muiRg6Theme from './mui-rg6-theme'
 
 const space    = [0, 4, 8, 16, 32].map(value => `${value}px`)
       space.s  = space[1]
@@ -72,3 +73,4 @@ const base = {
 
 export const rg6 = { ...base, ...rg6Theme }
 export const dark = { ...base, ...darkTheme }
+export { muiRg6Theme }
