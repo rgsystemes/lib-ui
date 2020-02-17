@@ -3,6 +3,7 @@ export default {
     cancel: 'Cancel',
     add: 'Add',
     dateFormat: 'dd/MM/yyyy hh:mm',
+    remove: 'Supprimer',
     pagination: {
       perPage: '%count% per page',
     },
