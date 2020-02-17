@@ -97,8 +97,8 @@ const EnhancedList = ({
             </Tooltip>
           }
         </ActionGroup>
-        {actions.map(actionGroup =>
-          <ActionGroup size="small">
+        {actions.map((actionGroup, i) =>
+          <ActionGroup size="small" key={`action-${i}`}>
             {actionGroup.map(action => action)}
           </ActionGroup>,
         )}

@@ -29,8 +29,8 @@ export const popover = () => {
       open={Boolean(anchorEl)}
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
-      anchorOrigin={{ vertical: openOnTop ? 'top' : 'bottom' }}
-      transformOrigin={{ vertical: openOnTop ? 'bottom' : 'top' }}
+      anchorOrigin={{ vertical: openOnTop ? 'top' : 'bottom', horizontal: openOnTop ? 'left' : 'right' }}
+      transformOrigin={{ vertical: openOnTop ? 'bottom' : 'top', horizontal: openOnTop ? 'right' : 'left' }}
     >
       <Typo>
         Some text
