@@ -17,14 +17,14 @@ const SortedColumn = props => <ThemeProvider theme={{}}>
   </table>
 </ThemeProvider>
 
-it('should not show the filter icon when onFilter is not defined', () => {
+it('should not show the filter icon when type is not defined', () => {
   const { queryByTestId } = render(
     <SortedColumn name="fruit">
       Fruit
     </SortedColumn>
   )
 
-  expect(queryByTestId('filter-column-fruit')).toBeNull()
+  expect(queryByTestId('filter-column-fruit')).toBeDisabled()
 })
 
 it('should not show the sort icon when onSort is not defined', () => {
