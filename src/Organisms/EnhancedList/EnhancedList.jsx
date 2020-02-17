@@ -11,7 +11,7 @@ import { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
 import BaseEditColumns from './EditColumns'
-import BaseMenu from '../../Atoms/Menu'
+import Popover from '../../Atoms/Popover'
 import Tooltip from '../../Atoms/Tooltip'
 import ButtonGroup from '../../Atoms/ButtonGroup'
 import Icon from '../../Atoms/Icon'
@@ -31,12 +31,6 @@ const SearchWrapper = styled.div`
 
   & > * {
     ${css({ mx: 's' })};
-  }
-`
-
-const Menu = styled(BaseMenu)`
-  .MuiMenu-paper {
-    width: 350px;
   }
 `
 
@@ -112,7 +106,7 @@ const EnhancedList = ({
     </Toolbar>
     <View columns={columns.filter(({ show }) => show)} {...props}/>
     {!!Export &&
-      <Menu
+      <Popover
         open={Boolean(exportAnchorEl)}
         anchorEl={exportAnchorEl}
         onClose={() => setExportAnchorEl(null)}
@@ -126,10 +120,10 @@ const EnhancedList = ({
         }}
       >
         <Export onClose={() => setExportAnchorEl(null)}/>
-      </Menu>
+      </Popover>
     }
     {!!EditColumns &&
-      <Menu
+      <Popover
         open={Boolean(editColumnsAnchorEl)}
         anchorEl={editColumnsAnchorEl}
         onClose={() => setEditColumnsAnchorEl(null)}
@@ -143,7 +137,7 @@ const EnhancedList = ({
         }}
       >
         <EditColumns columns={columns} />
-      </Menu>
+      </Popover>
     }
   </>
 }

@@ -7,7 +7,7 @@ const space    = [0, 4, 8, 16, 32].map(value => `${value}px`)
       space.l  = space[3]
       space.xl = space[4]
 
-const lineHeights         = [0.25, 1, 1.25, 1.75]
+const lineHeights         = [0.25, 1, 1.25, 1.42]
       lineHeights.heading = lineHeights[2]
       lineHeights.body    = lineHeights[3]
 

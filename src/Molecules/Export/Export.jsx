@@ -17,7 +17,6 @@ const isAllowedFormat = (formats, format) => formats.some(({ value } = {}) => fo
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  ${css({ px: 'xl' })}
 `
 
 const Actions = styled.div`
@@ -27,8 +26,6 @@ const Actions = styled.div`
   ${css({
     borderTopColor: 'secondary',
     pt:             'l',
-    pb:             's',
-    px:             'l',
     mt:             'l',
   })}
 `
@@ -41,6 +38,11 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  ${css({ mb: 'l' })}
+`
+
+const TitleTypo = styled(Typo)`
+  ${css({ my: 0 })}
 `
 
 const Export = ({
@@ -62,9 +64,9 @@ const Export = ({
     <Body>
       <Title>
         <DownloadIcon size={20} color="primary"/>
-        <Typo as="h2" fontSize="title" fontFamily="title" color="primary">
+        <TitleTypo as="h2" fontSize="title" fontFamily="title" color="primary">
           <Trans transKey="global.export.title" />
-        </Typo>
+        </TitleTypo>
       </Title>
       <Typo>{descriptionText}</Typo>
       <FormControl>
