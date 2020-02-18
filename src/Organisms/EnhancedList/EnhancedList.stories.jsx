@@ -234,7 +234,10 @@ export const enhancedList = () => {
     onSelect={action('item selected')}
     onSearch={action('searched something')}
     onAdd={action('clicked on add')}
-    onFilter={setFilters}
+    onFilter={filters => {
+      action('onFilter')(filters)
+      setFilters(filters)
+    }}
     onClear={setFilters}
     filters={filters}
     emptyPlaceholder={emptyPlaceholder}

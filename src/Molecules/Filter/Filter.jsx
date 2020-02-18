@@ -38,10 +38,8 @@ const Filter = ({
   if (type === 'date') {
     return <DateRange
       value={value}
-      onChange={value => {
-        setValue(value)
-        onChange(value)
-      }}
+      onChange={setValue}
+      onBlur={() => onChange(value)}
       variant="static"
       {...props}
     />

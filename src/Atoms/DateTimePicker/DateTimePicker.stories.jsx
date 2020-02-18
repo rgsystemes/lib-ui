@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { select } from '@storybook/addon-knobs'
 
-import DateTimePicker from './index'
+import DateTimePicker, { MuiPickersUtilsProvider } from './index'
 
+import util from '@date-io/date-fns'
+import * as locales from 'date-fns/locale'
 import markdown from './README.md'
 
 export default {
@@ -11,7 +14,9 @@ export default {
 export const dateTimePicker = () => {
   const [date, setDate] = useState(new Date())
 
-  return <DateTimePicker value={date} onChange={setDate}/>
+  return <MuiPickersUtilsProvider utils={util} locale={locales[select('Lang', ['fr', 'en', 'nl', 'zhCN'], 'fr')]}>
+    <DateTimePicker value={date} onChange={setDate} />
+  </MuiPickersUtilsProvider>
 }
 dateTimePicker.story = {
   parameters: {

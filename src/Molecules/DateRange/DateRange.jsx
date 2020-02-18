@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import DateTimePicker from '../../Atoms/DateTimePicker'
 
+import useOnClickOutside from '../../hooks/useOnClickOutside.js'
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,10 +18,11 @@ const onEndChange = (start, end) =>
   start > end ? ({ start: end, end }) :
   ({ start, end })
 
-const DateRange = ({ value, onChange, ...props }) => {
+const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
   const { start = new Date(), end = new Date() } = value || {}
+  const ref = useOnClickOutside(onBlur)
 
-  return <Container>
+  return <Container ref={ref}>
     <DateTimePicker
       data-testid="date-range-start"
       value={start}

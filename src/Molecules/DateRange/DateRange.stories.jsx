@@ -14,6 +14,7 @@ export const dateRange = () => {
 
   return <DateRange
     value={value}
+    onBlur={action('on blur')}
     onChange={value => {
       setValue(value)
       action('Date changed')(value)

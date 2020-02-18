@@ -1,9 +1,8 @@
 import React from 'react'
-import dateFns from '@date-io/date-fns'
 import { CalendarToday } from 'styled-icons/material/CalendarToday'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import { MuiPickersUtilsProvider, DateTimePicker as BaseDatePicker } from '@material-ui/pickers'
+import { DatePicker as BaseDatePicker } from '@material-ui/pickers'
 
 import TextField from '../TextField'
 import InputAdornment from '../Input/InputAdornment'
@@ -17,30 +16,24 @@ const theme = createMuiTheme({
   },
 })
 
-const DatePicker = ({ ...props }) => {
-  const t = useTranslation()
-  const { format = t('global.dateFormat') } = props
-
-  return <ThemeProvider theme={theme}>
-    <MuiPickersUtilsProvider utils={dateFns}>
-      <BaseDatePicker
-        TextFieldComponent={TextField}
-        variant="inline"
-        KeyboardButtonProps={{ disableRipple: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment>
-              <IconButton>
-                <CalendarToday size={20} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        {...props}
-        format={format}
-      />
-    </MuiPickersUtilsProvider>
+const DatePicker = ({ format = 'Pp', ...props }) =>
+  <ThemeProvider theme={theme}>
+    <BaseDatePicker
+      TextFieldComponent={TextField}
+      variant="inline"
+      KeyboardButtonProps={{ disableRipple: true }}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment>
+            <IconButton>
+              <CalendarToday size={20} />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+      format={format}
+      {...props}
+    />
   </ThemeProvider>
-}
 
 export default DatePicker
