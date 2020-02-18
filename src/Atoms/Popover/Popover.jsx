@@ -6,7 +6,7 @@ import { space, layout } from 'styled-system'
 const Popover = styled(BasePopover)`
   .MuiPopover-paper {
     box-sizing: border-box;
-    ${css({ border: '1px solid', borderColor: 'lightgrey' })};
+    ${css({ border: '1px solid', borderColor: 'lightgrey', maxHeight: '440px' })};
     ${layout}
     ${space}
   }
