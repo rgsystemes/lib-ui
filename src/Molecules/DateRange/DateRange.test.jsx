@@ -2,8 +2,11 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
+import util from '@date-io/date-fns'
+import { en } from 'date-fns'
 
 import BaseDateRange from './index'
+import { MuiPickersUtilsProvider } from '../../Atoms/DateTimePicker'
 import { TransProvider } from '../../Atoms/Trans'
 
 const translations = {
@@ -14,7 +17,9 @@ const translations = {
 
 const DateRange = props =>
   <TransProvider value={translations}>
-    <BaseDateRange variant="static" {...props} />
+    <MuiPickersUtilsProvider utils={util} locale={en}>
+      <BaseDateRange variant="static" {...props} />
+    </MuiPickersUtilsProvider>
   </TransProvider>
 
 it('should call onChange', () => {
