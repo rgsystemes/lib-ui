@@ -16,7 +16,11 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${css({ mb: 'l' })}
+  ${css({ px: 'xl', pt: 'xl', mb: 'l' })}
+`
+
+const DescriptionTypo = styled(Typo)`
+  ${css({ px: 'xl' })}
 `
 
 const TitleTypo = styled(Typo)`
@@ -44,14 +48,13 @@ const EditColumns = ({
         <Trans transKey="global.editColumns.title" />
       </TitleTypo>
     </Title>
-    <Typo as="div">{descriptionText}</Typo>
+    <DescriptionTypo as="div">{descriptionText}</DescriptionTypo>
     {enabledColumns.length > 0 &&
       <ColumnGroup
         label={<Trans transKey="global.editColumns.enabledColumns"/>}
         columns={enabledColumns}
         onChange={onChange}
         checked={true}
-        disableGutters={true}
       />
     }
     {disabledColumns.length > 0 &&
