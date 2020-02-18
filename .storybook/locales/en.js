@@ -4,6 +4,7 @@ export default {
     add: 'Add',
     dateFormat: 'dd/MM/yyyy hh:mm',
     remove: 'Supprimer',
+    no_results: 'No results found',
     filter: {
       clearCurrent: 'Clear current filters',
     },

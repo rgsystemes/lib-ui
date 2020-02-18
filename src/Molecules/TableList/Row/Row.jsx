@@ -43,12 +43,15 @@ const Row = ({
   cols,
   details,
   onSelect = () => {},
+  hover = true,
+  ...props
 }) => <>
   <TableRow
     details={details}
     selected={selected}
     onClick={() => onSelect(selected ? null : id)}
-    hover={true}
+    hover={hover}
+    {...props}
   >
     { children }
   </TableRow>
