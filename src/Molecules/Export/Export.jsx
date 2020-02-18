@@ -17,6 +17,10 @@ const isAllowedFormat = (formats, format) => formats.some(({ value } = {}) => fo
 const Body = styled.div`
   display: flex;
   flex-direction: column;
+  ${css({
+    px: 'xl',
+    pt: 'xl',
+  })}
 `
 
 const Actions = styled.div`
@@ -25,7 +29,8 @@ const Actions = styled.div`
   border-top: 1px solid;
   ${css({
     borderTopColor: 'secondary',
-    pt:             'l',
+    py:             'l',
+    px:             'xl',
     mt:             'l',
   })}
 `

@@ -135,8 +135,6 @@ const EnhancedList = ({
           vertical:   'top',
           horizontal: 'right',
         }}
-        px={0}
-        pt={0}
       >
         <EditColumns columns={columns} />
       </Popover>
