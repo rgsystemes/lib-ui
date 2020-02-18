@@ -6,8 +6,11 @@ import { Download } from 'styled-icons/boxicons-regular/Download'
 import { Columns } from 'styled-icons/boxicons-regular/Columns'
 import { Search } from 'styled-icons/material/Search'
 import { Plus } from 'styled-icons/boxicons-regular/Plus'
+import { Trash } from 'styled-icons/boxicons-solid/Trash'
 
-import { useTranslation } from '../../Atoms/Trans'
+import Button from '../../Atoms/Button'
+import Typo from '../../Atoms/Typo'
+import Trans, { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
 import BaseEditColumns from './EditColumns'
@@ -48,6 +51,22 @@ const ActionGroup = styled(ButtonGroup)`
   ${(css({ mx: 's' }))}
 `
 
+const Clear = styled.span`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  ${css({ px: 'm' })};
+`
+
+const ClearFilters = ({ filters, onClear, ...props }) =>
+  Object.values(filters).filter(Boolean).length > 0 &&
+  <Clear onClick={() => onClear({})}>
+    <Icon Component={Trash} size="small"/>
+    <Typo color="grey">
+      <Trans>global.filter.clearCurrent</Trans>
+    </Typo>
+  </Clear>
+
 const EnhancedList = ({
   onSearch = null,
   onAdd = null,
@@ -64,6 +83,7 @@ const EnhancedList = ({
   const [editColumnsAnchorEl, setEditColumnsAnchorEl] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
   const t = useTranslation()
+  const { filters, onClear } = props
 
   return <>
     <Toolbar component={Paper}>
@@ -83,6 +103,7 @@ const EnhancedList = ({
           />
         }
       </SearchWrapper>
+      <ClearFilters filters={filters} onClear={onClear} />
       <div>
         <ActionGroup size="small">
           {onAdd != null &&

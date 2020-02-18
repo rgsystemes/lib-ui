@@ -4,6 +4,9 @@ export default {
     add: 'Add',
     dateFormat: 'dd/MM/yyyy hh:mm',
     remove: 'Supprimer',
+    filter: {
+      clearCurrent: 'Clear current filters',
+    },
     pagination: {
       perPage: '%count% per page',
     },
