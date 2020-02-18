@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Box from '../Box'
+import Box from '@material-ui/core/Box'
 
 const VALID_STATUS = [
   'primary',
