@@ -29,11 +29,12 @@ const Clear = styled.span`
 const Filter = ({
   type,
   translationKey,
-  onChange = () => {},
+  onChange: onChangeProp = () => {},
   value: valueProp,
   ...props
 }) => {
   const [value, setValue] = useState(valueProp)
+  const onChange = () => value !== valueProp && onChangeProp(value)
 
   if (type === 'date') {
     return <DateRange

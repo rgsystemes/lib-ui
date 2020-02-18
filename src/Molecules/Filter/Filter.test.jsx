@@ -38,3 +38,20 @@ it('should call on clear when clicking on trash icon', () => {
   userEvent.click(getByText('global.remove'))
   expect(onClear).toHaveBeenCalled()
 })
+
+it('should call onChange only when value has changed', () => {
+  const onChange = jest.fn()
+
+  const { getByLabelText } = render(
+    <Filter
+      type="text"
+      value="Bonsoir"
+      translationKey="Input"
+      onChange={onChange}
+    />,
+  )
+
+  userEvent.type(getByLabelText('Input'), 'Bonsoir')
+  fireEvent.blur(getByLabelText('Input'))
+  expect(onChange).not.toBeCalled()
+})
