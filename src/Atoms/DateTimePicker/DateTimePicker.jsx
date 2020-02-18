@@ -7,7 +7,6 @@ import { DatePicker as BaseDatePicker } from '@material-ui/pickers'
 import TextField from '../TextField'
 import InputAdornment from '../Input/InputAdornment'
 import IconButton from '../IconButton'
-import { useTranslation } from '../../Atoms/Trans'
 
 const theme = createMuiTheme({
   palette: {
