@@ -8,7 +8,6 @@ import { Search } from 'styled-icons/material/Search'
 import { Plus } from 'styled-icons/boxicons-regular/Plus'
 import { Trash } from 'styled-icons/boxicons-solid/Trash'
 
-import Button from '../../Atoms/Button'
 import Typo from '../../Atoms/Typo'
 import Trans, { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
@@ -58,7 +57,7 @@ const Clear = styled.span`
   ${css({ px: 'm' })};
 `
 
-const ClearFilters = ({ filters, onClear, ...props }) =>
+const ClearFilters = ({ filters = {}, onClear = () => {}, ...props }) =>
   Object.values(filters).filter(Boolean).length > 0 &&
   <Clear onClick={() => onClear({})}>
     <Icon Component={Trash} size="small"/>
