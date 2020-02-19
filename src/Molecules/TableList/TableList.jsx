@@ -36,7 +36,6 @@ export const TableList = ({
   onSort = null,
   filters = {},
   onFilter = () => {},
-  onClear = () => {},
   onSelect = () => {},
   Details = () => null,
   selected,
@@ -45,7 +44,6 @@ export const TableList = ({
   way,
   Cell = ({ children }) => <TableCell children={children || '-'} />,
   Column = BaseColumn,
-  ColumnProps = {},
   ...props
 }) => (
   <Wrapper>
@@ -59,11 +57,10 @@ export const TableList = ({
               sort={sort === name && way}
               filter={filters[name]}
               onFilter={value => onFilter({ ...filters, [name]: value })}
-              onClear={filter => onClear({ ...filters, [name]: filter })}
+              onClear={defaultValue => onFilter({ ...filters, [name]: defaultValue })}
               name={name}
               translationKey={translationKey}
               {...column}
-              {...ColumnProps}
             >
               <Trans transKey={translationKey} />
             </Column>

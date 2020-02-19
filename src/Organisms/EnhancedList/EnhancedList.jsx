@@ -82,7 +82,7 @@ const EnhancedList = ({
   const [editColumnsAnchorEl, setEditColumnsAnchorEl] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
   const t = useTranslation()
-  const { filters, onClear } = props
+  const { filters, onFilter } = props
 
   return <>
     <Toolbar component={Paper}>
@@ -102,7 +102,7 @@ const EnhancedList = ({
           />
         }
       </SearchWrapper>
-      <ClearFilters filters={filters} onClear={onClear} />
+      <ClearFilters filters={filters} onClear={onFilter} />
       <div>
         <ActionGroup size="small">
           {onAdd != null &&
