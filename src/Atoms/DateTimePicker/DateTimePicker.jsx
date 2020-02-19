@@ -1,7 +1,6 @@
 import React from 'react'
 import { CalendarToday } from 'styled-icons/material/CalendarToday'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { DateTimePicker as BaseDatePicker } from '@material-ui/pickers'
 
 import TextField from '../TextField'
