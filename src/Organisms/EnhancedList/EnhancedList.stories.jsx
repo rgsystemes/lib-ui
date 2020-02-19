@@ -9,7 +9,6 @@ import EnhancedList from './index'
 import BasePagination from '../../Molecules/Pagination'
 import Button from '../../Atoms/Button'
 import Tooltip from '../../Atoms/Tooltip'
-import EmptyPlaceholder from '../../Molecules/EmptyPlaceholder'
 import BaseExport from '../../Molecules/Export'
 import EditColumns from './EditColumns'
 
@@ -169,17 +168,6 @@ const actions = [
   ],
 ]
 
-const emptyPlaceholder = <EmptyPlaceholder
-  icon={<MultilineChart size={98} />}
-  primaryText="Il n\'y a pas encore de personnes définis sur ce groupe"
-  secondaryText="Les personnes que vous allez créer sur ce groupe vont apparaitre ici"
-  action={
-    <Button onClick={action('Empty placeholder button clicked')} color="success" size="large">
-            Do something
-    </Button>
-  }
-/>
-
 const initialColumns = [
   { name: 'id', translationKey: 'ID', description: 'Unique id identifying the object' },
   { name: 'index', translationKey: 'Index', description: 'Index in the array' },
@@ -240,7 +228,6 @@ export const enhancedList = () => {
     }}
     onClear={setFilters}
     filters={filters}
-    emptyPlaceholder={emptyPlaceholder}
     SearchInputProps={{
       placeholder: 'Search ...',
     }}

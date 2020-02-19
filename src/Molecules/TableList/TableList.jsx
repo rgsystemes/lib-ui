@@ -27,8 +27,6 @@ const Wrapper = styled.div`
   overflow-x: auto;
 `
 
-const isCurrentlyFiltered = filters => Object.values(filters).filter(Boolean).length > 0
-
 const NoResults = styled(Typo)`
   ${css({ p: 'm' })};
 `
@@ -48,10 +46,8 @@ export const TableList = ({
   Cell = ({ children }) => <TableCell children={children || '-'} />,
   Column = BaseColumn,
   ColumnProps = {},
-  emptyPlaceholder = null,
   ...props
 }) => (
-  data.length === 0 && !isCurrentlyFiltered(filters) ? emptyPlaceholder :
   <Wrapper>
     <Table {...props}>
       <Head>
