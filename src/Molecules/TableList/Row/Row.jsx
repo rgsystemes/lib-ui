@@ -7,8 +7,6 @@ import BaseTableRow from '@material-ui/core/TableRow'
 import TableCell from '../TableCell'
 
 const TableRow = styled(BaseTableRow)`
-  ${css({ bg: 'secondary' })};
-
   cursor: ${({ details }) => details ? 'pointer' : 'auto'};
 
   border-left: 3px solid transparent;
