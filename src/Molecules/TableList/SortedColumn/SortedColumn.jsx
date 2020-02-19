@@ -116,11 +116,11 @@ const SortedColumn = ({
       <CellWrapper>
         <Column
           as="strong"
-          onClick={ () => !(onSort == null) && switchOrder(name, order, onSort) }
-          disableSort={onSort == null}
+          onClick={ () => !!onSort && switchOrder(name, order, onSort) }
+          disableSort={!onSort}
         >
           {children}
-          {!(onSort == null) &&
+          {!!onSort &&
             <SortIcon data-testid={`sort-column-${name}`} size="small" currentSort={!!sort}>
               {[<DownArrowAlt size={16} />, <UpArrowAlt size={16} />, <DownArrowAlt size={16} />][order]}
             </SortIcon>
