@@ -3,13 +3,15 @@ export default {
     cancel: 'Cancel',
     add: 'Add',
     dateFormat: 'dd/MM/yyyy hh:mm',
-    remove: 'Supprimer',
     no_results: 'No results found',
     filter: {
       clearCurrent: 'Clear current filters',
     },
     pagination: {
       perPage: '%count% per page',
+    },
+    action: {
+      remove: 'Supprimer',
     },
     export: {
       title: 'Export',

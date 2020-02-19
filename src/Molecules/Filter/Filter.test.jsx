@@ -35,7 +35,7 @@ it('should call on clear when clicking on trash icon', () => {
   const onClear = jest.fn()
   const { getByText } = render(<Filter onClear={onClear}/>)
 
-  userEvent.click(getByText('global.remove'))
+  userEvent.click(getByText('global.action.remove'))
   expect(onClear).toHaveBeenCalled()
 })
 

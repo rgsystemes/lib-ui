@@ -95,7 +95,7 @@ const FilterWrapper = ({ children, onClear, ...props }) =>
     <Clear onClick={onClear}>
       <Icon Component={Trash} size="small"/>
       <Typo color="gray">
-        <Trans>global.remove</Trans>
+        <Trans>global.action.remove</Trans>
       </Typo>
     </Clear>
   </Container>
