@@ -70,6 +70,12 @@ const computeOrder = sort => (
   NONE
 )
 
+const emptyValues = {
+  text:   '',
+  date:   {},
+  select: '',
+}
+
 const SortedColumn = ({
   children,
   name,
@@ -96,7 +102,7 @@ const SortedColumn = ({
       >
         <Filter onClear={() => {
           setFilterAnchorEl(null)
-          onClear(name)
+          onClear(type in emptyValues ? emptyValues[type] : '')
         }}
         onChange={onFilter}
         placeholder={placeholder}
