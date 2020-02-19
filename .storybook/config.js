@@ -11,7 +11,8 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { MuiPickersUtilsProvider } from '../src/Atoms/DateTimePicker'
 import { TransProvider } from '../src/Atoms/Trans'
 import results from '../.jest-test-results.json'
-import { rg6, dark, muiRg6Theme } from './themes'
+import { muiRg6Theme } from './themes'
+import { rg6, dark } from '../src/themes'
 import { en } from './locales'
 
 addDecorator(withKnobs)
