@@ -4,8 +4,9 @@ import NativeSelect from '@material-ui/core/NativeSelect'
 import { css } from '@styled-system/css'
 
 import Input from '../Input'
+import { useTranslation } from '../Trans'
 
-const Select = styled(NativeSelect)`
+const BaseSelect = styled(NativeSelect)`
   .MuiNativeSelect {
     &-root { 
       ${css({ bg: 'background' })};
@@ -25,6 +26,21 @@ const Select = styled(NativeSelect)`
     }
   }
 `
+
+const BaseEmpty = () => {
+  const t = useTranslation()
+
+  return <option disabled value="">
+    {t('global.chooseOption')}
+  </option>
+}
+
+const Select = ({ Empty = BaseEmpty, children, ...props }) => {
+  return <BaseSelect {...props}>
+    <Empty />
+    {children}
+  </BaseSelect>
+}
 
 Select.defaultProps = {
   input: <Input />,

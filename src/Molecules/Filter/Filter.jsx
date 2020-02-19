@@ -73,10 +73,12 @@ const InnerInput = ({
   const t = useTranslation()
 
   return type === 'select' ? (
-    <Select onChange={event => onChange(event.target.value)} value={value} {...props}>
-      <option value="0">
-        {t('global.chooseOption')}
-      </option>
+    <Select
+      onChange={event => onChange(event.target.value)}
+      value={value}
+      Empty={() => null}
+      {...props}
+    >
       {options.map(({ value, label }) => <option value={value}>{t(label)}</option>)}
     </Select>
   ) : (
