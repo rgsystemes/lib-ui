@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions'
 import { array } from '@storybook/addon-knobs'
 import { ListUl } from 'styled-icons/boxicons-regular/ListUl'
 import { BarChart } from 'styled-icons/boxicons-regular/BarChart'
-import { MultilineChart } from 'styled-icons/material/MultilineChart'
 
 import EnhancedList from './index'
 import BasePagination from '../../Molecules/Pagination'
