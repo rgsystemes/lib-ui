@@ -4,9 +4,9 @@ import { layout } from 'styled-system'
 
 const Popover = styled(BasePopover)`
   .MuiPopover-paper {
-    border: '1px solid';
-    borderColor: 'lightgrey';
-    maxHeight: '440px';
+    border: 1px solid;
+    border-color: lightgrey;
+    max-height: 600px;
     ${layout}
   }
 `
