@@ -99,7 +99,7 @@ const EnhancedList = ({
         </ActionGroup>
         {actions.map((actionGroup, i) =>
           <ActionGroup size="small" key={`action-${i}`}>
-            {actionGroup.map(action => action)}
+            {actionGroup}
           </ActionGroup>,
         )}
       </div>
