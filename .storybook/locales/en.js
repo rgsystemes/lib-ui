@@ -1,11 +1,14 @@
 export default {
   global: {
-    cancel: 'Cancel',
-    add: 'Add',
     dateFormat: 'dd/MM/yyyy hh:mm',
     no_results: 'No results found',
     filter: {
       clearCurrent: 'Clear current filters',
+    },
+    action: {
+      chooseOption: 'Choose an option',
+      cancel: 'Cancel',
+      add: 'Add',
     },
     pagination: {
       perPage: '%count% per page',

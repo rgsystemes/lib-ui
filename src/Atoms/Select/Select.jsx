@@ -31,7 +31,7 @@ const BaseEmpty = () => {
   const t = useTranslation()
 
   return <option disabled value="">
-    {t('global.chooseOption')}
+    {t('global.action.chooseOption')}
   </option>
 }
 
