@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import { variant } from 'styled-system'
 import { css as systemCss } from '@styled-system/css'
@@ -104,7 +104,7 @@ export const largeButtonStyles = css`
   }
 `
 
-const UncoloredButton = ({ color, ...props }) => <BaseButton {...props} />
+const UncoloredButton = forwardRef(({ color, ...props }, ref) => <BaseButton {...props} ref={ref}/>)
 
 const Button = styled(UncoloredButton)`
   ${defaultButtonStyles}

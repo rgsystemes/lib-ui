@@ -16,6 +16,7 @@ export {
   FormLabel,
   FormControlLabel,
 } from './Molecules'
+export { Popover } from './Atoms'
 export { Menu } from './Atoms'
 export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
