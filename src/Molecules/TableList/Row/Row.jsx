@@ -14,8 +14,8 @@ const TableRow = styled(BaseTableRow)`
   border-left: 3px solid transparent;
   ${({ selected }) => css({ borderLeftColor: selected ? 'primary' : 'transparent' })}};
 
-  &.MuiTableRow-hover:hover {
-    ${css({ borderLeftColor: 'primary' })}};
+  &&.MuiTableRow-hover:hover {
+    ${css({ borderLeftColor: 'primary', bg: 'lightgray' })}};
   }
 
   display: block;
