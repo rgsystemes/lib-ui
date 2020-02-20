@@ -35,12 +35,11 @@ const BaseEmpty = () => {
   </option>
 }
 
-const Select = ({ Empty = BaseEmpty, children, ...props }) => {
-  return <BaseSelect {...props}>
+const Select = ({ Empty = BaseEmpty, children, ...props }) =>
+  <BaseSelect {...props}>
     <Empty />
     {children}
   </BaseSelect>
-}
 
 Select.defaultProps = {
   input: <Input />,
