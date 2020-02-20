@@ -29,7 +29,7 @@ const ColumnGroup = ({
     {columns.map(({ name, translationKey, description }) =>
       <ListItem button key={name} onClick={() => onChange(name)} classes={classes}>
         <ListItemIcon>
-          <Checkbox checked={checked} color="default"/>
+          <Checkbox checked={checked} color="default" edge="start"/>
         </ListItemIcon>
         <ListItemText
           id={name}
