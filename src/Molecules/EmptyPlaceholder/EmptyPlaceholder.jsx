@@ -28,9 +28,11 @@ const EmptyPlaceholder = ({
   secondaryText,
   icon = null,
   action = null,
+  children,
+  empty = false,
   ...props
 }) =>
-  <Container {...props}>
+  empty ? <Container {...props}>
     {icon}
     <TextContainer>
       <Typo fontSize="xl">
@@ -41,7 +43,7 @@ const EmptyPlaceholder = ({
       </Typo>
     </TextContainer>
     {action}
-  </Container>
+  </Container> : <>{children}</>
 
 EmptyPlaceholder.defaultProps = {
   minHeight: '700px',

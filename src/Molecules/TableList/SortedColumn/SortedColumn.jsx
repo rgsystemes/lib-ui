@@ -1,28 +1,29 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { css } from '@styled-system/css'
+import Popover from '@material-ui/core/Popover'
 
 import { DownArrowAlt } from 'styled-icons/boxicons-regular/DownArrowAlt'
 import { UpArrowAlt } from 'styled-icons/boxicons-regular/UpArrowAlt'
 
 import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
 
+import BaseFilter from '../../../Molecules/Filter'
 import TableCell from '../TableCell'
-import Menu from '../../../Atoms/Menu'
 import Typo from '../../../Atoms/Typo'
+import Icon from '../../../Atoms/Icon'
 
 const DESC = 0
 const ASC = 1
 const NONE = 2
 
-const FilterIcon = styled(BaseFilterIcon)`
+const IconWrapper = styled(Icon)`
   display: flex;
-  opacity: 0;
-  cursor: pointer;
+  opacity: ${({ filtered }) => filtered ? '1' : '0'};
   ${css({ color: 'primary' })};
 
-  ${TableCell}:hover &, &:focus, &:active {
-    opacity: 1;
+  ${TableCell}:hover &  {
+    opacity: ${({ disabled }) => disabled ? '0' : '1'};
   }
 `
 
@@ -69,42 +70,70 @@ const computeOrder = sort => (
   NONE
 )
 
+const emptyValues = {
+  text:   '',
+  date:   {},
+  select: '',
+}
+
 const SortedColumn = ({
   children,
   name,
+  translationKey,
+  type,
+  options,
+  placeholder,
   onSort = null,
   sort,
-  onFilter = null,
-  Filter = () => null,
+  onClear = () => {},
+  onFilter = () => {},
+  Filter = BaseFilter,
+  filter,
 }) => {
   const order = computeOrder(sort)
   const [filterAnchorEl, setFilterAnchorEl] = useState(null)
 
   return (
     <TableCell>
-      <Menu
+      <Popover
         open={Boolean(filterAnchorEl)}
         onClose={() => setFilterAnchorEl(null)}
         anchorEl={filterAnchorEl}
       >
-        <Filter />
-      </Menu>
+        <Filter onClear={() => {
+          setFilterAnchorEl(null)
+          onClear(type in emptyValues ? emptyValues[type] : '')
+        }}
+        onChange={onFilter}
+        placeholder={placeholder}
+        value={filter}
+        name={name}
+        type={type}
+        options={options}
+        translationKey={translationKey}
+        />
+      </Popover>
       <CellWrapper>
         <Column
           as="strong"
-          onClick={ () => !(onSort == null) && switchOrder(name, order, onSort) }
-          disableSort={onSort == null}
+          onClick={ () => !!onSort && switchOrder(name, order, onSort) }
+          disableSort={!onSort}
         >
           {children}
-          {!(onSort == null) &&
+          {!!onSort &&
             <SortIcon data-testid={`sort-column-${name}`} size="small" currentSort={!!sort}>
               {[<DownArrowAlt size={16} />, <UpArrowAlt size={16} />, <DownArrowAlt size={16} />][order]}
             </SortIcon>
           }
         </Column>
-        {!(onFilter == null) &&
-          <FilterIcon data-testid={`filter-column-${name}`} size={20} onClick={event => setFilterAnchorEl(event.currentTarget)}/>
-        }
+        <IconWrapper
+          data-testid={`filter-column-${name}`}
+          disabled={!type}
+          Component={BaseFilterIcon}
+          onClick={event => setFilterAnchorEl(event.currentTarget)}
+          size="small"
+          filtered={filter != null && filter !== ''}
+        />
       </CellWrapper>
     </TableCell>
   )

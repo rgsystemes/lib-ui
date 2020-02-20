@@ -3,13 +3,11 @@ import { action } from '@storybook/addon-actions'
 import { array } from '@storybook/addon-knobs'
 import { ListUl } from 'styled-icons/boxicons-regular/ListUl'
 import { BarChart } from 'styled-icons/boxicons-regular/BarChart'
-import { MultilineChart } from 'styled-icons/material/MultilineChart'
 
 import EnhancedList from './index'
 import BasePagination from '../../Molecules/Pagination'
 import Button from '../../Atoms/Button'
 import Tooltip from '../../Atoms/Tooltip'
-import EmptyPlaceholder from '../../Molecules/EmptyPlaceholder'
 import BaseExport from '../../Molecules/Export'
 import EditColumns from './EditColumns'
 
@@ -146,7 +144,7 @@ const exportFormats = [
 const Export = props =>
   <BaseExport onExport={action('Export button clicked')} formats={exportFormats} {...props}/>
 
-const Pagination = props => <BasePagination
+const Pagination = () => <BasePagination
   currentPage={1}
   sizeOptions={['10', '20', '30', '40']}
   onPageChange={action('page changed')}
@@ -154,23 +152,60 @@ const Pagination = props => <BasePagination
   label="1-10 of 250"
 />
 
+const actions = [
+  [
+    <Tooltip title="Switch to graph view" key="tooltip-1">
+      <Button onClick={action('Clicked on additional action')}>
+        <BarChart size={16} />
+      </Button>
+    </Tooltip>,
+    <Tooltip title="Switch to list view" key="tooltip-2">
+      <Button onClick={action('Clicked on additional action')}>
+        <ListUl size={16} />
+      </Button>
+    </Tooltip>,
+  ],
+]
+
+const initialColumns = [
+  { name: 'id', translationKey: 'ID', description: 'Unique id identifying the object' },
+  { name: 'index', translationKey: 'Index', description: 'Index in the array' },
+  { name: 'guid', translationKey: 'GUID', description: 'Sorta same than the id but fancier' },
+  { name: 'isActive', translationKey: 'Is active', description: 'Is it active ?' },
+  { name: 'balance', translationKey: 'Balance', description: 'Bank account balance. Whether the guy is rich or not' },
+  {
+    name:           'age',
+    translationKey: 'Age',
+    description:    'Age of the dude',
+    type:           'date',
+  },
+  { name: 'eyeColor', translationKey: 'Eye color', description: 'Eye color of the dude' },
+  {
+    name:           'name',
+    translationKey: 'Name',
+    description:    'Kinda same than guid, but fancier',
+    placeholder:    'My name',
+    type:           'text',
+  },
+  {
+    name:           'gender',
+    translationKey: 'Gender',
+    description:    'Whether the guy is a dude or a chick',
+    type:           'select',
+    options:        [
+      { label: 'Male', value: 'm' },
+      { label: 'Female', value: 'f' },
+    ],
+  },
+  { name: 'company', translationKey: 'Company', description: 'Where the person currently works' },
+  { name: 'email', translationKey: 'Email', description: 'GDPR sensitive data' },
+  { name: 'phone', translationKey: 'Phone', description: 'GDPR sensitive data' },
+  { name: 'address', translationKey: 'Address', description: 'GDPR sensitive data' },
+  { name: 'favoriteFruit', translationKey: 'Favorite fruit', description: 'Favorite fruit of the person. This tells a lot about one\'s state of mind' },
+].map(c => ({ show: true, ...c }))
+
 export const enhancedList = () => {
-  const [columns, setColumns] = useState([
-    { name: 'id', translationKey: 'ID', description: 'Unique id identifying the object' },
-    { name: 'index', translationKey: 'Index', description: 'Index in the array' },
-    { name: 'guid', translationKey: 'GUID', description: 'Sorta same than the id but fancier' },
-    { name: 'isActive', translationKey: 'Is active', description: 'Is it active ?' },
-    { name: 'balance', translationKey: 'Balance', description: 'Bank accoun balance. Whether the guy is rich or not' },
-    { name: 'age', translationKey: 'Age', description: 'Age of the dude' },
-    { name: 'eyeColor', translationKey: 'Eye color', description: 'Eye color of the dude' },
-    { name: 'name', translationKey: 'Name', description: 'Kinda same than guid, but fancier' },
-    { name: 'gender', translationKey: 'Gender', description: 'Whether the guy is a dude or a chick' },
-    { name: 'company', translationKey: 'Company', description: 'Where the person currently works' },
-    { name: 'email', translationKey: 'Email', description: 'GDPR sensitive data' },
-    { name: 'phone', translationKey: 'Phone', description: 'GDPR sensitive data' },
-    { name: 'address', translationKey: 'Address', description: 'GDPR sensitive data' },
-    { name: 'favoriteFruit', translationKey: 'Favorite fruit', description: 'Favorite fruit of the person. This tells a lot about one\'s state of mind' },
-  ].map(c => ({ show: true, ...c })))
+  const [columns, setColumns] = useState(initialColumns)
 
   const setColumnShown = columnName => {
     setColumns(columns.map(({ name, show, ...column }) => (
@@ -178,44 +213,27 @@ export const enhancedList = () => {
     )))
   }
 
+  const [filters, setFilters] = useState(columns.reduce((filters, { name }) => ({ ...filters, [name]: null }), {}))
+
   return <EnhancedList
     columns={columns}
     data={array('Data', data)}
     onSelect={action('item selected')}
     onSearch={action('searched something')}
     onAdd={action('clicked on add')}
-    emptyPlaceholder={
-      <EmptyPlaceholder
-        icon={<MultilineChart size={98} />}
-        primaryText="Il n\'y a pas encore de quotas définis sur ce noeud"
-        secondaryText="Les quotas que vous allez créer sur ce noeud vont apparaitre ici"
-        action={
-          <Button onClick={action('Empty placeholder button clicked')} color="success" size="large">
-            Do something
-          </Button>
-        }
-      />
-    }
+    onFilter={filters => {
+      action('onFilter')(filters)
+      setFilters(filters)
+    }}
+    onClear={setFilters}
+    filters={filters}
     SearchInputProps={{
       placeholder: 'Search ...',
     }}
     Pagination={Pagination}
     Export={Export}
     EditColumns={props => <EditColumns onChange={setColumnShown} {...props} />}
-    actions={[
-      [
-        <Tooltip title="Switch to graph view" key="tooltip-1">
-          <Button onClick={action('Clicked on additional action')}>
-            <BarChart size={16} />
-          </Button>
-        </Tooltip>,
-        <Tooltip title="Switch to list view" key="tooltip-2">
-          <Button onClick={action('Clicked on additional action')}>
-            <ListUl size={16} />
-          </Button>
-        </Tooltip>,
-      ],
-    ]}
+    actions={actions}
   />
 }
 

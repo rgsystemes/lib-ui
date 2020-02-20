@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
@@ -12,6 +12,7 @@ import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
 import Radio from '../../Atoms/Radio'
 import Checkbox from '../../Atoms/Checkbox'
+import DateTimePicker from '../../Atoms/DateTimePicker'
 
 import markdown from './README.md'
 
@@ -35,6 +36,7 @@ export const formControl = () => {
   const label = text('Label', 'Label')
   const helpText = text('Help text', 'Help text')
   const disabled = boolean('Disabled', false)
+  const [date, setDate] = useState(new Date())
 
   return <Container>
     <FormControl error={errorState} disabled={disabled}>
@@ -87,6 +89,14 @@ export const formControl = () => {
         )}
       </FormGroup>
     </FormControl>
+    <DateTimePicker
+      label={label}
+      error={errorState}
+      disabled={disabled}
+      helperText={helpText}
+      value={date}
+      onChange={setDate}
+    />
   </Container>
 }
 formControl.story = {

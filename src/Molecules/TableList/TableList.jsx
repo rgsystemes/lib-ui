@@ -3,13 +3,18 @@ import styled from 'styled-components'
 import { css } from '@styled-system/css'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import TableBody from '@material-ui/core/TableBody'
+import BaseTableBody from '@material-ui/core/TableBody'
 
+import Typo from '../../Atoms/Typo'
 import Trans from '../../Atoms/Trans'
 import TableCell from './TableCell'
 import BaseColumn from './SortedColumn'
 import Row from './Row'
 import Table from './Table'
+
+const TableBody = styled(BaseTableBody)`
+  ${css({ bg: 'secondary' })};
+`
 
 const Head = styled(TableHead)`
   ${css({ borderBottomColor: 'lightgrey' })};
@@ -22,9 +27,15 @@ const Wrapper = styled.div`
   overflow-x: auto;
 `
 
+const NoResults = styled(Typo)`
+  ${css({ p: 'm' })};
+`
+
 export const TableList = ({
   data = [],
   onSort = null,
+  filters = {},
+  onFilter = () => {},
   onSelect = () => {},
   Details = () => null,
   selected,
@@ -33,21 +44,23 @@ export const TableList = ({
   way,
   Cell = ({ children }) => <TableCell children={children || '-'} />,
   Column = BaseColumn,
-  ColumnProps = {},
-  emptyPlaceholder = null,
   ...props
 }) => (
-  data.length > 0 ? <Wrapper>
+  <Wrapper>
     <Table {...props}>
       <Head>
         <TableRow>
-          { columns.map(({ name, translationKey }) => (
+          { columns.map(({ name, translationKey, ...column }) => (
             <Column
-              key={ name }
-              onSort={ onSort }
-              name={ name }
-              sort={ sort === name && way }
-              {...ColumnProps}
+              key={name}
+              onSort={onSort}
+              sort={sort === name && way}
+              filter={filters[name]}
+              onFilter={value => onFilter({ ...filters, [name]: value })}
+              onClear={defaultValue => onFilter({ ...filters, [name]: defaultValue })}
+              name={name}
+              translationKey={translationKey}
+              {...column}
             >
               <Trans transKey={translationKey} />
             </Column>
@@ -55,26 +68,34 @@ export const TableList = ({
         </TableRow>
       </Head>
       <TableBody>
-        { data.map(item => (
-          <Row
-            key={item.id}
-            id={item.id}
-            selected={selected === item.id}
-            cols={columns.length}
-            onSelect={onSelect}
-            details={<Details { ...item }/>}
-          >
-            { columns.map(({ name }) => (
-              <Cell key={name} name={ name } item={ item }>
-                {item[name]}
-              </Cell>
-            )) }
+        { data.length === 0 ? (
+          <Row hover={false}>
+            <TableCell colSpan={columns.length}>
+              <NoResults>
+                <Trans>global.no_results</Trans>
+              </NoResults>
+            </TableCell>
           </Row>
-        )) }
+        ) :
+          data.map(item => (
+            <Row
+              key={item.id}
+              id={item.id}
+              selected={selected === item.id}
+              cols={columns.length}
+              onSelect={onSelect}
+              details={<Details { ...item }/>}
+            >
+              { columns.map(({ name }) => (
+                <Cell key={name} name={ name } item={ item }>
+                  {item[name]}
+                </Cell>
+              )) }
+            </Row>
+          )) }
       </TableBody>
     </Table>
-  </Wrapper> :
-  emptyPlaceholder
+  </Wrapper>
 )
 
 export default TableList

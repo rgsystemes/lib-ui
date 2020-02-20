@@ -7,8 +7,6 @@ import BaseTableRow from '@material-ui/core/TableRow'
 import TableCell from '../TableCell'
 
 const TableRow = styled(BaseTableRow)`
-  ${css({ bg: 'secondary' })};
-
   cursor: ${({ details }) => details ? 'pointer' : 'auto'};
 
   border-left: 3px solid transparent;
@@ -43,12 +41,15 @@ const Row = ({
   cols,
   details,
   onSelect = () => {},
+  hover = true,
+  ...props
 }) => <>
   <TableRow
     details={details}
     selected={selected}
     onClick={() => onSelect(selected ? null : id)}
-    hover={true}
+    hover={hover}
+    {...props}
   >
     { children }
   </TableRow>

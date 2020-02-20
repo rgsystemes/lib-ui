@@ -88,7 +88,7 @@ const Export = ({
     </Body>
     <Actions>
       <Button onClick={onClose} size="small">
-        <Trans transKey="global.cancel"/>
+        <Trans transKey="global.action.cancel"/>
       </Button>
       <Button
         color="success"
