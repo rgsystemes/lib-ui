@@ -14,13 +14,13 @@ const theme = createMuiTheme({
   },
 })
 
-const DatePicker = ({ format = 'Pp', ampm = false, ...props }) =>
+const DatePicker = ({ format = 'Pp', disableAmPm = true, ...props }) =>
   <ThemeProvider theme={theme}>
     <BaseDatePicker
       TextFieldComponent={TextField}
       variant="inline"
       KeyboardButtonProps={{ disableRipple: true }}
-      ampm={ampm}
+      ampm={!disableAmPm}
       InputProps={{
         endAdornment: (
           <InputAdornment>
