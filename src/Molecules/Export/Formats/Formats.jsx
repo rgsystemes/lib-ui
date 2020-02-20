@@ -13,9 +13,6 @@ const Formats = ({ formats, value, onChange }) => {
       <InputLabel>
         <Trans transKey="global.export.format.label"/>
         <Select value={value} onChange={event => onChange(event.target.value)}>
-          <option value="" disabled data-testid={`export-format-${value}`}>
-            {t('global.chooseOption')}
-          </option>
           {formats.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
         </Select>
       </InputLabel>
