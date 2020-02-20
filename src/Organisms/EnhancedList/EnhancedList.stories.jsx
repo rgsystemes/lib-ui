@@ -154,12 +154,12 @@ const Pagination = () => <BasePagination
 
 const actions = [
   [
-    <Tooltip title="Switch to graph view">
+    <Tooltip title="Switch to graph view" key="tooltip-1">
       <Button onClick={action('Clicked on additional action')}>
         <BarChart size={16} />
       </Button>
     </Tooltip>,
-    <Tooltip title="Switch to list view">
+    <Tooltip title="Switch to list view" key="tooltip-2">
       <Button onClick={action('Clicked on additional action')}>
         <ListUl size={16} />
       </Button>

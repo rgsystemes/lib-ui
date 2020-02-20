@@ -1,7 +1,9 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { render, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+import { muiRg6Theme } from '../../../.storybook/themes'
 
 import BaseEnhancedList from './index'
 
@@ -15,12 +17,14 @@ global.document.createRange = () => ({
   },
 })
 
-const EnhancedList = props => <ThemeProvider theme={{}}>
-  <BaseEnhancedList
-    columns={[]}
-    {...props}
-  />
-</ThemeProvider>
+const EnhancedList = props => <MuiThemeProvider theme={muiRg6Theme}>
+  <ThemeProvider theme={{}}>
+    <BaseEnhancedList
+      columns={[]}
+      {...props}
+    />
+  </ThemeProvider>
+</MuiThemeProvider>
 
 it('should hide add button when onAdd is not defined', () => {
   const { queryByTestId } = render(

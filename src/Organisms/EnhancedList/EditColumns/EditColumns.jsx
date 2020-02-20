@@ -12,16 +12,19 @@ const ColumnsIcon = styled(Columns)`
   ${css({ mr: 'm', color: 'primary' })}
 `
 
-const Container = styled.div`
-  & > * {
-    ${css({ px: 'l' })}
-  }
-`
-
 const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  ${css({ px: 'xl', pt: 'xl', mb: 'l' })}
+`
+
+const DescriptionTypo = styled(Typo)`
+  ${css({ px: 'xl' })}
+`
+
+const TitleTypo = styled(Typo)`
+  ${css({ my: 0 })}
 `
 
 const EditColumns = ({
@@ -38,14 +41,14 @@ const EditColumns = ({
     { enabledColumns: [], disabledColumns: [] },
   )
 
-  return <Container>
+  return <>
     <Title>
       <ColumnsIcon size={24} />
-      <Typo as="h2" fontSize="title" fontFamily="title" color="primary">
+      <TitleTypo as="h2" fontSize="title" fontFamily="title" color="primary">
         <Trans transKey="global.editColumns.title" />
-      </Typo>
+      </TitleTypo>
     </Title>
-    <Typo as="div">{descriptionText}</Typo>
+    <DescriptionTypo as="div">{descriptionText}</DescriptionTypo>
     {enabledColumns.length > 0 &&
       <ColumnGroup
         label={<Trans transKey="global.editColumns.enabledColumns"/>}
@@ -62,6 +65,6 @@ const EditColumns = ({
         checked={false}
       />
     }
-  </Container>
+  </>
 }
 export default EditColumns

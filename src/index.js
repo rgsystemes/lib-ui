@@ -16,6 +16,7 @@ export {
   FormLabel,
   FormControlLabel,
 } from './Molecules'
+export { Popover } from './Atoms'
 export { Menu } from './Atoms'
 export { MenuItem } from './Atoms'
 export { TextField } from './Atoms'
@@ -47,5 +48,5 @@ export { DateTimePicker, MuiPickersUtilsProvider } from './Atoms'
 export { Filter } from './Molecules'
 export { DateRange } from './Molecules'
 export { StatusChip } from './Atoms'
-export { Box } from './Atoms'
+export { FlexBox } from './Templates'
 export { rg6 } from './themes'
