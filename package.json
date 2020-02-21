@@ -1,6 +1,6 @@
 {
   "name": "@rgsystem/lib-ui",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "React components library for the dashboard",
   "main": "lib/index.js",
   "browser": "lib/index.umd.js",
