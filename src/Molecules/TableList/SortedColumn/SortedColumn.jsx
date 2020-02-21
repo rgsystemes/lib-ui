@@ -9,13 +9,19 @@ import { UpArrowAlt } from 'styled-icons/boxicons-regular/UpArrowAlt'
 import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
 
 import BaseFilter from '../../../Molecules/Filter'
-import TableCell from '../TableCell'
+import BaseTableCell from '../TableCell'
 import Typo from '../../../Atoms/Typo'
 import Icon from '../../../Atoms/Icon'
 
 const DESC = 0
 const ASC = 1
 const NONE = 2
+
+const TableCell = styled(BaseTableCell)`
+  &.MuiTableCell-head {
+    padding-bottom: 0;
+  }
+`
 
 const IconWrapper = styled(Icon)`
   display: flex;
