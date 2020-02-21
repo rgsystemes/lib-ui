@@ -3,7 +3,7 @@ import BaseListItemIcon from '@material-ui/core/ListItemIcon'
 
 const ListItemIcon = styled(BaseListItemIcon)`
   &.MuiListItemIcon-root {
-    min-width: 36px;
+    min-width: 22px;
     align-self: start;
   }
 `
