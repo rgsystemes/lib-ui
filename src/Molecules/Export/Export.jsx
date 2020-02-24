@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import { css } from '@styled-system/css'
+
 import { Download } from 'styled-icons/boxicons-regular/Download'
+import Box from '@material-ui/core/Box'
 
 import Trans, { useTranslation } from '../../Atoms/Trans'
 import FormControl from '../../Molecules/FormControl'
@@ -9,46 +9,20 @@ import InputLabel from '../../Molecules/FormControl/InputLabel'
 import Input from '../../Atoms/Input'
 import Typo from '../../Atoms/Typo'
 import Button from '../../Atoms/Button'
+import FlexBox from '../../Templates/FlexBox'
 
 import Formats from './Formats'
 
 const isAllowedFormat = (formats, format) => formats.some(({ value } = {}) => format === value)
 
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  ${css({
-    px: 'xl',
-    pt: 'xl',
-  })}
-`
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid;
-  ${css({
-    borderTopColor: 'secondary',
-    py:             'l',
-    px:             'xl',
-    mt:             'l',
-  })}
-`
-
-const DownloadIcon = styled(Download)`
-  ${css({ mr: 's', color: 'primary' })}
-`
-
-const Title = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  ${css({ mb: 'l' })}
-`
-
-const TitleTypo = styled(Typo)`
-  ${css({ my: 0 })}
-`
+const Actions = ({ onClose, onExport, disabled }) => <>
+  <Button onClick={onClose} size="small">
+    <Trans transKey="global.action.cancel"/>
+  </Button>
+  <Button color="success" onClick={onExport} size="small" disabled={disabled}>
+    <Trans transKey="global.export.actionExport"/>
+  </Button>
+</>
 
 const Export = ({
   descriptionText = <Trans transKey="global.export.description"/>,
@@ -64,45 +38,37 @@ const Export = ({
   const t = useTranslation()
   const { defaultName = t('global.export.defaultFilename') } = props
   const { format = '', filename = defaultName } = value
+  const onFileNameChange = event => onChange({ filename: event.target.value, format })
 
   return <>
-    <Body>
-      <Title>
-        <DownloadIcon size={20} color="primary"/>
-        <TitleTypo as="h2" fontSize="title" fontFamily="title" color="primary">
+    <FlexBox flexDirection='column' p={4} gap={2}>
+      <FlexBox alignItems='center' mb={2} >
+        <Box component={Download} size={20} color="primary.main" />
+        <Box component='h2' ml={0.5} my={0} fontSize="fontSizes.title" fontFamily="fontFamily" color="primary.main">
           <Trans transKey="global.export.title" />
-        </TitleTypo>
-      </Title>
+        </Box>
+      </FlexBox>
       <Typo>{descriptionText}</Typo>
       <FormControl>
         <InputLabel>
           <Trans transKey="global.export.filename" />
-          <Input
-            value={filename}
-            onChange={event => onChange({ filename: event.target.value, format })}
-          />
+          <Input value={filename} onChange={onFileNameChange} />
         </InputLabel>
       </FormControl>
       <Formats formats={formats} value={format} onChange={format => onChange({ filename, format })} />
       {extraOptions}
-    </Body>
-    <Actions>
-      <Button onClick={onClose} size="small">
-        <Trans transKey="global.action.cancel"/>
-      </Button>
-      <Button
-        color="success"
-        onClick={onExport}
-        size="small"
+    </FlexBox>
+    <FlexBox justifyContent='space-between' borderColor='grey.100' borderTop={1} py={2} px={4} mt={2} >
+      <Actions
+        onClose={onClose}
+        onExport={onExport}
         disabled={
-          filename === '' ||
+          !filename === '' ||
           !isAllowedFormat(formats, format) ||
           disabled
         }
-      >
-        <Trans transKey="global.export.actionExport"/>
-      </Button>
-    </Actions>
+      />
+    </FlexBox>
   </>
 }
 
