@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
+import { select } from '@storybook/addon-knobs'
 
 import DateRange from './index'
 
@@ -19,7 +20,7 @@ export const dateRange = () => {
       setValue(value)
       action('Date changed')(value)
     }}
-    variant="static"
+    variant={select('variant', ['inline', 'static'], 'inline')}
   />
 }
 dateRange.story = {
