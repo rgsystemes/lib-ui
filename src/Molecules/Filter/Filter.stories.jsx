@@ -38,7 +38,8 @@ export const filter = () => <Container>
   <Filter
     type="date"
     value=""
-    translationKey="Date filter"
+    startLabelKey='Start date'
+    endLabelKey='End date'
     onChange={action('filter changed')}
   />
 </Container>
