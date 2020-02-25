@@ -18,7 +18,6 @@ const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
   return (
     <FlexBox gap={1}>
       <DateTimePicker
-        data-testid="date-range-start"
         value={start}
         maxDate={end}
         onBlur={onBlur}
@@ -26,7 +25,6 @@ const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
         {...props}
       />
       <DateTimePicker
-        data-testid="date-range-end"
         value={end}
         minDate={start}
         onBlur={onBlur}
