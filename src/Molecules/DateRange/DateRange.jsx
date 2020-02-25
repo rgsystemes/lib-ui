@@ -3,8 +3,7 @@ import React from 'react'
 import DateTimePicker from '../../Atoms/DateTimePicker'
 import FlexBox from '../../Templates/FlexBox'
 
-import useOnClickOutside from '../../hooks/useOnClickOutside.js'
-
+// We have to do that because maxDate and minDate don't take time into account
 const onStartChange = (start, end) =>
   start > end ? ({ start, end: start }) :
   ({ start, end })
@@ -15,13 +14,14 @@ const onEndChange = (start, end) =>
 
 const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
   const { start = new Date(), end = new Date() } = value || {}
-  const ref = useOnClickOutside(onBlur)
 
   return (
-    <FlexBox ref={ref} gap={1}>
+    <FlexBox gap={1}>
       <DateTimePicker
         data-testid="date-range-start"
         value={start}
+        maxDate={end}
+        onBlur={onBlur}
         onChange={start => onChange(onStartChange(start, end))}
         {...props}
       />
@@ -29,6 +29,7 @@ const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
         data-testid="date-range-end"
         value={end}
         minDate={start}
+        onBlur={onBlur}
         onChange={end => onChange(onEndChange(start, end))}
         {...props}
       />
