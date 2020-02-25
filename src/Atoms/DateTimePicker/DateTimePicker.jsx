@@ -6,21 +6,21 @@ import TextField from '../TextField'
 import InputAdornment from '../Input/InputAdornment'
 import IconButton from '../IconButton'
 
+const endAdornment = (
+  <InputAdornment>
+    <IconButton>
+      <CalendarToday size={20} />
+    </IconButton>
+  </InputAdornment>
+)
+
 const DatePicker = ({ format = 'Pp', disableAmPm = true, ...props }) =>
   <BaseDatePicker
     TextFieldComponent={TextField}
     variant="inline"
     KeyboardButtonProps={{ disableRipple: true }}
     ampm={!disableAmPm}
-    InputProps={{
-      endAdornment: (
-        <InputAdornment>
-          <IconButton>
-            <CalendarToday size={20} />
-          </IconButton>
-        </InputAdornment>
-      ),
-    }}
+    InputProps={{ endAdornment }}
     format={format}
     {...props}
   />
