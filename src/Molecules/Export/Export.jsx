@@ -62,11 +62,7 @@ const Export = ({
       <Actions
         onClose={onClose}
         onExport={onExport}
-        disabled={
-          !filename === '' ||
-          !isAllowedFormat(formats, format) ||
-          disabled
-        }
+        disabled={!filename || !isAllowedFormat(formats, format) || disabled}
       />
     </FlexBox>
   </>
