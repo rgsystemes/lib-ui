@@ -97,6 +97,7 @@ const SortedColumn = ({
 }) => {
   const order = computeOrder(sort)
   const [filterAnchorEl, setFilterAnchorEl] = useState(null)
+  const filtered = filter != null && filter !== '' && filter !== emptyValues[type]
 
   return (
     <TableCell>
@@ -127,7 +128,7 @@ const SortedColumn = ({
           {children}
           {!!onSort &&
             <SortIcon data-testid={`sort-column-${name}`} size="small" currentSort={!!sort}>
-              {[<DownArrowAlt size={16} />, <UpArrowAlt size={16} />, <DownArrowAlt size={16} />][order]}
+              {order === 1 ? <UpArrowAlt size={16} /> : <DownArrowAlt size={16} />}
             </SortIcon>
           }
         </Column>
@@ -137,7 +138,7 @@ const SortedColumn = ({
           Component={BaseFilterIcon}
           onClick={event => setFilterAnchorEl(event.currentTarget)}
           size="small"
-          filtered={filter != null && filter !== ''}
+          filtered={filtered}
         />
       </CellWrapper>
     </TableCell>
