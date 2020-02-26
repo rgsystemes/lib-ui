@@ -91,7 +91,6 @@ const SortedColumn = ({
   placeholder,
   onSort = null,
   sort,
-  onClear = () => {},
   onFilter = () => {},
   Filter = BaseFilter,
   filter,
@@ -108,7 +107,7 @@ const SortedColumn = ({
       >
         <Filter onClear={() => {
           setFilterAnchorEl(null)
-          onClear(type in emptyValues ? emptyValues[type] : '')
+          onFilter(type in emptyValues ? emptyValues[type] : '')
         }}
         onChange={onFilter}
         placeholder={placeholder}

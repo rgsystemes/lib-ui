@@ -53,12 +53,11 @@ export const TableList = ({
           { columns.map(({ name, translationKey, ...column }) => (
             <Column
               key={name}
+              name={name}
               onSort={onSort}
               sort={sort === name && way}
               filter={filters[name]}
               onFilter={value => onFilter({ ...filters, [name]: value })}
-              onClear={defaultValue => onFilter({ ...filters, [name]: defaultValue })}
-              name={name}
               translationKey={translationKey}
               {...column}
             >
