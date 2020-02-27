@@ -14,7 +14,7 @@ export const dateRange = () => {
   const [value, setValue] = useState()
 
   return (
-    <FlexBox height='500px' alignItems='flex-start'>
+    <FlexBox height="500px" alignItems="flex-start">
       <DateRange
         value={value}
         onBlur={action('on blur')}

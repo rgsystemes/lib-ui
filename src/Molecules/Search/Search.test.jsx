@@ -14,7 +14,7 @@ it('Should call onSearch with the input value', async () => {
   const { getByTestId, getByLabelText } = render(
     <MuiThemeProvider theme={muiRg6Theme}>
       <ThemeProvider theme={{}}>
-        <Search onSearch={onSearch} id='search-input' label='Search...' />
+        <Search onSearch={onSearch} id="search-input" label="Search..." />
       </ThemeProvider>
     </MuiThemeProvider>,
   )

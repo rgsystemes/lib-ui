@@ -75,7 +75,7 @@ const Banner = ({
 }) => (
   <Container level={level} {...props}>
     {onClose && <Close onClick={onClose}>×</Close>}
-    {title && <Title level={level} as='h4'>{title}</Title>}
+    {title && <Title level={level} as="h4">{title}</Title>}
     {children}
   </Container>
 )

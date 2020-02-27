@@ -20,7 +20,7 @@ const useGap = (gap, direction) => {
 const FlexBox = ({ gap = 0, ...props }) => {
   gap = useGap(gap, props.flexDirection)
 
-  return <GappedBox display='flex' gap={gap} {...props} />
+  return <GappedBox display="flex" gap={gap} {...props} />
 }
 
 export default FlexBox

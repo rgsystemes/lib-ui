@@ -88,7 +88,7 @@ const InnerInput = ({
 }
 
 const FilterWrapper = ({ children, onClear, ...props }) =>
-  <FlexBox minWidth='200px' flexDirection='column' px={2} py={1}>
+  <FlexBox minWidth="200px" flexDirection="column" px={2} py={1}>
     <Filter {...props}/>
     <Clear onClick={onClear}>
       <Icon Component={Trash} size="small"/>

@@ -20,9 +20,9 @@ export const flexBox = () => {
 
   return (
     <FlexBox flexDirection={direction} gap={gap} p={padding} border='1px solid black'>
-      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
-      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
-      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor='grey.300'/>
+      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
+      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
+      <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
     </FlexBox>
   )
 }
@@ -43,11 +43,11 @@ export const LayoutExample = () => {
           width: 100%;
         }`}
       </style>
-      <FlexBox gap={gap} flexDirection='column' minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} border={border ? '1px solid blue' : 'none'} >
+      <FlexBox gap={gap} flexDirection="column" minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} border={border ? '1px solid blue' : 'none'} >
         <FlexBox minWidth={300} minHeight={300} flexGrow={1} bgcolor={`rgba(0, 0, 0, ${opacity})`} />
         <FlexBox minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} />
       </FlexBox>
-      <FlexBox gap={gap} flexGrow={1} flexDirection='column' minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} border={border ? '1px solid blue' : 'none'} >
+      <FlexBox gap={gap} flexGrow={1} flexDirection="column" minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} border={border ? '1px solid blue' : 'none'} >
         <FlexBox gap={gap} minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} border={border ? '1px solid red' : 'none'} >
           <FlexBox flexGrow={2} minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} />
           <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor={`rgba(0, 0, 0, ${opacity})`} />
