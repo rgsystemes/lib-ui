@@ -8,7 +8,7 @@ import { UpArrowAlt } from 'styled-icons/boxicons-regular/UpArrowAlt'
 
 import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
 
-import BaseFilter from '../../../Molecules/Filter'
+import BaseFilter, { constants as filterConstants } from '../../../Molecules/Filter'
 import BaseTableCell from '../TableCell'
 import Typo from '../../../Atoms/Typo'
 import Icon from '../../../Atoms/Icon'
@@ -75,13 +75,7 @@ const computeOrder = sort => (
   sort === 'asc'  ? ASC :
   NONE
 )
-
-const emptyValues = {
-  text:   '',
-  date:   {},
-  select: '',
-}
-
+const { EMPTY_VALUES } = filterConstants
 const SortedColumn = ({
   children,
   name,
@@ -99,7 +93,7 @@ const SortedColumn = ({
 }) => {
   const order = computeOrder(sort)
   const [filterAnchorEl, setFilterAnchorEl] = useState(null)
-  const filtered = filter != null && filter !== '' && filter !== emptyValues[type]
+  const filtered = filter != null && filter !== '' && filter !== EMPTY_VALUES[type]
 
   return (
     <TableCell>
@@ -110,7 +104,7 @@ const SortedColumn = ({
       >
         <Filter onClear={() => {
           setFilterAnchorEl(null)
-          onFilter(type in emptyValues ? emptyValues[type] : '')
+          onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')
         }}
         onChange={onFilter}
         placeholder={placeholder}
