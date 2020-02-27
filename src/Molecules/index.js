@@ -1,3 +1,6 @@
+import * as locales from './locales'
+
+export { locales }
 export { default as Pagination } from './Pagination'
 export {
   default as FormControl,

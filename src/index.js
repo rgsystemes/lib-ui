@@ -1,3 +1,6 @@
+import * as locales from './locales'
+export { locales }
+
 export { Button } from './Atoms'
 export { Pagination } from './Molecules'
 export { Input } from './Atoms'

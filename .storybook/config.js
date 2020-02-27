@@ -9,18 +9,18 @@ import { withThemesProvider } from 'storybook-addon-styled-component-theme'
 import { ThemeProvider } from '@material-ui/core/styles'
 
 import { MuiPickersUtilsProvider } from '../src/Atoms/DateTimePicker'
-import { TransProvider } from '../src/Atoms/Trans'
 import results from '../.jest-test-results.json'
 import { muiRg6Theme } from './themes'
 import { rg6, dark } from '../src/themes'
-import { en } from './locales'
+import LangSwitcher from './LangSwitcher'
+import { locales } from '../src'
 
 addDecorator(withKnobs)
 addDecorator(withA11y)
 addDecorator(withThemesProvider([rg6, dark]))
 addDecorator(withTests({ results }))
-addDecorator(storyFn => <TransProvider value={en}>{storyFn()}</TransProvider>)
 addDecorator(storyFn => <ThemeProvider theme={muiRg6Theme}>{storyFn()}</ThemeProvider>)
 addDecorator(storyFn => <MuiPickersUtilsProvider utils={util} locale={fr}>{storyFn()}</MuiPickersUtilsProvider>)
+addDecorator(storyFn => <LangSwitcher langs={locales}>{storyFn()}</LangSwitcher>)
 // automatically import all files ending in *.stories.jsx
 configure(require.context('../src', true, /\.stories\.jsx$/), module)
