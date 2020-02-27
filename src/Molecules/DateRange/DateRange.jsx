@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useTranslation } from '../../Atoms/Trans'
 import DateTimePicker from '../../Atoms/DateTimePicker'
 import FlexBox from '../../Templates/FlexBox'
 
@@ -17,11 +18,14 @@ const DateRange = ({
   value,
   onChange,
   onBlur = () => {},
-  startLabel,
-  endLabel,
   ...props
 }) => {
+  const t = useTranslation()
   const { start = new Date(), end = new Date() } = value || {}
+  const {
+    startLabel = t('molecules.dateRange.startDate'),
+    endLabel = t('molecules.dateRange.endDate'),
+  } = props
 
   return (
     <FlexBox gap={1}>
