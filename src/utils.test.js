@@ -1,11 +1,12 @@
+/* eslint-disable max-lines */
 import { pipe, groupBy } from './utils'
 
 describe('pipe', () => {
-  it('composes functions from left to right', () => {
-    const multiply = x => y => y * x
-    const add = x => y => y + x
-    const pow = x => y => y ** x
+  const multiply = x => y => y * x
+  const add = x => y => y + x
+  const pow = x => y => y ** x
 
+  it('composes functions from left to right', () => {
     const doubleIncrementSquare = pipe(
       multiply(2),
       add(1),
@@ -16,9 +17,32 @@ describe('pipe', () => {
       add(1),
       multiply(2),
     )
-
     expect(doubleIncrementSquare(5)).toBe(((5 * 2) + 1) ** 2) // 121
     expect(squareIncrementDouble(5)).toBe(((5 ** 2) + 1) * 2) // 52
+  })
+
+  it('enhances readability', () => {
+    // operations will be performed in the order they appear in the pipe
+    const doubleIncrementSquare = pipe(multiply(2), add(1), pow(2))
+
+    // unlike here where you need to read from right to left
+    const _doubleIncrementSquare = x => pow(2)(add(1)(multiply(2)(x)))
+
+    expect(doubleIncrementSquare(5)).toEqual(_doubleIncrementSquare(5))
+  })
+
+  it('allows easy optimizations', () => {
+    const inputs = [5, 10, 15, 20]
+
+    expect(inputs.map(pipe( // map only once
+      multiply(2),
+      add(1),
+      pow(2),
+    ))).toEqual(inputs // instead of three times
+      .map(multiply(2))
+      .map(add(1))
+      .map(pow(2)),
+    )
   })
 })
 
