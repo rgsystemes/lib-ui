@@ -25,20 +25,15 @@ const Filter = ({
   translationKey,
   onChange: onChangeProp = () => {},
   value: valueProp,
-  startLabelKey,
-  endLabelKey,
   ...props
 }) => {
   const [value, setValue] = useState(valueProp)
   const onChange = () => value !== valueProp && onChangeProp(value)
-  const t = useTranslation()
 
   if (type === 'date') {
     return <DateRange
       value={value}
       onChange={setValue}
-      startLabel={t(startLabelKey)}
-      endLabel={t(endLabelKey)}
       onBlur={() => onChange(value)}
       {...props}
     />
@@ -46,7 +41,7 @@ const Filter = ({
 
   return <FormControl>
     <InputLabel>
-      <Trans>{translationKey}</Trans>
+      {translationKey}
       <InnerInput
         value={value}
         onChange={setValue}

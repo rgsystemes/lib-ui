@@ -88,8 +88,6 @@ const SortedColumn = ({
   onFilter = () => {},
   Filter = BaseFilter,
   filter,
-  startLabelKey,
-  endLabelKey,
 }) => {
   const order = computeOrder(sort)
   const [filterAnchorEl, setFilterAnchorEl] = useState(null)
@@ -112,8 +110,6 @@ const SortedColumn = ({
         name={name}
         type={type}
         options={options}
-        startLabelKey={startLabelKey}
-        endLabelKey={endLabelKey}
         translationKey={translationKey}
         />
       </Popover>

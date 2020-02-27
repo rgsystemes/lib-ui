@@ -178,8 +178,6 @@ const initialColumns = [
     translationKey: 'Age',
     description:    'Age of the dude',
     type:           'date',
-    startLabelKey:  'global.filter.startDate',
-    endLabelKey:    'global.filter.endDate',
   },
   { name: 'eyeColor', translationKey: 'Eye color', description: 'Eye color of the dude' },
   {
