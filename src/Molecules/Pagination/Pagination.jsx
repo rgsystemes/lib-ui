@@ -45,10 +45,10 @@ const Pagination = ({
       )}
     </Menu>
     <ButtonGroup size="small">
-      <Button data-testid='first' onClick={() => onPageChange(1)} disabled={disabledFirst}>«</Button>
-      <Button data-testid='prev' onClick={() => onPageChange(currentPage - 1)} disabled={disabledPrevious}>‹</Button>
+      <Button data-testid="first" onClick={() => onPageChange(1)} disabled={disabledFirst}>«</Button>
+      <Button data-testid="prev" onClick={() => onPageChange(currentPage - 1)} disabled={disabledPrevious}>‹</Button>
       <Button data-testid="select" onClick={event => setAnchorEl(event.currentTarget)}>{label}</Button>
-      <Button data-testid='next' onClick={() => onPageChange(currentPage + 1)} disabled={disabledNext}>›</Button>
+      <Button data-testid="next" onClick={() => onPageChange(currentPage + 1)} disabled={disabledNext}>›</Button>
     </ButtonGroup>
   </>
 }

@@ -10,13 +10,7 @@ import FormControl, { InputLabel } from '../../Molecules/FormControl'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
 import Typo from '../../Atoms/Typo'
-
-const Container = styled.div`
-  min-width: 200px;
-  .MuiFormControl-root {
-    ${css({ px: 'l', py: 'm' })};
-  }
-`
+import FlexBox from '../../Templates/FlexBox'
 
 const Clear = styled.span`
   display: flex;
@@ -41,16 +35,13 @@ const Filter = ({
       value={value}
       onChange={setValue}
       onBlur={() => onChange(value)}
-      variant="static"
       {...props}
     />
   }
 
   return <FormControl>
     <InputLabel>
-      <Trans>
-        {translationKey}
-      </Trans>
+      {translationKey}
       <InnerInput
         value={value}
         onChange={setValue}
@@ -92,7 +83,7 @@ const InnerInput = ({
 }
 
 const FilterWrapper = ({ children, onClear, ...props }) =>
-  <Container>
+  <FlexBox minWidth="200px" flexDirection="column" px={2} py={1}>
     <Filter {...props}/>
     <Clear onClick={onClear}>
       <Icon Component={Trash} size="small"/>
@@ -100,6 +91,6 @@ const FilterWrapper = ({ children, onClear, ...props }) =>
         <Trans>global.action.remove</Trans>
       </Typo>
     </Clear>
-  </Container>
+  </FlexBox>
 
 export default FilterWrapper

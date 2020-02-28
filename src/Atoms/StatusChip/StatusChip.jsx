@@ -12,18 +12,18 @@ const VALID_STATUS = [
 
 const StatusChip = ({ status = '', ...props }) => (
   <Box
-    boxSizing='border-box'
-    display='inline-flex'
-    alignItems='center'
-    fontSize='caption.fontSize'
+    boxSizing="border-box"
+    display="inline-flex"
+    alignItems="center"
+    fontSize="caption.fontSize"
     borderRadius={10}
     color={
       VALID_STATUS.includes(status) ? `${status}.contrastText` :
       'black'
     }
     px={1}
-    minWidth='18px'
-    minHeight='18px'
+    minWidth="18px"
+    minHeight="18px"
     bgcolor={
       VALID_STATUS.includes(status) ? `${status}.main` :
       'grey.500'

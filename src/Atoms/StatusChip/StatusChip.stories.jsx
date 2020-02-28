@@ -20,14 +20,14 @@ const STATUS = [
 ]
 
 export const statusChip = () => (
-  <Box fontFamily='fontFamily'>
+  <Box fontFamily="fontFamily">
     <h2>Status chip</h2>
-    <Box display='flex' flexDirection='column'>
+    <Box display="flex" flexDirection="column">
       {STATUS.map(status => (
-        <Box display='flex' mb={1} justifyContent='space-between' width='250px'>
-          <Box display='flex' alignItems='center' flex={10}>status {status}: </Box>
-          <Box display='flex' alignItems='center' flex={2}><StatusChip status={status} /></Box>
-          <Box display='flex' alignItems='center' flex={10}><StatusChip status={status}>With text</StatusChip></Box>
+        <Box display="flex" mb={1} justifyContent="space-between" width="250px">
+          <Box display="flex" alignItems="center" flex={10}>status {status}: </Box>
+          <Box display="flex" alignItems="center" flex={2}><StatusChip status={status} /></Box>
+          <Box display="flex" alignItems="center" flex={10}><StatusChip status={status}>With text</StatusChip></Box>
         </Box>
       ))}
     </Box>

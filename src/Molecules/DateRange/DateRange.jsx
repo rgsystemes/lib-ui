@@ -1,15 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 
+import { useTranslation } from '../../Atoms/Trans'
 import DateTimePicker from '../../Atoms/DateTimePicker'
+import FlexBox from '../../Templates/FlexBox'
 
-import useOnClickOutside from '../../hooks/useOnClickOutside.js'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
+// We have to do that because maxDate and minDate
+// don't take time into account
 const onStartChange = (start, end) =>
   start > end ? ({ start, end: start }) :
   ({ start, end })
@@ -18,25 +14,39 @@ const onEndChange = (start, end) =>
   start > end ? ({ start: end, end }) :
   ({ start, end })
 
-const DateRange = ({ value, onChange, onBlur = () => {}, ...props }) => {
+const DateRange = ({
+  value,
+  onChange,
+  onBlur = () => {},
+  ...props
+}) => {
+  const t = useTranslation()
   const { start = new Date(), end = new Date() } = value || {}
-  const ref = useOnClickOutside(onBlur)
+  const {
+    startLabel = t('molecules.dateRange.startDate'),
+    endLabel = t('molecules.dateRange.endDate'),
+  } = props
 
-  return <Container ref={ref}>
-    <DateTimePicker
-      data-testid="date-range-start"
-      value={start}
-      onChange={start => onChange(onStartChange(start, end))}
-      {...props}
-    />
-    <DateTimePicker
-      data-testid="date-range-end"
-      value={end}
-      minDate={start}
-      onChange={end => onChange(onEndChange(start, end))}
-      {...props}
-    />
-  </Container>
+  return (
+    <FlexBox gap={1}>
+      <DateTimePicker
+        value={start}
+        maxDate={end}
+        label={startLabel}
+        onBlur={onBlur}
+        onChange={start => onChange(onStartChange(start, end))}
+        {...props}
+      />
+      <DateTimePicker
+        value={end}
+        minDate={start}
+        label={endLabel}
+        onBlur={onBlur}
+        onChange={end => onChange(onEndChange(start, end))}
+        {...props}
+      />
+    </FlexBox>
+  )
 }
 
 export default DateRange

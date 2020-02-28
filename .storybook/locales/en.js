@@ -1,4 +1,10 @@
 export default {
+  molecules: {
+    dateRange: {
+      startDate: 'Start date',
+      endDate: 'End date',
+    },
+  },
   global: {
     dateFormat: 'dd/MM/yyyy hh:mm',
     no_results: 'No results found',

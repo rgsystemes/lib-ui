@@ -12,6 +12,7 @@ import Typo from '../../Atoms/Typo'
 import Trans, { useTranslation } from '../../Atoms/Trans'
 import BasePagination from '../../Molecules/Pagination'
 import BaseExport from '../../Molecules/Export'
+import { constants as filterConstants } from '../../Molecules/Filter'
 import BaseEditColumns from './EditColumns'
 import Popover from '../../Atoms/Popover'
 import Tooltip from '../../Atoms/Tooltip'
@@ -21,6 +22,7 @@ import Input from '../../Atoms/Input'
 import InputAdornment from '../../Atoms/Input/InputAdornment'
 
 import TableList from '../../Molecules/TableList'
+const { EMPTY_VALUES } = filterConstants
 
 const Toolbar = styled.div`
   display: flex;
@@ -51,8 +53,14 @@ const Clear = styled.span`
   ${css({ px: 'm' })};
 `
 
-const ClearFilters = ({ filters = {}, onClear = () => {}, ...props }) =>
-  Object.values(filters).filter(Boolean).length > 0 &&
+const isFiltered = (filter, column) => (
+  filter != null &&
+  filter !== '' &&
+  filter !== EMPTY_VALUES[column.type]
+)
+
+const ClearFilters = ({ filters = {}, onClear = () => {}, columns = [] }) =>
+  columns.some(column => isFiltered(filters[column.name], column)) &&
   <Clear onClick={() => onClear({})}>
     <Icon Component={Trash} size="small"/>
     <Typo color="grey">
@@ -96,7 +104,7 @@ const EnhancedList = ({
           />
         }
       </SearchWrapper>
-      <ClearFilters filters={filters} onClear={onFilter} />
+      <ClearFilters filters={filters} onClear={onFilter} columns={columns} />
       <div>
         <ActionGroup size="small">
           {onAdd != null &&
