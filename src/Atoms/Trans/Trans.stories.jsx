@@ -16,12 +16,12 @@ const LocalWrapper = ({ translations = {}, ...props }) => {
   return <TransProvider value={translations[lang]} {...props} />
 }
 
-const Value = () => <div><b>scope</b>: <Trans>scope</Trans></div>
+const TransWrapper = ({ transKey }) => <div><b>{transKey}</b>: <Trans>{transKey}</Trans></div>
 
 const FirstChild = () => (
   <FlexBox flexDirection="column" gap={0.5} bgcolor="rgba(0, 0, 255, 0.1)" p={2}>
     <LocalWrapper translations={{ en: { scope: 'first child' }, fr: { value: 'premier enfant' } }}>
-      <Value />
+      <TransWrapper transKey="scope" />
     </LocalWrapper>
   </FlexBox>
 )
@@ -32,9 +32,9 @@ const SecondChild = () => (
       en: { scope: 'second child', local: { value: 'some specific local value can be declared' } },
       fr: { scope: 'deuxième enfant', local: { value: 'une valeur locale peut être déclarée' } },
     }}>
-      <Value />
-      <div><b>local.value</b>: <Trans>local.value</Trans></div>
-      <div><b>keep</b>: <Trans>keep</Trans></div>
+      <TransWrapper transKey="scope" />
+      <TransWrapper transKey="local.value" />
+      <TransWrapper transKey="keep" />
     </LocalWrapper>
   </FlexBox>
 )
@@ -45,20 +45,21 @@ export const trans = () => <>
       en: {
         scope:    'parent',
         keep:     'not overridden value still reachable',
-        outscope: 'isn\'t accessible from outside it\'s scope so fallback is used',
+        outscope: 'Not accessible from outside it\'s scope so fallback is used',
       },
       fr: {
         scope:    'parent',
         keep:     'valeur non surchargée toujours accessibles',
-        outscope: 'n\'est pas accessible en dehors de son scope le fallback est donc utilisé',
+        outscope: 'Non accessible en dehors de son scope le fallback est donc utilisé',
       },
     }}>
-      <Value />
+      <TransWrapper transKey="scope" />
       <FirstChild />
       <SecondChild />
-      <Value />
-      <div><b>keep</b>: <Trans>keep</Trans></div>
-      <div><b><Trans>local.value</Trans></b> <Trans>outscope</Trans></div>
+      <TransWrapper transKey="scope" />
+      <TransWrapper transKey="keep" />
+      <Trans>outscope</Trans>
+      <TransWrapper transKey="local.value" />
     </LocalWrapper>
   </FlexBox>
 </>
