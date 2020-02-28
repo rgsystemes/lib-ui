@@ -19,7 +19,7 @@ export const flexBox = () => {
   const direction = select('Flex direction', directions, 'column')
 
   return (
-    <FlexBox flexDirection={direction} gap={gap} p={padding} border='1px solid black'>
+    <FlexBox flexDirection={direction} gap={gap} p={padding} border="1px solid black">
       <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
       <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
       <FlexBox flexGrow={1} minWidth={300} minHeight={200} bgcolor="grey.300"/>
