@@ -1,6 +1,7 @@
 import { fr as molecules } from '../Molecules/locales'
 
 const locale = {
+  lang:   'fr',
   molecules,
   global: {
     dateFormat: 'dd/MM/yyyy hh:mm',

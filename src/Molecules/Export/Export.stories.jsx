@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
-import {  } from '@storybook/addon-knobs'
 
 import Export from './index'
 import FormControl, { FormLabel, FormControlLabel } from '../../Molecules/FormControl'
 import Radio from '../../Atoms/Radio'
+import { TransProvider, useTranslation } from '../../Atoms/Trans'
 import RadioGroup from '@material-ui/core/RadioGroup'
 
 import markdown from './README.md'
@@ -23,57 +23,87 @@ const exportFormats = [
 ]
 
 const extraOptions = [
-  { label: 'Choose red pill', value: 'red' },
-  { label: 'Choose blue pill', value: 'blue' },
+  { label: 'extraOptions.redPill', value: 'red' },
+  { label: 'extraOptions.bluePill', value: 'blue' },
 ]
 
-const ExtraOptions = ({ value, onChange }) =>
-  <FormControl component="fieldset">
-    <FormLabel component="legend">
-      Extra option
-    </FormLabel>
-    <RadioGroup
-      aria-label="exportScope"
-      name="extraOption"
-      value={value}
-      onChange={event => {
-        onChange(event.target.value)
-        action('extra option changed')(event.target.value)
-      }}
-    >
-      {extraOptions.map(({ label, value }) =>
-        <FormControlLabel
-          key={value}
-          value={value}
-          control={<Radio />}
-          label={label}
-        />,
-      )}
-    </RadioGroup>
-  </FormControl>
+const ExtraOptions = ({ value, onChange }) => {
+  const t = useTranslation()
+  return (
+    <FormControl component="fieldset">
+      <FormLabel component="legend">{t('extraOptions.label')}</FormLabel>
+      <RadioGroup
+        aria-label="exportScope"
+        name="extraOption"
+        value={value}
+        onChange={event => {
+          onChange(event.target.value)
+          action('extra option changed')(event.target.value)
+        }}
+      >
+        {extraOptions.map(({ label, value }) =>
+          <FormControlLabel
+            key={value}
+            value={value}
+            control={<Radio />}
+            label={t(label)}
+          />,
+        )}
+      </RadioGroup>
+    </FormControl>
+  )
+}
+
+const customLocales = {
+  en: {
+    extraOptions: {
+      label:    'Extra option',
+      redPill:  'Choose red pill',
+      bluePill: 'Choose blue pill',
+    },
+  },
+  fr: {
+    extraOptions: {
+      label:    'Option supplémentaire',
+      redPill:  'Prendre la pilule rouge',
+      bluePill: 'prendre la pilule bleue',
+    },
+  },
+}
+
+const Wrapper = ({ ...props }) => {
+  const t = useTranslation()
+  const lang = t('lang')
+
+  return <TransProvider value={customLocales[lang]} {...props} />
+}
 
 export const exportStory = () => {
   const [value, setValue] = useState({ format: '' })
 
-  return <Export
-    value={value}
-    disabled={value.extraOption == null}
-    onChange={newValue => {
-      setValue({ ...value, ...newValue })
-      action('export value changed')(newValue)
-    }}
-    onClose={action('export canceled')}
-    onExport={action('export launched')}
-    formats={exportFormats}
-    extraOptions={
-      <ExtraOptions
-        value={value.extraOption}
-        onChange={extraOption => {
-          setValue({ ...value, extraOption })
+  return (
+    <Wrapper>
+      <Export
+        value={value}
+        disabled={value.extraOption == null}
+        onChange={newValue => {
+          setValue({ ...value, ...newValue })
+          action('export value changed')(newValue)
         }}
+        onClose={action('export canceled')}
+        onExport={action('export launched')}
+        formats={exportFormats}
+        extraOptions={
+          <ExtraOptions
+            value={value.extraOption}
+            onChange={extraOption => {
+              setValue({ ...value, extraOption })
+            }}
+          />
+        }
       />
-    }
-  />
+    </Wrapper>
+  )
 }
 
 exportStory.story = {
