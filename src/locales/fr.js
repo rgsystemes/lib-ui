@@ -17,14 +17,6 @@ const locale = {
     pagination: {
       perPage: '%count% par page',
     },
-    export: {
-      title:           'Export',
-      description:     'Vous recevrez un email contenant un lien vers l\'export',
-      filename:        'Nom du fichier',
-      defaultFilename: 'Mon export',
-      format:          'Format de fichier',
-      actionExport:    'Exporter',
-    },
     editColumns: {
       title:           'Edition des colonnes',
       description:     'Vous pouvez afficher/cacher les colonnes ou changer l\'ordre des colonnes',

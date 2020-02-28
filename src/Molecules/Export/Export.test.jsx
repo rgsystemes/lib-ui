@@ -29,7 +29,7 @@ it('should not call onExport when the filename is empty', () => {
     <Export value={{ filename: '' }} onExport={onExport}/>,
   )
 
-  userEvent.click(getByText('global.export.actionExport'))
+  userEvent.click(getByText('molecules.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
@@ -40,7 +40,7 @@ it('should not call onExport when the format is empty', () => {
     <Export value={{ format: '' }} formats={exportFormats} onExport={onExport}/>,
   )
 
-  userEvent.click(getByText('global.export.actionExport'))
+  userEvent.click(getByText('molecules.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
@@ -51,7 +51,7 @@ it('should call onExport when the filename and format are filled', () => {
     <Export onExport={onExport} formats={exportFormats} value={{ filename: 'toto', format: 'xls' }}/>,
   )
 
-  userEvent.click(getByText('global.export.actionExport'))
+  userEvent.click(getByText('molecules.export.actionExport'))
 
   expect(onExport).toHaveBeenCalled()
 })
@@ -67,7 +67,7 @@ it('should call onExport when filename and format are filled in but disabled is 
     />,
   )
 
-  userEvent.click(getByText('global.export.actionExport'))
+  userEvent.click(getByText('molecules.export.actionExport'))
 
   expect(onExport).toHaveBeenCalledTimes(0)
 })
@@ -83,8 +83,8 @@ it('should call onChange when filename has changed', async () => {
 
   const { getByLabelText } = render(<Wrapper formats={exportFormats} />)
 
-  fireEvent.change(getByLabelText(/global\.export\.filename/), { target: { value: 'test' } })
-  userEvent.selectOptions(getByLabelText(/global\.export\.format/), 'json')
+  fireEvent.change(getByLabelText(/molecules\.export\.filename/), { target: { value: 'test' } })
+  userEvent.selectOptions(getByLabelText(/molecules\.export\.format/), 'json')
 
   expect(onChange).toHaveBeenNthCalledWith(1, { filename: 'test', format: 'xls' })
   expect(onChange).toHaveBeenNthCalledWith(2, { filename: 'test', format: 'json' })

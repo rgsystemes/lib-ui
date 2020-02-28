@@ -115,7 +115,7 @@ const EnhancedList = ({
         </ActionGroup>
         <ActionGroup size="small">
           {!!Export &&
-            <Tooltip title={t('global.export.title')}>
+            <Tooltip title={t('molecules.export.title')}>
               <Icon button Component={Download} onClick={event => setExportAnchorEl(event.currentTarget)} />
             </Tooltip>
           }

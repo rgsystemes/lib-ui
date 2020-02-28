@@ -20,12 +20,12 @@ const Actions = ({ onClose, onExport, disabled }) => <>
     <Trans transKey="global.action.cancel"/>
   </Button>
   <Button color="success" onClick={onExport} size="small" disabled={disabled}>
-    <Trans transKey="global.export.actionExport"/>
+    <Trans transKey="molecules.export.actionExport"/>
   </Button>
 </>
 
 const Export = ({
-  descriptionText = <Trans transKey="global.export.description"/>,
+  descriptionText = <Trans transKey="molecules.export.description"/>,
   onExport = () => {},
   value = {},
   onChange = () => {},
@@ -36,7 +36,7 @@ const Export = ({
   ...props
 }) => {
   const t = useTranslation()
-  const { defaultName = t('global.export.defaultFilename') } = props
+  const { defaultName = t('molecules.export.defaultFilename') } = props
   const { format = '', filename = defaultName } = value
   const onFileNameChange = event => onChange({ filename: event.target.value, format })
 
@@ -45,13 +45,13 @@ const Export = ({
       <FlexBox alignItems='center' mb={2} >
         <Box component={Download} size={20} color="primary.main" />
         <Box component='h2' ml={0.5} my={0} fontSize="fontSizes.title" fontFamily="fontFamily" color="primary.main">
-          <Trans transKey="global.export.title" />
+          <Trans transKey="molecules.export.title" />
         </Box>
       </FlexBox>
       <Typo>{descriptionText}</Typo>
       <FormControl>
         <InputLabel>
-          <Trans transKey="global.export.filename" />
+          <Trans transKey="molecules.export.filename" />
           <Input value={filename} onChange={onFileNameChange} />
         </InputLabel>
       </FormControl>

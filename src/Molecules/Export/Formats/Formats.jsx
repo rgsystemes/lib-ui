@@ -9,7 +9,7 @@ const Formats = ({ formats, value, onChange }) =>
   formats.length > 0 &&
   <FormControl>
     <InputLabel>
-      <Trans transKey="global.export.format.label"/>
+      <Trans transKey="molecules.export.format.label"/>
       <Select value={value} onChange={event => onChange(event.target.value)}>
         {formats.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
       </Select>
