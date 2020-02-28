@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { pipe, groupBy } from './utils'
+import { pipe, groupBy, deepMerge } from './utils'
 
 describe('pipe', () => {
   const multiply = x => y => y * x
@@ -97,6 +97,38 @@ describe('groupBy', () => {
         { darkSide: false, saberColor: 'blue', name: 'Obi Wan' },
         { darkSide: false, saberColor: 'blue', name: 'Luke Skywalker' },
       ]),
+    })
+  })
+})
+
+// eslint-disable-next-line max-lines-per-function
+describe('deepMerge', () => {
+  it('groups objects by values of a given key', () => {
+    const source = {
+      override: {
+        key:  'source',
+        keep: true,
+      },
+      keep: true,
+    }
+    const override = {
+      override: {
+        key: 'override',
+        add: true,
+      },
+      add: true,
+    }
+
+    const result = deepMerge(source, override)
+
+    expect(result).toEqual({
+      override: {
+        key:  'override',
+        keep: true,
+        add:  true,
+      },
+      keep: true,
+      add:  true,
     })
   })
 })
