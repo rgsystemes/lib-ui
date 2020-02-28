@@ -9,7 +9,7 @@ export default {
   title: 'Atoms/Trans',
 }
 
-export const LocalWrapper = ({ translations = {}, ...props }) => {
+const LocalWrapper = ({ translations = {}, ...props }) => {
   const t = useTranslation()
   const lang = t('lang')
 
