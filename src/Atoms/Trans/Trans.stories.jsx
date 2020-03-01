@@ -16,7 +16,7 @@ const LocalWrapper = ({ translations = {}, ...props }) => {
   return <TransProvider value={translations[lang]} {...props} />
 }
 
-const TransWrapper = ({ transKey }) => <div><b>{transKey}</b>: <Trans>{transKey}</Trans></div>
+const TransWrapper = ({ transKey, ...props }) => <div><b>{transKey}</b>: <Trans {...props}>{transKey}</Trans></div>
 
 const FirstChild = () => (
   <FlexBox flexDirection="column" gap={0.5} bgcolor="rgba(0, 0, 255, 0.1)" p={2}>
@@ -43,16 +43,19 @@ export const trans = () => <>
   <FlexBox flexDirection="column" gap={2} bgcolor="rgba(0, 0, 0, 0.1)" p={2}>
     <LocalWrapper translations={{
       en: {
-        scope:    'parent',
-        keep:     'not overridden value still reachable',
-        outscope: 'Not accessible from outside it\'s scope so fallback is used',
+        scope:      'parent',
+        keep:       'not overridden value still reachable',
+        outscope:   'Not accessible from outside it\'s scope so fallback is used',
+        JSXReplace: 'JSX can be used in %variables%',
       },
       fr: {
-        scope:    'parent',
-        keep:     'valeur non surchargée toujours accessibles',
-        outscope: 'Non accessible en dehors de son scope le fallback est donc utilisé',
+        scope:      'parent',
+        keep:       'valeur non surchargée toujours accessibles',
+        outscope:   'Non accessible en dehors de son scope le fallback est donc utilisé',
+        JSXReplace: 'Du JSX peut être utilisé dans les %variables%',
       },
     }}>
+      <TransWrapper transKey="JSXReplace" variables={<span style={{ color: 'red', fontWeight: 'bold' }}>variables</span>} />
       <TransWrapper transKey="scope" />
       <FirstChild />
       <SecondChild />

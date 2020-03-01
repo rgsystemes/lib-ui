@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react'
+import React, { createContext, useContext, useMemo, Fragment } from 'react'
 import { deepMerge } from '../../utils'
 const Context = createContext()
 const { Provider: BaseProvider } = Context
@@ -17,18 +17,35 @@ export default () => {
   const translations = useContext(Context) || {}
 
   return (transKey = '', parameters = {}) => {
-    console.info(transKey.split('.'), translations)
-    let translated = transKey
-      .split('.')
-      .reduce(
-        (acc, k) => acc[k] || transKey,
-        translations,
-      )
+    const translation = transKey.split('.').reduce(
+      (acc, k) => acc[k] || transKey,
+      translations,
+    )
 
-    Object.entries(parameters).forEach(([key, value]) => {
-      translated = translated.replace(new RegExp(`%${key}%`, 'g'), value)
-    })
+    const params = Object.entries(parameters)
+    const children = params.length ? replace(translation, params) : [translation]
 
-    return translated
+    return (
+      !children.some(child => typeof child === 'object') ? children.join('') :
+      React.createElement(Fragment, null, ...children)
+    )
   }
+}
+
+export const replace = (str, parameters) => {
+  const mapReplace = parameters.reduce(
+    (acc, [k, v]) => Object.assign(acc, { [`%${k}%`]: v }),
+    {},
+  )
+  const re = new RegExp(Object.keys(mapReplace).join('|'), 'g')
+
+  const children = []
+  let match
+  let lastIndex = 0
+  while ((match = re.exec(str)) != null) {
+    children.push(str.slice(lastIndex, match.index))
+    children.push(mapReplace[match[0]])
+    lastIndex = re.lastIndex
+  }
+  return children
 }
