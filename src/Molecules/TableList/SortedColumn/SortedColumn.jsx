@@ -104,7 +104,10 @@ const SortedColumn = ({
           setFilterAnchorEl(null)
           onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')
         }}
-        onChange={onFilter}
+        onChange={value => {
+          setFilterAnchorEl(null)
+          onFilter(value)
+        }}
         placeholder={placeholder}
         value={filter}
         name={name}

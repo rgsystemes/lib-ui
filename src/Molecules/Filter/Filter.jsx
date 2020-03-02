@@ -1,56 +1,61 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { css } from '@styled-system/css'
 
-import Icon from '../../Atoms/Icon'
 import { Trash } from 'styled-icons/boxicons-solid/Trash'
+import { Check } from 'styled-icons/material/Check'
+import Divider from '@material-ui/core/Divider'
+
 import DateRange from '../../Molecules/DateRange'
 import Trans, { useTranslation } from '../../Atoms/Trans'
 import FormControl, { InputLabel } from '../../Molecules/FormControl'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
-import Typo from '../../Atoms/Typo'
 import FlexBox from '../../Templates/FlexBox'
 
-const Clear = styled.span`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border-top: 1px solid lightgrey;
-  ${css({ mt: 'm', px: 'l', py: 'm' })};
-`
+const Action = props => <FlexBox
+  css={{ cursor: 'pointer' }}
+  fontSize="fontSize"
+  fontFamily="fontFamily"
+  component="button"
+  alignItems="center"
+  border="none"
+  color="grey.600"
+  bgcolor="white"
+  gap={0.5}
+  p={1}
+  {...props}
+/>
 
 const Filter = ({
   type,
   translationKey,
-  onChange: onChangeProp = () => {},
-  value: valueProp,
+  setValue = () => {},
+  onChange,
+  value,
   ...props
 }) => {
-  const [value, setValue] = useState(valueProp)
-  const onChange = () => value !== valueProp && onChangeProp(value)
-
-  if (type === 'date') {
-    return <DateRange
-      value={value}
-      onChange={setValue}
-      onBlur={() => onChange(value)}
-      {...props}
-    />
-  }
-
-  return <FormControl>
-    <InputLabel>
-      {translationKey}
-      <InnerInput
+  return (
+    type === 'date' ? (
+      <DateRange
         value={value}
         onChange={setValue}
-        onBlur={() => onChange(value)}
-        type={type}
+        onBlur={onChange}
         {...props}
       />
-    </InputLabel>
-  </FormControl>
+    ) : (
+      <FormControl>
+        <InputLabel>
+          {translationKey}
+          <InnerInput
+            value={value}
+            onChange={setValue}
+            onBlur={onChange}
+            type={type}
+            {...props}
+          />
+        </InputLabel>
+      </FormControl>
+    )
+  )
 }
 
 const InnerInput = ({
@@ -82,15 +87,31 @@ const InnerInput = ({
   )
 }
 
-const FilterWrapper = ({ children, onClear, ...props }) =>
-  <FlexBox minWidth="200px" flexDirection="column" px={2} py={1}>
-    <Filter {...props}/>
-    <Clear onClick={onClear}>
-      <Icon Component={Trash} size="small"/>
-      <Typo color="gray">
-        <Trans>global.action.remove</Trans>
-      </Typo>
-    </Clear>
-  </FlexBox>
+const FilterWrapper = ({
+  children,
+  onClear,
+  value: valueProp,
+  onChange: onChangeProp = () => {},
+  ...props
+}) => {
+  const [value, setValue] = useState(valueProp)
+  const onChange = () => value !== valueProp && onChangeProp(value)
+
+  return (
+    <FlexBox minWidth="200px" flexDirection="column" px={2} py={1} gap={1}>
+      <Filter value={value} setValue={setValue} onChange={onChange} {...props}/>
+      <Divider />
+      <FlexBox gap={1}>
+        <Action onClick={onClear}>
+          <Trash size={16} />
+          <span><Trans>global.action.remove</Trans></span>
+        </Action>
+        <Action onClick={onChange}>
+          <Check size={16} />
+        </Action>
+      </FlexBox>
+    </FlexBox>
+  )
+}
 
 export default FilterWrapper
