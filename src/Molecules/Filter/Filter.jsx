@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import { Filter as FilterIcon } from 'styled-icons/boxicons-regular/Filter'
 import { Trash } from 'styled-icons/boxicons-solid/Trash'
 import { Check } from 'styled-icons/material/Check'
 import Divider from '@material-ui/core/Divider'
+import Popover from '@material-ui/core/Popover'
 
 import DateRange from '../../Molecules/DateRange'
 import Trans, { useTranslation } from '../../Atoms/Trans'
@@ -29,7 +31,6 @@ const Filter = ({
   type,
   translationKey,
   setValue = () => {},
-  onChange,
   value,
   ...props
 }) => {
@@ -38,7 +39,6 @@ const Filter = ({
       <DateRange
         value={value}
         onChange={setValue}
-        onBlur={onChange}
         {...props}
       />
     ) : (
@@ -48,7 +48,6 @@ const Filter = ({
           <InnerInput
             value={value}
             onChange={setValue}
-            onBlur={onChange}
             type={type}
             {...props}
           />
@@ -89,35 +88,52 @@ const InnerInput = ({
 
 const FilterWrapper = ({
   children,
-  onClear,
+  onClear: onClearProp = () => {},
   value: valueProp,
   onChange: onChangeProp = () => {},
   ...props
 }) => {
   const [value, setValue] = useState(valueProp)
-  const onChange = () => value !== valueProp && onChangeProp(value)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const onChange = () => {
+    setAnchorEl(null)
+    value !== valueProp && onChangeProp(value)
+  }
+  const onClear = (...args) => {
+    setAnchorEl(null)
+    onClearProp(...args)
+  }
 
-  return (
+  return <>
     <FlexBox
-      onKeyPress={ev => ev.key === 'Enter' && onChange()}
-      minWidth="200px"
-      flexDirection="column"
-    >
-      <FlexBox p={2} flexDirection="column">
-        <Filter value={value} setValue={setValue} onChange={onChange} {...props}/>
+      color="grey.600"
+      pb={1}
+      component={FilterIcon}
+      onClick={ev => setAnchorEl(ev.currentTarget)}
+      size={16}
+    />
+    <Popover open={!!anchorEl} onClose={onChange} anchorEl={anchorEl}>
+      <FlexBox
+        onKeyPress={ev => ev.key === 'Enter' && onChange()}
+        minWidth="200px"
+        flexDirection="column"
+      >
+        <FlexBox p={2} flexDirection="column">
+          <Filter value={value} setValue={setValue} {...props}/>
+        </FlexBox>
+        <Divider />
+        <FlexBox gap={1} p={1} justifyContent="space-between">
+          <Action onClick={onClear}>
+            <Trash size={16} />
+            <span><Trans>global.action.remove</Trans></span>
+          </Action>
+          <Action onClick={onChange}>
+            <Check size={16} />
+          </Action>
+        </FlexBox>
       </FlexBox>
-      <Divider />
-      <FlexBox gap={1} p={1} justifyContent="space-between">
-        <Action onClick={onClear}>
-          <Trash size={16} />
-          <span><Trans>global.action.remove</Trans></span>
-        </Action>
-        <Action onClick={onChange}>
-          <Check size={16} />
-        </Action>
-      </FlexBox>
-    </FlexBox>
-  )
+    </Popover>
+  </>
 }
 
 export default FilterWrapper
