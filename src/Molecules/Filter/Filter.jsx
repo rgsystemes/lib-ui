@@ -102,11 +102,14 @@ const FilterWrapper = ({
       onKeyPress={ev => ev.key === 'Enter' && onChange()}
       minWidth="200px"
       flexDirection="column"
-      px={2} py={1} gap={1}
+      // px={2} py={1}
+      // gap={1}
     >
-      <Filter value={value} setValue={setValue} onChange={onChange} {...props}/>
+      <FlexBox p={2} flexDirection="column">
+        <Filter value={value} setValue={setValue} onChange={onChange} {...props}/>
+      </FlexBox>
       <Divider />
-      <FlexBox gap={1}>
+      <FlexBox gap={1} p={1} justifyContent="space-between">
         <Action onClick={onClear}>
           <Trash size={16} />
           <span><Trans>global.action.remove</Trans></span>
