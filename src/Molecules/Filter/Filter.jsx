@@ -98,7 +98,12 @@ const FilterWrapper = ({
   const onChange = () => value !== valueProp && onChangeProp(value)
 
   return (
-    <FlexBox minWidth="200px" flexDirection="column" px={2} py={1} gap={1}>
+    <FlexBox
+      onKeyPress={ev => ev.key === 'Enter' && onChange()}
+      minWidth="200px"
+      flexDirection="column"
+      px={2} py={1} gap={1}
+    >
       <Filter value={value} setValue={setValue} onChange={onChange} {...props}/>
       <Divider />
       <FlexBox gap={1}>
