@@ -36,10 +36,10 @@ export const TableList = ({
   onSort = null,
   filters = {},
   onFilter = () => {},
-  onSelect = () => {},
   Details = () => null,
-  selected,
   columns = [],
+  selected,
+  onSelect = () => {},
   sort,
   way,
   Cell = ({ children }) => <TableCell children={children || '-'} />,
@@ -80,9 +80,9 @@ export const TableList = ({
             <Row
               key={item.id}
               id={item.id}
-              selected={selected === item.id}
-              cols={columns.length}
+              selected={selected}
               onSelect={onSelect}
+              cols={columns.length}
               details={<Details { ...item }/>}
             >
               { columns.map(({ name }) => (

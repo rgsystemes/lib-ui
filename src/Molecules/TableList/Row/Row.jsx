@@ -37,23 +37,26 @@ const DetailsCell = styled(TableCell)`
 const Row = ({
   children,
   id,
-  selected = false,
   cols,
   details,
+  selected: selectedProp,
   onSelect = () => {},
   hover = true,
   ...props
-}) => <>
-  <TableRow
-    details={details}
-    selected={selected}
-    onClick={() => onSelect(selected ? null : id)}
-    hover={hover}
-    {...props}
-  >
-    { children }
-  </TableRow>
-  { !!details &&
+}) => {
+  const selected = (typeof selectedProp === 'object' && selectedProp != null) ? id in selectedProp && !!selectedProp[id] : selectedProp === id
+
+  return <>
+    <TableRow
+      details={details}
+      selected={selected}
+      onClick={() => onSelect(id)}
+      hover={hover}
+      {...props}
+    >
+      { children }
+    </TableRow>
+    { !!details &&
     <TableRow selected={selected}>
       <DetailsCell colSpan={ cols }>
         <AnimateHeight height={selected ? 'auto' : 0}>
@@ -63,7 +66,8 @@ const Row = ({
         </AnimateHeight>
       </DetailsCell>
     </TableRow>
-  }
-</>
+    }
+  </>
+}
 
 export default Row

@@ -149,7 +149,7 @@ const Details = ({ id }) => <Typo>
 export const tableList = () => {
   const [sort, setSort] = useState()
   const [way, setWay] = useState()
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState({})
 
   return <TableList
     data={data}
@@ -157,7 +157,7 @@ export const tableList = () => {
     way={way}
     sort={sort}
     selected={selected}
-    onSelect={setSelected}
+    onSelect={id => setSelected({ ...selected, [id]: !selected[id] })}
     Details={Details}
     onSort={(sortedColumn, sortedWay) => {
       setSort(sortedColumn)
