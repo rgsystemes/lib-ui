@@ -20,7 +20,7 @@ export default {
       perPage: '%count% per page',
     },
     action: {
-      remove: 'Supprimer',
+      remove: 'Clear',
     },
     export: {
       title: 'Export',
