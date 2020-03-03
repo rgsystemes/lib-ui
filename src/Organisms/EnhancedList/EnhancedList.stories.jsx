@@ -193,6 +193,7 @@ const initialColumns = [
     description:    'Whether the guy is a dude or a chick',
     type:           'select',
     options:        [
+      { label: 'Not specified', value: '' },
       { label: 'Male', value: 'm' },
       { label: 'Female', value: 'f' },
     ],

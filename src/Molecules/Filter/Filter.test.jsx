@@ -17,7 +17,7 @@ const Filter = props =>
 it('should call onChange on validate', async () => {
   const onChange = jest.fn()
 
-  const { getByLabelText } = render(
+  const { getByLabelText, getByText } = render(
     <Filter
       type="text"
       value=""
@@ -29,7 +29,7 @@ it('should call onChange on validate', async () => {
   userEvent.click(getByLabelText('open filter'))
 
   await userEvent.type(getByLabelText('Input'), 'Bonsoir')
-  userEvent.click(getByLabelText('validate filter'))
+  userEvent.click(getByText('global.filter.applyFilter'))
   expect(onChange).toBeCalledWith('Bonsoir')
 })
 
@@ -45,7 +45,7 @@ it('should call on clear when clicking on trash icon', () => {
 it('should call onChange only when value has changed', async () => {
   const onChange = jest.fn()
 
-  const { getByLabelText } = render(
+  const { getByLabelText, getByText } = render(
     <Filter
       type="text"
       value="Bonsoir"
@@ -57,6 +57,6 @@ it('should call onChange only when value has changed', async () => {
   userEvent.click(getByLabelText('open filter'))
   await userEvent.type(getByLabelText('Input'), 'Bonsoir')
 
-  userEvent.click(getByLabelText('validate filter'))
+  userEvent.click(getByText('global.filter.applyFilter'))
   expect(onChange).not.toBeCalled()
 })

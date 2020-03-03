@@ -129,8 +129,9 @@ const FilterWrapper = ({
             <Trash size={16} />
             <span><Trans>global.action.remove</Trans></span>
           </Action>
-          <Action onClick={onChange} aria-label="validate filter">
+          <Action onClick={onChange}>
             <Check size={16} />
+            <span><Trans>global.filter.applyFilter</Trans></span>
           </Action>
         </FlexBox>
       </FlexBox>
