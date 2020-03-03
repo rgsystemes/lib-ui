@@ -18,6 +18,7 @@ const DateRange = ({
   value,
   onChange,
   onBlur = () => {},
+  flexDirection = 'row',
   ...props
 }) => {
   const t = useTranslation()
@@ -28,7 +29,7 @@ const DateRange = ({
   } = props
 
   return (
-    <FlexBox gap={1}>
+    <FlexBox gap={1} flexDirection={flexDirection}>
       <DateTimePicker
         value={start}
         maxDate={end}
