@@ -54,6 +54,7 @@ const EditColumns = ({
         label={<Trans transKey="global.editColumns.enabledColumns"/>}
         columns={enabledColumns}
         onChange={onChange}
+        disabled={enabledColumns.length === 1}
         checked={true}
       />
     }

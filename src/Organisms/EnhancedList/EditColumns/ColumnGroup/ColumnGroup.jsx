@@ -19,6 +19,7 @@ const ColumnGroup = ({
   columns,
   onChange = () => {},
   checked,
+  disabled = false,
 }) => {
   const classes = useStyles()
 
@@ -27,9 +28,9 @@ const ColumnGroup = ({
     subheader={<ListSubheader disableSticky={true} classes={classes}>{label}</ListSubheader>}
   >
     {columns.map(({ name, translationKey, description }) =>
-      <ListItem button key={name} onClick={() => onChange(name)} classes={classes}>
+      <ListItem button key={name} onClick={() => !disabled && onChange(name)} classes={classes}>
         <ListItemIcon>
-          <Checkbox checked={checked} color="default" edge="start"/>
+          <Checkbox disabled={disabled} checked={checked} color="default" edge="start"/>
         </ListItemIcon>
         <ListItemText
           id={name}
