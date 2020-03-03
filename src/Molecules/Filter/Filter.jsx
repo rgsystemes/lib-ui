@@ -108,6 +108,7 @@ const FilterWrapper = ({
     <FlexBox
       color="grey.600"
       pb={1}
+      css={{ cursor: 'pointer' }}
       aria-label="open filter"
       component={FilterIcon}
       onClick={ev => setAnchorEl(ev.currentTarget)}
