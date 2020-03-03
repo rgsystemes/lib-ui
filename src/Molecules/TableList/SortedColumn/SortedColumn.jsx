@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { css } from '@styled-system/css'
-import Popover from '@material-ui/core/Popover'
 
 import { DownArrowAlt } from 'styled-icons/boxicons-regular/DownArrowAlt'
 import { UpArrowAlt } from 'styled-icons/boxicons-regular/UpArrowAlt'
 
-import { Filter as BaseFilterIcon } from 'styled-icons/boxicons-regular/Filter'
-
 import BaseFilter, { constants as filterConstants } from '../../../Molecules/Filter'
 import BaseTableCell from '../TableCell'
 import Typo from '../../../Atoms/Typo'
-import Icon from '../../../Atoms/Icon'
 
 const DESC = 0
 const ASC = 1
@@ -23,11 +19,9 @@ const TableCell = styled(BaseTableCell)`
   }
 `
 
-const IconWrapper = styled(Icon)`
-  display: flex;
+const IconWrapper = styled.div`
   opacity: ${({ filtered }) => filtered ? '1' : '0'};
-  ${css({ color: 'primary' })};
-
+  height: 24px;
   ${TableCell}:hover &  {
     opacity: ${({ disabled }) => disabled ? '0' : '1'};
   }
@@ -90,29 +84,10 @@ const SortedColumn = ({
   filter,
 }) => {
   const order = computeOrder(sort)
-  const [filterAnchorEl, setFilterAnchorEl] = useState(null)
   const filtered = filter != null && filter !== '' && filter !== EMPTY_VALUES[type]
 
   return (
     <TableCell>
-      <Popover
-        open={Boolean(filterAnchorEl)}
-        onClose={() => setFilterAnchorEl(null)}
-        anchorEl={filterAnchorEl}
-      >
-        <Filter onClear={() => {
-          setFilterAnchorEl(null)
-          onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')
-        }}
-        onChange={onFilter}
-        placeholder={placeholder}
-        value={filter}
-        name={name}
-        type={type}
-        options={options}
-        translationKey={translationKey}
-        />
-      </Popover>
       <CellWrapper>
         <Column
           as="strong"
@@ -126,14 +101,18 @@ const SortedColumn = ({
             </SortIcon>
           }
         </Column>
-        <IconWrapper
-          data-testid={`filter-column-${name}`}
-          disabled={!type}
-          Component={BaseFilterIcon}
-          onClick={event => setFilterAnchorEl(event.currentTarget)}
-          size="small"
-          filtered={filtered}
-        />
+        <IconWrapper data-testid={`filter-column-${name}`} filtered={filtered} disabled={!type}>
+          {type && <Filter
+            onClear={() => onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')}
+            onChange={onFilter}
+            placeholder={placeholder}
+            value={filter}
+            name={name}
+            type={type}
+            options={options}
+            translationKey={translationKey}
+          />}
+        </IconWrapper>
       </CellWrapper>
     </TableCell>
   )
