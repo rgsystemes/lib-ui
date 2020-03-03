@@ -10,17 +10,16 @@ export default {
     no_results: 'No results found',
     filter: {
       clearCurrent: 'Clear current filters',
+      applyFilter: 'Ok',
     },
     action: {
       chooseOption: 'Choose an option',
       cancel: 'Cancel',
       add: 'Add',
+      remove: 'Clear',
     },
     pagination: {
       perPage: '%count% per page',
-    },
-    action: {
-      remove: 'Clear',
     },
     export: {
       title: 'Export',
