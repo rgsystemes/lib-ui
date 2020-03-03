@@ -58,7 +58,7 @@ const Export = ({
       <Formats formats={formats} value={format} onChange={format => onChange({ filename, format })} />
       {extraOptions}
     </FlexBox>
-    <FlexBox justifyContent="space-between" borderColor="grey.100" borderTop={1} py={2} px={4} mt={2} >
+    <FlexBox justifyContent="space-between" borderColor="grey.100" borderTop={1} py={2} px={4}>
       <Actions
         onClose={onClose}
         onExport={onExport}
