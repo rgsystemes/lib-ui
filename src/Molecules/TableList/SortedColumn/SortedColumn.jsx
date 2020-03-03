@@ -21,7 +21,7 @@ const TableCell = styled(BaseTableCell)`
 
 const IconWrapper = styled.div`
   opacity: ${({ filtered }) => filtered ? '1' : '0'};
-
+  height: 24px;
   ${TableCell}:hover &  {
     opacity: ${({ disabled }) => disabled ? '0' : '1'};
   }
@@ -102,7 +102,7 @@ const SortedColumn = ({
           }
         </Column>
         <IconWrapper data-testid={`filter-column-${name}`} filtered={filtered} disabled={!type}>
-          <Filter
+          {type && <Filter
             onClear={() => onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')}
             onChange={onFilter}
             placeholder={placeholder}
@@ -111,7 +111,7 @@ const SortedColumn = ({
             type={type}
             options={options}
             translationKey={translationKey}
-          />
+          />}
         </IconWrapper>
       </CellWrapper>
     </TableCell>
