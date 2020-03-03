@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { TransProvider } from '../../Atoms/Trans'
@@ -14,7 +14,7 @@ const Filter = props =>
     </ThemeProvider>
   </TransProvider>
 
-it('should call onChange on blur', () => {
+it('should call onChange on validate', async () => {
   const onChange = jest.fn()
 
   const { getByLabelText } = render(
@@ -26,20 +26,23 @@ it('should call onChange on blur', () => {
     />,
   )
 
-  userEvent.type(getByLabelText('Input'), 'Bonsoir')
-  fireEvent.blur(getByLabelText('Input'))
+  userEvent.click(getByLabelText('open filter'))
+
+  await userEvent.type(getByLabelText('Input'), 'Bonsoir')
+  userEvent.click(getByLabelText('validate filter'))
   expect(onChange).toBeCalledWith('Bonsoir')
 })
 
 it('should call on clear when clicking on trash icon', () => {
   const onClear = jest.fn()
-  const { getByText } = render(<Filter onClear={onClear}/>)
+  const { getByText, getByLabelText } = render(<Filter onClear={onClear}/>)
 
+  userEvent.click(getByLabelText('open filter'))
   userEvent.click(getByText('global.action.remove'))
   expect(onClear).toHaveBeenCalled()
 })
 
-it('should call onChange only when value has changed', () => {
+it('should call onChange only when value has changed', async () => {
   const onChange = jest.fn()
 
   const { getByLabelText } = render(
@@ -51,7 +54,9 @@ it('should call onChange only when value has changed', () => {
     />,
   )
 
-  userEvent.type(getByLabelText('Input'), 'Bonsoir')
-  fireEvent.blur(getByLabelText('Input'))
+  userEvent.click(getByLabelText('open filter'))
+  await userEvent.type(getByLabelText('Input'), 'Bonsoir')
+
+  userEvent.click(getByLabelText('validate filter'))
   expect(onChange).not.toBeCalled()
 })

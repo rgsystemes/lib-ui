@@ -101,7 +101,7 @@ const SortedColumn = ({
             </SortIcon>
           }
         </Column>
-        <IconWrapper filtered={filtered} disabled={!type}>
+        <IconWrapper data-testid={`filter-column-${name}`} filtered={filtered} disabled={!type}>
           <Filter
             onClear={() => onFilter(type in EMPTY_VALUES ? EMPTY_VALUES[type] : '')}
             onChange={onFilter}

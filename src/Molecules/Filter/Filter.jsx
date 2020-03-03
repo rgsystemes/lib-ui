@@ -108,6 +108,7 @@ const FilterWrapper = ({
     <FlexBox
       color="grey.600"
       pb={1}
+      aria-label="open filter"
       component={FilterIcon}
       onClick={ev => setAnchorEl(ev.currentTarget)}
       size={16}
@@ -127,7 +128,7 @@ const FilterWrapper = ({
             <Trash size={16} />
             <span><Trans>global.action.remove</Trans></span>
           </Action>
-          <Action onClick={onChange}>
+          <Action onClick={onChange} aria-label="validate filter">
             <Check size={16} />
           </Action>
         </FlexBox>

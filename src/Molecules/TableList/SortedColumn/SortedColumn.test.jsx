@@ -24,7 +24,7 @@ it('should not show the filter icon when type is not defined', () => {
     </SortedColumn>,
   )
 
-  expect(queryByTestId('filter-column-fruit')).toBeDisabled()
+  expect(queryByTestId('filter-column-fruit')).not.toBeVisible()
 })
 
 it('should not show the sort icon when onSort is not defined', () => {
