@@ -13,39 +13,58 @@ export const Provider = ({ value, ...props }) => {
   return <BaseProvider value={merged} {...props} />
 }
 
-export default () => {
-  const translations = useContext(Context) || {}
+const preProcessor = ({ translations }) => (key = '') => (
+  key.split('.').reduce(
+    (acc, k) => (acc[k] || key),
+    translations,
+  )
+)
 
-  return (transKey = '', parameters = {}) => {
-    const translation = transKey.split('.').reduce(
-      (acc, k) => acc[k] || transKey,
-      translations,
-    )
-
-    const params = Object.entries(parameters)
-    const children = params.length ? replace(translation, params) : [translation]
-
-    return (
-      !children.some(child => typeof child === 'object') ? children.join('') :
-      React.createElement(Fragment, null, ...children)
-    )
+const processor = ({ translations = {}, ...context }) => {
+  const params = Object.entries(context)
+  if (!params.length) {
+    return translation => [translation]
   }
-}
-
-export const replace = (str, parameters) => {
-  const mapReplace = parameters.reduce(
+  const mapReplace = params.reduce(
     (acc, [k, v]) => Object.assign(acc, { [`%${k}%`]: v }),
     {},
   )
   const re = new RegExp(Object.keys(mapReplace).join('|'), 'g')
 
-  const children = []
-  let match
-  let lastIndex = 0
-  while ((match = re.exec(str)) != null) {
-    children.push(str.slice(lastIndex, match.index))
-    children.push(mapReplace[match[0]])
-    lastIndex = re.lastIndex
+  return function * (translation = '') {
+    let lastIndex = 0
+    for (const match of translation.matchAll(re)) {
+      yield translation.slice(lastIndex, match.index)
+      yield mapReplace[match[0]]
+      lastIndex = match.index + match[0].length
+    }
+    yield translation.slice(lastIndex)
   }
-  return children
+}
+
+const postProcessor = () => (processedTranslation = []) => {
+  let result = ''
+  for (const chunk of processedTranslation) {
+    console.info('chunk', chunk)
+    if (!['number', 'string'].includes(typeof chunk)) {
+      return React.createElement(Fragment, null, result, chunk, ...processedTranslation)
+    }
+    result = result.concat(chunk)
+  }
+  return result
+}
+
+export default () => {
+  const translations = useContext(Context) || {}
+
+  return (transKey = '', parameters = {}) => {
+    const context = { translations, ...parameters }
+
+    const preProcessed = preProcessor(context)(transKey)
+    const processed = processor(context)(preProcessed)
+    const postProcessed = postProcessor(context)(processed)
+
+    console.info(transKey, postProcessed)
+    return postProcessed
+  }
 }
