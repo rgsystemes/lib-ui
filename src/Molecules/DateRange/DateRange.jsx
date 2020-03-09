@@ -7,11 +7,11 @@ import FlexBox from '../../Templates/FlexBox'
 // We have to do that because maxDate and minDate
 // don't take time into account
 const onStartChange = (start, end) =>
-  start > end ? ({ start, end: start }) :
+  start > end ? ({ start, end: end == null ? end : start }) :
   ({ start, end })
 
 const onEndChange = (start, end) =>
-  start > end ? ({ start: end, end }) :
+  start > end ? ({ start: start == null ? start : end, end }) :
   ({ start, end })
 
 const DateRange = ({
@@ -22,7 +22,7 @@ const DateRange = ({
   ...props
 }) => {
   const t = useTranslation()
-  const { start = new Date(), end = new Date() } = value || {}
+  const { start = null, end = null } = value || {}
   const {
     startLabel = t('molecules.dateRange.startDate'),
     endLabel = t('molecules.dateRange.endDate'),

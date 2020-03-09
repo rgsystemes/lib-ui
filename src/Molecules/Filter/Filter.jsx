@@ -12,6 +12,7 @@ import FormControl, { InputLabel } from '../../Molecules/FormControl'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
 import FlexBox from '../../Templates/FlexBox'
+import { EMPTY_VALUES } from './constants'
 
 const Action = props => <FlexBox
   css={{ cursor: 'pointer' }}
@@ -30,7 +31,6 @@ const Action = props => <FlexBox
 const Filter = ({
   type,
   translationKey,
-  setValue = () => {},
   value,
   ...props
 }) => {
@@ -38,7 +38,6 @@ const Filter = ({
     type === 'date' ? (
       <DateRange
         value={value}
-        onChange={setValue}
         {...props}
       />
     ) : (
@@ -47,7 +46,6 @@ const Filter = ({
           {translationKey}
           <InnerInput
             value={value}
-            onChange={setValue}
             type={type}
             {...props}
           />
@@ -101,6 +99,7 @@ const FilterWrapper = ({
   }
   const onClear = (...args) => {
     setAnchorEl(null)
+    setValue(EMPTY_VALUES[props.type])
     onClearProp(...args)
   }
 
@@ -114,14 +113,14 @@ const FilterWrapper = ({
       onClick={ev => setAnchorEl(ev.currentTarget)}
       size={16}
     />
-    <Popover open={!!anchorEl} onClose={onChange} anchorEl={anchorEl}>
+    <Popover open={!!anchorEl} onClose={() => setAnchorEl(null)} anchorEl={anchorEl}>
       <FlexBox
         onKeyPress={ev => ev.key === 'Enter' && onChange()}
         minWidth="200px"
         flexDirection="column"
       >
         <FlexBox p={2} flexDirection="column">
-          <Filter value={value} setValue={setValue} {...props}/>
+          <Filter value={value} onChange={setValue} {...props}/>
         </FlexBox>
         <Divider />
         <FlexBox gap={1} p={1} justifyContent="space-between">
