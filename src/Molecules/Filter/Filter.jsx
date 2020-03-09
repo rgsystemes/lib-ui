@@ -127,7 +127,7 @@ const FilterWrapper = ({
         <FlexBox gap={1} p={1} justifyContent="space-between">
           <Action onClick={onClear}>
             <Trash size={16} />
-            <span><Trans>global.action.remove</Trans></span>
+            <span><Trans>global.filter.clear</Trans></span>
           </Action>
           <Action onClick={onChange}>
             <Check size={16} />

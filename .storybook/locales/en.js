@@ -9,6 +9,7 @@ export default {
     dateFormat: 'dd/MM/yyyy hh:mm',
     no_results: 'No results found',
     filter: {
+      clear: 'Clear',
       clearCurrent: 'Clear current filters',
       applyFilter: 'Ok',
     },
@@ -16,7 +17,7 @@ export default {
       chooseOption: 'Choose an option',
       cancel: 'Cancel',
       add: 'Add',
-      remove: 'Clear',
+      remove: 'Remove',
     },
     pagination: {
       perPage: '%count% per page',
