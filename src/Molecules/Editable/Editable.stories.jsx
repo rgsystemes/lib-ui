@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { action } from '@storybook/addon-actions'
 import { boolean } from '@storybook/addon-knobs'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormGroup from '@material-ui/core/FormGroup'
