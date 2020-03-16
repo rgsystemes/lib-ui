@@ -6,6 +6,7 @@ export const formControlStyles = css`
   box-sizing: border-box;
 
   label > .MuiInputBase-root,
+  label > .MuiTextField-root,
   label + .MuiInputBase-root {
     ${systemCss({ marginTop: 's' })};
   }
