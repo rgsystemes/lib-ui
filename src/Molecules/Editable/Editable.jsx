@@ -6,6 +6,10 @@ import Input from '../../Atoms/Input'
 import Typo from '../../Atoms/Typo'
 import FlexBox from '../../Templates/FlexBox'
 
+Input.defaultProps = {
+  autoFocus: true,
+}
+
 const DefaulFromControl = ({
   Type = Input,
   label,
@@ -17,9 +21,11 @@ const DefaulFromControl = ({
       {label}
       <Type {...props} />
     </InputLabel>
-    <FormHelperText>
-      {helpText}
-    </FormHelperText>
+    {!!helpText &&
+      <FormHelperText>
+        {helpText}
+      </FormHelperText>
+    }
   </FormControl>
 
 const Editable = ({
@@ -33,9 +39,11 @@ const Editable = ({
 }) => (
   edit ? <FormControl label={label} {...props}/> : (
     <FlexBox onClick={() => onEdit(true)} gap={1} flexDirection="column">
-      <Typo fontSize="title" fontWeight="title" fontFamily="title">
-        {label}
-      </Typo>
+      {!!label &&
+        <Typo fontSize="title" fontWeight="title" fontFamily="title">
+          {label}
+        </Typo>
+      }
       {children}
     </FlexBox>
   )
