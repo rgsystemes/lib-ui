@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import { Edit } from '@styled-icons/material/Edit'
 import { Check } from '@styled-icons/material/Check'
 import Box from '@material-ui/core/Box'
+import { ArrowRightAlt } from '@styled-icons/material/ArrowRightAlt'
 
 import Button from '../../Atoms/Button'
 import IconButton from '../../Atoms/IconButton'
@@ -70,6 +71,11 @@ const EditableRadioGroup = ({ ...props }) =>
     )}
   </RadioGroup>
 
+const EditableDateRange = ({ value: { start, end }, onChange, ...props }) => <FlexBox gap={2}>
+  <DateTimePicker value={start} onChange={start => onChange({ start, end })}/>
+  <DateTimePicker value={end} onChange={end => onChange({ start, end })}/>
+</FlexBox>
+
 const CustomFormControl = ({
   value = [],
   onChange = () => {},
@@ -90,7 +96,7 @@ export const groupedEditable = () => {
   const [value, baseSetValue] = useState({
     text:           'Text',
     select:         'choice3',
-    date:           new Date(),
+    date:           { start: new Date(), end: new Date() },
     checkbox:       { choice4: true },
     singleCheckbox: true,
     custom:         ['choice1', 'choice3'],
@@ -174,14 +180,16 @@ export const groupedEditable = () => {
         </Editable>
         <Editable
           edit={edit}
-          Type={DateTimePicker}
+          Type={EditableDateRange}
           value={date}
           label="Label"
           onChange={date => setValue({ date })}
         >
-          <Typo>
-            {format(date, 'Pp')}
-          </Typo>
+          <FlexBox gap={2} as={Typo}>
+            <span>{format(date.start, 'Pp')}</span>
+            <ArrowRightAlt size={16} />
+            <span>{format(date.end, 'Pp')}</span>
+          </FlexBox>
         </Editable>
         <Editable
           edit={edit}
