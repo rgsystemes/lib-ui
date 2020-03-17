@@ -38,6 +38,15 @@ const EditableSelect = ({ ...props }) =>
     )}
   </Select>
 
+const EditableCheckbox = ({ ...props }) =>
+  <FormControlLabel
+    {...props}
+    label="Option 1"
+    control={
+      <Checkbox />
+    }
+  />
+
 const EditableCheckboxGroup = ({ checked, onChange, ...props }) =>
   <FormGroup aria-label="checkboxGroup" name="checkboxGroup" {...props}>
     {options.map(({ value, label }) =>
@@ -79,16 +88,22 @@ const CustomFormControl = ({
 export const groupedEditable = () => {
   const [edit, setEdit] = useState(false)
   const [value, baseSetValue] = useState({
-    text:     'Text',
-    select:   'choice3',
-    date:     new Date(),
-    checkbox: { choice4: true },
-    custom:   ['choice1', 'choice3'],
+    text:           'Text',
+    select:         'choice3',
+    date:           new Date(),
+    checkbox:       { choice4: true },
+    singleCheckbox: true,
+    custom:         ['choice1', 'choice3'],
   })
 
   const setValue = newValue => baseSetValue({ ...value, ...newValue })
   const {
-    text, select, checkbox, date, custom = [],
+    text,
+    select,
+    checkbox,
+    date,
+    custom = [],
+    singleCheckbox,
   } = value
   const [customFirst, customSecond] = custom
 
@@ -125,6 +140,17 @@ export const groupedEditable = () => {
         >
           <Typo>
             {select}
+          </Typo>
+        </Editable>
+        <Editable
+          edit={edit}
+          Type={EditableCheckbox}
+          checked={singleCheckbox}
+          label="Label"
+          onChange={(value, checked) => setValue({ singleCheckbox: checked })}
+        >
+          <Typo>
+            {singleCheckbox ? 'Checkbox checked' : 'Checkbox not checked'}
           </Typo>
         </Editable>
         <Editable
