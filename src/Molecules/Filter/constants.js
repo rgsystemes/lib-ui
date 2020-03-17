@@ -1,5 +1,5 @@
 export const EMPTY_VALUES = {
   text:   '',
-  date:   {},
+  date:   { start: null, end: null },
   select: '',
 }
