@@ -12,7 +12,7 @@ Input.defaultProps = {
 
 const DefaulFormControl = ({
   Type = Input,
-  label,
+  label = '',
   helpText = '',
   ...props
 }) => (
@@ -35,7 +35,7 @@ const Editable = ({
   onEdit = () => {},
   onValid = () => {},
   FormControl = DefaulFormControl,
-  label,
+  label = '',
   ...props
 }) => (
   edit ? <FormControl label={label} {...props}/> :
