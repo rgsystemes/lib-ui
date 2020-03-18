@@ -15,7 +15,7 @@ const DefaulFormControl = ({
   label,
   helpText = '',
   ...props
-}) =>
+}) => (
   <FormControl>
     <InputLabel>
       {label}
@@ -27,6 +27,7 @@ const DefaulFormControl = ({
       </FormHelperText>
     }
   </FormControl>
+)
 
 const Editable = ({
   children,
@@ -37,16 +38,15 @@ const Editable = ({
   label,
   ...props
 }) => (
-  edit ? <FormControl label={label} {...props}/> : (
-    <FlexBox onClick={() => onEdit(true)} gap={1} flexDirection="column">
-      {!!label &&
+  edit ? <FormControl label={label} {...props}/> :
+  <FlexBox onClick={() => onEdit(true)} gap={1} flexDirection="column">
+    {!!label &&
         <Typo fontSize="title" fontWeight="title" fontFamily="title">
           {label}
         </Typo>
-      }
-      {children}
-    </FlexBox>
-  )
+    }
+    {children}
+  </FlexBox>
 )
 
 export default Editable
