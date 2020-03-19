@@ -38,7 +38,7 @@ it('should call on clear when clicking on trash icon', () => {
   const { getByText, getByLabelText } = render(<Filter onClear={onClear}/>)
 
   userEvent.click(getByLabelText('open filter'))
-  userEvent.click(getByText('global.action.remove'))
+  userEvent.click(getByText('global.filter.clear'))
   expect(onClear).toHaveBeenCalled()
 })
 
