@@ -4,13 +4,14 @@ import BaseCard from '@material-ui/core/Card'
 
 import { FlexBox } from '../../Templates'
 
-const Card = ({
-  children,
-  ...props
-}) => (
-  <FlexBox gap={2} component={BaseCard} {...props} bgcolor="grey.100" p={2} borderRadius="borderRadius" flexDirection="column">
-    {children}
-  </FlexBox>
-)
+const Card = props => <FlexBox
+  component={BaseCard}
+  gap={2}
+  p={2}
+  bgcolor="grey.100"
+  borderRadius="borderRadius"
+  flexDirection="column"
+  {...props}
+/>
 
 export default Card
