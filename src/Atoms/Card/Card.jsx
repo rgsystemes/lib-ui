@@ -11,6 +11,7 @@ const Card = props => <FlexBox
   bgcolor="grey.100"
   borderRadius="borderRadius"
   flexDirection="column"
+  boxShadow={0}
   {...props}
 />
 
