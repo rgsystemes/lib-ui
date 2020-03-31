@@ -1,22 +1,19 @@
 import React, { useState } from 'react'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormGroup from '@material-ui/core/FormGroup'
-import { format } from 'date-fns'
 import { Edit } from '@styled-icons/material/Edit'
 import { Check } from '@styled-icons/material/Check'
 import Box from '@material-ui/core/Box'
-import { ArrowRightAlt } from '@styled-icons/material/ArrowRightAlt'
 
 import Button from '../../Atoms/Button'
 import IconButton from '../../Atoms/IconButton'
-import StatusChip from '../../Atoms/StatusChip'
 import FormControl, { FormControlLabel } from '../FormControl'
 import Editable from './index'
 import FlexBox from '../../Templates/FlexBox'
 import Select from '../../Atoms/Select'
 import Typo from '../../Atoms/Typo'
 import Checkbox from '../../Atoms/Checkbox'
-import DateTimePicker from '../../Atoms/DateTimePicker'
+import DateRange from '../../Molecules/DateRange'
 import Radio from '../../Atoms/Radio'
 
 import markdown from './README.md'
@@ -32,50 +29,6 @@ const options = [
   { value: 'choice4', label: 'Choice 4' },
 ]
 
-const EditableSelect = ({ ...props }) =>
-  <Select {...props}>
-    {options.map(({ value, label }) =>
-      <option value={value}>{label}</option>,
-    )}
-  </Select>
-
-const EditableCheckbox = ({ ...props }) =>
-  <FormControlLabel
-    {...props}
-    label="Option 1"
-    control={
-      <Checkbox />
-    }
-  />
-
-const EditableCheckboxGroup = ({ checked, onChange, ...props }) =>
-  <FormGroup aria-label="checkboxGroup" name="checkboxGroup" {...props}>
-    {options.map(({ value, label }) =>
-      <FormControlLabel
-        control={
-          <Checkbox
-            value={value}
-            checked={checked[value]}
-            onChange={(e, checked) => onChange(value, checked)}
-          />
-        }
-        label={label}
-      />,
-    )}
-  </FormGroup>
-
-const EditableRadioGroup = ({ ...props }) =>
-  <RadioGroup aria-label="radioGroup" name="radioGroup" {...props}>
-    {options.map(({ value, label }) =>
-      <FormControlLabel value={value} control={<Radio />} label={label} />,
-    )}
-  </RadioGroup>
-
-const EditableDateRange = ({ value: { start, end }, onChange, ...props }) => <FlexBox gap={2}>
-  <DateTimePicker value={start} onChange={start => onChange({ start, end })}/>
-  <DateTimePicker value={end} onChange={end => onChange({ start, end })}/>
-</FlexBox>
-
 const CustomFormControl = ({
   value = [],
   onChange = () => {},
@@ -85,8 +38,16 @@ const CustomFormControl = ({
 
   return <FormControl {...props}>
     <FlexBox gap={1}>
-      <EditableSelect value={first} onChange={e => onChange([e.target.value, second])}/>
-      <EditableSelect value={second} onChange={e => onChange([first, e.target.value])}/>
+      <Select value={first} onChange={e => onChange([e.target.value, second])}>
+        {options.map(({ value, label }) =>
+          <option value={value}>{label}</option>,
+        )}
+      </Select>
+      <Select value={second} onChange={e => onChange([first, e.target.value])}>
+        {options.map(({ value, label }) =>
+          <option value={value}>{label}</option>,
+        )}
+      </Select>
     </FlexBox>
   </FormControl>
 }
@@ -94,12 +55,11 @@ const CustomFormControl = ({
 export const groupedEditable = () => {
   const [edit, setEdit] = useState(false)
   const [value, baseSetValue] = useState({
-    text:           'Text',
-    select:         'choice3',
-    date:           { start: new Date(), end: new Date() },
-    checkbox:       { choice4: true },
-    singleCheckbox: true,
-    custom:         ['choice1', 'choice3'],
+    text:     'Text',
+    select:   'choice3',
+    date:     { start: new Date(), end: new Date() },
+    checkbox: { choice4: true },
+    custom:   ['choice1', 'choice3'],
   })
 
   const setValue = newValue => baseSetValue({ ...value, ...newValue })
@@ -121,86 +81,70 @@ export const groupedEditable = () => {
           value={text}
           label="Label"
           onChange={e => setValue({ ...value, text: e.target.value })}
-        >
-          <Typo>
-            {text}
-          </Typo>
-        </Editable>
+        />
         <Editable
           edit={edit}
-          Type={EditableSelect}
+          Type={Select}
           value={select}
           label="Label"
           onChange={e => setValue({ select: e.target.value })}
         >
-          <Typo>
-            {select}
-          </Typo>
+          {options.map(({ value, label }) =>
+            <option value={value}>{label}</option>,
+          )}
         </Editable>
         <Editable
           edit={edit}
-          Type={EditableRadioGroup}
+          Type={RadioGroup}
           value={select}
           label="Label"
           onChange={e => setValue({ select: e.target.value })}
         >
-          <Typo>
-            {select}
-          </Typo>
+          {options.map(({ value, label }) =>
+            <FormControlLabel value={value} control={<Radio />} label={label} />,
+          )}
         </Editable>
         <Editable
           edit={edit}
-          Type={EditableCheckbox}
-          checked={singleCheckbox}
+          Type={FormGroup}
+          value={checkbox}
           label="Label"
-          onChange={(value, checked) => setValue({ singleCheckbox: checked })}
         >
-          <Typo>
-            {singleCheckbox ? 'Checkbox checked' : 'Checkbox not checked'}
-          </Typo>
+          {options.map(({ value, label }) =>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value={value}
+                  checked={checkbox[value]}
+                  onChange={(e, checked) => setValue({ checkbox: { ...checkbox, [value]: checked } })}
+                />
+              }
+              label={label}
+            />,
+          )}
         </Editable>
         <Editable
           edit={edit}
-          Type={EditableCheckboxGroup}
-          checked={checkbox}
-          label="Label"
-          onChange={(name, value) => setValue({ checkbox: { ...checkbox, [name]: value } })}
-        >
-          <FlexBox as={Typo} gap={2}>
-            {Object
-              .entries(checkbox)
-              .filter(([name, value]) => !!value)
-              .map(([name, value]) =>
-                <StatusChip>
-                  {name}
-                </StatusChip>,
-              )
-            }
-          </FlexBox>
-        </Editable>
-        <Editable
-          edit={edit}
-          Type={EditableDateRange}
+          Type={DateRange}
+          startLabel={null}
+          endLabel={null}
           value={date}
           label="Label"
           onChange={date => setValue({ date })}
-        >
-          <FlexBox gap={2} as={Typo}>
-            <span>{format(date.start, 'Pp')}</span>
-            <ArrowRightAlt size={16} />
-            <span>{format(date.end, 'Pp')}</span>
-          </FlexBox>
-        </Editable>
+        />
         <Editable
           edit={edit}
           FormControl={CustomFormControl}
           label="Label"
           value={custom}
           onChange={custom => setValue({ custom })}
-        >
-          <Typo>The first value is : {customFirst}</Typo>
-          <Typo>The first value is : {customSecond}</Typo>
-        </Editable>
+          Description={() =>
+            <>
+              <Typo>The first value is : {customFirst}</Typo>
+              <Typo>The first value is : {customSecond}</Typo>
+            </>
+          }
+        />
       </FlexBox>
       <Box mt={2}>
         <Button onClick={() => setEdit(!edit)}>
