@@ -15,11 +15,11 @@ export default {
 const jedis = [
   {
     value: 'Obi Wan Kenobi',
-    src:   'https://material-ui.com/static/images/avatar/1.jpg',
+    src:   '//material-ui.com/static/images/avatar/1.jpg',
   },
   {
     value: 'Dark Vador',
-    src:   'https://material-ui.com/static/images/avatar/2.jpg',
+    src:   '//material-ui.com/static/images/avatar/2.jpg',
   },
 ]
 
