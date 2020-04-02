@@ -69,7 +69,6 @@ export const groupedEditable = () => {
     checkbox,
     date,
     custom = [],
-    singleCheckbox,
   } = value
   const [customFirst, customSecond] = custom
 
