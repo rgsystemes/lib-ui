@@ -18,7 +18,7 @@ Input.defaultProps = {
   autoFocus: true,
 }
 
-const DefaulFormControl = ({
+const DefaultFormControl = ({
   Type,
   label = '',
   helpText = '',
@@ -42,7 +42,7 @@ const Editable = ({
   edit,
   onEdit = () => {},
   onValid = () => {},
-  FormControl = DefaulFormControl,
+  FormControl = DefaultFormControl,
   label = '',
   Type = Input,
   value = '',
