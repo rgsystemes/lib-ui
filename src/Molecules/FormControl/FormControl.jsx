@@ -5,6 +5,7 @@ import BaseFormControl from '@material-ui/core/FormControl'
 export const formControlStyles = css`
   box-sizing: border-box;
 
+  label > *,
   label > .MuiInputBase-root,
   label > .MuiTextField-root,
   label + .MuiInputBase-root {

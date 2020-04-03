@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box'
 
 import Button from '../../Atoms/Button'
 import IconButton from '../../Atoms/IconButton'
-import FormControl, { FormControlLabel } from '../FormControl'
+import FormControl, { FormControlLabel, InputLabel } from '../FormControl'
 import Editable from './index'
 import FlexBox from '../../Templates/FlexBox'
 import Select from '../../Atoms/Select'
@@ -37,18 +37,21 @@ const CustomFormControl = ({
   const [first, second] = value
 
   return <FormControl {...props}>
-    <FlexBox gap={1}>
-      <Select value={first} onChange={e => onChange([e.target.value, second])}>
-        {options.map(({ value, label }) =>
-          <option value={value}>{label}</option>,
-        )}
-      </Select>
-      <Select value={second} onChange={e => onChange([first, e.target.value])}>
-        {options.map(({ value, label }) =>
-          <option value={value}>{label}</option>,
-        )}
-      </Select>
-    </FlexBox>
+    <InputLabel>
+      Label
+      <FlexBox gap={1}>
+        <Select value={first} onChange={e => onChange([e.target.value, second])}>
+          {options.map(({ value, label }) =>
+            <option value={value}>{label}</option>,
+          )}
+        </Select>
+        <Select value={second} onChange={e => onChange([first, e.target.value])}>
+          {options.map(({ value, label }) =>
+            <option value={value}>{label}</option>,
+          )}
+        </Select>
+      </FlexBox>
+    </InputLabel>
   </FormControl>
 }
 
