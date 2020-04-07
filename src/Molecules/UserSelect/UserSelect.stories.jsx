@@ -21,23 +21,34 @@ const jedis = [
     value: 'Dark Vador',
     src:   '//material-ui.com/static/images/avatar/2.jpg',
   },
+  {
+    value: 'Yoda',
+    state: 'success',
+  },
+  {
+    value: 'C3PO',
+    state: 'warning',
+  },
 ]
 
-const avatars = jedis.reduce(
-  (acc, { value, src }) => Object.assign(acc, { [value]: src }),
+const indexByValueFor = key => jedis.reduce(
+  (acc, { value, ...rest }) => Object.assign(acc, { [value]: rest[key] }),
   {},
 )
 
+const avatars = indexByValueFor('src')
+const states = indexByValueFor('state')
+
 export const userSelect = () => {
   const [value, setValue] = useState([])
-  const onChange = event => setValue(event.target.value)
 
   return <UserSelect
     label="Jedis and not jedis"
     children={jedis}
     value={value}
-    onChange={onChange}
+    onChange={setValue}
     avatars={avatars}
+    states={states}
   >
     {jedis.map(({ value }) =>
       <MenuItem key={value} value={value}>
