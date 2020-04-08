@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useMemo, useState, Children, forwardRef } from 'react'
 import clsx from 'clsx'
-import { Avatar, Select, Chip } from '@material-ui/core'
+import { Avatar, Select, Chip, MenuItem } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
+import { Check } from '@styled-icons/boxicons-regular'
+import { Circle } from '@styled-icons/boxicons-solid'
 
+import Icon from '../../Atoms/Icon'
 import Input from '../../Atoms/Input'
 import FormControl from '../../Molecules/FormControl'
 import InputLabel from '../../Molecules/FormControl/InputLabel'
@@ -12,7 +15,7 @@ const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyle
     marginLeft:  2,
     marginRight: 2,
   },
-  hasState: {
+  hasStatus: {
     color: success.contrastText,
   },
   success: {
@@ -23,20 +26,21 @@ const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyle
   },
 }))
 
-const UserChips = ({
-  values = [],
+const UserChip = ({
+  value,
+  labels = {},
   avatars = {},
-  states = {},
+  statuses = {},
   onDelete = () => {},
 }) => {
   const chipClasses = chipStyles()
-  return values.map(value => <Chip
+  return <Chip
     key={value}
-    label={value}
+    label={labels[value]}
     onDelete={() => onDelete(value)}
     avatar={avatars[value] ? <Avatar alt={value} src={avatars[value]} /> : undefined}
-    className={clsx(chipClasses.common, states[value] && chipClasses.hasState, chipClasses[states[value]])}
-  />)
+    className={clsx(chipClasses.common, statuses[value] && chipClasses.hasStatus, chipClasses[statuses[value]])}
+  />
 }
 
 const inputStyles = makeStyles({
@@ -50,61 +54,104 @@ const inputStyles = makeStyles({
   },
 })
 
+const userStyles = makeStyles(({ palette: { success, warning } }) => createStyles({
+  success: {
+    color: success.main,
+  },
+  warning: {
+    color: warning.main,
+  },
+}))
+
+export const UserOption = forwardRef(({
+  children,
+  value,
+  checked = false,
+  values = [],
+  onChange = () => {},
+  avatar,
+  status,
+  ...props
+}, ref) => {
+  value = value || props['data-value'] // hack
+  const userClasses = userStyles()
+  return (
+    <MenuItem ref={ref} value={value} onClick={() => onChange(checked ? values.filter(v => v !== value) : [...values, value])}>
+      <Icon Component={props => checked ? <Check {...props} /> : null} />
+      {!!avatar && <Avatar alt={value} src={avatar} />}
+      {children}
+      {!!status && <Circle size="30" className={userClasses[status]} />}
+    </MenuItem>
+  )
+})
+
 const UserSelect = ({
   children,
   label,
-  value,
-  avatars = {},
-  states = {},
+  values,
   onChange = () => {},
   onDelete = () => {},
-  FormControlProps = {},
-  InputLabelProps = {},
-  InputProps = {},
-  UserChipsProps = {},
-  MenuProps = {
-    anchorReference: null,
-    anchorOrigin:    {
-      horizontal: 'left',
-      vertical:   'bottom',
-    },
-    marginThreshold: 0,
-    PaperProps:      {
-      square: true,
-    },
-  },
   ...props
 }) => {
   const [open, setOpen] = useState(false)
   const inputClasses = inputStyles()
-  const selectRef = useRef(null)
-  MenuProps.getContentAnchorEl = () => selectRef.current
+  const { labels, avatars, statuses } = useMemo(() =>
+    Children.toArray(children).reduce(
+      (acc, child) => Object.assign(acc, {
+        labels:   Object.assign(acc.labels, { [child.props.value]: child.props.label || child.props.children }),
+        avatars:  Object.assign(acc.avatars, { [child.props.value]: child.props.avatar }),
+        statuses: Object.assign(acc.statuses, { [child.props.value]: child.props.status }),
+      }),
+      {
+        labels:   {},
+        avatars:  {},
+        statuses: {},
+      },
+    ),
+  [children],
+  )
 
   return (
-    <FormControl variant="outlined" {...FormControlProps}>
-      <InputLabel {...InputLabelProps}>{label}</InputLabel>
-      <Select
-        multiple
-        ref={selectRef}
-        value={value}
-        onChange={event => onChange(event.target.value)}
-        open={open}
-        onOpen={event => setOpen(event.target === event.currentTarget)}
-        onClose={() => setOpen(false)}
-        variant="outlined"
-        input={<Input id="select-multiple-chip" classes={inputClasses} {...InputProps} />}
-        renderValue={values => <UserChips
-          values={values}
+    <FormControl variant="outlined">
+      <InputLabel>{label}</InputLabel>
+      {React.createElement(Select, {
+        multiple:    true,
+        value:       values,
+        onChange,
+        open,
+        onOpen:      event => setOpen(event.target === event.currentTarget),
+        onClose:     () => setOpen(false),
+        variant:     'outlined',
+        input:       <Input id="select-multiple-chip" classes={inputClasses} />,
+        renderValue: values => values.map(value => <UserChip
+          value={value}
+          labels={labels}
           avatars={avatars}
-          states={states}
+          statuses={statuses}
           onDelete={value => onChange(values.filter(v => v !== value))}
-          {...UserChipsProps}
-        />}
-        MenuProps={MenuProps}
-        {...props}
-      >
-        {children}
-      </Select>
+        />),
+        MenuProps: {
+          getContentAnchorEl: null,
+          anchorOrigin:       {
+            horizontal: 'left',
+            vertical:   'bottom',
+          },
+          marginThreshold: 0,
+          PaperProps:      {
+            square: true,
+          },
+        },
+        ...props,
+      },
+      ...(Children.toArray(children).map(
+        child => <UserOption
+          values={values}
+          checked={!!(values.find(v => v === child.props.value))}
+          onChange={onChange}
+          {...child.props}
+        />,
+      ) || []),
+      )}
     </FormControl>
   )
 }
