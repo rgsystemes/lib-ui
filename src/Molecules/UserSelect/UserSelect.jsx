@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import clsx from 'clsx'
-import Avatar from '@material-ui/core/Avatar'
-import Chip from '@material-ui/core/Chip'
-import Select from '@material-ui/core/Select'
-import { makeStyles } from '@material-ui/core/styles'
+import { Avatar, Select, Chip } from '@material-ui/core'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 import Input from '../../Atoms/Input'
 import FormControl from '../../Molecules/FormControl'
 import InputLabel from '../../Molecules/FormControl/InputLabel'
 
-const chipStyles = makeStyles(({ palette: { success, warning } }) => ({
+const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyles({
   common: {
     marginLeft:  2,
     marginRight: 2,
@@ -56,33 +54,51 @@ const UserSelect = ({
   children,
   label,
   value,
-  MenuProps,
   avatars = {},
   states = {},
   onChange = () => {},
   onDelete = () => {},
+  FormControlProps = {},
+  InputLabelProps = {},
+  InputProps = {},
+  UserChipsProps = {},
+  MenuProps = {
+    anchorReference: null,
+    anchorOrigin:    {
+      horizontal: 'left',
+      vertical:   'bottom',
+    },
+    marginThreshold: 0,
+    PaperProps:      {
+      square: true,
+    },
+  },
   ...props
 }) => {
   const [open, setOpen] = useState(false)
   const inputClasses = inputStyles()
+  const selectRef = useRef(null)
+  MenuProps.getContentAnchorEl = () => selectRef.current
+
   return (
-    <FormControl variant="outlined">
-      <InputLabel>{label}</InputLabel>
+    <FormControl variant="outlined" {...FormControlProps}>
+      <InputLabel {...InputLabelProps}>{label}</InputLabel>
       <Select
         multiple
+        ref={selectRef}
         value={value}
         onChange={event => onChange(event.target.value)}
         open={open}
-        data-set-open
-        onOpen={event => event.target.parentNode.dataset.setOpen && setOpen(true)}
+        onOpen={event => setOpen(event.target === event.currentTarget)}
         onClose={() => setOpen(false)}
         variant="outlined"
-        input={<Input id="select-multiple-chip" classes={inputClasses} />}
+        input={<Input id="select-multiple-chip" classes={inputClasses} {...InputProps} />}
         renderValue={values => <UserChips
           values={values}
           avatars={avatars}
           states={states}
           onDelete={value => onChange(values.filter(v => v !== value))}
+          {...UserChipsProps}
         />}
         MenuProps={MenuProps}
         {...props}
