@@ -52,12 +52,12 @@ const provideContext = (children, values, onChange) => {
   )
 
   return {
-    toggleValue, values, labels, avatars, statuses,
+    toggleValue, labels, avatars, statuses,
   }
 }
 
 const UserSelect = ({
-  children, label, values, onChange = () => {}, ...props
+  children, label, values = [], onChange = () => {}, ...props
 }) => {
   const [open, setOpen] = useState(false)
   const inputClasses = inputStyles()

@@ -21,19 +21,17 @@ const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyle
 }))
 
 const UserChip = ({
-  value,
-  labels = {},
-  avatars = {},
-  statuses = {},
-  onDelete = () => {},
+  value, label, avatar, status, onDelete = () => {}, ...props
 }) => {
   const chipClasses = chipStyles()
+
   return <Chip
     key={value}
-    label={labels[value]}
+    label={label}
     onDelete={() => onDelete(value)}
-    avatar={avatars[value] ? <Avatar alt={value} src={avatars[value]} /> : undefined}
-    className={clsx(chipClasses.common, statuses[value] && chipClasses.hasStatus, chipClasses[statuses[value]])}
+    avatar={avatar ? <Avatar alt={avatar} src={avatar} /> : undefined}
+    className={clsx(chipClasses.common, status && chipClasses.hasStatus, chipClasses[status])}
+    {...props}
   />
 }
 
