@@ -35,7 +35,6 @@ const UserChip = ({
 }) => {
   const chipClasses = chipStyles()
   return <Chip
-    key={value}
     label={labels[value]}
     onDelete={() => onDelete(value)}
     avatar={avatars[value] ? <Avatar alt={value} src={avatars[value]} /> : undefined}
@@ -124,6 +123,7 @@ const UserSelect = ({
         variant:     'outlined',
         input:       <Input id="select-multiple-chip" classes={inputClasses} />,
         renderValue: values => values.map(value => <UserChip
+          key={value}
           value={value}
           labels={labels}
           avatars={avatars}
