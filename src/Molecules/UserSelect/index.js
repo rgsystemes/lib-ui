@@ -1,4 +1,4 @@
-import UserSelect, { UserOption } from './UserSelect'
+import UserSelect, { User } from './UserSelect'
 
-export { UserOption }
+export { User }
 export default UserSelect
