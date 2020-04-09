@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, Children } from 'react'
 import { Select } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
@@ -31,7 +31,7 @@ const menuListStyles = makeStyles(theme => createStyles({
 
 const provideContext = (children, values, onChange) => {
   const { labels, avatars, statuses } = useMemo(
-    () => children.reduce(
+    () => Children.toArray(children).reduce(
       (acc, child) => Object.assign(acc, {
         labels:   Object.assign(acc.labels, { [child.props.value]: child.props.label || child.props.children }),
         avatars:  Object.assign(acc.avatars, { [child.props.value]: child.props.avatar }),
