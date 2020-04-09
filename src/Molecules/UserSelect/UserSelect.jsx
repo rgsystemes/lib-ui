@@ -94,8 +94,8 @@ const UserSelect = ({
 }) => {
   const [open, setOpen] = useState(false)
   const inputClasses = inputStyles()
-  const { labels, avatars, statuses } = useMemo(() =>
-    Children.toArray(children).reduce(
+  const { labels, avatars, statuses } = useMemo(
+    () => Children.toArray(children).reduce(
       (acc, child) => Object.assign(acc, {
         labels:   Object.assign(acc.labels, { [child.props.value]: child.props.label || child.props.children }),
         avatars:  Object.assign(acc.avatars, { [child.props.value]: child.props.avatar }),
@@ -107,7 +107,7 @@ const UserSelect = ({
         statuses: {},
       },
     ),
-  [children],
+    [children],
   )
 
   return (
