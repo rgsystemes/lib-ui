@@ -63,7 +63,11 @@ const Editable = ({
 )
 
 const DefaultDescription = ({
-  Type, value, descriptionSize, descriptionFontFamily, children,
+  Type,
+  value,
+  descriptionSize,
+  descriptionFontFamily,
+  children,
 }) =>
   Type === Select ? (
     Children
