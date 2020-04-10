@@ -1,4 +1,4 @@
-import React, { useMemo, useState, Children } from 'react'
+import React, { useState } from 'react'
 import { Select } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
@@ -6,7 +6,7 @@ import Input from '../../Atoms/Input'
 import FormControl from '../../Molecules/FormControl'
 import InputLabel from '../../Molecules/FormControl/InputLabel'
 import UserChips from './UserChips'
-import UsersContext from './UsersContext'
+import UserProvider from './UserProvider'
 
 const inputStyles = makeStyles({
   root: {
@@ -29,33 +29,6 @@ const menuListStyles = makeStyles(theme => createStyles({
   },
 }))
 
-const provideContext = (children, values, onChange) => {
-  const { labels, avatars, statuses } = useMemo(
-    () => Children.toArray(children).reduce(
-      (acc, child) => Object.assign(acc, {
-        labels:   Object.assign(acc.labels, { [child.props.value]: child.props.label || child.props.children }),
-        avatars:  Object.assign(acc.avatars, { [child.props.value]: child.props.avatar }),
-        statuses: Object.assign(acc.statuses, { [child.props.value]: child.props.status }),
-      }),
-      {
-        labels:   {},
-        avatars:  {},
-        statuses: {},
-      },
-    ),
-    [children],
-  )
-
-  const toggleValue = value => onChange(
-    values.includes(value) ? values.filter(v => v !== value) :
-    [...values, value],
-  )
-
-  return {
-    toggleValue, labels, avatars, statuses,
-  }
-}
-
 const UserSelect = ({
   children, label, values = [], onChange = () => {}, ...props
 }) => {
@@ -64,7 +37,7 @@ const UserSelect = ({
   const menuListClasses = menuListStyles()
 
   return (
-    <UsersContext.Provider value={provideContext(children, values, onChange)}>
+    <UserProvider users={children} values={values} onChange={onChange}>
       <FormControl variant="outlined">
         <InputLabel>{label}</InputLabel>
         <Select
@@ -97,7 +70,7 @@ const UserSelect = ({
           {children}
         </Select>
       </FormControl>
-    </UsersContext.Provider>
+    </UserProvider>
   )
 }
 
