@@ -82,42 +82,26 @@ const EditableList = ({ edit, value, onChange }) => {
 
 const Actions = ({
   edit,
+  onCancel,
   onEdit,
-  value,
-  onChange,
-}) => {
-  const onCancelClick = () => {
-    onChange(originalValue)
-    onEdit(false)
-  }
-
-  const onEditClick = () => {
-    originalValue = value
-    onEdit(true)
-  }
-
-  const onSaveClick = () => {
-    onEdit(false)
-  }
-
-  return edit ? (
-    <>
-      <FlexBox onClick={onCancelClick}>
-        <Times size={16} />
-        <FlexBox marginLeft={0.5}><Trans>global.action.cancel</Trans></FlexBox>
-      </FlexBox>
-      <FlexBox onClick={onSaveClick}>
-        <Check size={16} />
-        <FlexBox marginLeft={0.5}><Trans>global.action.save</Trans></FlexBox>
-      </FlexBox>
-    </>
-  ) : (
-    <FlexBox onClick={onEditClick}>
-      <Edit size={16} />
-      <FlexBox marginLeft={0.5}><Trans>global.action.edit</Trans></FlexBox>
+  onSave,
+}) => edit ? (
+  <>
+    <FlexBox onClick={onCancel}>
+      <Times size={16} />
+      <FlexBox marginLeft={0.5}><Trans>global.action.cancel</Trans></FlexBox>
     </FlexBox>
-  )
-}
+    <FlexBox onClick={onSave}>
+      <Check size={16} />
+      <FlexBox marginLeft={0.5}><Trans>global.action.save</Trans></FlexBox>
+    </FlexBox>
+  </>
+) : (
+  <FlexBox onClick={onEdit}>
+    <Edit size={16} />
+    <FlexBox marginLeft={0.5}><Trans>global.action.edit</Trans></FlexBox>
+  </FlexBox>
+)
 
 export const actionCard = () => {
   const [edit, setEdit] = useState(false)
@@ -128,11 +112,25 @@ export const actionCard = () => {
   })
 
   const setValue = newValue => baseSetValue({ ...value, ...newValue })
+  const onCancel = () => {
+    setValue(originalValue)
+    setEdit(false)
+  }
+
+  const onEdit = () => {
+    originalValue = value
+    setEdit(true)
+  }
+
+  const onSave = () => {
+    setEdit(false)
+  }
+
   const actions = <Actions
     edit={edit}
-    onEdit={setEdit}
-    value={value}
-    onChange={setValue}
+    onCancel={onCancel}
+    onEdit={onEdit}
+    onSave={onSave}
   />
 
   return (
