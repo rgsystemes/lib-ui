@@ -19,7 +19,11 @@ export default {
   title: 'Molecules/ActionCard',
 }
 
-let originalValue
+let originalValue = {
+  textOne:  'Input value #1',
+  textTwo:  'Input value #2',
+  checkbox: { option1: true },
+}
 
 const options = [
   { value: 'option1', label: 'First option' },
@@ -105,11 +109,7 @@ const Actions = ({
 
 export const actionCard = () => {
   const [edit, setEdit] = useState(false)
-  const [value, baseSetValue] = useState({
-    textOne:  'Input value #1',
-    textTwo:  'Input value #2',
-    checkbox: { option1: true },
-  })
+  const [value, baseSetValue] = useState(originalValue)
 
   const setValue = newValue => baseSetValue({ ...value, ...newValue })
   const onCancel = () => {

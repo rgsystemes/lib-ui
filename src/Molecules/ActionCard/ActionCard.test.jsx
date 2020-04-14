@@ -22,7 +22,7 @@ const cancelBtn = 'global.action.cancel'
 const editBtn = 'global.action.edit'
 const saveBtn = 'global.action.save'
 
-let originalValue
+let originalValue = 'Text #1'
 
 const Actions = ({
   edit,
@@ -49,7 +49,7 @@ const Actions = ({
 
 const ActionCardWrapper = () => {
   const [edit, setEdit] = useState(false)
-  const [value, setValue] = useState('Text #1')
+  const [value, setValue] = useState(originalValue)
 
   const onCancel = () => {
     setValue(originalValue)
