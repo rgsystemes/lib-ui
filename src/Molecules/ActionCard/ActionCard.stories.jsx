@@ -19,7 +19,7 @@ export default {
   title: 'Molecules/ActionCard',
 }
 
-let originalValue = {
+const originalValue = {
   textOne:  'Input value #1',
   textTwo:  'Input value #2',
   checkbox: { option1: true },
@@ -109,20 +109,21 @@ const Actions = ({
 
 export const actionCard = () => {
   const [edit, setEdit] = useState(false)
-  const [value, baseSetValue] = useState(originalValue)
+  const [original, setOriginal] = useState(originalValue)
+  const [current, baseSetCurrent] = useState(originalValue)
 
-  const setValue = newValue => baseSetValue({ ...value, ...newValue })
+  const setCurrent = newValue => baseSetCurrent({ ...current, ...newValue })
   const onCancel = () => {
-    setValue(originalValue)
+    setCurrent(original)
     setEdit(false)
   }
 
   const onEdit = () => {
-    originalValue = value
     setEdit(true)
   }
 
   const onSave = () => {
+    setOriginal(current)
     setEdit(false)
   }
 
@@ -139,7 +140,7 @@ export const actionCard = () => {
       description={text('description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nisi quis varius sollicitudin. Duis tincidunt nec velit pretium dictum. Aliquam non facilisis lacus. Sed eget tincidunt sapien.')}
       actions={actions}
     >
-      <EditableList edit={edit} value={value} onChange={setValue} />
+      <EditableList edit={edit} value={current} onChange={setCurrent} />
     </ActionCard>
   )
 }

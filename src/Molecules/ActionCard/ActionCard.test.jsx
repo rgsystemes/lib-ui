@@ -22,7 +22,7 @@ const cancelBtn = 'global.action.cancel'
 const editBtn = 'global.action.edit'
 const saveBtn = 'global.action.save'
 
-let originalValue = 'Text #1'
+const originalValue = 'Text #1'
 
 const Actions = ({
   edit,
@@ -49,19 +49,20 @@ const Actions = ({
 
 const ActionCardWrapper = () => {
   const [edit, setEdit] = useState(false)
-  const [value, setValue] = useState(originalValue)
+  const [original, setOriginal] = useState(originalValue)
+  const [current, setCurrent] = useState(originalValue)
 
   const onCancel = () => {
-    setValue(originalValue)
+    setCurrent(original)
     setEdit(false)
   }
 
   const onEdit = () => {
-    originalValue = value
     setEdit(true)
   }
 
   const onSave = () => {
+    setOriginal(current)
     setEdit(false)
   }
 
@@ -80,9 +81,9 @@ const ActionCardWrapper = () => {
     >
       <Editable
         edit={edit}
-        value={value}
+        value={current}
         label={text('label', label)}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => setCurrent(e.target.value)}
         labelSize="body"
         descriptionSize="fontSize"
         descriptionFontFamily="fontFamily"
