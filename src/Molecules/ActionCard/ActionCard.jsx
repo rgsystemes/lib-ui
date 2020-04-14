@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Trash } from 'styled-icons/boxicons-solid/Trash'
+import { Times } from '@styled-icons/fa-solid/Times'
 import { Check } from 'styled-icons/material/Check'
 import { Edit } from 'styled-icons/material/Edit'
 
@@ -56,18 +56,18 @@ const Actions = ({
   return edit ? (
     <>
       <Action onClick={onCancel}>
-        <Trash size={16} />
-        <span><Trans>global.action.cancel</Trans></span>
+        <Times size={16} />
+        <FlexBox marginLeft={0.5}><Trans>global.action.cancel</Trans></FlexBox>
       </Action>
       <Action onClick={onSave}>
         <Check size={16} />
-        <span><Trans>global.action.save</Trans></span>
+        <FlexBox marginLeft={0.5}><Trans>global.action.save</Trans></FlexBox>
       </Action>
     </>
   ) : (
     <Action onClick={onEdit}>
       <Edit size={16} />
-      <span><Trans>global.action.edit</Trans></span>
+      <FlexBox marginLeft={0.5}><Trans>global.action.edit</Trans></FlexBox>
     </Action>
   )
 }
@@ -85,12 +85,12 @@ const ActionCard = ({
   return (
     <Card {...props}>
       <Title>
-        { title }
+        {title}
       </Title>
       <Description>
-        { description }
+        {description}
       </Description>
-      { children }
+      {children}
       <FlexBox justifyContent="space-between">
         <Actions edit={edit} setEdit={setEdit} value={value} setValue={setValue} />
       </FlexBox>
