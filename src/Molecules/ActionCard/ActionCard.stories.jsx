@@ -7,12 +7,19 @@ import Editable from '../Editable'
 import { FormControlLabel } from '../FormControl'
 import Checkbox from '../../Atoms/Checkbox'
 import FlexBox from '../../Templates/FlexBox'
+import Trans from '../../Atoms/Trans'
+
 import FormGroup from '@material-ui/core/FormGroup'
 import { text } from '@storybook/addon-knobs'
+import { Times } from '@styled-icons/fa-solid/Times'
+import { Check } from 'styled-icons/material/Check'
+import { Edit } from 'styled-icons/material/Edit'
 
 export default {
   title: 'Molecules/ActionCard',
 }
+
+let originalValue
 
 const options = [
   { value: 'option1', label: 'First option' },
@@ -21,7 +28,7 @@ const options = [
   { value: 'option4', label: 'Last option' },
 ]
 
-const EditableList = ({ edit, value, setValue }) => {
+const EditableList = ({ edit, value, onChange }) => {
   const {
     textOne,
     textTwo,
@@ -33,7 +40,7 @@ const EditableList = ({ edit, value, setValue }) => {
       edit={edit}
       value={textOne}
       label={text('label', 'Label')}
-      onChange={e => setValue({ ...value, textOne: e.target.value })}
+      onChange={e => onChange({ ...value, textOne: e.target.value })}
       labelSize="body"
       descriptionSize="fontSize"
       descriptionFontFamily="fontFamily"
@@ -42,7 +49,7 @@ const EditableList = ({ edit, value, setValue }) => {
       edit={edit}
       value={textTwo}
       label={text('label', 'Label')}
-      onChange={e => setValue({ ...value, textTwo: e.target.value })}
+      onChange={e => onChange({ ...value, textTwo: e.target.value })}
       labelSize="body"
       descriptionSize="fontSize"
       descriptionFontFamily="fontFamily"
@@ -62,7 +69,7 @@ const EditableList = ({ edit, value, setValue }) => {
             <Checkbox
               value={value}
               checked={checkbox[value]}
-              onChange={(e, checked) => setValue({ checkbox: { ...checkbox, [value]: checked } })}
+              onChange={(e, checked) => onChange({ checkbox: { ...checkbox, [value]: checked } })}
             />
           }
           label={label}
@@ -71,6 +78,45 @@ const EditableList = ({ edit, value, setValue }) => {
       )}
     </Editable>
   </FlexBox>
+}
+
+const Actions = ({
+  edit,
+  onEdit,
+  value,
+  onChange,
+}) => {
+  const onCancelClick = () => {
+    onChange(originalValue)
+    onEdit(false)
+  }
+
+  const onEditClick = () => {
+    originalValue = value
+    onEdit(true)
+  }
+
+  const onSaveClick = () => {
+    onEdit(false)
+  }
+
+  return edit ? (
+    <>
+      <FlexBox onClick={onCancelClick}>
+        <Times size={16} />
+        <FlexBox marginLeft={0.5}><Trans>global.action.cancel</Trans></FlexBox>
+      </FlexBox>
+      <FlexBox onClick={onSaveClick}>
+        <Check size={16} />
+        <FlexBox marginLeft={0.5}><Trans>global.action.save</Trans></FlexBox>
+      </FlexBox>
+    </>
+  ) : (
+    <FlexBox onClick={onEditClick}>
+      <Edit size={16} />
+      <FlexBox marginLeft={0.5}><Trans>global.action.edit</Trans></FlexBox>
+    </FlexBox>
+  )
 }
 
 export const actionCard = () => {
@@ -82,17 +128,20 @@ export const actionCard = () => {
   })
 
   const setValue = newValue => baseSetValue({ ...value, ...newValue })
+  const actions = <Actions
+    edit={edit}
+    onEdit={setEdit}
+    value={value}
+    onChange={setValue}
+  />
 
   return (
     <ActionCard
       title={text('title', 'This is the card title')}
       description={text('description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nisi quis varius sollicitudin. Duis tincidunt nec velit pretium dictum. Aliquam non facilisis lacus. Sed eget tincidunt sapien.')}
-      edit={edit}
-      setEdit={setEdit}
-      value={value}
-      setValue={setValue}
+      actions={actions}
     >
-      <EditableList edit={edit} value={value} setValue={setValue} />
+      <EditableList edit={edit} value={value} onChange={setValue} />
     </ActionCard>
   )
 }
