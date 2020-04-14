@@ -30,7 +30,9 @@ const sizes = {
 export const inputStyles = ({ size }) => css`
   &.MuiInputBase-root  {
     .MuiInputBase-input {
-      ${systemCss({ px: 'l', py: 'm', lineHeight: '1', fontSize: 'body' })}
+      ${systemCss({
+    px: 'l', py: 'm', lineHeight: '1', fontSize: 'body', backgroundColor: 'white',
+  })}
     }
     &.Mui-focused {
       ${systemCss({ boxShadow: '0 0px 8px #66afe9', borderColor: '#66afe9' })}
