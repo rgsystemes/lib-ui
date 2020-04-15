@@ -30,26 +30,28 @@ const menuListStyles = makeStyles(theme => createStyles({
 }))
 
 const UserSelect = ({
-  children, label, values = [], onChange = () => {}, ...props
+  children, label, values = [], onChange = () => {}, id = '', ...props
 }) => {
   const [open, setOpen] = useState(false)
   const inputClasses = inputStyles()
   const menuListClasses = menuListStyles()
+  const labelId = `users-${id}`
 
   return (
     <UserProvider users={children} values={values} onChange={onChange}>
       <FormControl variant="outlined">
-        <InputLabel>{label}</InputLabel>
+        <InputLabel id={labelId}>{label}</InputLabel>
         <Select
           multiple
           value={values}
-          onChange={onChange}
           open={open}
           onOpen={event => setOpen(event.target === event.currentTarget)}
           onClose={() => setOpen(false)}
           variant="outlined"
           input={<Input classes={inputClasses} />}
           renderValue={values => <UserChips values={values} onChange={onChange} />}
+          name="users"
+          labelId={labelId}
           MenuProps={{
             getContentAnchorEl: null,
             anchorOrigin:       {
