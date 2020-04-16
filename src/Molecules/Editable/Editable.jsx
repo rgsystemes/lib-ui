@@ -46,35 +46,26 @@ const Editable = ({
   label = '',
   Type = Input,
   value = '',
-  labelSize = 'title',
-  descriptionSize,
-  descriptionFontFamily,
   ...props
 }) => (
   edit ? <FormControl label={label} Type={Type} value={value} {...props}/> :
   <FlexBox onClick={() => onEdit(true)} gap={1} flexDirection="column">
     {!!label &&
-        <Typo fontSize={labelSize} fontWeight="title" fontFamily="title">
+        <Typo fontSize="title" fontWeight="title" fontFamily="title">
           {label}
         </Typo>
     }
-    <Description value={value} Type={Type} size={descriptionSize} fontFamily={descriptionFontFamily} {...props}/>
+    <Description value={value} Type={Type} {...props}/>
   </FlexBox>
 )
 
-const DefaultDescription = ({
-  Type,
-  value,
-  size = 'title',
-  fontFamily = '',
-  children,
-}) =>
+const DefaultDescription = ({ Type, value, children }) =>
   Type === Select ? (
     Children
       .toArray(children)
       .reduce((acc, child) => ({ ...acc, [child.props.value]: child.props.children }), {})[value]
   )    : Type === DateRange ? (
-    <FlexBox gap={2} as={Typo} fontSize={size} fontFamily={fontFamily}>
+    <FlexBox gap={2} as={Typo}>
       <span>{format(value.start, 'Pp')}</span>
       <ArrowRightAlt size={16} />
       <span>{format(value.end, 'Pp')}</span>
@@ -84,12 +75,12 @@ const DefaultDescription = ({
       .toArray(children)
       .reduce((acc, child) => ({ ...acc, [child.props.value]: child.props.label }), {})[value]
   ) : Type === FormGroup ? (
-    <FlexBox as={Typo} gap={2} fontSize={size}>
+    <FlexBox as={Typo} gap={2}>
       {Object
         .entries(value)
         .filter(([name, value]) => !!value)
         .map(([name, value]) =>
-          <StatusChip key={`chip-${value}`}>
+          <StatusChip>
             {Children
               .toArray(children)
               .reduce((acc, child) => ({ ...acc, [child.props.control.props.value]: child.props.label }), {})[name]
@@ -98,8 +89,7 @@ const DefaultDescription = ({
         )
       }
     </FlexBox>
-  ) : <FlexBox fontSize={size} fontFamily={fontFamily}>
-    {value}
-  </FlexBox>
+  ) :
+    value
 
 export default Editable

@@ -18,8 +18,6 @@ export default {
       cancel: 'Cancel',
       add: 'Add',
       remove: 'Remove',
-      save: 'Save',
-      edit: 'Edit',
     },
     pagination: {
       perPage: '%count% per page',

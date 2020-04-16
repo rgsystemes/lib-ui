@@ -30,9 +30,7 @@ const sizes = {
 export const inputStyles = ({ size }) => css`
   &.MuiInputBase-root  {
     .MuiInputBase-input {
-      ${systemCss({
-    px: 'l', py: 'm', lineHeight: '1', fontSize: 'body',
-  })}
+      ${systemCss({ px: 'l', py: 'm', lineHeight: '1', fontSize: 'body' })}
     }
     &.Mui-focused {
       ${systemCss({ boxShadow: '0 0px 8px #66afe9', borderColor: '#66afe9' })}
@@ -54,13 +52,12 @@ export const inputStyles = ({ size }) => css`
     transition: all 0.1s ease-out;
     transition-property: box-shadow, border-color, color;
     ${systemCss({
-    position:        'relative',
-    borderRadius:    '1',
-    border:          '1px solid',
-    borderColor:     'lightgrey',
-    color:           'text',
-    fontWeight:      'normal',
-    backgroundColor: 'white',
+    position:     'relative',
+    borderRadius: '1',
+    border:       '1px solid',
+    borderColor:  'lightgrey',
+    color:        'text',
+    fontWeight:   'normal',
   })};
   }
 
