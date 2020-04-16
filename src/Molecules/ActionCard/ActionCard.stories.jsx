@@ -44,6 +44,7 @@ const EditableList = ({ edit, value, onChange }) => {
       edit={edit}
       value={textOne}
       label={text('label', 'Label')}
+      placeholder={text('placeholder', 'Placeholder')}
       onChange={e => onChange({ ...value, textOne: e.target.value })}
       labelSize="body"
       descriptionSize="fontSize"
@@ -53,6 +54,7 @@ const EditableList = ({ edit, value, onChange }) => {
       edit={edit}
       value={textTwo}
       label={text('label', 'Label')}
+      placeholder={text('placeholder', 'Placeholder')}
       onChange={e => onChange({ ...value, textTwo: e.target.value })}
       labelSize="body"
       descriptionSize="fontSize"
