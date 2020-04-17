@@ -8,12 +8,17 @@ import { FormControlLabel } from '../FormControl'
 import Checkbox from '../../Atoms/Checkbox'
 import FlexBox from '../../Templates/FlexBox'
 import Trans from '../../Atoms/Trans'
+import Input from '../../Atoms/Input'
 
 import FormGroup from '@material-ui/core/FormGroup'
 import { text } from '@storybook/addon-knobs'
 import { Times } from '@styled-icons/fa-solid/Times'
 import { Check } from 'styled-icons/material/Check'
 import { Edit } from 'styled-icons/material/Edit'
+
+Input.defaultProps = {
+  autoFocus: false,
+}
 
 export default {
   title: 'Molecules/ActionCard',
@@ -41,6 +46,7 @@ const EditableList = ({ edit, value, onChange }) => {
 
   return <FlexBox gap={3} mb={0} flexDirection="column" fontSize="body">
     <Editable
+      Type={Input}
       edit={edit}
       value={textOne}
       label={text('label', 'Label')}
@@ -51,6 +57,7 @@ const EditableList = ({ edit, value, onChange }) => {
       descriptionFontFamily="fontFamily"
     />
     <Editable
+      Type={Input}
       edit={edit}
       value={textTwo}
       label={text('label', 'Label')}
