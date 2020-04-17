@@ -1,30 +1,45 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { css } from '@styled-system/css'
+import classNames from 'classnames'
 
 const variants = {
   primary: {
     background: 'primary',
-    color: 'secondary'
+    color: 'secondary',
+    hover: '#00859a',
+    disabled: {
+      background: '#59bfce',
+      color: '#c5e9ee',
+    },
   },
   success: {
     background: 'success',
-    color: 'secondary'
+    color: 'secondary',
+    hover: '#449d44',
+    disabled: {
+      background: '#95d195',
+      color: '#daefda',
+    },
   },
   default: {
     background: 'default',
-    color: 'text'
-  },
-  grey: {
-    background: 'lightgray',
-    color: 'text'
+    color: 'text',
+    hover: '#e6e6e6',
+    disabled: {
+      background: 'default',
+      color: '#7a7a7a',
+    },
   },
 }
 
-const BaseSwitch = ({ className, onChange = () => {}, checked = false, size = 'medium', color = 'primary', ...props }) => {
+const BaseSwitch = ({ className, disabled = false, onChange = () => {}, checked = false, size = 'medium', color = 'primary', ...props }) => {
   const [state, setState] = useState(checked)
 
   const onClick = (onChange) => () => {
+    if (disabled)
+      return
+
     const newState = !state
     setState(newState)
     onChange({
@@ -34,7 +49,14 @@ const BaseSwitch = ({ className, onChange = () => {}, checked = false, size = 'm
     })
   }
 
-  return <div className={`${className} ${size === 'medium' ? '' : size === 'small' ? 'switch-small' : 'switch-smallest'}`} onClick={onClick(onChange)} { ...props }>
+  const classes = classNames(className, {
+    size: size === 'medium' ? '' : size === 'small' ? 'switch-small' : 'switch-smallest',
+    'switch-small': size === 'small',
+    'switch-smallest': size === 'smallest',
+    disabled: disabled
+  })
+
+  return <div className={classes} onClick={onClick(onChange)} { ...props }>
     <div className={`switch-group ${state ? 'switch-checked' : ''}`}>
       <label className={'switch-on'}>On</label>
       <label className={'switch-off'}>Off</label>
@@ -92,11 +114,11 @@ const StyledSwitch = styled(BaseSwitch)`
     
     & > .switch-on {
       ${BootstrapSwitchBtn}
-      ${({ color }) => {
+      ${({ color, disabled }) => {
         const variant = variants[color] || variants.primary
         return css({
-          backgroundColor: variant.background,
-          color: variant.color,
+          backgroundColor: disabled ? variant.disabled.background : variant.background,
+          color: disabled ? variant.disabled.color : variant.color,
         })
       }};
       left: 0;
@@ -104,13 +126,40 @@ const StyledSwitch = styled(BaseSwitch)`
       right: 50%;
     }
     
+    & > .switch-on:hover {
+      ${({ color, disabled }) => {
+        if (disabled)
+          return
+  
+        const variant = variants[color] || variants.primary
+        return css({
+          backgroundColor: variant.hover,
+        })
+      }};
+    }
+    
     & > .switch-off {
       ${BootstrapSwitchBtn}
-      background-color: #e6e6e6;
-      color: #333;
+      ${({ disabled }) => {
+        return css({
+          backgroundColor: disabled ? '#efefef' : '#e6e6e6',
+          color: disabled ? '#747474' : '#333',
+        })
+      }};
       left: 50%;
       padding-left: 24px;
       right: 0;
+    }
+    
+    & > .switch-off:hover {
+      ${({ disabled }) => {
+        if (disabled)
+          return
+      
+        return css({
+          backgroundColor: '#dddddd',
+        })
+      }};
     }
     
     & > .switch-slider {
@@ -169,6 +218,30 @@ const StyledSwitch = styled(BaseSwitch)`
       padding: 0px 5px;
     }
   }
+  
+  &.disabled {
+    cursor: not-allowed;
+    
+    * {
+      cursor: not-allowed;
+    }
+    
+    & .switch-group {
+      cursor: not-allowed;
+    }
+  
+    & .switch-on {
+      cursor: not-allowed;
+    }
+    
+    & .switch-off {
+      cursor: not-allowed;
+    }
+    
+    & .switch-slider {
+      cursor: not-allowed;
+    }
+  }
 `
 
 export const Switch = ({ ...props }) => {
@@ -176,8 +249,7 @@ export const Switch = ({ ...props }) => {
 }
 
 // TODO trim whitespaces
-// TODO Prop disabled
-// TODO hover lol
+// TODO redo colors
 // TODO border de la bonne couleur
 // TODO utiliser large au lieu de smallest?
 

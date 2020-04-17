@@ -6,31 +6,30 @@ export default {
   title: 'Atoms/Switch',
 }
 
+const colors = ['primary', 'success', 'default']
+const sizes = ['medium', 'small', 'smallest']
+
 export const switchAtom = () => (
   <>
-    <Switch/>
-    <hr/>
-    <Switch size={'medium'}/>
-    <br/><br/>
-    <Switch size={'medium'} checked={true}/>
-    <br/><br/>
-    <Switch size={'small'}/>
-    <br/><br/>
-    <Switch size={'small'} checked={true}/>
-    <br/><br/>
-    <Switch size={'smallest'}/>
-    <br/><br/>
-    <Switch size={'smallest'} checked={true}/>
-    <Switch color={'secondary'} checked={true}/>
-    <Switch color={'success'} checked={true}/>
-    <Switch color={'default'} checked={true}/>
-    <Switch color={'grey'} checked={true}/>
-    <hr/>
-    <Switch checked={true}/>
-    <br/><br/>
-    <Switch checked={false}/>
-    <hr/>
-    <Switch onChange={(props) => {console.log(props)}}/> // todo find a cool method
+    {sizes.map(size => {
+      return <>
+        {colors.map(color => {
+          return <>
+            <Switch checked={true} color={color} size={size}/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </>
+        })}
+        <Switch checked={false} size={size}/>
+        <br/><br/>
+      </>
+    })}
+    {colors.map(color => {
+      return <>
+        <Switch checked={true} color={color} disabled={true}/>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </>
+    })}
+    <Switch checked={false} disabled={true}/>
   </>
 )
 
