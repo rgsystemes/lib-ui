@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { css } from '@styled-system/css'
 
-const BaseSwitch = ({ className, onChange, checked = false, size = 'medium', ...props }) => {
+const variants = {
+  primary: {
+    background: 'primary',
+    color: 'secondary'
+  },
+  success: {
+    background: 'success',
+    color: 'secondary'
+  },
+  default: {
+    background: 'default',
+    color: 'text'
+  },
+  grey: {
+    background: 'lightgray',
+    color: 'text'
+  },
+}
+
+const BaseSwitch = ({ className, onChange = () => {}, checked = false, size = 'medium', color = 'primary', ...props }) => {
   const [state, setState] = useState(checked)
 
   const onClick = (onChange) => () => {
-    setState(!state)
-    onChange()
+    const newState = !state
+    setState(newState)
+    onChange({
+      target: {
+        checked: newState
+      }
+    })
   }
 
   return <div className={`${className} ${size === 'medium' ? '' : size === 'small' ? 'switch-small' : 'switch-smallest'}`} onClick={onClick(onChange)} { ...props }>
@@ -24,24 +49,17 @@ const BootstrapSwitchBtn = `
   margin-bottom: 0;
   text-align: center;
   white-space: nowrap;
-  vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-image: none;
-  color: #333;
-  background-color: #fff;
   position: absolute;
   margin: 0;
   top: 0;
-  bottom: 0;
 `
 
 const StyledSwitch = styled(BaseSwitch)`
   font-family: sans-serif;
   width: 57px;
   height: 32px;
-  color: #333;
-  background-color: #fff;
   display: inline-block;
   margin-bottom: 0;
   font-size: 14px;
@@ -51,7 +69,6 @@ const StyledSwitch = styled(BaseSwitch)`
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  user-select: none;
   background-image: none;
   border: 1px solid #adadad;
   border-radius: 4px;
@@ -63,12 +80,9 @@ const StyledSwitch = styled(BaseSwitch)`
   }
   
   & > .switch-group {
-    color: #333;
-    line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
-    left: -100%;
     position: absolute;
     width: 200%;
     top: 0;
@@ -78,9 +92,13 @@ const StyledSwitch = styled(BaseSwitch)`
     
     & > .switch-on {
       ${BootstrapSwitchBtn}
-      background-color: #428bca;
-      border-color: #428bca;
-      color: #fff;
+      ${({ color }) => {
+        const variant = variants[color] || variants.primary
+        return css({
+          backgroundColor: variant.background,
+          color: variant.color,
+        })
+      }};
       left: 0;
       padding-right: 24px;
       right: 50%;
@@ -89,7 +107,6 @@ const StyledSwitch = styled(BaseSwitch)`
     & > .switch-off {
       ${BootstrapSwitchBtn}
       background-color: #e6e6e6;
-      border-color: #adadad;
       color: #333;
       left: 50%;
       padding-left: 24px;
@@ -98,6 +115,7 @@ const StyledSwitch = styled(BaseSwitch)`
     
     & > .switch-slider {
       ${BootstrapSwitchBtn}
+      background-color: #fff;
       position: relative;
       margin: 0 auto;
       padding-top: 0px;
@@ -143,7 +161,7 @@ const StyledSwitch = styled(BaseSwitch)`
     
     & .switch-off {
       padding-top: 2px;
-      padding-left: 13px;
+      padding-left: 12px;
     }
     
     & .switch-slider {
@@ -158,12 +176,9 @@ export const Switch = ({ ...props }) => {
 }
 
 // TODO trim whitespaces
-// TODO Prop style
 // TODO Prop disabled
-// TODO Prop callbacks
 // TODO hover lol
 // TODO border de la bonne couleur
-// TODO text placement
-// TODO duplicated css
+// TODO utiliser large au lieu de smallest?
 
 export default Switch

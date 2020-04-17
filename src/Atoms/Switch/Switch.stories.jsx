@@ -21,10 +21,16 @@ export const switchAtom = () => (
     <Switch size={'smallest'}/>
     <br/><br/>
     <Switch size={'smallest'} checked={true}/>
+    <Switch color={'secondary'} checked={true}/>
+    <Switch color={'success'} checked={true}/>
+    <Switch color={'default'} checked={true}/>
+    <Switch color={'grey'} checked={true}/>
     <hr/>
     <Switch checked={true}/>
     <br/><br/>
     <Switch checked={false}/>
+    <hr/>
+    <Switch onChange={(props) => {console.log(props)}}/> // todo find a cool method
   </>
 )
 

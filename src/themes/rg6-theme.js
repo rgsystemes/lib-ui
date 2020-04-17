@@ -9,6 +9,7 @@ export const colors = {
   lightgray:  '#e6e6e6',
   midgray:    '#adadad',
   gray:       '#777',
+  success:    '#5cb85c',
 }
 
 export const shadows = {
