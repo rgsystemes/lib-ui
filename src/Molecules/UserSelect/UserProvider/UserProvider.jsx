@@ -1,29 +1,35 @@
-import React, { useMemo, Children } from 'react'
+import React, { useMemo } from 'react'
 
 import UsersContext from '../UsersContext'
 
 const UserProvider = ({
-  children, users = [], values = [], onChange = () => {},
+  children, options = [], values = [],
 }) => {
+  if (!Array.isArray(values)) {
+    values = [values]
+  }
   const { labels, avatars, statuses } = useMemo(
-    () => Children.toArray(users).reduce(
-      (acc, child) => Object.assign(acc, {
-        labels:   Object.assign(acc.labels, { [child.props.value]: child.props.label || child.props.children }),
-        avatars:  Object.assign(acc.avatars, { [child.props.value]: child.props.avatar }),
-        statuses: Object.assign(acc.statuses, { [child.props.value]: child.props.status }),
+    () => options.reduce(
+      (acc, option) => Object.assign(acc, {
+        labels:   Object.assign(acc.labels, { [option.value]: option.label || option.children }),
+        avatars:  Object.assign(acc.avatars, { [option.value]: option.avatar }),
+        statuses: Object.assign(acc.statuses, { [option.value]: option.status }),
       }),
       {
-        labels:   {},
+        labels: values.reduce(
+          (acc, value) => typeof (value) === 'string' && value.indexOf('@')            ? Object.assign(acc, { [value]: value }) :
+          acc,
+          {},
+        ),
         avatars:  {},
-        statuses: {},
+        statuses: values.reduce(
+          (acc, value) => typeof (value) === 'string' && value.indexOf('@')            ? Object.assign(acc, { [value]: 'warning' }) :
+          acc,
+          {},
+        ),
       },
     ),
-    [children],
-  )
-
-  const toggleValue = value => onChange(
-    values.includes(value) ? values.filter(v => v !== value) :
-    [...values, value],
+    [options],
   )
 
   return (
@@ -31,7 +37,7 @@ const UserProvider = ({
       labels,
       avatars,
       statuses,
-      toggleValue,
+      values,
     }}>
       {children}
     </UsersContext.Provider>

@@ -5,6 +5,16 @@ import '@testing-library/jest-dom/extend-expect'
 
 import UserSelect, { User } from './index'
 
+// required until jsdom>=16 (https://github.com/mui-org/material-ui/issues/15726#issuecomment-493124813)
+global.document.createRange = () => ({
+  setStart:                () => {},
+  setEnd:                  () => {},
+  commonAncestorContainer: {
+    nodeName:      'BODY',
+    ownerDocument: document,
+  },
+})
+
 const StateHolder = ({ children = () => {}, state = [] }) => {
   const [values, setValues] = useState(state)
 
@@ -51,7 +61,7 @@ it.each([
 })
 
 it('should add item in the list', async () => {
-  const { getByLabelText, findByText, findByTestId } = render(
+  const { getByRole, findByText, findByTestId } = render(
     <StateHolder>
       {([values, onChange]) => (
         <UserSelect id="test" label="test" values={values} onChange={onChange}>
@@ -61,14 +71,14 @@ it('should add item in the list', async () => {
     </StateHolder>,
   )
 
-  user.click(getByLabelText('test'))
+  user.click(getByRole('combobox'))
   user.click(await findByText('user'))
 
   expect(await findByTestId('values')).toContainElement(await findByTestId('value-1'))
 })
 
 it('should remove item of the list', async () => {
-  const { getByLabelText, getByTestId, findAllByText } = render(
+  const { getByRole, getByTestId, findAllByText } = render(
     <StateHolder state={[1]}>
       {([values, onChange]) => (
         <UserSelect id="test" label="test" values={values} onChange={onChange}>
@@ -78,7 +88,7 @@ it('should remove item of the list', async () => {
     </StateHolder>,
   )
 
-  user.click(getByLabelText('test'))
+  user.click(getByRole('combobox'))
   user.click((await findAllByText('user')).find(node => !node.classList.contains('MuiChip-label')))
 
   expect(getByTestId('values')).toBeEmpty()

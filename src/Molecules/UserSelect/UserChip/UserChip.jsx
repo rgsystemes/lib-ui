@@ -5,9 +5,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyles({
   common: {
-    marginLeft:   2,
-    marginRight:  2,
-    marginBottom: 8,
+    margin: '3px 2px',
   },
   hasStatus: {
     color: success.contrastText,
