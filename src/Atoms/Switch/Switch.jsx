@@ -59,7 +59,7 @@ const BaseSwitch = ({ className, disabled = false, onChange = () => {}, checked 
     <div className={`switch-group ${state ? 'switch-checked' : ''}`}>
       <label className={'switch-on button'}>On</label>
       <label className={'switch-off button'}>Off</label>
-      <span className={'switch-slider button'}/>
+      <span className={'switch-slider button'} />
     </div>
   </div>
 }
