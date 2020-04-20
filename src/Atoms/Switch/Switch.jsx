@@ -36,7 +36,7 @@ const variants = {
 const BaseSwitch = ({ className, disabled = false, onChange = () => {}, checked = false, size = 'medium', color = 'primary', ...props }) => {
   const [state, setState] = useState(checked)
 
-  const onClick = (onChange) => () => {
+  const onClick = () => {
     if (disabled)
       return
 
@@ -50,33 +50,19 @@ const BaseSwitch = ({ className, disabled = false, onChange = () => {}, checked 
   }
 
   const classes = classNames(className, {
-    size: size === 'medium' ? '' : size === 'small' ? 'switch-small' : 'switch-smallest',
     'switch-small': size === 'small',
     'switch-smallest': size === 'smallest',
     disabled: disabled
   })
 
-  return <div className={classes} onClick={onClick(onChange)} { ...props }>
+  return <div className={classes} onClick={onClick} { ...props }>
     <div className={`switch-group ${state ? 'switch-checked' : ''}`}>
-      <label className={'switch-on'}>On</label>
-      <label className={'switch-off'}>Off</label>
-      <span className={'switch-slider'}/>
+      <label className={'switch-on button'}>On</label>
+      <label className={'switch-off button'}>Off</label>
+      <span className={'switch-slider button'}/>
     </div>
   </div>
 }
-
-const BootstrapSwitchBtn = `
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  text-align: center;
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
-  position: absolute;
-  margin: 0;
-  top: 0;
-`
 
 const StyledSwitch = styled(BaseSwitch)`
   font-family: sans-serif;
@@ -97,6 +83,19 @@ const StyledSwitch = styled(BaseSwitch)`
   position: relative;
   overflow: hidden;
   
+  & .button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    margin: 0;
+    top: 0;
+  }
+  
   & > .switch-group :not(.switch-checked) {
     left: -100%
   }
@@ -113,7 +112,6 @@ const StyledSwitch = styled(BaseSwitch)`
     transition: left 0.35s;
     
     & > .switch-on {
-      ${BootstrapSwitchBtn}
       ${({ color, disabled }) => {
         const variant = variants[color] || variants.primary
         return css({
@@ -139,7 +137,6 @@ const StyledSwitch = styled(BaseSwitch)`
     }
     
     & > .switch-off {
-      ${BootstrapSwitchBtn}
       ${({ disabled }) => {
         return css({
           backgroundColor: disabled ? '#efefef' : '#e6e6e6',
@@ -163,7 +160,6 @@ const StyledSwitch = styled(BaseSwitch)`
     }
     
     & > .switch-slider {
-      ${BootstrapSwitchBtn}
       background-color: #fff;
       position: relative;
       margin: 0 auto;
@@ -225,22 +221,6 @@ const StyledSwitch = styled(BaseSwitch)`
     * {
       cursor: not-allowed;
     }
-    
-    & .switch-group {
-      cursor: not-allowed;
-    }
-  
-    & .switch-on {
-      cursor: not-allowed;
-    }
-    
-    & .switch-off {
-      cursor: not-allowed;
-    }
-    
-    & .switch-slider {
-      cursor: not-allowed;
-    }
   }
 `
 
@@ -250,6 +230,8 @@ export const Switch = ({ ...props }) => {
 
 // TODO trim whitespaces
 // TODO redo colors
+// TODO espaces avnat  />
+// TODO utiliser makestyles (à confirmer) makeStyles(theme => createStyles({
 // TODO border de la bonne couleur
 // TODO utiliser large au lieu de smallest?
 

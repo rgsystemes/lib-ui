@@ -1,6 +1,7 @@
 import React from 'react'
 import Switch from './index'
 import markdown from './README.md'
+import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Atoms/Switch',
@@ -30,6 +31,8 @@ export const switchAtom = () => (
       </>
     })}
     <Switch checked={false} disabled={true}/>
+    <br/><br/>
+    <Switch onChange={action('onChange')}/>
   </>
 )
 
