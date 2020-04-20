@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
 
@@ -16,13 +16,18 @@ global.document.createRange = () => ({
 })
 
 const StateHolder = ({ children = () => {}, state = [] }) => {
-  const [values, setValues] = useState(state)
+  const [values, onChange] = useState(state)
+  const [errors, setErrors] = useState([])
+  const onError = data => setErrors(errors.concat(data))
 
   return <>
-    <div data-testid='values'>
+    <div data-testid="values">
       {values.map(value => <div key={value} data-testid={`value-${value}`} />)}
     </div>
-    {children([values, setValues])}
+    <div data-testid="errors">
+      {errors.map(({ error }) => <div key={error} data-testid={`error-${error}`} />)}
+    </div>
+    {children({ values, onChange, onError })}
   </>
 }
 
@@ -61,10 +66,10 @@ it.each([
 })
 
 it('should add item in the list', async () => {
-  const { getByRole, findByText, findByTestId } = render(
+  const { getByRole, getByTestId, findByText, findByTestId } = render(
     <StateHolder>
-      {([values, onChange]) => (
-        <UserSelect id="test" label="test" values={values} onChange={onChange}>
+      {({ ...props }) => (
+        <UserSelect {...props}>
           <User value={1}>user</User>
         </UserSelect>
       )}
@@ -74,14 +79,14 @@ it('should add item in the list', async () => {
   user.click(getByRole('combobox'))
   user.click(await findByText('user'))
 
-  expect(await findByTestId('values')).toContainElement(await findByTestId('value-1'))
+  expect(getByTestId('values')).toContainElement(await findByTestId('value-1'))
 })
 
 it('should remove item of the list', async () => {
   const { getByRole, getByTestId, findAllByText } = render(
     <StateHolder state={[1]}>
-      {([values, onChange]) => (
-        <UserSelect id="test" label="test" values={values} onChange={onChange}>
+      {({ ...props }) => (
+        <UserSelect {...props}>
           <User value={1}>user</User>
         </UserSelect>
       )}
@@ -97,8 +102,8 @@ it('should remove item of the list', async () => {
 it('should remove item of the list using chip', () => {
   const { getByText, getByTestId } = render(
     <StateHolder state={[1]}>
-      {([values, onChange]) => (
-        <UserSelect id="test" values={values} onChange={onChange}>
+      {({ ...props }) => (
+        <UserSelect {...props}>
           <User value={1}>user</User>
         </UserSelect>
       )}
@@ -108,4 +113,54 @@ it('should remove item of the list using chip', () => {
   user.click(getByText('user').nextSibling)
 
   expect(getByTestId('values')).toBeEmpty()
+})
+
+it('should add custom option matching email', async () => {
+  const { getByPlaceholderText, getByTestId, findByTestId } = render(
+    <StateHolder>
+      {({ ...props }) => (
+        <UserSelect placeholder="add" {...props} />
+      )}
+    </StateHolder>,
+  )
+
+  const input = getByPlaceholderText('add')
+  fireEvent.change(input, { target: { value: 'a@a' } })
+  fireEvent.keyDown(input, { key: 'Enter' })
+
+  expect(getByTestId('values')).toContainElement(await findByTestId('value-a@a'))
+})
+
+it('should trigger error handler when custom option does not match email', async () => {
+  const { getByPlaceholderText, getByTestId, findByTestId } = render(
+    <StateHolder>
+      {({ ...props }) => (
+        <UserSelect placeholder="add" {...props} />
+      )}
+    </StateHolder>,
+  )
+
+  const input = getByPlaceholderText('add')
+  fireEvent.change(input, { target: { value: 'a' } })
+  fireEvent.keyDown(input, { key: 'Enter' })
+
+  expect(getByTestId('errors')).toContainElement(await findByTestId('error-email_validation_failed'))
+})
+
+it('should trigger error handler when custom option is already added', async () => {
+  const { getByPlaceholderText, getByTestId, findByTestId } = render(
+    <StateHolder>
+      {({ ...props }) => (
+        <UserSelect placeholder="add" {...props} />
+      )}
+    </StateHolder>,
+  )
+
+  const input = getByPlaceholderText('add')
+  fireEvent.change(input, { target: { value: 'a@a' } })
+  fireEvent.keyDown(input, { key: 'Enter' })
+  fireEvent.change(input, { target: { value: 'a@a' } })
+  fireEvent.keyDown(input, { key: 'Enter' })
+
+  expect(getByTestId('errors')).toContainElement(await findByTestId('error-email_already_exist'))
 })
