@@ -16,6 +16,7 @@ const autocompleteStyles = makeStyles(theme => createStyles({
     border:                              '0 !important', // FIXME: refacto input instead
     borderBottomLeftRadius:              '0 !important', // FIXME: refacto input instead
     borderBottomRightRadius:             '0 !important', // FIXME: refacto input instead
+    height:                              'auto !important', // FIXME: refacto input instead
     minHeight:                           50,
     '&[class*="MuiOutlinedInput-root"]': {
       paddingTop:                                     6,
@@ -38,8 +39,7 @@ const autocompleteStyles = makeStyles(theme => createStyles({
       },
     },
     '& input': {
-      padding:  '9.5px 4px !important', // FIXME: refacto input instead
-      minWidth: '75px', // FIXME: https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L446-L452
+      minWidth: '75px !important', // FIXME: https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L447-L453
     },
   },
   option: {
