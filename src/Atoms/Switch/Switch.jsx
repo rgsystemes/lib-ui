@@ -28,7 +28,7 @@ const variants = {
     background: 'default',
     color: 'text',
     hover: '#e6e6e6',
-    borderColor: '#7a7a7a',
+    borderColor: '#ccc',
     disabled: {
       background: 'default',
       color: '#7a7a7a',
