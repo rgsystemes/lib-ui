@@ -8,6 +8,7 @@ const variants = {
     background: 'primary',
     color: 'secondary',
     hover: '#00859a',
+    borderColor: 'primary',
     disabled: {
       background: '#59bfce',
       color: '#c5e9ee',
@@ -17,6 +18,7 @@ const variants = {
     background: 'success',
     color: 'secondary',
     hover: '#449d44',
+    borderColor: 'success',
     disabled: {
       background: '#95d195',
       color: '#daefda',
@@ -26,6 +28,7 @@ const variants = {
     background: 'default',
     color: 'text',
     hover: '#e6e6e6',
+    borderColor: '#7a7a7a',
     disabled: {
       background: 'default',
       color: '#7a7a7a',
@@ -50,13 +53,14 @@ const BaseSwitch = ({ className, disabled = false, onChange = () => {}, checked 
   }
 
   const classes = classNames(className, {
+    disabled: disabled,
     'switch-small': size === 'small',
     'switch-smallest': size === 'smallest',
-    disabled: disabled
+    'switch-checked': state,
   })
 
   return <div className={classes} onClick={onClick} { ...props }>
-    <div className={`switch-group ${state ? 'switch-checked' : ''}`}>
+    <div className={'switch-group'}>
       <label className={'switch-on button'}>On</label>
       <label className={'switch-off button'}>Off</label>
       <span className={'switch-slider button'} />
@@ -96,8 +100,17 @@ const StyledSwitch = styled(BaseSwitch)`
     top: 0;
   }
   
-  & > .switch-group :not(.switch-checked) {
-    left: -100%
+  &.switch-checked {
+    ${({ color, disabled }) => {
+      const variant = variants[color] || variants.primary
+      return css({
+        borderColor: disabled ? variant.disabled.background : variant.borderColor,
+      })
+    }};
+  }
+  
+  & :not(.switch-checked) > .switch-group {
+    left: -100%;
   }
   
   & > .switch-group {
@@ -228,11 +241,7 @@ export const Switch = ({ ...props }) => {
   return <StyledSwitch { ...props } />
 }
 
-// TODO trim whitespaces
-// TODO redo colors
-// TODO espaces avnat  />
 // TODO utiliser makestyles (à confirmer) makeStyles(theme => createStyles({
-// TODO border de la bonne couleur
 // TODO utiliser large au lieu de smallest?
 
 export default Switch
