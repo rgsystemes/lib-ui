@@ -1,8 +1,6 @@
 import React, { forwardRef } from 'react'
-import BaseButton from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles';
-
-const UncoloredButton = forwardRef(({ color, ...props }, ref) => <BaseButton {...props} ref={ref}/>)
+import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,14 +22,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }))
-
-
 const ButtonNoBorder = ({ className, children, ...props }) => {
+  const classes = useStyles()
   return <>
-    <UncoloredButton className={useStyles().root} { ...props }>
+    <Button classes={classes} { ...props }>
       <div className={'circle'}>+</div>
       {children}
-    </UncoloredButton>
+    </Button>
   </>
 }
 
@@ -39,7 +36,6 @@ ButtonNoBorder.defaultProps = {
   disableRipple: true,
   disableFocusRipple: true,
 }
-
 
 export default ButtonNoBorder
 
