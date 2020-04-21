@@ -37,6 +37,8 @@ export const formControl = () => {
   const helpText = text('Help text', 'Help text')
   const disabled = boolean('Disabled', false)
   const [date, setDate] = useState(new Date())
+  const [option, setOption] = useState('')
+  const handleChange = event => (setOption(event.target.value) && action('Select changed'))
 
   return <Container>
     <FormControl error={errorState} disabled={disabled}>
@@ -51,11 +53,8 @@ export const formControl = () => {
     <FormControl error={errorState} disabled={disabled}>
       <InputLabel>
         {label}
-        <Select onChange={action('Select changed')}>
-          <option value="0">
-          Choose an option
-          </option>
-          {options.map(({ value, label }) => <option value={value}>{label}</option>)}
+        <Select value={option} onChange={handleChange}>
+          {options.map(({ value, label }) => <option value={value} key={value}>{label}</option>)}
         </Select>
       </InputLabel>
       <FormHelperText>
@@ -70,7 +69,7 @@ export const formControl = () => {
         onChange={action('Radio group changed')}
       >
         {options.map(({ value, label }) =>
-          <FormControlLabel value={value} control={<Radio />} label={label} />,
+          <FormControlLabel value={value} key={value} control={<Radio />} label={label} />,
         )}
       </RadioGroup>
     </FormControl>
@@ -85,6 +84,7 @@ export const formControl = () => {
           <FormControlLabel
             control={<Checkbox value={value} onChange={action('Checkbox changed')}/>}
             label={label}
+            key={value}
           />,
         )}
       </FormGroup>

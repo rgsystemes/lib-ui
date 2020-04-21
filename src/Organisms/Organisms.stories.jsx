@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 export default { title: 'Organisms' }
 
-const Container = styled.p`
+const Container = styled.div`
   max-width: 750px;
   font-family: sans-serif;
   color: #4D4339;

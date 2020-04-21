@@ -72,7 +72,7 @@ const InnerInput = ({
       Empty={() => null}
       {...props}
     >
-      {options.map(({ value, label }) => <option value={value}>{t(label)}</option>)}
+      {options.map(({ value, label }) => <option value={value} key={value}>{t(label)}</option>)}
     </Select>
   ) : (
     <Input
