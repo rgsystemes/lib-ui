@@ -1,5 +1,13 @@
 # lib-ui
 
+## Setup
+
+```sh
+npm install
+npm run test
+npm run storybook
+```
+
 ## plop
 
 In order to simplify component creation, *plop* has been added and configured to generate pre-filled components files.
