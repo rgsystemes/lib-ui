@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -38,6 +38,3 @@ ButtonNoBorder.defaultProps = {
 }
 
 export default ButtonNoBorder
-
-// TODO fix Warning: Failed prop type: The prop `children` is marked as required in `ForwardRef(Button)`, but its value is `undefined`.
-// TODO check the forward ref usage

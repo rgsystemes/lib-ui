@@ -7,8 +7,6 @@ export default {
   title: 'Atoms/ButtonNoBorder',
 }
 
-// TODO wtf with the perfs???
-
 export const buttonNoBorder = () => (
   <ButtonNoBorder onClick={action('onClick')}>Add</ButtonNoBorder>
 )
