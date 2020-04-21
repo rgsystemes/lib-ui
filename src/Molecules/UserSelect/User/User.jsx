@@ -8,12 +8,6 @@ import Typo from '../../../Atoms/Typo'
 import FlexBox from '../../../Templates/FlexBox'
 import UsersContext from '../UsersContext'
 
-const flexBoxStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-})
-
 const avatarStyles = makeStyles({
   root: {
     width:  25,
@@ -22,9 +16,11 @@ const avatarStyles = makeStyles({
 })
 
 export const User = ({
-  children, value, avatar, status,
+  children,
+  value,
+  avatar,
+  status,
 }) => {
-  const flexBoxClasses = flexBoxStyles()
   const avatarClasses = avatarStyles()
   const { values } = useContext(UsersContext)
   const selected = values.includes(value)
@@ -34,12 +30,12 @@ export const User = ({
       alignItems="center"
       height={32}
       gap={1}
-      classes={flexBoxClasses}
+      flexGrow={1}
     >
-      <FlexBox component={selected ? Check : null} alignItems="center" width={45} size={25} marginLeft={1} />
-      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatarClasses} />
+      <FlexBox component={selected ? Check : null} width={45} size={25} marginLeft={1} />
+      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatar ? avatarClasses : null} />
       <FlexBox flexGrow={1} component={Typo}>{children}</FlexBox>
-      <FlexBox component={status ? Circle : null} alignItems="center" color={`${status}.main`} width={60} size={25} title={status} />
+      <FlexBox component={status ? Circle : null} color={`${status}.main`} width={60} size={25} title={status} />
     </FlexBox>
   )
 }

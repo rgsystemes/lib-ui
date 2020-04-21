@@ -77,7 +77,14 @@ const formControlStyles = makeStyles({
 })
 
 const UserSelect = ({
-  children, id = '', label = '', placeholder = '', values = [], onChange = () => {}, onError = () => {}, ...props
+  children,
+  id = '',
+  label = '',
+  placeholder = '',
+  values = [],
+  onChange = () => {},
+  onError = () => {},
+  ...props
 }) => {
   const [open, setOpen] = useState(false)
   const t = useTranslation()

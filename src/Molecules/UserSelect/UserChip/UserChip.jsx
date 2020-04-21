@@ -19,7 +19,12 @@ const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyle
 }))
 
 const UserChip = ({
-  value, label, avatar, status, onDelete = () => {}, ...props
+  value,
+  label,
+  avatar,
+  status,
+  onDelete = () => {},
+  ...props
 }) => {
   const chipClasses = chipStyles()
 

@@ -4,7 +4,9 @@ import UserChip from '../UserChip'
 import UsersContext from '../UsersContext'
 
 const UserChips = ({
-  values = [], onChange = () => {}, ...props
+  values = [],
+  onChange = () => {},
+  ...props
 }) => {
   const { labels, avatars, statuses } = useContext(UsersContext)
 

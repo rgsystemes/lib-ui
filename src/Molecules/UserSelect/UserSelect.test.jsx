@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { cloneElement, useState, Children } from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
@@ -27,7 +27,7 @@ const StateHolder = ({ children = () => {}, state = [] }) => {
     <div data-testid="errors">
       {errors.map(({ error }) => <div key={error} data-testid={`error-${error}`} />)}
     </div>
-    {children({ values, onChange, onError })}
+    {cloneElement(Children.only(children), { values, onChange, onError })}
   </>
 }
 
@@ -68,11 +68,9 @@ it.each([
 it('should add item in the list', async () => {
   const { getByRole, getByTestId, findByText, findByTestId } = render(
     <StateHolder>
-      {({ ...props }) => (
-        <UserSelect {...props}>
-          <User value={1}>user</User>
-        </UserSelect>
-      )}
+      <UserSelect>
+        <User value={1}>user</User>
+      </UserSelect>
     </StateHolder>,
   )
 
@@ -85,11 +83,9 @@ it('should add item in the list', async () => {
 it('should remove item of the list', async () => {
   const { getByRole, getByTestId, findAllByText } = render(
     <StateHolder state={[1]}>
-      {({ ...props }) => (
-        <UserSelect {...props}>
-          <User value={1}>user</User>
-        </UserSelect>
-      )}
+      <UserSelect>
+        <User value={1}>user</User>
+      </UserSelect>
     </StateHolder>,
   )
 
@@ -102,11 +98,9 @@ it('should remove item of the list', async () => {
 it('should remove item of the list using chip', () => {
   const { getByText, getByTestId } = render(
     <StateHolder state={[1]}>
-      {({ ...props }) => (
-        <UserSelect {...props}>
-          <User value={1}>user</User>
-        </UserSelect>
-      )}
+      <UserSelect>
+        <User value={1}>user</User>
+      </UserSelect>
     </StateHolder>,
   )
 
@@ -118,9 +112,7 @@ it('should remove item of the list using chip', () => {
 it('should add custom option matching email', async () => {
   const { getByPlaceholderText, getByTestId, findByTestId } = render(
     <StateHolder>
-      {({ ...props }) => (
-        <UserSelect placeholder="add" {...props} />
-      )}
+      <UserSelect placeholder="add" />
     </StateHolder>,
   )
 
@@ -134,9 +126,7 @@ it('should add custom option matching email', async () => {
 it('should trigger error handler when custom option does not match email', async () => {
   const { getByPlaceholderText, getByTestId, findByTestId } = render(
     <StateHolder>
-      {({ ...props }) => (
-        <UserSelect placeholder="add" {...props} />
-      )}
+      <UserSelect placeholder="add" />
     </StateHolder>,
   )
 
@@ -150,9 +140,7 @@ it('should trigger error handler when custom option does not match email', async
 it('should trigger error handler when custom option is already added', async () => {
   const { getByPlaceholderText, getByTestId, findByTestId } = render(
     <StateHolder>
-      {({ ...props }) => (
-        <UserSelect placeholder="add" {...props} />
-      )}
+      <UserSelect placeholder="add" />
     </StateHolder>,
   )
 

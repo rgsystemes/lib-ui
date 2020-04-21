@@ -38,7 +38,15 @@ export const userSelect = () => {
             useState: useState([1]),
           },
         ].map(({ id, label, useState: [state, setState] }, key) => (
-          <UserSelect key={key} id={id} label={label} values={state} onChange={value => action('change')(value) || setState(value)} onError={error => action('error')(error) || handleError(error)} placeholder="Select a jedi or add one">
+          <UserSelect
+            key={key}
+            id={id}
+            label={label}
+            values={state}
+            onChange={value => action('change')(value) || setState(value)}
+            onError={error => action('error')(error) || handleError(error)}
+            placeholder="Select a jedi or add one"
+          >
             <User value={1} avatar="//material-ui.com/static/images/avatar/1.jpg">
               Obi-Wan Kenobi
             </User>
