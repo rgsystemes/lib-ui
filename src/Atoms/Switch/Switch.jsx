@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => {
@@ -246,7 +246,7 @@ export const Switch = ({ className, disabled = false, onChange = () => {}, check
     })
   }
 
-  const classes = classNames(className, `switch-${size}`, `switch-color-${color}`, useStyles().root, {
+  const classes = clsx(className, `switch-${size}`, `switch-color-${color}`, useStyles().root, {
     disabled: disabled,
     'switch-checked': state,
   })
@@ -259,7 +259,5 @@ export const Switch = ({ className, disabled = false, onChange = () => {}, check
     </div>
   </div>
 }
-
-// TODO TU lul
 
 export default Switch
