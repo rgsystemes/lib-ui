@@ -69,6 +69,9 @@ const useStyles = makeStyles(theme => {
       '&:not(.switch-checked) .switch-group': {
         left: '-100%',
       },
+      '&:not(.disabled):hover': {
+        borderColor: '#a4a4a4',
+      },
       '& > .switch-group': {
         textAlign: 'center',
         whiteSpace: 'nowrap',
@@ -146,7 +149,7 @@ const useStyles = makeStyles(theme => {
       '&.disabled': {
         borderColor: '#dedede',
         cursor: 'not-allowed',
-        '*': {
+        '& *': {
           cursor: 'not-allowed',
         },
         '& > .switch-group': {
@@ -164,6 +167,10 @@ const useStyles = makeStyles(theme => {
         '& .switch-on': {
           backgroundColor: variants.primary.background,
           color: variants.primary.color,
+        },
+        '&:not(.disabled) .switch-on:hover': {
+          backgroundColor: variants.primary.hover,
+          borderColor: variants.primary.hover,
         },
         '&.disabled': {
           '&.switch-checked': {
@@ -183,6 +190,10 @@ const useStyles = makeStyles(theme => {
           backgroundColor: variants.success.background,
           color: variants.success.color,
         },
+        '&:not(.disabled) .switch-on:hover': {
+          backgroundColor: variants.success.hover,
+          borderColor: variants.success.hover,
+        },
         '&.disabled': {
           '&.switch-checked': {
             borderColor: variants.success.disabled.background,
@@ -200,6 +211,10 @@ const useStyles = makeStyles(theme => {
         '& .switch-on': {
           backgroundColor: variants.default.background,
           color: variants.default.color,
+        },
+        '&:not(.disabled) .switch-on:hover': {
+          backgroundColor: variants.default.hover,
+          borderColor: variants.default.hover,
         },
         '&.disabled': {
           '&.switch-checked': {
@@ -245,7 +260,6 @@ export const Switch = ({ className, disabled = false, onChange = () => {}, check
   </div>
 }
 
-// TODO utiliser large au lieu de smallest? > large
 // TODO TU lul
 
 export default Switch
