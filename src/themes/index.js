@@ -71,5 +71,6 @@ const base = {
   iconSizes,
 }
 
+export default base
 export const rg6 = { ...base, ...rg6Theme }
 export const dark = { ...base, ...darkTheme }
