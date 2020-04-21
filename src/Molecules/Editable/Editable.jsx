@@ -46,26 +46,35 @@ const Editable = ({
   label = '',
   Type = Input,
   value = '',
+  labelSize = 'title',
+  descriptionSize,
+  descriptionFontFamily,
   ...props
 }) => (
   edit ? <FormControl label={label} Type={Type} value={value} {...props}/> :
   <FlexBox onClick={() => onEdit(true)} gap={1} flexDirection="column">
     {!!label &&
-        <Typo fontSize="title" fontWeight="title" fontFamily="title">
+        <Typo fontSize={labelSize} fontWeight="title" fontFamily="title">
           {label}
         </Typo>
     }
-    <Description value={value} Type={Type} {...props}/>
+    <Description value={value} Type={Type} size={descriptionSize} fontFamily={descriptionFontFamily} {...props}/>
   </FlexBox>
 )
 
-const DefaultDescription = ({ Type, value, children }) =>
+const DefaultDescription = ({
+  Type,
+  value,
+  size = 'title',
+  fontFamily = '',
+  children,
+}) =>
   Type === Select ? (
     Children
       .toArray(children)
       .reduce((acc, child) => ({ ...acc, [child.props.value]: child.props.children }), {})[value]
   )    : Type === DateRange ? (
-    <FlexBox gap={2} as={Typo}>
+    <FlexBox gap={2} as={Typo} fontSize={size} fontFamily={fontFamily}>
       <span>{format(value.start, 'Pp')}</span>
       <ArrowRightAlt size={16} />
       <span>{format(value.end, 'Pp')}</span>
@@ -75,12 +84,12 @@ const DefaultDescription = ({ Type, value, children }) =>
       .toArray(children)
       .reduce((acc, child) => ({ ...acc, [child.props.value]: child.props.label }), {})[value]
   ) : Type === FormGroup ? (
-    <FlexBox as={Typo} gap={2}>
+    <FlexBox as={Typo} gap={2} fontSize={size}>
       {Object
         .entries(value)
         .filter(([name, value]) => !!value)
         .map(([name, value]) =>
-          <StatusChip>
+          <StatusChip key={`chip-${value}`}>
             {Children
               .toArray(children)
               .reduce((acc, child) => ({ ...acc, [child.props.control.props.value]: child.props.label }), {})[name]
@@ -89,7 +98,8 @@ const DefaultDescription = ({ Type, value, children }) =>
         )
       }
     </FlexBox>
-  ) :
-    value
+  ) : <FlexBox fontSize={size} fontFamily={fontFamily}>
+    {value}
+  </FlexBox>
 
 export default Editable
