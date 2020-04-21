@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => {
       hover: '#e6e6e6',
       borderColor: '#ccc',
       disabled: {
-        background: '#e6e6e6',
+        background: 'white',
         color: '#7a7a7a',
       },
     },
@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => {
   return {
     root: {
       fontFamily: 'sans-serif',
-      width: '57px',
-      height: '32px',
+      width: '53px',
+      height: '28px',
       display: 'inline-block',
       marginBottom: 0,
       fontSize: '14px',
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => {
       overflow: 'hidden',
       '& .button': {
         display: 'inline-block',
-        padding: '6px 12px',
+        padding: '4px 11px',
         marginBottom: 0,
         textAlign: 'center',
         whiteSpace: 'nowrap',
@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => {
         },
         '& > .switch-off': {
           left: '50%',
-          paddingLeft: '24px',
+          paddingLeft: '23px',
           right: 0,
           backgroundColor: '#e6e6e6',
         },
@@ -94,10 +94,9 @@ const useStyles = makeStyles(theme => {
           backgroundColor: '#fff',
           position: 'relative',
           margin: '0 auto',
-          paddingTop: '0px',
-          paddingBottom: '0px',
+          width: '2px',
+          padding: '0px 10px',
           height: '100%',
-          width: '4px',
           borderRadius: '4px',
           borderWidth: '0px 1px',
           borderColor: '#ccc',
@@ -105,25 +104,26 @@ const useStyles = makeStyles(theme => {
         },
       },
       // Sizes
-      '&.switch-small': {
-        width: '53px',
-        height: '28px',
+      '&.switch-large': {
+        width: '57px',
+        height: '31px',
         '& > .switch-group': {
           '& .switch-on': {
-            paddingTop: '4px',
-            paddingLeft: '11px',
+            paddingTop: '6px',
+            paddingLeft: '12px',
           },
           '& .switch-off': {
-            paddingTop: '4px',
-            paddingLeft: '23px',
+            paddingTop: '6px',
+            paddingLeft: '24px',
           },
           '& .switch-slider': {
-            width: '2px',
-            padding: '0px 10px',
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            width: '4px',
           },
         },
       },
-      '&.switch-smallest': {
+      '&.switch-small': {
         width: '34px',
         height: '20px',
         fontSize: '11px',
@@ -203,7 +203,7 @@ const useStyles = makeStyles(theme => {
         },
         '&.disabled': {
           '&.switch-checked': {
-            borderColor: variants.default.disabled.background,
+            borderColor: variants.default.borderColor,
           },
           '& .switch-on': {
             backgroundColor: variants.default.disabled.background,

@@ -8,7 +8,7 @@ export default {
 }
 
 const colors = ['primary', 'success', 'default']
-const sizes = ['medium', 'small', 'smallest']
+const sizes = ['large', 'normal', 'small']
 
 export const switchAtom = () => (
   <>
