@@ -8,7 +8,8 @@ export const formControlStyles = css`
   label > *,
   label > .MuiInputBase-root,
   label > .MuiTextField-root,
-  label + .MuiInputBase-root {
+  label + .MuiInputBase-root,
+  label + .MuiAutocomplete-root {
     ${systemCss({ marginTop: 's' })};
   }
 `
