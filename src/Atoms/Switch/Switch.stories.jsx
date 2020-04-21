@@ -16,23 +16,21 @@ export const switchAtom = () => (
       return <>
         {colors.map(color => {
           return <>
-            <Switch checked={true} color={color} size={size} />
+            <Switch checked={true} color={color} size={size} onChange={action('onChange')} />
             &nbsp;&nbsp;&nbsp;&nbsp;
           </>
         })}
-        <Switch checked={false} size={size} />
+        <Switch checked={false} size={size} onChange={action('onChange')} />
         <br/><br/>
       </>
     })}
     {colors.map(color => {
       return <>
-        <Switch checked={true} color={color} disabled={true} />
+        <Switch checked={true} color={color} disabled={true} onChange={action('onChange')} />
         &nbsp;&nbsp;&nbsp;&nbsp;
       </>
     })}
-    <Switch checked={false} disabled={true} />
-    <br/><br/>
-    <Switch onChange={action('onChange')} />
+    <Switch checked={false} disabled={true} onChange={action('onChange')} />
   </>
 )
 

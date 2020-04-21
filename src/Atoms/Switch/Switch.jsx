@@ -10,8 +10,9 @@ const useStyles = makeStyles(theme => {
       hover:       theme.palette.primary.dark,
       borderColor: theme.palette.primary.main,
       disabled:    {
-        background: theme.palette.primary.light,
-        color:      theme.palette.primary.contrastText,
+        background:  theme.palette.primary.light,
+        color:       theme.palette.primary.contrastText,
+        borderColor: theme.palette.primary.light,
       },
     },
     success: {
@@ -20,8 +21,9 @@ const useStyles = makeStyles(theme => {
       hover:       theme.palette.success.dark,
       borderColor: theme.palette.success.main,
       disabled:    {
-        background: theme.palette.success.light,
-        color:      theme.palette.success.contrastText,
+        background:  theme.palette.success.light,
+        color:       theme.palette.success.contrastText,
+        borderColor: theme.palette.success.light,
       },
     },
     default: {
@@ -30,17 +32,44 @@ const useStyles = makeStyles(theme => {
       hover:       '#e6e6e6',
       borderColor: '#ccc',
       disabled:    {
-        background: 'white',
-        color:      '#7a7a7a',
+        background:  'white',
+        color:       '#7a7a7a',
+        borderColor: '#ccc',
       },
     },
   }
 
+  let colors = {};
+  ['primary', 'success', 'default'].forEach(variant => {
+    colors[`&.switch-color-${variant}`] = {
+      '&.switch-checked': {
+        borderColor: variants[variant].borderColor,
+      },
+      '& .switch-on': {
+        backgroundColor: variants[variant].background,
+        color:           variants[variant].color,
+      },
+      '&:not(.disabled) .switch-on:hover': {
+        backgroundColor: variants[variant].hover,
+        borderColor:     variants[variant].hover,
+      },
+      '&.disabled': {
+        '&.switch-checked': {
+          borderColor: variants[variant].disabled.borderColor,
+        },
+        '& .switch-on': {
+          backgroundColor: variants[variant].disabled.background,
+          color:           variants[variant].disabled.color,
+        },
+      },
+    }
+  })
+
   return {
     root: {
       fontFamily:    'sans-serif',
-      width:         '53px',
-      height:        '28px',
+      width:         53,
+      height:        28,
       display:       'inline-block',
       marginBottom:  0,
       fontSize:      '14px',
@@ -51,7 +80,7 @@ const useStyles = makeStyles(theme => {
       verticalAlign: 'middle',
       cursor:        'pointer',
       border:        '1px solid #ccc',
-      borderRadius:  '4px',
+      borderRadius:  4,
       position:      'relative',
       overflow:      'hidden',
       '& .button':   {
@@ -84,12 +113,12 @@ const useStyles = makeStyles(theme => {
         transition:       'left 0.35s',
         '& > .switch-on': {
           left:         0,
-          paddingRight: '24px',
+          paddingRight: 24,
           right:        '50%',
         },
         '& > .switch-off': {
           left:            '50%',
-          paddingLeft:     '23px',
+          paddingLeft:     23,
           right:           0,
           backgroundColor: '#e6e6e6',
         },
@@ -97,10 +126,10 @@ const useStyles = makeStyles(theme => {
           backgroundColor: '#fff',
           position:        'relative',
           margin:          '0 auto',
-          width:           '2px',
+          width:           2,
           padding:         '0px 10px',
           height:          '100%',
-          borderRadius:    '4px',
+          borderRadius:    4,
           borderWidth:     '0px 1px',
           borderColor:     '#ccc',
           borderStyle:     'solid',
@@ -108,39 +137,39 @@ const useStyles = makeStyles(theme => {
       },
       // Sizes
       '&.switch-large': {
-        width:               '57px',
-        height:              '31px',
+        width:               57,
+        height:              31,
         '& > .switch-group': {
           '& .switch-on': {
-            paddingTop:  '6px',
-            paddingLeft: '12px',
+            paddingTop:  6,
+            paddingLeft: 12,
           },
           '& .switch-off': {
-            paddingTop:  '6px',
-            paddingLeft: '24px',
+            paddingTop:  6,
+            paddingLeft: 24,
           },
           '& .switch-slider': {
-            paddingTop:    '0px',
-            paddingBottom: '0px',
-            width:         '4px',
+            paddingTop:    0,
+            paddingBottom: 0,
+            width:         4,
           },
         },
       },
       '&.switch-small': {
-        width:               '34px',
-        height:              '20px',
-        fontSize:            '11px',
+        width:               34,
+        height:              20,
+        fontSize:            11,
         '& > .switch-group': {
           '& .switch-on': {
-            paddingTop:  '2px',
-            paddingLeft: '7px',
+            paddingTop:  2,
+            paddingLeft: 7,
           },
           '& .switch-off': {
-            paddingTop:  '2px',
-            paddingLeft: '12px',
+            paddingTop:  2,
+            paddingLeft: 12,
           },
           '& .switch-slider': {
-            width:   '1px',
+            width:   1,
             padding: '0px 5px',
           },
         },
@@ -159,84 +188,26 @@ const useStyles = makeStyles(theme => {
           },
         },
       },
-      // Color stuff
-      '&.switch-color-primary': {
-        '&.switch-checked': {
-          borderColor: variants.primary.borderColor,
-        },
-        '& .switch-on': {
-          backgroundColor: variants.primary.background,
-          color:           variants.primary.color,
-        },
-        '&:not(.disabled) .switch-on:hover': {
-          backgroundColor: variants.primary.hover,
-          borderColor:     variants.primary.hover,
-        },
-        '&.disabled': {
-          '&.switch-checked': {
-            borderColor: variants.primary.disabled.background,
-          },
-          '& .switch-on': {
-            backgroundColor: variants.primary.disabled.background,
-            color:           variants.primary.disabled.color,
-          },
-        },
-      },
-      '&.switch-color-success': {
-        '&.switch-checked': {
-          borderColor: variants.success.borderColor,
-        },
-        '& .switch-on': {
-          backgroundColor: variants.success.background,
-          color:           variants.success.color,
-        },
-        '&:not(.disabled) .switch-on:hover': {
-          backgroundColor: variants.success.hover,
-          borderColor:     variants.success.hover,
-        },
-        '&.disabled': {
-          '&.switch-checked': {
-            borderColor: variants.success.disabled.background,
-          },
-          '& .switch-on': {
-            backgroundColor: variants.success.disabled.background,
-            color:           variants.success.disabled.color,
-          },
-        },
-      },
-      '&.switch-color-default': {
-        '&.switch-checked': {
-          borderColor: variants.default.borderColor,
-        },
-        '& .switch-on': {
-          backgroundColor: variants.default.background,
-          color:           variants.default.color,
-        },
-        '&:not(.disabled) .switch-on:hover': {
-          backgroundColor: variants.default.hover,
-          borderColor:     variants.default.hover,
-        },
-        '&.disabled': {
-          '&.switch-checked': {
-            borderColor: variants.default.borderColor,
-          },
-          '& .switch-on': {
-            backgroundColor: variants.default.disabled.background,
-            color:           variants.default.disabled.color,
-          },
-        },
-      },
+      ...colors,
     },
   }
 })
 
 export const Switch = ({
-  className, disabled = false, onChange = () => {}, checked = false, size = 'medium', color = 'primary', ...props
+  className,
+  disabled = false,
+  onChange = () => {},
+  checked = false,
+  size = 'medium',
+  color = 'primary',
+  ...props
 }) => {
   const [state, setState] = useState(checked)
 
   const onClick = () => {
-    if (disabled) { return }
+    if (disabled) {
+      return
+    }
 
     const newState = !state
     setState(newState)
@@ -253,10 +224,10 @@ export const Switch = ({
   })
 
   return <div className={classes} onClick={onClick} { ...props }>
-    <div className={'switch-group'}>
-      <label className={'switch-on button'}>On</label>
-      <label className={'switch-off button'}>Off</label>
-      <span className={'switch-slider button'} />
+    <div className="switch-group">
+      <label className="switch-on button">On</label>
+      <label className="switch-off button">Off</label>
+      <span className="switch-slider button" />
     </div>
   </div>
 }

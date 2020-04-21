@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
+import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -15,21 +15,19 @@ const useStyles = makeStyles(theme => ({
       lineHeight:   '16px',
       border:       '2px solid',
       borderColor:  theme.palette.grey[600],
-      borderRadius: '12px',
-      width:        '16px',
-      height:       '16px',
-      marginRight:  '7px',
+      borderRadius: 12,
+      width:        16,
+      height:       16,
+      marginRight:  7,
     },
   },
 }))
 const ButtonNoBorder = ({ className, children, ...props }) => {
   const classes = useStyles()
-  return <>
-    <Button classes={classes} { ...props }>
+  return <Button classes={classes} { ...props }>
       <div className={'circle'}>+</div>
       {children}
-    </Button>
-  </>
+  </Button>
 }
 
 ButtonNoBorder.defaultProps = {
