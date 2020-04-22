@@ -26,7 +26,6 @@ export const header = () => {
     action('saved')(success)
 
     if (success) {
-      setSubFeature(value)
       resolve()
     } else {
       window.alert('error')
@@ -56,6 +55,7 @@ export const header = () => {
           feature="Molecules"
           featurePath="/?path=/story/molecules-header--header"
           subFeature={subFeature}
+          onChange={setSubFeature}
           onSave={value => action('save')(value) || handleSave(value)}
           actions={() => <ButtonGroup>
             <Icon button Component={Heart} onClick={() => action('click')('heart')} />
