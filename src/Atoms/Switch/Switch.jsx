@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => {
     },
   }
 
-  let colors = {};
+  const colors = {};
   ['primary', 'success', 'default'].forEach(variant => {
     colors[`&.switch-color-${variant}`] = {
       '&.switch-checked': {

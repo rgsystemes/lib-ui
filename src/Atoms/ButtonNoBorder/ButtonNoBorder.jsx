@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
 const ButtonNoBorder = ({ className, children, ...props }) => {
   const classes = useStyles()
   return <Button classes={classes} { ...props }>
-      <div className={'circle'}>+</div>
-      {children}
+    <div className={'circle'}>+</div>
+    {children}
   </Button>
 }
 
