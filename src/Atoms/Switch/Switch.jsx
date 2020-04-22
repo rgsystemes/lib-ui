@@ -39,9 +39,8 @@ const useStyles = makeStyles(theme => {
     },
   }
 
-  const colors = {};
-  ['primary', 'success', 'default'].forEach(variant => {
-    colors[`&.switch-color-${variant}`] = {
+  const colors = ['primary', 'success', 'default'].reduce((colors, variant) => Object.assign(colors, {
+    [`&.switch-color-${variant}`]: {
       '&.switch-checked': {
         borderColor: variants[variant].borderColor,
       },
@@ -63,7 +62,7 @@ const useStyles = makeStyles(theme => {
         },
       },
     }
-  })
+  }), {})
 
   return {
     root: {
