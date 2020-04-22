@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => {
           color:           variants[variant].disabled.color,
         },
       },
-    }
+    },
   }), {})
 
   return {
