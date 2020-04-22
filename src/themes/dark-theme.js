@@ -9,4 +9,5 @@ export const colors = {
   gray:       '#333',
   lightgray:  '#111',
   midgray:    '#222',
+  success:    '#5cb85c',
 }
