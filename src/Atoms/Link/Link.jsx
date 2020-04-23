@@ -5,7 +5,7 @@ import Typo from '../Typo'
 
 const Link = ({ ...props }) => (
   <Typo>
-    <BaseLink underline="hover" {...props} />
+    <BaseLink underline="hover" {...props} style={{ color: '#337AB7' }} />
   </Typo>
 )
 
