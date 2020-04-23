@@ -33,6 +33,7 @@ const Header = ({
     setValue(value)
     onChange(value)
   }
+
   const handleCancel = (catched = false) => {
     setEditing(catched)
     setSaving(false)
@@ -40,6 +41,7 @@ const Header = ({
       handleValue(subFeature)
     }
   }
+
   const handleSave = () => {
     setEditing(false)
     setSaving(true)
@@ -50,7 +52,12 @@ const Header = ({
       response = response ? Promise.resolve() : Promise.reject(new Error(JSON.stringify(response)))
     }
 
-    response.then(() => handleValue(value) || setSaving(false)).catch(handleCancel.bind(null, true))
+    response.then(() => {
+      setSaving(false)
+      handleValue(value)
+    }).catch(() => {
+      handleCancel(true)
+    })
   }
 
   return (
