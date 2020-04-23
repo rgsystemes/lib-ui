@@ -1,9 +1,12 @@
 import React, { cloneElement, useState, Children } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { render, fireEvent } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
 
-import UserSelect, { User } from './index'
+import { muiRg6Theme } from '../../../.storybook/themes'
+import BaseUserSelect, { User } from './index'
 
 // required until jsdom>=16 (https://github.com/mui-org/material-ui/issues/15726#issuecomment-493124813)
 global.document.createRange = () => ({
@@ -14,6 +17,16 @@ global.document.createRange = () => ({
     ownerDocument: document,
   },
 })
+
+const UserSelect = ({ children, ...props }) => (
+  <MuiThemeProvider theme={muiRg6Theme}>
+    <ThemeProvider theme={{}}>
+      <BaseUserSelect {...props}>
+        {children}
+      </BaseUserSelect>
+    </ThemeProvider>
+  </MuiThemeProvider>
+)
 
 const StateHolder = ({ children = () => {}, state = [] }) => {
   const [values, onChange] = useState(state)
@@ -54,7 +67,7 @@ it.each([
 
 it.each([
   'success',
-  'warning',
+  'info',
 ])('should display correct color for a given status when provided', (status, id = 1) => {
   const { getByText } = render(
     <UserSelect values={[id]}>

@@ -28,7 +28,7 @@ export const User = ({
   value,
   avatar,
   status,
-  tooltip,
+  tooltip = '',
 }) => {
   const avatarClasses = avatarStyles()
   const tooltipClasses = tooltipStyles()
