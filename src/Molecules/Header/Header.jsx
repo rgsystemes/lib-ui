@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { Link, Typography, CircularProgress } from '@material-ui/core'
+import { Typography, CircularProgress } from '@material-ui/core'
 import { Edit, Save } from '@styled-icons/material'
 
 import Input from '../../Atoms/Input'
+import Link from '../../Atoms/Link'
 import { useTranslation } from '../../Atoms/Trans'
 import FlexBox from '../../Templates/FlexBox'
 import BottomTooltipIcon from './BottomTooltipIcon'
@@ -57,11 +58,11 @@ const Header = ({
       <FlexBox alignItems="center">
         <FlexBox flexDirection="column">
           <FlexBox alignItems="center">
-            <Typography>
-              {featurePath ? <Link component={RouterLink} to={featurePath}>
-                {feature}
-              </Link> : feature}
-            </Typography>
+            {featurePath ? <Link component={RouterLink} to={featurePath}>
+              {feature}
+            </Link> : <Typography>
+              {feature}
+            </Typography>}
             {subFeature && <Typography>&nbsp;>&nbsp;</Typography>}
             {displayMode && <>
               <Typography>
