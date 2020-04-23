@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Check } from '@styled-icons/boxicons-regular'
 import { Circle } from '@styled-icons/boxicons-solid'
 
+import Tooltip from '../../../Atoms/Tooltip'
 import Typo from '../../../Atoms/Typo'
 import FlexBox from '../../../Templates/FlexBox'
 import UsersContext from '../UsersContext'
@@ -20,6 +21,7 @@ export const User = ({
   value,
   avatar,
   status,
+  tooltip = '',
 }) => {
   const avatarClasses = avatarStyles()
   const { values } = useContext(UsersContext)
@@ -33,9 +35,13 @@ export const User = ({
       flexGrow={1}
     >
       <FlexBox component={selected ? Check : null} width={45} size={25} marginLeft={1} />
-      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatar ? avatarClasses : null} />
+      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatar ? avatarClasses : null} className={avatar ? null : avatarClasses.root} />
       <FlexBox flexGrow={1} component={Typo}>{children}</FlexBox>
-      <FlexBox component={status ? Circle : null} color={`${status}.main`} width={60} size={25} title={status} />
+      <Tooltip title={tooltip} placement="bottom">
+        <span>{/* FIXME: add forwardRef to FlexBox */}
+          <FlexBox component={status ? Circle : null} color={`${status}.main`} width={60} size={25} />
+        </span>
+      </Tooltip>
     </FlexBox>
   )
 }
