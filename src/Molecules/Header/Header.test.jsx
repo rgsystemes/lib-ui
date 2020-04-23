@@ -83,7 +83,6 @@ it('should handle saving', async () => {
   expect(edit).toBeVisible()
 
   user.click(edit)
-  // await user.type(document.activeElement, '@')
 
   const save = await findByRole('save')
   expect(save).toBeVisible()

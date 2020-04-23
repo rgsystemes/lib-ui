@@ -28,8 +28,17 @@ const Header = ({
   const displayMode = !isEditing && !isSaving
   const editMode = isEditing && !isSaving
 
-  const handleValue = value => setValue(value) || onChange(value)
-  const handleCancel = () => handleValue(subFeature) || setEditing(false) || setSaving(false)
+  const handleValue = value => {
+    setValue(value)
+    onChange(value)
+  }
+  const handleCancel = (catched = false) => {
+    setEditing(catched)
+    setSaving(false)
+    if (!catched) {
+      handleValue(subFeature)
+    }
+  }
   const handleSave = () => {
     setEditing(false)
     setSaving(true)
@@ -40,11 +49,11 @@ const Header = ({
       response = response ? Promise.resolve() : Promise.reject(new Error(JSON.stringify(response)))
     }
 
-    response.then(() => handleValue(value) || setSaving(false)).catch(handleCancel)
+    response.then(() => handleValue(value) || setSaving(false)).catch(handleCancel.bind(null, true))
   }
 
   return (
-    <FlexBox flexDirection="column">
+    <FlexBox flexDirection="column" {...props}>
       <FlexBox alignItems="center">
         <FlexBox flexDirection="column">
           <FlexBox alignItems="center">

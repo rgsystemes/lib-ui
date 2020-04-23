@@ -28,7 +28,6 @@ export const header = () => {
     if (success) {
       resolve()
     } else {
-      window.alert('error')
       reject(new Error('invalid'))
     }
   }, 1000))
