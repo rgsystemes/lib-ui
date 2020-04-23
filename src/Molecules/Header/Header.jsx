@@ -93,11 +93,9 @@ const Header = ({
               />
             </>}
             {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Save} onClick={handleSave} ref={saveButton} />}
-            {isSaving && <>
-              <FlexBox padding={1.5}>
-                <CircularProgress color="primary" size={16} />
-              </FlexBox>
-            </>}
+            {isSaving && <FlexBox padding={1.5}>
+              <CircularProgress color="primary" size={16} />
+            </FlexBox>}
           </FlexBox>
           <FlexBox>
             {status}
