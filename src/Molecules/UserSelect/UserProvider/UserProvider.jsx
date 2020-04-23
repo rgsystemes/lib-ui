@@ -17,13 +17,13 @@ const UserProvider = ({
       }),
       {
         labels: values.reduce(
-          (acc, value) => typeof (value) === 'string' && value.indexOf('@')            ? Object.assign(acc, { [value]: value }) :
+          (acc, value) => typeof (value) === 'string' && value.indexOf('@') ? Object.assign(acc, { [value]: value }) :
           acc,
           {},
         ),
         avatars:  {},
         statuses: values.reduce(
-          (acc, value) => typeof (value) === 'string' && value.indexOf('@')            ? Object.assign(acc, { [value]: 'warning' }) :
+          (acc, value) => typeof (value) === 'string' && value.indexOf('@') ? Object.assign(acc, { [value]: 'info' }) :
           acc,
           {},
         ),

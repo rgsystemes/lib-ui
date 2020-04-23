@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Avatar, Chip } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
-const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyles({
+const chipStyles = makeStyles(({ palette: { success, info } }) => createStyles({
   common: {
     margin: '3px 2px',
   },
@@ -13,8 +13,8 @@ const chipStyles = makeStyles(({ palette: { success, warning } }) => createStyle
   success: {
     backgroundColor: success.main,
   },
-  warning: {
-    backgroundColor: warning.main,
+  info: {
+    backgroundColor: info.main,
   },
 }))
 
