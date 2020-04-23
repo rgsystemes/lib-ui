@@ -21,3 +21,4 @@ export { default as DateTimePicker, MuiPickersUtilsProvider } from './DateTimePi
 export { default as StatusChip } from './StatusChip'
 export { default as Switch } from './Switch'
 export { default as ButtonNoBorder } from './ButtonNoBorder'
+export { default as Link } from './Link'
