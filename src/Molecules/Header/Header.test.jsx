@@ -130,23 +130,27 @@ it('should cancel when user types escape', () => {
   expect(queryByRole('save')).not.toBeInTheDocument()
 })
 
-it('should cancel when user blurs input', () => {
-  const { getByRole, getByText/*, queryByRole */ } = render(
+it('should reset when user click anything but input and save button', async () => {
+  const { getByRole, getByText, queryByText } = render(
     <ThemeWrapper>
-      <Header feature="blur" onSave={() => true} />
+      <Header feature="feature" subFeature="subFeature" onSave />
     </ThemeWrapper>,
   )
 
   user.click(getByRole('edit'))
-  user.click(getByText('blur'))
+  await user.type(document.activeElement, '@', { allAtOnce: true })
 
-  // TODO: find a way to test onBlur prop since test events doesn't implement relatedTarget
-  // expect(getByRole('edit')).toBeVisible()
-  // expect(queryByRole('save')).not.toBeInTheDocument()
+  expect(queryByText('subFeature')).not.toBeInTheDocument()
+
+  act(() => {
+    user.click(getByText('feature'))
+  })
+
+  expect(getByText('subFeature')).toBeVisible()
 })
 
 it('should update state on successful save', async () => {
-  const { getByRole, getByTestId } = render(
+  const { getByRole, getByTestId, findByRole } = render(
     <ThemeWrapper>
       <StateHolder state="initial">
         <Header onSave={() => true} />
@@ -159,15 +163,16 @@ it('should update state on successful save', async () => {
   user.click(getByRole('edit'))
   await user.type(document.activeElement, 'success', { allAtOnce: true })
 
-  await act(async () => {
+  act(() => {
     user.click(getByRole('save'))
   })
 
+  expect(await findByRole('edit')).toBeVisible()
   expect(getByTestId('state')).toHaveTextContent('success')
 })
 
 it('should restore state on unsuccessful save', async () => {
-  const { getByRole, getByTestId } = render(
+  const { getByRole, getByTestId, findByRole } = render(
     <ThemeWrapper>
       <StateHolder state="initial">
         <Header onSave={() => false} />
@@ -180,9 +185,10 @@ it('should restore state on unsuccessful save', async () => {
   user.click(getByRole('edit'))
   await user.type(document.activeElement, 'failure', { allAtOnce: true })
 
-  await act(async () => {
+  act(() => {
     user.click(getByRole('save'))
   })
 
+  expect(await findByRole('save')).toBeVisible()
   expect(getByTestId('state')).toHaveTextContent('initial')
 })
