@@ -63,7 +63,7 @@ const Header = ({
     })
   }
 
-  useOnClickOutside([input, saveButton], () => handleCancel())
+  useOnClickOutside([input, saveButton], () => !isSaving && handleCancel())
 
   return (
     <FlexBox flexDirection="column" {...props}>
