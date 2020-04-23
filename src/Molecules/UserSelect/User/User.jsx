@@ -16,13 +16,6 @@ const avatarStyles = makeStyles({
   },
 })
 
-const tooltipStyles = makeStyles({
-  tooltip: {
-    maxWidth:  250,
-    textAlign: 'center',
-  },
-})
-
 export const User = ({
   children,
   value,
@@ -31,7 +24,6 @@ export const User = ({
   tooltip = '',
 }) => {
   const avatarClasses = avatarStyles()
-  const tooltipClasses = tooltipStyles()
   const { values } = useContext(UsersContext)
   const selected = values.includes(value)
 
@@ -43,10 +35,10 @@ export const User = ({
       flexGrow={1}
     >
       <FlexBox component={selected ? Check : null} width={45} size={25} marginLeft={1} />
-      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatar ? avatarClasses : null} />
+      <FlexBox component={avatar ? Avatar : null} alt={avatar} src={avatar} classes={avatar ? avatarClasses : null} className={avatar ? null : avatarClasses.root} />
       <FlexBox flexGrow={1} component={Typo}>{children}</FlexBox>
-      <Tooltip title={tooltip} placement="bottom" classes={tooltipClasses}>
-        <span>{/* FIXME: add forwardRef to Tooltip */}
+      <Tooltip title={tooltip} placement="bottom">
+        <span>{/* FIXME: add forwardRef to FlexBox */}
           <FlexBox component={status ? Circle : null} color={`${status}.main`} width={60} size={25} />
         </span>
       </Tooltip>
