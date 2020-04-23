@@ -38,7 +38,7 @@ export const header = () => {
         feature="Atoms"
         subFeature="StaticHeader"
         status={<Tooltip title="Complex Formula">
-          <span> {/* FIXME: add forwardRef to Tooltip */}
+          <span> {/* FIXME: add forwardRef to StatusChip */}
             <StatusChip fontFamily="fontFamily" status="success">
               HO⁻ + H₃O⁺ = 2 H₂O
             </StatusChip>

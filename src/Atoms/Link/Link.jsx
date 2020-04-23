@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Link as BaseLink } from '@material-ui/core'
+import { Link as BaseLink } from '@material-ui/core'
 
-const Link = ({ children, ...props }) => (
-  <Box fontFamily="fontFamily">
-    <BaseLink style={{ color: '#337AB7' }} {...props}>
-      { children }
-    </BaseLink>
-  </Box>
+import Typo from '../Typo'
+
+const Link = ({ ...props }) => (
+  <Typo>
+    <BaseLink underline="hover" {...props} />
+  </Typo>
 )
 
 export default Link

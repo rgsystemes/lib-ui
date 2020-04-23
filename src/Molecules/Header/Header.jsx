@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { Typography, CircularProgress } from '@material-ui/core'
-import { Edit, Save } from '@styled-icons/material'
+import { CircularProgress } from '@material-ui/core'
+import { ChevronRight, Edit, Save } from '@styled-icons/material'
 
 import Input from '../../Atoms/Input'
 import Link from '../../Atoms/Link'
 import { useTranslation } from '../../Atoms/Trans'
+import Typo from '../../Atoms/Typo'
 import FlexBox from '../../Templates/FlexBox'
 import BottomTooltipIcon from './BottomTooltipIcon'
+import useOnClickOutside from '../../hooks/useOnClickOutside'
 
 const Header = ({
   children,
@@ -20,7 +22,8 @@ const Header = ({
   actions = null,
   ...props
 }) => {
-  const saveButton = useRef(null)
+  const input = useRef()
+  const saveButton = useRef()
   const [isEditing, setEditing] = useState(false)
   const [isSaving, setSaving] = useState(false)
   const [value, setValue] = useState(subFeature)
@@ -60,6 +63,8 @@ const Header = ({
     })
   }
 
+  useOnClickOutside([input, saveButton], () => handleCancel())
+
   return (
     <FlexBox flexDirection="column" {...props}>
       <FlexBox alignItems="center">
@@ -67,28 +72,28 @@ const Header = ({
           <FlexBox alignItems="center">
             {featurePath ? <Link component={RouterLink} to={featurePath}>
               {feature}
-            </Link> : <Typography>
+            </Link> : <Typo>
               {feature}
-            </Typography>}
-            {subFeature && <Typography>&nbsp;>&nbsp;</Typography>}
+            </Typo>}
+            {subFeature && <ChevronRight width={20} />}
             {displayMode && <>
-              <Typography>
+              <Typo>
                 {value}
-              </Typography>
+              </Typo>
               {!!onSave && <BottomTooltipIcon role="edit" title={t('global.action.edit')} Component={Edit} onClick={() => setEditing(true)} />}
             </>}
-            {editMode && <>
+            {!displayMode && <>
               <Input
                 value={value}
                 autoFocus
                 onChange={({ target: { value } }) => setValue(value)}
-                onBlur={({ relatedTarget }) => relatedTarget !== saveButton.current && !(relatedTarget instanceof Document) && handleCancel()}
                 onKeyDown={({ key }) => (key === 'Enter' && handleSave()) || (key === 'Escape' && handleCancel())}
+                disabled={isSaving}
+                ref={input}
               />
-              <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Save} onClick={handleSave} ref={saveButton} />
             </>}
+            {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Save} onClick={handleSave} ref={saveButton} />}
             {isSaving && <>
-              <Input value={value} disabled />
               <FlexBox padding={1.5}>
                 <CircularProgress color="primary" size={16} />
               </FlexBox>

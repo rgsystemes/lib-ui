@@ -1,13 +1,14 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 
-const useOnClickOutside = (onClikOutside, deps = []) => {
-  const ref = useRef()
+const useOnClickOutside = (ref, onClikOutside, deps = []) => {
   const handler = useCallback(onClikOutside, [deps])
   useEffect(
     () => {
       const listener = event => {
+        const refs = Array.isArray(ref) ? ref : [ref]
+        const els = refs.reduce((carry, { current }) => current ? carry.concat(current) : carry, [])
         // Do nothing if clicking ref's element or descendent elements
-        if (!ref.current || ref.current.contains(event.target)) {
+        if (!els.length || !els.every(el => !el.contains(event.target))) {
           return
         }
         handler(event)
@@ -23,8 +24,6 @@ const useOnClickOutside = (onClikOutside, deps = []) => {
     // Add ref and handler to effect dependencies
     [ref, handler],
   )
-
-  return ref
 }
 
 export default useOnClickOutside
