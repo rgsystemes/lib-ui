@@ -34,10 +34,10 @@ const Header = ({
     onChange(value)
   }
 
-  const handleCancel = (catched = false) => {
-    setEditing(catched)
+  const handleCancel = (hasError = false) => {
+    setEditing(hasError)
     setSaving(false)
-    if (!catched) {
+    if (!hasError) {
       handleValue(subFeature)
     }
   }
