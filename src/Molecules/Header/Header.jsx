@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { CircularProgress } from '@material-ui/core'
-import { ChevronRight, Edit, Save } from '@styled-icons/material'
+import { ChevronRight, Edit, Check } from '@styled-icons/material'
 
 import Input from '../../Atoms/Input'
 import Link from '../../Atoms/Link'
@@ -92,7 +92,7 @@ const Header = ({
                 ref={input}
               />
             </>}
-            {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Save} onClick={handleSave} ref={saveButton} />}
+            {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Check} onClick={handleSave} ref={saveButton} />}
             {isSaving && <FlexBox padding={1.5}>
               <CircularProgress color="primary" size={16} />
             </FlexBox>}
