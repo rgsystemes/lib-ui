@@ -51,7 +51,6 @@ export const header = () => {
       <SpacedTableList />
       <br/>
       <Router>
-        <i>{subFeature}</i>
         <Route render={({ location }) => action('route')(location.pathname + location.search)} />
         <Header
           isEditing={isEditing}
