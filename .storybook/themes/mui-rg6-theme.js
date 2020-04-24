@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-const fontSizes = [12, 14, 16, 18, 24, 32, 48, 64, 72]
+const fontSizes = [12, 14, 16, 18, 20, 24, 32, 48, 64, 72]
 
 export default createMuiTheme({
   palette: {
@@ -14,13 +14,14 @@ export default createMuiTheme({
   typography: {
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
     fontSizes:  Object.assign(fontSizes, {
-      xs:    fontSizes[0],
-      body:  fontSizes[1],
-      title: fontSizes[2],
-      s:     fontSizes[1],
-      m:     fontSizes[2],
-      l:     fontSizes[3],
-      xl:    fontSizes[4],
+      xs:     fontSizes[0],
+      body:   fontSizes[1],
+      title:  fontSizes[2],
+      s:      fontSizes[1],
+      m:      fontSizes[2],
+      l:      fontSizes[3],
+      header: fontSizes[4],
+      xl:     fontSizes[5],
     }),
     monospace:  'monospace',
   },
