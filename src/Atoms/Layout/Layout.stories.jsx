@@ -20,7 +20,7 @@ export const layout = () => (
         <div>{text('some_text_again', 'Some text again but pretty long so we can see were it wraps')}</div>
       </>
     }
-    leftWidth={'250px'}
+    leftWidth={'25%'}
     rightChildren={
       <>
         <div>{text('another_text', 'Another text')}</div>
@@ -29,7 +29,7 @@ export const layout = () => (
         <div>{text('another_text_again', 'Another text again, same here we try to make it as longer as possible to ensure wrap is well done. This div has a huge width, so we need more content to try to reach the end of each line!')}</div>
       </>
     }
-    rightWidth={'100%'}
+    rightWidth={'75%'}
   />
 )
 
