@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { CircularProgress } from '@material-ui/core'
 import { ChevronRight, Edit, Check } from '@styled-icons/material'
@@ -24,8 +24,7 @@ const Header = ({
   actions = null,
   ...props
 }) => {
-  const input = useRef()
-  const saveButton = useRef()
+  const ref = useOnClickOutside(() => !isSaving && handleCancel())
   const [isEditing, setEditing] = useState(false)
   const [isSaving, setSaving] = useState(false)
   const [value, setValue] = useState(subFeature)
@@ -65,8 +64,6 @@ const Header = ({
     })
   }
 
-  useOnClickOutside([input, saveButton], () => !isSaving && handleCancel())
-
   return (
     <FlexBox flexDirection="column" {...props}>
       <FlexBox alignItems="center">
@@ -86,17 +83,18 @@ const Header = ({
               </HeaderTypo>
               {!!onSave && <BottomTooltipIcon role="edit" title={t('global.action.edit')} Component={Edit} onClick={() => setEditing(true)} />}
             </>}
-            {!displayMode && <>
-              <Input
-                value={value}
-                autoFocus
-                onChange={({ target: { value } }) => setValue(value)}
-                onKeyDown={({ key }) => (key === 'Enter' && handleSave()) || (key === 'Escape' && handleCancel())}
-                disabled={isSaving}
-                ref={input}
-              />
-            </>}
-            {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Check} onClick={handleSave} ref={saveButton} />}
+            <div ref={ref}>
+              {!displayMode && <>
+                <Input
+                  value={value}
+                  autoFocus
+                  onChange={({ target: { value } }) => setValue(value)}
+                  onKeyDown={({ key }) => (key === 'Enter' && handleSave()) || (key === 'Escape' && handleCancel())}
+                  disabled={isSaving}
+                />
+              </>}
+              {editMode && <BottomTooltipIcon role="save" title={t('global.action.save')} Component={Check} onClick={handleSave} />}
+            </div>
             {isSaving && <FlexBox padding={1.5}>
               <CircularProgress color="primary" size={16} />
             </FlexBox>}
