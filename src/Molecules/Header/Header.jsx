@@ -14,7 +14,6 @@ import useOnClickOutside from '../../hooks/useOnClickOutside'
 const HeaderTypo = ({ ...props }) => <Typo fontSize="header" fontFamily="title" {...props} />
 
 const Header = ({
-  children,
   feature = '',
   featurePath = null,
   subFeature = '',
@@ -108,7 +107,6 @@ const Header = ({
           {actions}
         </FlexBox>
       </FlexBox>
-      {children}
     </FlexBox>
   )
 }

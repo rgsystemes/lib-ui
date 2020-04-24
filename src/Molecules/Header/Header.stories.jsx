@@ -44,9 +44,8 @@ export const header = () => {
             </StatusChip>
           </span>
         </Tooltip>}
-      >
-        <SpacedTableList />
-      </Header>
+      />
+      <SpacedTableList />
       <br/>
       <Router>
         <Route render={({ location, search }) => action('route')(location.pathname + location.search)} />
@@ -61,9 +60,8 @@ export const header = () => {
             <Icon button Component={Star} onClick={() => action('click')('star')} />
             <Icon button Component={Home} onClick={() => action('click')('home')} />
           </ButtonGroup>}
-        >
-          <SpacedTableList />
-        </Header>
+        />
+        <SpacedTableList />
       </Router>
     </>
   )
