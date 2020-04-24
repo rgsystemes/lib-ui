@@ -48,7 +48,7 @@ export const header = () => {
       <SpacedTableList />
       <br/>
       <Router>
-        <Route render={({ location, search }) => action('route')(location.pathname + location.search)} />
+        <Route render={({ location }) => action('route')(location.pathname + location.search)} />
         <Header
           feature="Molecules"
           featurePath="/?path=/story/molecules-header--header"
