@@ -34,14 +34,15 @@ const levels = {
   },
 }
 
-const fontSizes = [12, 14, 16, 18, 24, 32, 48, 64, 72]
+const fontSizes = [12, 14, 16, 18, 20, 24, 32, 48, 64, 72]
 fontSizes.xs = fontSizes[0]
 fontSizes.body = fontSizes[1]
 fontSizes.s = fontSizes[1]
 fontSizes.m = fontSizes[2]
 fontSizes.title = fontSizes[2]
 fontSizes.l = fontSizes[3]
-fontSizes.xl = fontSizes[4]
+fontSizes.header = fontSizes[4]
+fontSizes.xl = fontSizes[5]
 
 const fontWeights = ['lighter', 'normal', 'bold']
 fontWeights.body = fontWeights[1]

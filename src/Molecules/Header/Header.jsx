@@ -11,6 +11,8 @@ import FlexBox from '../../Templates/FlexBox'
 import BottomTooltipIcon from './BottomTooltipIcon'
 import useOnClickOutside from '../../hooks/useOnClickOutside'
 
+const HeaderTypo = ({ ...props }) => <Typo fontSize="header" fontFamily="title" {...props} />
+
 const Header = ({
   children,
   feature = '',
@@ -70,16 +72,18 @@ const Header = ({
       <FlexBox alignItems="center">
         <FlexBox flexDirection="column">
           <FlexBox alignItems="center">
-            {featurePath ? <Link component={RouterLink} to={featurePath}>
-              {feature}
-            </Link> : <Typo>
-              {feature}
-            </Typo>}
+            <HeaderTypo>
+              {featurePath ? <Link component={RouterLink} to={featurePath}>
+                {feature}
+              </Link> :
+              feature
+              }
+            </HeaderTypo>
             {subFeature && <ChevronRight width={20} />}
             {displayMode && <>
-              <Typo>
+              <HeaderTypo>
                 {value}
-              </Typo>
+              </HeaderTypo>
               {!!onSave && <BottomTooltipIcon role="edit" title={t('global.action.edit')} Component={Edit} onClick={() => setEditing(true)} />}
             </>}
             {!displayMode && <>
