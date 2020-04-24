@@ -45,6 +45,7 @@ const InputSaveProgress = ({
           Description={() => <HeaderTypo>
             {value}
           </HeaderTypo>}
+          autoFocus
           {...props}
         />
         {
