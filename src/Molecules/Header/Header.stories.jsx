@@ -21,16 +21,19 @@ const SpacedTableList = () => <TableList style={{ marginTop: 10 }} />
 
 export const header = () => {
   const [subFeature, setSubFeature] = useState('Header')
-  const handleSave = value => new Promise((resolve, reject) => setTimeout(() => {
-    const success = value && !/\W/.test(value.replace(/\s/g, ''))
-    action('saved')(success)
+  const [isEditing, setEditing] = useState(false)
+  const [isLoading, setLoading] = useState(false)
 
-    if (success) {
-      resolve()
-    } else {
-      reject(new Error('invalid'))
-    }
-  }, 1000))
+  const handleSubmit = value => {
+    setLoading(true)
+    setTimeout(() => {
+      const success = value && !/\W/.test(value.replace(/\s/g, ''))
+      action('saved')(success)
+      setEditing(!success)
+      setLoading(false)
+      setSubFeature(value)
+    }, 3000)
+  }
 
   return (
     <>
@@ -48,13 +51,17 @@ export const header = () => {
       <SpacedTableList />
       <br/>
       <Router>
+        <i>{subFeature}</i>
         <Route render={({ location }) => action('route')(location.pathname + location.search)} />
         <Header
+          isEditing={isEditing}
+          isLoading={isLoading}
           feature="Molecules"
           featurePath="/?path=/story/molecules-header--header"
           subFeature={subFeature}
-          onChange={setSubFeature}
-          onSave={value => action('save')(value) || handleSave(value)}
+          onEdit={() => setEditing(true)}
+          onCancel={() => setEditing(false)}
+          onSubmit={value => action('save')(value) || handleSubmit(value)}
           actions={() => <ButtonGroup>
             <Icon button Component={Heart} onClick={() => action('click')('heart')} />
             <Icon button Component={Star} onClick={() => action('click')('star')} />

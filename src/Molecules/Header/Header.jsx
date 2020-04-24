@@ -1,63 +1,26 @@
 import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { ChevronRight, Edit } from '@styled-icons/material'
+import { ChevronRight } from '@styled-icons/material'
 
 import Link from '../../Atoms/Link'
-import { useTranslation } from '../../Atoms/Trans'
-import Typo from '../../Atoms/Typo'
 import FlexBox from '../../Templates/FlexBox'
-import BottomTooltipIcon from './BottomTooltipIcon'
+import HeaderTypo from './HeaderTypo'
 import InputSaveProgress from './InputSaveProgress'
 
-const HeaderTypo = ({ ...props }) => <Typo fontSize="header" fontFamily="title" {...props} />
-
 const Header = ({
+  isEditing = false,
+  isLoading = false,
   feature = '',
   featurePath = null,
   subFeature = '',
-  onChange = () => {},
-  onSave = false,
+  onEdit = () => {},
+  onCancel = () => {},
+  onSubmit = false,
   status = null,
   actions = null,
   ...props
 }) => {
-  const [isEditing, setEditing] = useState(false)
-  const [isSaving, setSaving] = useState(false)
   const [value, setValue] = useState(subFeature)
-
-  const t = useTranslation()
-  const displayMode = !isEditing && !isSaving
-
-  const handleValue = value => {
-    setValue(value)
-    onChange(value)
-  }
-
-  const handleCancel = (hasError = false) => {
-    setEditing(hasError)
-    setSaving(false)
-    if (!hasError) {
-      handleValue(subFeature)
-    }
-  }
-
-  const handleSave = () => {
-    setEditing(false)
-    setSaving(true)
-
-    let response = typeof onSave === 'function' ? onSave(value) : onSave
-
-    if (!(response instanceof Promise)) {
-      response = response ? Promise.resolve() : Promise.reject(new Error(JSON.stringify(response)))
-    }
-
-    response.then(() => {
-      setSaving(false)
-      handleValue(value)
-    }).catch(() => {
-      handleCancel(true)
-    })
-  }
 
   return (
     <FlexBox flexDirection="column" {...props}>
@@ -67,24 +30,20 @@ const Header = ({
             <HeaderTypo>
               {featurePath ? <Link component={RouterLink} to={featurePath}>
                 {feature}
-              </Link> :
-              feature
-              }
+              </Link> : feature}
             </HeaderTypo>
             {subFeature && <ChevronRight width={20} />}
-            {displayMode ? <>
-              <HeaderTypo>
-                {value}
-              </HeaderTypo>
-              {!!onSave && <BottomTooltipIcon role="edit" title={t('global.action.edit')} Component={Edit} onClick={() => setEditing(true)} />}
-            </> : <InputSaveProgress
+            {onSubmit ? <InputSaveProgress
               value={value}
               isEditing={isEditing}
-              isSaving={isSaving}
+              isLoading={isLoading}
+              onEdit={onEdit}
               onChange={setValue}
-              onSubmit={handleSave}
-              onBlur={handleCancel}
-            />}
+              onSubmit={onSubmit}
+              onBlur={() => setValue(subFeature) || onCancel()}
+            /> : <HeaderTypo>
+              {value}
+            </HeaderTypo>}
           </FlexBox>
           <FlexBox>
             {status}

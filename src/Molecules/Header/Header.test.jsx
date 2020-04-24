@@ -9,6 +9,16 @@ import user from '@testing-library/user-event'
 import { muiRg6Theme } from '../../../.storybook/themes'
 import Header from './index'
 
+// required until jsdom>=16 (https://github.com/mui-org/material-ui/issues/15726#issuecomment-493124813)
+global.document.createRange = () => ({
+  setStart:                () => {},
+  setEnd:                  () => {},
+  commonAncestorContainer: {
+    nodeName:      'BODY',
+    ownerDocument: document,
+  },
+})
+
 // FIXME: MuiThemeProvider and ThemeProvider are required here because of Tooltip theme usage
 const ThemeWrapper = ({ children = () => {} }) => (
   <MuiThemeProvider theme={muiRg6Theme}>
@@ -18,14 +28,29 @@ const ThemeWrapper = ({ children = () => {} }) => (
   </MuiThemeProvider>
 )
 
-const StateHolder = ({ children = () => {}, state = '' }) => {
+const StateHolder = ({ children = () => {}, state = '', success = true }) => {
   const [subFeature, setSubFeature] = useState(state)
+  const [isEditing, setEditing] = useState(false)
+  const [isLoading, setLoading] = useState(false)
 
   return <>
-    <div data-testid="state">{subFeature}</div>
+    <div data-testid="state" data-value={subFeature} />
     {cloneElement(Children.only(children), {
       subFeature,
-      onChange: setSubFeature,
+      isEditing,
+      isLoading,
+      onEdit:   () => setEditing(true),
+      onCancel: () => setEditing(false),
+      onSubmit: value => {
+        setLoading(true)
+        setTimeout(() => {
+          setEditing(!success)
+          setLoading(false)
+          if (success) {
+            setSubFeature(value)
+          }
+        })
+      },
     })}
   </>
 }
@@ -75,7 +100,9 @@ it('should display actions', () => {
 it('should handle saving', async () => {
   const { getByRole, findByRole, queryByRole } = render(
     <ThemeWrapper>
-      <Header onSave />
+      <StateHolder>
+        <Header />
+      </StateHolder>
     </ThemeWrapper>,
   )
 
@@ -101,7 +128,9 @@ it('should handle saving', async () => {
 it('should save when user types enter', async () => {
   const { getByRole, queryByRole, findByRole } = render(
     <ThemeWrapper>
-      <Header onSave />
+      <StateHolder>
+        <Header />
+      </StateHolder>
     </ThemeWrapper>,
   )
 
@@ -117,7 +146,9 @@ it('should save when user types enter', async () => {
 it('should cancel when user types escape', () => {
   const { getByRole, queryByRole } = render(
     <ThemeWrapper>
-      <Header onSave />
+      <StateHolder>
+        <Header />
+      </StateHolder>
     </ThemeWrapper>,
   )
 
@@ -133,7 +164,9 @@ it('should cancel when user types escape', () => {
 it('should reset when user click anything but input and save button', async () => {
   const { getByRole, getByText, queryByText } = render(
     <ThemeWrapper>
-      <Header feature="feature" subFeature="subFeature" onSave />
+      <StateHolder state="subFeature">
+        <Header feature="feature" />
+      </StateHolder>
     </ThemeWrapper>,
   )
 
@@ -153,42 +186,41 @@ it('should update state on successful save', async () => {
   const { getByRole, getByTestId, findByRole } = render(
     <ThemeWrapper>
       <StateHolder state="initial">
-        <Header onSave={() => true} />
+        <Header />
       </StateHolder>
     </ThemeWrapper>,
   )
 
-  expect(getByTestId('state')).toHaveTextContent('initial')
+  const state = getByTestId('state')
+  expect(state).toHaveAttribute('data-value', 'initial')
 
   user.click(getByRole('edit'))
   await user.type(document.activeElement, 'success', { allAtOnce: true })
 
-  act(() => {
-    user.click(getByRole('save'))
-  })
+  user.click(getByRole('save'))
 
   expect(await findByRole('edit')).toBeVisible()
-  expect(getByTestId('state')).toHaveTextContent('success')
+  expect(state).toHaveAttribute('data-value', 'success')
 })
 
 it('should restore state on unsuccessful save', async () => {
   const { getByRole, getByTestId, findByRole } = render(
     <ThemeWrapper>
-      <StateHolder state="initial">
-        <Header onSave={() => false} />
+      <StateHolder state="initial" success={false}>
+        <Header />
       </StateHolder>
     </ThemeWrapper>,
   )
 
-  expect(getByTestId('state')).toHaveTextContent('initial')
+  const state = getByTestId('state')
+  expect(state).toHaveAttribute('data-value', 'initial')
 
   user.click(getByRole('edit'))
+
   await user.type(document.activeElement, 'failure', { allAtOnce: true })
 
-  act(() => {
-    user.click(getByRole('save'))
-  })
+  user.click(getByRole('save'))
 
   expect(await findByRole('save')).toBeVisible()
-  expect(getByTestId('state')).toHaveTextContent('initial')
+  expect(state).toHaveAttribute('data-value', 'initial')
 })
