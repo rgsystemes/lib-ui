@@ -22,6 +22,8 @@ export const fullscreen = () => {
     onValidate:  action('validated!'),
   }
 
+  const { tooltip, ...propsNoTooltip } = props
+
   return (
     <>
       <Button color={'default'} onClick={() => { setState(true) }}>Show</Button>
@@ -35,9 +37,9 @@ export const fullscreen = () => {
         <div>Wow!</div>
       </Fullscreen>
       <br/><br/>
-      <Button color={'default'} onClick={() => { setStateNoValidate(true) }}>Show without validate</Button>
+      <Button color={'default'} onClick={() => { setStateNoValidate(true) }}>Show without validate & tooltip</Button>
       <Fullscreen
-        { ...props }
+        { ...propsNoTooltip }
         open={stateNoValidate}
         setOpen={setStateNoValidate}
       >
