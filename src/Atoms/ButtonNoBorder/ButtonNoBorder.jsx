@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { AddCircleOutline } from 'styled-icons/material/AddCircleOutline'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 const ButtonNoBorder = ({ className, children, ...props }) => {
   const classes = useStyles()
   return <Button classes={classes} { ...props }>
-    <div className="circle">+</div>
+    <AddCircleOutline size={20} />
     {children}
   </Button>
 }
