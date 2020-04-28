@@ -49,9 +49,9 @@ export const fullscreen = () => {
 
   if (!stripped) {
     props = {
-      tooltip: 'Super tooltip!',
+      tooltip:      'Super tooltip!',
       validateText: 'I accept',
-      ...props
+      ...props,
     }
   }
 
