@@ -43,8 +43,8 @@ export const fullscreen = () => {
     icon:        icon,
     headerTitle: 'Header title',
     title:       'Page title',
-    onCancel:    onCancel,
-    onValidate:  onValidate
+    onCancel,
+    onValidate,
   }
 
   if (!stripped) {

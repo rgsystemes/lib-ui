@@ -9,10 +9,18 @@ import { muiRg6Theme } from '../../../.storybook/themes'
 const StateHolder = ({ children = () => {} }) => {
   const [displayed, setDisplayed] = useState(true)
 
+  const onCancel = () => {
+    setDisplayed(false)
+  }
+
+  const onValidate = () => {
+    setDisplayed(false)
+  }
+
   return <>
     <MuiThemeProvider theme={muiRg6Theme}>
       <ThemeProvider theme={{}}>
-        {children({ open: displayed, setOpen: setDisplayed })}
+        {children({ open: displayed, onCancel, onValidate })}
       </ThemeProvider>
     </MuiThemeProvider>
   </>
@@ -54,14 +62,14 @@ it('should show when open is set and hide when x is clicked', () => {
 it('should call custom function on validate', () => {
   let hasValidated = false
   const validateText = 'validatebutton'
-  const callback = () => {
+  const onValidate = () => {
     hasValidated = true
   }
 
   const { getByText } = render(
     <StateHolder>
       {({ ...props }) => (
-        <Fullscreen onValidate={callback} validateText={validateText} {...props} />
+        <Fullscreen validateText={validateText} {...props} onValidate={onValidate} />
       )}
     </StateHolder>,
   )
