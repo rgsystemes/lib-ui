@@ -67,36 +67,34 @@ const Fullscreen = ({
   const transKeyCancel = 'global.action.cancel'
 
   return <Dialog fullScreen className={useStyles().root} {...props} hideBackdrop>
-    <>
-      <div className={'header'}>
-        <FlexBox className={'title'}>
-          {icon}
-          <Typo fontSize="xs" fontWeight="title" fontFamily="title">{headerTitle}</Typo>
-        </FlexBox>
-        <FlexBox className={'subTitle'}>
-          <Typo fontSize="l" fontFamily="title">{title}</Typo>
-          {tooltip &&
-            <Tooltip title={tooltip} data-testid={'tooltip'}>
-              <Question size={25} />
-            </Tooltip>
-          }
-        </FlexBox>
-      </div>
-      <div className={'body'}>
-        {children}
-      </div>
-      <IconButton className={'close'} onClick={handleClose} title={t(transKeyCancel)}>
-        <X size={50} />
-      </IconButton>
-      <div className={'buttons'}>
-        <Button color={'default'} onClick={handleClose}>
-          <Trans transKey={transKeyCancel} />
-        </Button>
-        {!!validateText &&
-          <Button color={'success'} onClick={handleValidate}>{validateText}</Button>
+    <div className="header">
+      <FlexBox className="title">
+        {icon}
+        <Typo fontSize="xs" fontWeight="title" fontFamily="title">{headerTitle}</Typo>
+      </FlexBox>
+      <FlexBox className="subTitle">
+        <Typo fontSize="l" fontFamily="title">{title}</Typo>
+        {tooltip &&
+          <Tooltip title={tooltip} data-testid="tooltip">
+            <Question size={25} />
+          </Tooltip>
         }
-      </div>
-    </>
+      </FlexBox>
+    </div>
+    <div className="body">
+      {children}
+    </div>
+    <IconButton className="close" onClick={handleClose} title={t(transKeyCancel)}>
+      <X size={50} />
+    </IconButton>
+    <div className="buttons">
+      <Button color="default" onClick={handleClose}>
+        <Trans transKey={transKeyCancel} />
+      </Button>
+      {!!validateText &&
+        <Button color="success" onClick={handleValidate}>{validateText}</Button>
+      }
+    </div>
   </Dialog>
 }
 
