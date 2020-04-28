@@ -12,36 +12,56 @@ export default {
 const icon = <Heart size={20} />
 
 export const fullscreen = () => {
-  const [state, setState] = useState(false)
-  const [stateNoValidate, setStateNoValidate] = useState(false)
-  const props = {
+  const [open, setOpen] = useState(false)
+  const [stripped, setStripped] = useState(false)
+
+  const onValidateAction = action('validated')
+  const onCancelAction = action('cancelled')
+
+  const onClick = () => {
+    setStripped(false)
+    setOpen(true)
+  }
+
+  const onClickStripped = () => {
+    setStripped(true)
+    setOpen(true)
+  }
+
+  const onCancel = () => {
+    setOpen(false)
+    onCancelAction()
+  }
+
+  const onValidate = () => {
+    setOpen(false)
+    onValidateAction()
+  }
+
+  let props = {
+    open:        open,
     icon:        icon,
     headerTitle: 'Header title',
     title:       'Page title',
-    tooltip:     'Super tooltip!',
-    onValidate:  action('validated!'),
+    onCancel:    onCancel,
+    onValidate:  onValidate
   }
 
-  const { tooltip, ...propsNoTooltip } = props
+  if (!stripped) {
+    props = {
+      tooltip: 'Super tooltip!',
+      validateText: 'I accept',
+      ...props
+    }
+  }
 
   return (
     <>
-      <Button color={'default'} onClick={() => { setState(true) }}>Show</Button>
+      <Button color={'default'} onClick={onClick}>Show</Button>
+      <br/><br/>
+      <Button color={'default'} onClick={onClickStripped}>Show without validate & tooltip</Button>
       <Fullscreen
         { ...props }
-        open={state}
-        setOpen={setState}
-        validateText={'I accept'}
-      >
-        <span className={'lol'}>My cool content!</span>
-        <div>Wow!</div>
-      </Fullscreen>
-      <br/><br/>
-      <Button color={'default'} onClick={() => { setStateNoValidate(true) }}>Show without validate & tooltip</Button>
-      <Fullscreen
-        { ...propsNoTooltip }
-        open={stateNoValidate}
-        setOpen={setStateNoValidate}
       >
         <span className={'lol'}>My cool content!</span>
         <div>Wow!</div>

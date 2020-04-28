@@ -4,8 +4,8 @@ import { Dialog } from '@material-ui/core'
 import {
   Button, IconButton, Tooltip, Typo, Trans,
 } from '../../Atoms'
-import { X } from 'styled-icons/feather/X'
-import { Question } from '@styled-icons/evil/Question'
+import { Close } from 'styled-icons/material/Close'
+import { HelpOutline } from '@styled-icons/material/HelpOutline'
 import FlexBox from '../FlexBox'
 import { useTranslation } from '../../Atoms/Trans'
 
@@ -52,17 +52,16 @@ const useStyles = makeStyles(theme => {
 })
 
 const Fullscreen = ({
-  icon, headerTitle, title, tooltip, children, setOpen, onValidate, validateText, ...props
+  icon,
+  headerTitle,
+  title,
+  tooltip,
+  children,
+  onCancel,
+  onValidate,
+  validateText,
+  ...props
 }) => {
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleValidate = () => {
-    onValidate()
-    handleClose()
-  }
-
   const t = useTranslation()
   const transKeyCancel = 'global.action.cancel'
 
@@ -76,7 +75,7 @@ const Fullscreen = ({
         <Typo fontSize="l" fontFamily="title">{title}</Typo>
         {tooltip &&
           <Tooltip title={tooltip} data-testid="tooltip">
-            <Question size={25} />
+            <HelpOutline size={25} />
           </Tooltip>
         }
       </FlexBox>
@@ -84,15 +83,15 @@ const Fullscreen = ({
     <div className="body">
       {children}
     </div>
-    <IconButton className="close" onClick={handleClose} title={t(transKeyCancel)}>
-      <X size={50} />
+    <IconButton className="close" onClick={onCancel} title={t(transKeyCancel)}>
+      <Close size={50} />
     </IconButton>
     <div className="buttons">
-      <Button color="default" onClick={handleClose}>
+      <Button color="default" onClick={onCancel}>
         <Trans transKey={transKeyCancel} />
       </Button>
       {!!validateText &&
-        <Button color="success" onClick={handleValidate}>{validateText}</Button>
+        <Button color="success" onClick={onValidate}>{validateText}</Button>
       }
     </div>
   </Dialog>
