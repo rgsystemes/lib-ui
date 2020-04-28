@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Modal } from '@material-ui/core'
+import { Dialog } from '@material-ui/core'
 import { Button, IconButton, Tooltip, Typo, Trans } from '../../Atoms'
 import { X } from 'styled-icons/feather/X'
 import { Question } from '@styled-icons/evil/Question'
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => {
 })
 
 const Fullscreen = ({
-  icon, headerTitle, title, tooltip, children, open, setOpen, onValidate, validateText, ...props
+  icon, headerTitle, title, tooltip, children, setOpen, onValidate, validateText, ...props
 }) => {
   const handleClose = () => {
     setOpen(false)
@@ -64,7 +64,7 @@ const Fullscreen = ({
   const t = useTranslation()
   const transKeyCancel = 'global.action.cancel'
 
-  return <Modal className={useStyles().root} open={open} {...props} hideBackdrop closeAfterTransition>
+  return <Dialog fullScreen className={useStyles().root} {...props} hideBackdrop>
     <>
       <div className={'header'}>
         <FlexBox className={'title'}>
@@ -95,7 +95,7 @@ const Fullscreen = ({
         }
       </div>
     </>
-  </Modal>
+  </Dialog>
 }
 
 export default Fullscreen
