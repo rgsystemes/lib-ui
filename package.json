@@ -19,6 +19,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "lint": "eslint --ext .js --ext .jsx src/",
+    "lint:fix": "eslint --ext .js --ext .jsx src/ --fix",
     "test": "jest --json --outputFile=.jest-test-results.json",
     "build": "rollup -c",
     "build:storybook": "build-storybook -o docs",
