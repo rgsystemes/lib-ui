@@ -29,7 +29,9 @@ it('should show when open is set and hide when cancel is clicked', () => {
   const cancel = queryByText('global.action.cancel')
   expect(cancel).toBeVisible()
   fireEvent.click(cancel)
-  expect(cancel).not.toBeInTheDocument()
+  setTimeout(() => {
+    expect(cancel).not.toBeInTheDocument()
+  }, 200)
 })
 
 it('should show when open is set and hide when x is clicked', () => {
@@ -44,7 +46,9 @@ it('should show when open is set and hide when x is clicked', () => {
   const cancel = getByTitle('global.action.cancel')
   expect(cancel).toBeVisible()
   fireEvent.click(cancel)
-  expect(cancel).not.toBeInTheDocument()
+  setTimeout(() => {
+    expect(cancel).not.toBeInTheDocument()
+  }, 200)
 })
 
 it('should call custom function on validate', () => {
