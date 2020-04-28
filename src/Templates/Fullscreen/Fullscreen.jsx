@@ -7,7 +7,6 @@ import {
 import { Close } from 'styled-icons/material/Close'
 import { HelpOutline } from '@styled-icons/material/HelpOutline'
 import FlexBox from '../FlexBox'
-import { useTranslation } from '../../Atoms/Trans'
 
 const useStyles = makeStyles(theme => {
   return {
@@ -62,7 +61,6 @@ const Fullscreen = ({
   validateText,
   ...props
 }) => {
-  const t = useTranslation()
   const transKeyCancel = 'global.action.cancel'
 
   return <Dialog fullScreen className={useStyles().root} {...props} hideBackdrop>
@@ -83,7 +81,7 @@ const Fullscreen = ({
     <div className="body">
       {children}
     </div>
-    <IconButton className="close" onClick={onCancel} title={t(transKeyCancel)}>
+    <IconButton className="close" onClick={onCancel} data-testid="close">
       <Close size={50} />
     </IconButton>
     <div className="buttons">

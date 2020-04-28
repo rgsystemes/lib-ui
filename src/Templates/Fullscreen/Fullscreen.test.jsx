@@ -43,7 +43,7 @@ it('should show when open is set and hide when cancel is clicked', () => {
 })
 
 it('should show when open is set and hide when x is clicked', () => {
-  const { getByTitle } = render(
+  const { getByTestId } = render(
     <StateHolder>
       {({ ...props }) => (
         <Fullscreen {...props} />
@@ -51,7 +51,7 @@ it('should show when open is set and hide when x is clicked', () => {
     </StateHolder>,
   )
 
-  const cancel = getByTitle('global.action.cancel')
+  const cancel = getByTestId('close')
   expect(cancel).toBeVisible()
   fireEvent.click(cancel)
   setTimeout(() => {
