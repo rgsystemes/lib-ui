@@ -1,7 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Dialog } from '@material-ui/core'
-import { Button, IconButton, Tooltip, Typo, Trans } from '../../Atoms'
+import {
+  Button, IconButton, Tooltip, Typo, Trans,
+} from '../../Atoms'
 import { X } from 'styled-icons/feather/X'
 import { Question } from '@styled-icons/evil/Question'
 import FlexBox from '../FlexBox'
