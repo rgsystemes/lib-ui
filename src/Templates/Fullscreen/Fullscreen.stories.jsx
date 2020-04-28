@@ -57,13 +57,13 @@ export const fullscreen = () => {
 
   return (
     <>
-      <Button color={'default'} onClick={onClick}>Show</Button>
+      <Button color="default" onClick={onClick}>Show</Button>
       <br/><br/>
-      <Button color={'default'} onClick={onClickStripped}>Show without validate & tooltip</Button>
+      <Button color="default" onClick={onClickStripped}>Show without validate & tooltip</Button>
       <Fullscreen
         { ...props }
       >
-        <span className={'lol'}>My cool content!</span>
+        <span className="lol">My cool content!</span>
         <div>Wow!</div>
       </Fullscreen>
     </>
