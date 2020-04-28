@@ -11,22 +11,14 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     fontWeight:    'normal',
     '& .circle':   {
-      fontWeight:   'normal',
-      fontSize:     '23px',
-      lineHeight:   '16px',
-      border:       '2px solid',
-      borderColor:  theme.palette.grey[600],
-      borderRadius: 12,
-      width:        16,
-      height:       16,
-      marginRight:  7,
+      marginRight: 6,
     },
   },
 }))
 const ButtonNoBorder = ({ className, children, ...props }) => {
   const classes = useStyles()
   return <Button classes={classes} { ...props }>
-    <AddCircleOutline size={20} />
+    <AddCircleOutline className="circle" size={26} />
     {children}
   </Button>
 }
