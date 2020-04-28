@@ -81,7 +81,7 @@ const Fullscreen = ({
     <div className="body">
       {children}
     </div>
-    <IconButton className="close" onClick={onCancel} data-testid="close">
+    <IconButton className="close" onClick={onCancel} role="close">
       <Close size={50} />
     </IconButton>
     <div className="buttons">
