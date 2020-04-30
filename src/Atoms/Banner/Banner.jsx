@@ -41,7 +41,7 @@ Close.defaultProps = {
   border:     0,
   bg:         'transparent',
   color:      'midgray',
-  fontSize:   4,
+  fontSize:   'xl',
   fontWeight: 'bold',
   top:        0,
   right:      0,
