@@ -2,18 +2,28 @@ import React, { useState, Children, cloneElement } from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import user from '@testing-library/user-event'
+import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { InputLabel } from '@material-ui/core'
 
-import Select from './index'
-import Option from './Option'
+import Select, { Option } from './index'
+import { muiRg6Theme } from '../../../.storybook/themes'
+
+const ThemeWrapper = ({ children = () => {} }) => (
+  <MuiThemeProvider theme={muiRg6Theme}>
+    <ThemeProvider theme={{}}>
+      {children}
+    </ThemeProvider>
+  </MuiThemeProvider>
+)
 
 const SelectWrapper = ({ native, label, children, ...props }) => (
-  <>
+  <ThemeWrapper>
     <InputLabel id="label" htmlFor="select">{label}</InputLabel>
     <Select native={native} labelId="label" inputProps={{ id: 'select' }} {...props}>
       {children}
     </Select>
-  </>
+  </ThemeWrapper>
 )
 
 const StateHolder = ({ children }) => {

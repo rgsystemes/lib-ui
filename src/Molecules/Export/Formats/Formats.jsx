@@ -3,8 +3,7 @@ import React from 'react'
 import Trans from '../../../Atoms/Trans'
 import FormControl from '../../../Molecules/FormControl'
 import InputLabel from '../../../Molecules/FormControl/InputLabel'
-import Select from '../../../Atoms/Select'
-import Option from '../../../Atoms/Select/Option'
+import Select, { Option } from '../../../Atoms/Select'
 
 const Formats = ({ formats, value, onChange }) =>
   formats.length > 0 &&

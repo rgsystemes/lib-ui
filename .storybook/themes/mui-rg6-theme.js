@@ -10,6 +10,8 @@ export default createMuiTheme({
     info:      { main: '#006AA1' },
     warning:   { main: '#F0AD4E' },
     error:     { main: '#D9534F' },
+    label:     { main: '#333333' },
+    desc:      { main: '#707070' },
   },
   typography: {
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',

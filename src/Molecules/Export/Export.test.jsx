@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
 import { TransProvider } from '../../Atoms/Trans'
 import BaseExport from './index'
+import { muiRg6Theme } from '../../../.storybook/themes'
 
 const Export = props =>
   <TransProvider value={{}}>
-    <ThemeProvider theme={{}}>
-      <BaseExport {...props} />
-    </ThemeProvider>
+    <MuiThemeProvider theme={muiRg6Theme}>
+      <ThemeProvider theme={{}}>
+        <BaseExport {...props} />
+      </ThemeProvider>
+    </MuiThemeProvider>
   </TransProvider>
 
 const exportFormats = [

@@ -5,20 +5,39 @@ import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { css } from '@styled-system/css'
 
 import Option from './Option'
+import InnerOption from './InnerOption'
 import Input from '../Input'
 import { useTranslation } from '../Trans'
 
 const selectStyles = makeStyles(theme => createStyles({
-  root: {
-    backgroundColor: theme.palette.common.white,
-  },
-  select: {
-
-  },
   icon: {
-    color: theme.palette.common.black,
+    color:       theme.palette.label.main,
+    width:       '0.75em',
+    marginRight: 5,
   },
 }))
+
+const inputStyles = makeStyles({
+  root: {
+    height:                  'auto !important', // FIXME: refacto input instead
+    borderBottomLeftRadius:  '0 !important', // FIXME: refacto input instead
+    borderBottomRightRadius: '0 !important', // FIXME: refacto input instead
+  },
+  input: {
+    padding: '6px 16px !important', // FIXME: refacto input instead
+  },
+})
+
+const menuStyles = makeStyles({
+  paper: {
+    marginTop:            1,
+    borderTopLeftRadius:  0,
+    borderTopRightRadius: 0,
+  },
+  list: {
+    padding: 0,
+  },
+})
 
 const BaseSelect = styled(MuiSelect)`
   .MuiSelect, .MuiNativeSelect {
@@ -41,29 +60,39 @@ const BaseSelect = styled(MuiSelect)`
   }
 `
 
-const Select = ({ placeholder = 'global.action.chooseOption', children, ...props }) => {
+const Select = ({
+  placeholder = 'global.action.chooseOption',
+  children,
+  ...props
+}) => {
   const selectClasses = selectStyles()
+  const inputClasses = inputStyles()
+  const menuClasses = menuStyles()
   const t = useTranslation()
 
   const { native } = props
+  const childrenArray = (placeholder ? [<Option disabled key="." value="" native={native}>
+    {t(placeholder)}
+  </Option>] : []).concat(Children.toArray(children))
+  const indexedProps = childrenArray.reduce((acc, child) => Object.assign(acc, { [child.props.value]: child.props }), {})
 
   return (
     <BaseSelect
       classes={selectClasses}
       displayEmpty={!native}
+      input={<Input classes={native ? {} : inputClasses} />}
       MenuProps={{
         getContentAnchorEl: null,
         anchorOrigin:       {
           horizontal: 'left',
           vertical:   'bottom',
         },
+        classes: menuClasses,
       }}
+      renderValue={value => <InnerOption {...indexedProps[value]} />}
       {...props}
     >
-      {placeholder && <Option disabled value="" native={native}>
-        {t(placeholder)}
-      </Option>}
-      {Children.toArray(children).map(child => ({
+      {childrenArray.map(child => ({
         ...child,
         props: {
           ...child.props,
@@ -72,10 +101,6 @@ const Select = ({ placeholder = 'global.action.chooseOption', children, ...props
       }))}
     </BaseSelect>
   )
-}
-
-Select.defaultProps = {
-  input: <Input />,
 }
 
 export default Select

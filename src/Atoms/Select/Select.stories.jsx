@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { action } from '@storybook/addon-actions'
 import { boolean, button } from '@storybook/addon-knobs'
 
-import Select from './index'
-import Option from './Option'
+import Select, { Option } from './index'
 import InputLabel from '../../Molecules/FormControl/InputLabel'
 
 import markdown from './README.md'
@@ -21,11 +20,15 @@ const Container = styled.div`
 
 const selects = [
   {
-    key:    'native-select',
+    key:    'Native Select',
     native: true,
   },
   {
-    key: 'simple-Select',
+    key: 'Simple Select',
+  },
+  {
+    key:         'Descriptive Select',
+    description: 'Description de l\'option %d',
   },
 ]
 
@@ -35,13 +38,13 @@ export const select = () => {
 
   button('Reset', () => setOption(''))
 
-  return selects.map(({ key, ...props }) => (
+  return selects.map(({ key, description = '', ...props }) => (
     <Container key={key}>
-      <InputLabel id={`label-${key}`} htmlFor={`select-${key}`}>Label</InputLabel>
+      <InputLabel id={`label-${key}`} htmlFor={`select-${key}`} style={{ paddingBottom: 5 }}>{key}</InputLabel>
       <Select value={option} labelId={`label-${key}`} inputProps={{ id: `select-${key}` }} onChange={handleChange} {...props} disabled={boolean('Disabled', false)}>
         {[1, 2, 3].map(value => (
-          <Option key={value} value={value}>
-            Option {value}
+          <Option key={value} value={value} description={description.replace('%d', value)}>
+            Option #{value}
           </Option>
         ))}
       </Select>
