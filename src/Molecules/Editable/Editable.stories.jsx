@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormGroup from '@material-ui/core/FormGroup'
+import { Box, RadioGroup, FormGroup } from '@material-ui/core'
 import { Edit } from '@styled-icons/material/Edit'
 import { Check } from '@styled-icons/material/Check'
-import Box from '@material-ui/core/Box'
 
 import Button from '../../Atoms/Button'
 import IconButton from '../../Atoms/IconButton'
@@ -11,6 +9,7 @@ import FormControl, { FormControlLabel, InputLabel } from '../FormControl'
 import Editable from './index'
 import FlexBox from '../../Templates/FlexBox'
 import Select from '../../Atoms/Select'
+import Option from '../../Atoms/Select/Option'
 import Typo from '../../Atoms/Typo'
 import Checkbox from '../../Atoms/Checkbox'
 import DateRange from '../../Molecules/DateRange'
@@ -40,14 +39,14 @@ const CustomFormControl = ({
     <InputLabel>
       Label
       <FlexBox gap={1}>
-        <Select value={first} onChange={e => onChange([e.target.value, second])}>
+        <Select value={first} onChange={e => onChange([e.target.value, second])} native>
           {options.map(({ value, label }) =>
-            <option value={value}>{label}</option>,
+            <Option key={value} value={value}>{label}</Option>,
           )}
         </Select>
-        <Select value={second} onChange={e => onChange([first, e.target.value])}>
+        <Select value={second} onChange={e => onChange([first, e.target.value])} native>
           {options.map(({ value, label }) =>
-            <option value={value}>{label}</option>,
+            <Option key={value} value={value}>{label}</Option>,
           )}
         </Select>
       </FlexBox>
@@ -90,9 +89,10 @@ export const groupedEditable = () => {
           value={select}
           label="Label"
           onChange={e => setValue({ select: e.target.value })}
+          native
         >
           {options.map(({ value, label }) =>
-            <option value={value}>{label}</option>,
+            <Option key={value} value={value}>{label}</Option>,
           )}
         </Editable>
         <Editable
@@ -103,7 +103,7 @@ export const groupedEditable = () => {
           onChange={e => setValue({ select: e.target.value })}
         >
           {options.map(({ value, label }) =>
-            <FormControlLabel value={value} control={<Radio />} label={label} />,
+            <FormControlLabel key={value} value={value} control={<Radio />} label={label} />,
           )}
         </Editable>
         <Editable
@@ -114,6 +114,7 @@ export const groupedEditable = () => {
         >
           {options.map(({ value, label }) =>
             <FormControlLabel
+              key={value}
               control={
                 <Checkbox
                   value={value}
@@ -143,7 +144,7 @@ export const groupedEditable = () => {
           Description={() =>
             <>
               <Typo>The first value is : {customFirst}</Typo>
-              <Typo>The first value is : {customSecond}</Typo>
+              <Typo>The second value is : {customSecond}</Typo>
             </>
           }
         />

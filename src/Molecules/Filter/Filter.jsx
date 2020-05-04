@@ -3,14 +3,14 @@ import React, { useState } from 'react'
 import { Filter as FilterIcon } from 'styled-icons/boxicons-regular/Filter'
 import { Trash } from 'styled-icons/boxicons-solid/Trash'
 import { Check } from 'styled-icons/material/Check'
-import Divider from '@material-ui/core/Divider'
-import Popover from '@material-ui/core/Popover'
+import { Divider, Popover } from '@material-ui/core'
 
 import DateRange from '../../Molecules/DateRange'
 import Trans, { useTranslation } from '../../Atoms/Trans'
 import FormControl, { InputLabel } from '../../Molecules/FormControl'
 import Input from '../../Atoms/Input'
 import Select from '../../Atoms/Select'
+import Option from '../../Atoms/Select/Option'
 import FlexBox from '../../Templates/FlexBox'
 import { EMPTY_VALUES } from './constants'
 
@@ -69,10 +69,11 @@ const InnerInput = ({
     <Select
       onChange={event => onChange(event.target.value)}
       value={value}
-      Empty={() => null}
+      placeholder={false}
       {...props}
+      native
     >
-      {options.map(({ value, label }) => <option value={value}>{t(label)}</option>)}
+      {options.map(({ value, label }) => <Option key={value} value={value}>{t(label)}</Option>)}
     </Select>
   ) : (
     <Input
