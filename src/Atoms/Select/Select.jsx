@@ -17,7 +17,7 @@ const selectStyles = makeStyles(theme => createStyles({
   },
 }))
 
-const inputStyles = makeStyles({
+const inputStyles = makeStyles(theme => createStyles({
   root: {
     height:                  'auto !important', // FIXME: refacto input instead
     borderBottomLeftRadius:  '0 !important', // FIXME: refacto input instead
@@ -25,8 +25,12 @@ const inputStyles = makeStyles({
   },
   input: {
     padding: '6px 16px !important', // FIXME: refacto input instead
+    color:   theme.palette.label.main,
   },
-})
+  disabled: {
+    color: 'currentColor',
+  },
+}))
 
 const menuStyles = makeStyles({
   paper: {
@@ -80,7 +84,7 @@ const Select = ({
     <BaseSelect
       classes={selectClasses}
       displayEmpty={!native}
-      input={<Input classes={native ? {} : inputClasses} />}
+      input={<Input classes={inputClasses} />}
       MenuProps={{
         getContentAnchorEl: null,
         anchorOrigin:       {
