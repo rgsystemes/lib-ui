@@ -65,8 +65,8 @@ const BaseSelect = styled(MuiSelect)`
 `
 
 const Select = ({
-  placeholder = 'global.action.chooseOption',
   children,
+  placeholder = 'global.action.chooseOption',
   ...props
 }) => {
   const selectClasses = selectStyles()
@@ -93,7 +93,7 @@ const Select = ({
         },
         classes: menuClasses,
       }}
-      renderValue={value => <InnerOption {...indexedProps[value]} />}
+      renderValue={value => <InnerOption disabled={props.disabled} {...indexedProps[value]} />}
       {...props}
     >
       {childrenArray.map(child => ({
