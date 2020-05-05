@@ -28,7 +28,7 @@ const selects = [
   },
   {
     key:         'Descriptive Select',
-    description: 'Description de l\'option %d',
+    description: 'Option description %d',
   },
 ]
 
