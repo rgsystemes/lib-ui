@@ -9,7 +9,7 @@ import FormControl, { FormLabel, FormControlLabel } from './index'
 import FormHelperText from './FormHelperText'
 import InputLabel from './InputLabel'
 import Input from '../../Atoms/Input'
-import Select from '../../Atoms/Select'
+import Select, { Option } from '../../Atoms/Select'
 import Radio from '../../Atoms/Radio'
 import Checkbox from '../../Atoms/Checkbox'
 import DateTimePicker from '../../Atoms/DateTimePicker'
@@ -37,6 +37,8 @@ export const formControl = () => {
   const helpText = text('Help text', 'Help text')
   const disabled = boolean('Disabled', false)
   const [date, setDate] = useState(new Date())
+  const [option, setOption] = useState('')
+  const handleChange = ({ target: { value } }) => (setOption(value) && action('Select changed')(value))
 
   return <Container>
     <FormControl error={errorState} disabled={disabled}>
@@ -51,11 +53,8 @@ export const formControl = () => {
     <FormControl error={errorState} disabled={disabled}>
       <InputLabel>
         {label}
-        <Select onChange={action('Select changed')}>
-          <option value="0">
-          Choose an option
-          </option>
-          {options.map(({ value, label }) => <option value={value}>{label}</option>)}
+        <Select value={option} onChange={handleChange} native>
+          {options.map(({ value, label }) => <Option key={value} value={value}>{label}</Option>)}
         </Select>
       </InputLabel>
       <FormHelperText>
@@ -70,7 +69,7 @@ export const formControl = () => {
         onChange={action('Radio group changed')}
       >
         {options.map(({ value, label }) =>
-          <FormControlLabel value={value} control={<Radio />} label={label} />,
+          <FormControlLabel key={value} value={value} control={<Radio />} label={label} />,
         )}
       </RadioGroup>
     </FormControl>
@@ -83,6 +82,7 @@ export const formControl = () => {
       >
         {options.map(({ value, label }) =>
           <FormControlLabel
+            key={value}
             control={<Checkbox value={value} onChange={action('Checkbox changed')}/>}
             label={label}
           />,

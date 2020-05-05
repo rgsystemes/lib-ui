@@ -28,8 +28,8 @@ export const filter = () => <Container>
   <Filter
     type="select"
     options={[
-      { name: '1', label: 'Choice 1' },
-      { name: '2', label: 'Choice 2' },
+      { value: '1', label: 'Choice 1' },
+      { value: '2', label: 'Choice 2' },
     ]}
     value=""
     translationKey="Select filter"
