@@ -28,9 +28,21 @@ export default {
       title: 'Export',
       description: 'You will receive an email containing a link that contains the export',
       filename: 'File name',
-      defaultFilename: 'My export',
+      defaultFilename: 'AGENT_NAME_OR_NODE_NAME - EXPORT_NAME',
       format: 'File format',
-      actionExport: 'Export'
+      actionExport: 'Export',
+      formats: {
+        xls: 'Excel file (.xls)',
+        xml: 'XML file (.xml)',
+        json: 'JSON file (.json)',
+        'csv-comma': 'CSV file with comma separator (.csv)',
+        'csv-semicolon': 'CSV file with semicolon separator (.csv)',
+        txt: 'Text file with tab separator (.txt)',
+      },
+      alerts: {
+        success: 'Your export is processing, we\'ll send you a link by email to download it when it\'ll be ready',
+        error: 'An error occured while exporting',
+      },
     },
     editColumns: {
       title: 'Edit columns',

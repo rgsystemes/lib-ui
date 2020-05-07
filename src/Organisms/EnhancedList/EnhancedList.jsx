@@ -71,6 +71,7 @@ const ClearFilters = ({ filters = {}, onClear = () => {}, columns = [] }) =>
 const EnhancedList = ({
   onSearch = null,
   onAdd = null,
+  onExport = () => {},
   columns,
   actions = [],
   Export = BaseExport,
@@ -83,6 +84,7 @@ const EnhancedList = ({
   const [exportAnchorEl, setExportAnchorEl] = useState(null)
   const [editColumnsAnchorEl, setEditColumnsAnchorEl] = useState(null)
   const [searchTerm, setSearchTerm] = useState()
+  const [exportValue, setExportValue] = useState()
   const t = useTranslation()
   const { filters, onFilter } = props
 
@@ -108,7 +110,7 @@ const EnhancedList = ({
       <div>
         <ActionGroup size="small">
           {onAdd != null &&
-            <Tooltip title={t('global.add')}>
+            <Tooltip title={t('global.action.add')}>
               <Icon button Component={Plus} data-testid="add-button" onClick={onAdd} />
             </Tooltip>
           }
@@ -147,7 +149,15 @@ const EnhancedList = ({
           horizontal: 'right',
         }}
       >
-        <Export onClose={() => setExportAnchorEl(null)}/>
+        <Export
+          value={exportValue}
+          onChange={newValue => setExportValue({ ...exportValue, ...newValue })}
+          onClose={() => setExportAnchorEl(null)}
+          onExport={data => {
+            setExportAnchorEl(null)
+            onExport(data)
+          }}
+        />
       </Popover>
     }
     {!!EditColumns &&

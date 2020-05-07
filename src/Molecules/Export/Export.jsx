@@ -11,9 +11,9 @@ import Typo from '../../Atoms/Typo'
 import Button from '../../Atoms/Button'
 import FlexBox from '../../Templates/FlexBox'
 
-import Formats from './Formats'
+import FormatSelect, { formats as defaultFormats } from './FormatSelect'
 
-const isAllowedFormat = (formats, format) => formats.some(({ value } = {}) => format === value)
+const isAllowedFormat = (formats, format) => formats.some(value => format === value)
 
 const Actions = ({ onClose, onExport, disabled }) => <>
   <Button onClick={onClose} size="small">
@@ -25,43 +25,44 @@ const Actions = ({ onClose, onExport, disabled }) => <>
 </>
 
 const Export = ({
-  descriptionText = <Trans transKey="global.export.description"/>,
-  onExport = () => {},
+  children = null,
+  descriptionText = <Trans transKey="global.export.description" />,
   value = {},
+  onExport = () => {},
   onChange = () => {},
   onClose = () => {},
-  extraOptions = null,
-  formats = [],
+  formats = defaultFormats,
   disabled = false,
-  ...props
 }) => {
   const t = useTranslation()
-  const { defaultName = t('global.export.defaultFilename') } = props
-  const { format = '', filename = defaultName } = value
+  const { format, filename } = value = Object.assign({
+    filename: t('global.export.defaultFilename'),
+    format:   'xls',
+  }, value)
   const onFileNameChange = event => onChange({ filename: event.target.value, format })
 
   return <>
     <FlexBox flexDirection="column" p={4} gap={2}>
-      <FlexBox alignItems="center" mb={2} >
+      <FlexBox alignItems="center" mb={2}>
         <Box component={Download} size={20} color="primary.main" />
         <Box component="h2" ml={0.5} my={0} fontSize="fontSizes.title" fontFamily="fontFamily" color="primary.main">
           <Trans transKey="global.export.title" />
         </Box>
       </FlexBox>
       <Typo>{descriptionText}</Typo>
-      <FormControl>
+      <FormControl component="fieldset">
         <InputLabel>
           <Trans transKey="global.export.filename" />
           <Input value={filename} onChange={onFileNameChange} />
         </InputLabel>
       </FormControl>
-      <Formats formats={formats} value={format} onChange={format => onChange({ filename, format })} />
-      {extraOptions}
+      <FormatSelect formats={formats} value={format} onChange={format => onChange({ filename, format })} />
+      {children}
     </FlexBox>
     <FlexBox justifyContent="space-between" borderColor="grey.100" borderTop={1} py={2} px={4}>
       <Actions
         onClose={onClose}
-        onExport={onExport}
+        onExport={() => onExport(value)}
         disabled={!filename || !isAllowedFormat(formats, format) || disabled}
       />
     </FlexBox>

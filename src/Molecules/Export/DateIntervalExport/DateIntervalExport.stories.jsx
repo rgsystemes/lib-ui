@@ -9,8 +9,8 @@ export default {
   title: 'Molecules/Export',
 }
 
-export const GenericExport = () => {
-  const [value, setValue] = useState()
+export const DateIntervalExport = () => {
+  const [value, setValue] = useState({ from: null, to: null })
 
   return (
     <Export
@@ -22,9 +22,9 @@ export const GenericExport = () => {
   )
 }
 
-GenericExport.story = {
+DateIntervalExport.story = {
   parameters: {
     notes: { markdown },
-    jest:  ['Export.test.jsx'],
+    jest:  ['DateIntervalExport.test.jsx'],
   },
 }

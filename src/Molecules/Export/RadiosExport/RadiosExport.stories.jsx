@@ -9,22 +9,29 @@ export default {
   title: 'Molecules/Export',
 }
 
-export const GenericExport = () => {
-  const [value, setValue] = useState()
+const options = [
+  { label: 'Export everything', value: 'all' },
+  { label: 'Export view only', value: 'view' },
+]
+
+export const RadiosExport = () => {
+  const [value, setValue] = useState({ data: null })
 
   return (
     <Export
       value={value}
       onChange={newValue => setValue({ ...value, ...newValue }) || action('export value changed')(newValue)}
+      label="Export viewable data"
+      options={options}
       onClose={action('cancel')}
       onExport={action('export')}
     />
   )
 }
 
-GenericExport.story = {
+RadiosExport.story = {
   parameters: {
     notes: { markdown },
-    jest:  ['Export.test.jsx'],
+    jest:  ['RadiosExport.test.jsx'],
   },
 }

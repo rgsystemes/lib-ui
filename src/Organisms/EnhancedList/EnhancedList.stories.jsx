@@ -3,13 +3,15 @@ import { action } from '@storybook/addon-actions'
 import { array } from '@storybook/addon-knobs'
 import { ListUl } from 'styled-icons/boxicons-regular/ListUl'
 import { BarChart } from 'styled-icons/boxicons-regular/BarChart'
+import { Snackbar } from '@material-ui/core'
+import { Alert as MuiAlert } from '@material-ui/lab'
 
-import EnhancedList from './index'
+import EnhancedList, { EditColumns } from './index'
 import BasePagination from '../../Molecules/Pagination'
 import Button from '../../Atoms/Button'
 import Tooltip from '../../Atoms/Tooltip'
+import Trans from '../../Atoms/Trans'
 import BaseExport from '../../Molecules/Export'
-import EditColumns from './EditColumns'
 
 import markdown from './README.md'
 
@@ -132,17 +134,10 @@ const data = [
   },
 ]
 
-const exportFormats = [
-  { value: 'xls', label: 'Excel' },
-  { value: 'xml', label: 'XML' },
-  { value: 'json', label: 'JSON' },
-  { value: 'csv-comma', label: 'CSV comma-separated' },
-  { value: 'csv-semicolon', label: 'CSV semicolon-separated' },
-  { value: 'txt', label: 'Text' },
-]
+const Alert = ({ ...props }) => <MuiAlert elevation={6} variant="filled" {...props} />
 
 const Export = props =>
-  <BaseExport onExport={action('Export button clicked')} formats={exportFormats} {...props}/>
+  <BaseExport onExport={action('Export button clicked')} {...props}/>
 
 const Pagination = () => <BasePagination
   currentPage={1}
@@ -216,26 +211,59 @@ export const enhancedList = () => {
 
   const [filters, setFilters] = useState(columns.reduce((filters, { name }) => ({ ...filters, [name]: null }), {}))
 
-  return <EnhancedList
-    columns={columns}
-    data={array('Data', data)}
-    onSelect={action('item selected')}
-    onSearch={action('searched something')}
-    onAdd={action('clicked on add')}
-    onFilter={filters => {
-      action('onFilter')(filters)
-      setFilters(filters)
-    }}
-    onClear={setFilters}
-    filters={filters}
-    SearchInputProps={{
-      placeholder: 'Search ...',
-    }}
-    Pagination={Pagination}
-    Export={Export}
-    EditColumns={props => <EditColumns onChange={setColumnShown} {...props} />}
-    actions={actions}
-  />
+  const [exportAlertOpen, setExportAlertOpen] = useState(false)
+  const [exportAlertSeverity, setExportAlertSeverity] = useState()
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setExportAlertOpen(false)
+  }
+
+  return <>
+    <EnhancedList
+      columns={columns}
+      data={array('Data', data)}
+      onSelect={action('item selected')}
+      onSearch={action('searched something')}
+      onAdd={action('clicked on add')}
+      onFilter={filters => {
+        action('onFilter')(filters)
+        setFilters(filters)
+      }}
+      onExport={({ filename }) => setTimeout(() => {
+        setExportAlertSeverity(!/\W/.test(filename.replace(/\s/g, '')) ? 'success' : 'error')
+        setExportAlertOpen(true)
+      }, 1000)}
+      onClear={setFilters}
+      filters={filters}
+      SearchInputProps={{
+        placeholder: 'Search ...',
+      }}
+      Pagination={Pagination}
+      Export={Export}
+      EditColumns={props => <EditColumns onChange={setColumnShown} {...props} />}
+      actions={actions}
+    />
+    <Snackbar
+      anchorOrigin={{
+        vertical:   'top',
+        horizontal: 'right',
+      }}
+      open={exportAlertOpen}
+      autoHideDuration={3000}
+      onClose={handleAlertClose}
+    >
+      <Alert
+        onClose={handleAlertClose}
+        severity={exportAlertSeverity}
+      >
+        <Trans transKey={`global.export.alerts.${exportAlertSeverity}`} />
+      </Alert>
+    </Snackbar>
+  </>
 }
 
 enhancedList.story = {
