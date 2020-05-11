@@ -26,7 +26,7 @@ export default {
     },
     export: {
       title: 'Export',
-      description: 'You will receive an email containing a link that contains the export',
+      description: 'You will receive an email containing a link that contains the export.',
       filename: 'File name',
       defaultFilename: 'AGENT_NAME_OR_NODE_NAME - EXPORT_NAME',
       format: 'File format',
