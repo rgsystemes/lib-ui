@@ -35,7 +35,7 @@ const Export = ({
   disabled = false,
 }) => {
   const t = useTranslation()
-  const { format, filename } = value = Object.assign({
+  const { format, filename } = Object.assign({
     filename: t('global.export.defaultFilename'),
     format:   'xls',
   }, value)
@@ -62,7 +62,7 @@ const Export = ({
     <FlexBox justifyContent="space-between" borderColor="grey.100" borderTop={1} py={2} px={4}>
       <Actions
         onClose={onClose}
-        onExport={() => onExport(value)}
+        onExport={() => onExport(Object.assign({}, value, { format, filename }))}
         disabled={!filename || !isAllowedFormat(formats, format) || disabled}
       />
     </FlexBox>
