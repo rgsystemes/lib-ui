@@ -21,9 +21,6 @@ const dialogStyles = makeStyles(theme => ({
         textTransform: 'uppercase',
       },
     },
-    '& .body': {
-      height: 'calc(100% - 150px)',
-    },
   },
 }))
 
@@ -59,7 +56,7 @@ const Fullscreen = ({
             <Typo fontSize="l" fontFamily="title">
               {title}
             </Typo>
-            {tooltip && <Tooltip title={tooltip} data-testid="tooltip">
+            {tooltip && <Tooltip title={tooltip}>
               <HelpOutline size={25} />
             </Tooltip>}
           </FlexBox>
@@ -70,7 +67,7 @@ const Fullscreen = ({
           </IconButton>
         </FlexBox>
       </FlexBox>
-      <FlexBox className="body" flexDirection="column" overflow="auto">
+      <FlexBox className="body" flexDirection="column" overflow="auto" height="100%">
         {children}
       </FlexBox>
       <FlexBox justifyContent="flex-end" gap={1} mt={2}>
