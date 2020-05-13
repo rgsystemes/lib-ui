@@ -46,7 +46,7 @@ const Fullscreen = ({
   ...props
 }) => (
   <Dialog fullScreen classes={dialogStyles()} {...props} hideBackdrop>
-    <FlexBox flexDirection="column" gap={4} my={3} mx={8} overflow="hidden">
+    <FlexBox flexDirection="column" gap={4} my={3} mx={8} height="100%" overflow="hidden">
       <FlexBox className="header">
         <FlexBox flexDirection="column" flexGrow={1} justifyContent="center">
           <FlexBox className="title" gap={0.5}>
@@ -70,7 +70,7 @@ const Fullscreen = ({
           </IconButton>
         </FlexBox>
       </FlexBox>
-      <FlexBox className="body" flexDirection="column" overflow="scroll">
+      <FlexBox className="body" flexDirection="column" overflow="auto">
         {children}
       </FlexBox>
       <FlexBox justifyContent="flex-end" gap={1} mt={2}>
