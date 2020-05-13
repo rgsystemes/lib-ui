@@ -8,46 +8,27 @@ import { Close } from 'styled-icons/material/Close'
 import { HelpOutline } from '@styled-icons/material/HelpOutline'
 import FlexBox from '../FlexBox'
 
-const useStyles = makeStyles(theme => {
-  return {
-    root: {
-      backgroundColor: 'white',
-      position:        'absolute',
-      top:             0,
-      left:            0,
-      height:          '100%',
-      width:           '100%',
-      '& .close':      {
-        position: 'absolute',
-        top:      10,
-        right:    80,
-      },
-      '& .buttons': {
-        position: 'absolute',
-        bottom:   47,
-        right:    80,
-        '& > *':  {
-          marginLeft: 7,
-        },
-      },
+const dialogStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.common.white,
+    position:        'absolute',
+    top:             0,
+    left:            0,
+    height:          '100%',
+    width:           '100%',
+    '& .header':     {
       '& .title': {
         textTransform: 'uppercase',
-        '& span':      {
-          marginLeft: 4,
-        },
-      },
-      '& .header, .body': {
-        marginLeft: 67,
-        marginTop:  22,
-      },
-      '& .subTitle > *': {
-        marginLeft: 3,
-      },
-      '&.hidden': {
-        visibility: 'hidden',
       },
     },
-  }
+  },
+}))
+
+const iconStyles = makeStyles({
+  root: {
+    padding:     0,
+    marginRight: -10,
+  },
 })
 
 const Fullscreen = ({
@@ -60,39 +41,47 @@ const Fullscreen = ({
   onValidate,
   validateText,
   ...props
-}) => {
-  const transKeyCancel = 'global.action.cancel'
-
-  return <Dialog fullScreen className={useStyles().root} {...props} hideBackdrop>
-    <div className="header">
-      <FlexBox className="title">
-        {icon}
-        <Typo fontSize="xs" fontWeight="title" fontFamily="title">{headerTitle}</Typo>
+}) => (
+  <Dialog fullScreen classes={dialogStyles()} {...props} hideBackdrop>
+    <FlexBox flexDirection="column" gap={4} my={3} mx={8} height="100%" overflow="hidden">
+      <FlexBox className="header">
+        <FlexBox flexDirection="column" flexGrow={1} justifyContent="center">
+          <FlexBox className="title" gap={0.5}>
+            {icon}
+            <Typo fontSize="xs" fontWeight="title" fontFamily="title">
+              {headerTitle}
+            </Typo>
+          </FlexBox>
+          <FlexBox className="subTitle" gap={0.5}>
+            <Typo fontSize="l" fontFamily="title">
+              {title}
+            </Typo>
+            {tooltip && <Tooltip title={tooltip}>
+              <HelpOutline size={25} />
+            </Tooltip>}
+          </FlexBox>
+        </FlexBox>
+        <FlexBox>
+          <IconButton onClick={onCancel} role="close" classes={iconStyles()}>
+            <Close size={50} />
+          </IconButton>
+        </FlexBox>
       </FlexBox>
-      <FlexBox className="subTitle">
-        <Typo fontSize="l" fontFamily="title">{title}</Typo>
-        {tooltip &&
-          <Tooltip title={tooltip} data-testid="tooltip">
-            <HelpOutline size={25} />
-          </Tooltip>
+      <FlexBox className="body" flexDirection="column" overflow="auto" height="100%">
+        {children}
+      </FlexBox>
+      <FlexBox justifyContent="flex-end" gap={1} mt={2}>
+        <Button color="default" onClick={onCancel}>
+          <Trans transKey="global.action.cancel" />
+        </Button>
+        {!!validateText &&
+          <Button color="success" onClick={onValidate}>
+            {validateText}
+          </Button>
         }
       </FlexBox>
-    </div>
-    <div className="body">
-      {children}
-    </div>
-    <IconButton className="close" onClick={onCancel} role="close">
-      <Close size={50} />
-    </IconButton>
-    <div className="buttons">
-      <Button color="default" onClick={onCancel}>
-        <Trans transKey={transKeyCancel} />
-      </Button>
-      {!!validateText &&
-        <Button color="success" onClick={onValidate}>{validateText}</Button>
-      }
-    </div>
+    </FlexBox>
   </Dialog>
-}
+)
 
 export default Fullscreen
