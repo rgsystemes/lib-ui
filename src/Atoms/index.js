@@ -1,7 +1,7 @@
 export { default as Button } from './Button'
 export { default as Input } from './Input'
 export { default as ButtonGroup } from './ButtonGroup'
-export { default as Select } from './Select'
+export { default as Select, Option } from './Select'
 export { default as Typo } from './Typo'
 export { default as Banner } from './Banner'
 export { default as Title } from './Title'
