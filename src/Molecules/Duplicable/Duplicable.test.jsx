@@ -11,6 +11,12 @@ import { muiRg6Theme } from '../../../.storybook/themes'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { TrashAlt } from 'styled-icons/boxicons-solid/TrashAlt'
 import userEvent from '@testing-library/user-event'
+import { text } from '@storybook/addon-knobs'
+
+const Model = ({ onRemove, key, value }) => <FlexBox alignItems="center" mb={1} gap={1} key={key}>
+  <Input placeholder={text('email_placeholder', 'contact@email.com')} value={value} />
+  <FlexBox component={TrashAlt} size={24} cursor="pointer" onClick={onRemove} title="InputRemover" />
+</FlexBox>
 
 it('should show a default input', () => {
   const data = [
@@ -20,9 +26,12 @@ it('should show a default input', () => {
   const { getByText, getAllByPlaceholderText, getAllByTitle } = render(
     <MuiThemeProvider theme={muiRg6Theme}>
       <Duplicable
-        model={<FlexBox component={Input} placeholder={'contact@email.com'} mb={1} />}
-        addType={<FlexBox component={ButtonNoBorder} mt={2}>{'Duplicate input'}</FlexBox>}
-        removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" title="InputRemover" />}
+        model={<Model />}
+        addType={
+          <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          </FlexBox>
+        }
       />,
     </MuiThemeProvider>,
   )
@@ -80,9 +89,12 @@ it('should show no input', () => {
   const { getByText, getAllByPlaceholderText, getAllByTitle } = render(
     <MuiThemeProvider theme={muiRg6Theme}>
       <Duplicable
-        model={<FlexBox component={Input} placeholder={'contact@email.com'} mb={1} />}
-        addType={<FlexBox component={ButtonNoBorder} mt={2}>{'Duplicate input'}</FlexBox>}
-        removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" title="InputRemover" />}
+        model={<Model />}
+        addType={
+          <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          </FlexBox>
+        }
         canBeEmpty={true}
       />,
     </MuiThemeProvider>,
@@ -144,9 +156,12 @@ it('should show sent input', () => {
   const { getByText, getAllByPlaceholderText, getAllByTitle } = render(
     <MuiThemeProvider theme={muiRg6Theme}>
       <Duplicable
-        model={<FlexBox component={Input} placeholder={'contact@email.com'} mb={1} />}
-        addType={<FlexBox component={ButtonNoBorder} mt={2}>{'Duplicate input'}</FlexBox>}
-        removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" title="InputRemover" />}
+        model={<Model />}
+        addType={
+          <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          </FlexBox>
+        }
         canBeEmpty={true}
         instancesProps={data.map(datum => ({ value: datum }))}
       />,

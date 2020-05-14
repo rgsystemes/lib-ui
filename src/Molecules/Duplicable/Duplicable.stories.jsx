@@ -13,11 +13,19 @@ export default {
   title: 'Molecules/Duplicable',
 }
 
+const Model = ({ onRemove, key, value }) => <FlexBox alignItems="center" mb={1} gap={1} key={key}>
+  <Input placeholder={text('email_placeholder', 'contact@email.com')} value={value} />
+  <FlexBox component={TrashAlt} size={24} cursor="pointer" onClick={onRemove}/>
+</FlexBox>
+
 export const emptyDuplicable = () => {
   return <Duplicable
-    model={<Input placeholder={text('email_placeholder', 'contact@email.com')} />}
-    addType={<ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>}
-    removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" />}
+    model={<Model />}
+    addType={
+      <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      </FlexBox>
+    }
   />
 }
 
@@ -30,9 +38,12 @@ emptyDuplicable.story = {
 
 export const emptyableDuplicable = () => {
   return <Duplicable
-    model={<Input placeholder={text('email_placeholder', 'contact@email.com')} />}
-    addType={<ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>}
-    removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" />}
+    model={<Model />}
+    addType={
+      <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      </FlexBox>
+    }
     canBeEmpty={true}
   />
 }
@@ -46,9 +57,12 @@ emptyableDuplicable.story = {
 
 export const duplicableWithData = () => {
   return <Duplicable
-    model={<Input placeholder={text('email_placeholder', 'contact@email.com')} />}
-    addType={<ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>}
-    removeType={<FlexBox component={TrashAlt} size={24} cursor="pointer" />}
+    model={<Model />}
+    addType={
+      <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      </FlexBox>
+    }
     instancesProps={[{ value: 'toto' }, { value: 'tata' }]}
   />
 }

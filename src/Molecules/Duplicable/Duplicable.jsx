@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import FlexBox from '../../Templates/FlexBox'
-
 const computeNextKey = duplicated => {
   let nextKey = 0
 
@@ -19,12 +17,8 @@ const computeNextKey = duplicated => {
 const Duplicable = ({
   model,
   addType,
-  removeType,
   canBeEmpty = false,
   instancesProps = [],
-  gap = 1,
-  mb = 1,
-  btnMarginTop = 2,
 }) => {
   const [duplicated, setDuplicated] = useState(
     instancesProps.length ? instancesProps.map((instanceProps, index) => {
@@ -56,20 +50,10 @@ const Duplicable = ({
   return <>
     {
       duplicated.map(duplicate => {
-        const clonedRemove = React.cloneElement(removeType, {
-          onClick: () => { removeDuplicate(duplicate.key) },
-          ...removeType.props,
-        })
-
-        return <FlexBox key={duplicate.key} alignItems="center" mb={mb} gap={gap}>
-          {duplicate}
-          {clonedRemove}
-        </FlexBox>
+        return React.cloneElement(duplicate, { onRemove: () => removeDuplicate(duplicate.key), ...duplicate })
       })
     }
-    <FlexBox key="add_btn" mt={btnMarginTop}>
-      {clonedAdd}
-    </FlexBox>
+    {clonedAdd}
   </>
 }
 
