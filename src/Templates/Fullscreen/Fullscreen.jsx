@@ -5,7 +5,7 @@ import {
   Button, IconButton, Tooltip, Typo, Trans,
 } from '../../Atoms'
 import { Close } from 'styled-icons/material/Close'
-import { HelpOutline } from '@styled-icons/material/HelpOutline'
+import { HelpOutline } from 'styled-icons/material/HelpOutline'
 import FlexBox from '../FlexBox'
 
 const dialogStyles = makeStyles(theme => ({

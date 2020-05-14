@@ -8,7 +8,7 @@ import FlexBox from '../../Templates/FlexBox'
 
 import { text } from '@storybook/addon-knobs'
 import userEvent from '@testing-library/user-event'
-import { Times } from '@styled-icons/fa-solid/Times'
+import { Times } from 'styled-icons/fa-solid/Times'
 import { Check } from 'styled-icons/material/Check'
 import { Edit } from 'styled-icons/material/Edit'
 import Trans from '../../Atoms/Trans'

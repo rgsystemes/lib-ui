@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Avatar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Check } from '@styled-icons/boxicons-regular'
-import { Circle } from '@styled-icons/boxicons-solid'
+import { Check } from 'styled-icons/boxicons-regular'
+import { Circle } from 'styled-icons/boxicons-solid'
 
 import Tooltip from '../../../Atoms/Tooltip'
 import Typo from '../../../Atoms/Typo'

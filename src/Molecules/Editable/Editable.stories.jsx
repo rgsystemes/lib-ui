@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, RadioGroup, FormGroup } from '@material-ui/core'
-import { Edit } from '@styled-icons/material/Edit'
-import { Check } from '@styled-icons/material/Check'
+import { Edit } from 'styled-icons/material/Edit'
+import { Check } from 'styled-icons/material/Check'
 
 import Button from '../../Atoms/Button'
 import IconButton from '../../Atoms/IconButton'
