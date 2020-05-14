@@ -28,7 +28,7 @@ const Duplicable = ({
 }) => {
   const [duplicated, setDuplicated] = useState(
     instancesProps.length ? instancesProps.map((instanceProps, index) => {
-      return React.cloneElement(model, { ...instanceProps, key: index, index: index })
+      return React.cloneElement(model, { key: index, ...instanceProps, index: index })
     }) :
     canBeEmpty ? [] :
     [React.cloneElement(model, { key: 0, index: 0 })],
@@ -45,11 +45,11 @@ const Duplicable = ({
 
         return duplicate.key !== key
       },
-    ),
+    ).map((filtered, index) => ({ ...filtered, index: index })),
   )
 
   const clonedAdd = React.cloneElement(addType, {
-    onClick: () => setDuplicated([...duplicated, React.cloneElement(model, { key: nextKey, index: nextKey })]),
+    onClick: () => setDuplicated([...duplicated, React.cloneElement(model, { key: nextKey, index: duplicated.length + 1 })]),
     ...addType.props,
   })
 
