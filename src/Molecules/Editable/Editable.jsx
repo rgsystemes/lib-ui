@@ -1,5 +1,6 @@
 import React, { Children } from 'react'
-import { ArrowRightAlt } from '@styled-icons/material/ArrowRightAlt'
+
+import { ArrowRightAlt } from 'styled-icons/material/ArrowRightAlt'
 import { format } from 'date-fns'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormGroup from '@material-ui/core/FormGroup'
