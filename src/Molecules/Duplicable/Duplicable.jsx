@@ -20,12 +20,12 @@ const Duplicable = ({
   canBeEmpty = false,
   instancesProps = [],
 }) => {
+  if (instancesProps.length === 0 && !canBeEmpty) {
+    instancesProps.push({})
+  }
+  
   const [duplicated, setDuplicated] = useState(
-    instancesProps.length ? instancesProps.map((instanceProps, index) => {
-      return React.cloneElement(model, { key: index, ...instanceProps, index: index })
-    }) :
-    canBeEmpty ? [] :
-    [React.cloneElement(model, { key: 0, index: 0 })],
+    instancesProps.map((instanceProps, index) => React.cloneElement(model, { ...instanceProps, key: index, index }))
   )
 
   const nextKey = computeNextKey(duplicated)
