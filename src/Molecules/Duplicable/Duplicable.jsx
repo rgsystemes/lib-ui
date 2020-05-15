@@ -31,15 +31,9 @@ const Duplicable = ({
   const nextKey = computeNextKey(duplicated)
 
   const removeDuplicate = key => setDuplicated(
-    duplicated.filter(
-      duplicate => {
-        if (!canBeEmpty && duplicated.length < 2) {
-          return true
-        }
-
-        return duplicate.key !== key
-      },
-    ).map((filtered, index) => ({ ...filtered, index: index })),
+    duplicated
+      .filter(duplicate => !canBeEmpty && duplicated.length < 2 || duplicate.key !== key)
+      .map((filtered, index) => ({ ...filtered, index }))
   )
 
   const clonedAdd = React.cloneElement(addType, {
