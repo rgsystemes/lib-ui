@@ -182,7 +182,7 @@ it('should reset when user click anything but input and save button', async () =
   expect(getByText('subFeature')).toBeVisible()
 })
 
-it('should update state on successful save.', async () => {
+it('should update state on successful save', async () => {
   const { getByRole, getByTestId, findByRole } = render(
     <ThemeWrapper>
       <StateHolder state="initial">
