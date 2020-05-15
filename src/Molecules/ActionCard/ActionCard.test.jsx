@@ -111,6 +111,7 @@ const doTheMagicTrick = async ({
 
   expect(getByLabelText(label)).toBeVisible()
   expect(getByLabelText(label)).toHaveValue(inputValue)
+  userEvent.clear(getByLabelText(label))
   await userEvent.type(getByLabelText(label), updatedInputValue, { allAtOnce: true })
 
   userEvent.click(getByText(actionBtn))
