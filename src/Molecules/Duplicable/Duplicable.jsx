@@ -44,7 +44,7 @@ const Duplicable = ({
   return <>
     {
       duplicated.map(duplicate => {
-        return React.cloneElement(duplicate, { onRemove: () => removeDuplicate(duplicate.key), ...duplicate })
+        return React.cloneElement(duplicate, { ...duplicate, onRemove: () => removeDuplicate(duplicate.key) })
       })
     }
     {clonedAdd}
