@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { ChevronRight } from '@styled-icons/material'
+import { ChevronRight } from 'styled-icons/material'
 
 import Link from '../../Atoms/Link'
 import FlexBox from '../../Templates/FlexBox'

@@ -12,7 +12,7 @@ import Input from '../../Atoms/Input'
 
 import FormGroup from '@material-ui/core/FormGroup'
 import { text } from '@storybook/addon-knobs'
-import { Times } from '@styled-icons/fa-solid/Times'
+import { Times } from 'styled-icons/fa-solid/Times'
 import { Check } from 'styled-icons/material/Check'
 import { Edit } from 'styled-icons/material/Edit'
 
