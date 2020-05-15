@@ -40,8 +40,8 @@ export const select = () => {
 
   return selects.map(({ key, description = '', ...props }) => (
     <Container key={key}>
-      <InputLabel id={`label-${key}`} htmlFor={`select-${key}`} style={{ paddingBottom: 5 }}>{key}</InputLabel>
-      <Select value={option} labelId={`label-${key}`} inputProps={{ id: `select-${key}` }} onChange={handleChange} {...props} disabled={boolean('Disabled', false)}>
+      <InputLabel id={`label-${key.replace(/\s/g, '-')}`} htmlFor={`select-${key}`} style={{ paddingBottom: 5 }}>{key}</InputLabel>
+      <Select value={option} labelId={`label-${key.replace(/\s/g, '-')}`} inputProps={{ id: `select-${key}` }} onChange={handleChange} {...props} disabled={boolean('Disabled', false)}>
         {[1, 2, 3].map(value => (
           <Option key={value} value={value} description={description.replace('%d', value)}>
             Option #{value}
