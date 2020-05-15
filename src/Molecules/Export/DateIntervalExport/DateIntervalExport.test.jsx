@@ -56,9 +56,9 @@ it('should call onExport when the from and the to are not null', () => {
 
   expect(onExport).toHaveBeenCalledWith({
     filename: 'global.export.defaultFilename',
-    format: 'xls',
-    from: '01/01/2020 à 00:00:00',
-    to: '31/12/2020 à 00:00:00',
+    format:   'xls',
+    from:     '01/01/2020 à 00:00:00',
+    to:       '31/12/2020 à 00:00:00',
   })
 })
 
