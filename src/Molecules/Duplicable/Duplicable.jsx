@@ -23,23 +23,20 @@ const Duplicable = ({
   if (instancesProps.length === 0 && !canBeEmpty) {
     instancesProps.push({})
   }
-  
+
   const [duplicated, setDuplicated] = useState(
-    instancesProps.map((instanceProps, index) => React.cloneElement(model, { ...instanceProps, key: index, index }))
+    instancesProps.map(
+      (instanceProps, index) => React.cloneElement(model, { ...instanceProps, key: index, index }),
+    ),
   )
 
   const nextKey = computeNextKey(duplicated)
 
   const removeDuplicate = key => setDuplicated(
     duplicated
-      .filter(duplicate => !canBeEmpty && duplicated.length < 2 || duplicate.key !== key)
-      .map((filtered, index) => ({ ...filtered, index }))
+      .filter(duplicate => (!canBeEmpty && duplicated.length < 2) || duplicate.key !== key)
+      .map((filtered, index) => ({ ...filtered, index })),
   )
-
-  const clonedAdd = React.cloneElement(addType, {
-    onClick: () => setDuplicated([...duplicated, React.cloneElement(model, { key: nextKey, index: duplicated.length + 1 })]),
-    ...addType.props,
-  })
 
   return <>
     {
@@ -47,7 +44,17 @@ const Duplicable = ({
         return React.cloneElement(duplicate, { ...duplicate, onRemove: () => removeDuplicate(duplicate.key) })
       })
     }
-    {clonedAdd}
+    {
+      React.cloneElement(addType, {
+        onClick: () => setDuplicated(
+          [
+            ...duplicated,
+            React.cloneElement(model, { key: nextKey, index: duplicated.length }),
+          ],
+        ),
+        ...addType.props,
+      })
+    }
   </>
 }
 
