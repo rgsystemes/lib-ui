@@ -15,11 +15,7 @@ const DateTimePickerForm = ({ label, value, onChange, ...props }) => (
   </FormControl>
 )
 
-export const DateIntervalExport = ({
-  value,
-  onChange = () => {},
-  ...props
-}) => (
+export const DateIntervalExport = ({ value, onChange = () => {}, ...props }) => (
   <Export
     value={value}
     onChange={onChange}

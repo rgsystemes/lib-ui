@@ -12,7 +12,7 @@ import { TransProvider } from '../../../Atoms/Trans'
 import { muiRg6Theme } from '../../../../.storybook/themes'
 import { MuiPickersUtilsProvider } from '../../../Atoms/DateTimePicker'
 
-const Export = props =>
+const Export = props => (
   <TransProvider value={{}}>
     <MuiThemeProvider theme={muiRg6Theme}>
       <ThemeProvider theme={{}}>
@@ -22,6 +22,7 @@ const Export = props =>
       </ThemeProvider>
     </MuiThemeProvider>
   </TransProvider>
+)
 
 it('should not call onExport when the from is null', () => {
   const onExport = jest.fn()
@@ -31,7 +32,7 @@ it('should not call onExport when the from is null', () => {
 
   userEvent.click(getByText('global.export.actionExport'))
 
-  expect(onExport).toHaveBeenCalledTimes(0)
+  expect(onExport).not.toHaveBeenCalled()
 })
 
 it('should not call onExport when the to is null', () => {
@@ -42,7 +43,7 @@ it('should not call onExport when the to is null', () => {
 
   userEvent.click(getByText('global.export.actionExport'))
 
-  expect(onExport).toHaveBeenCalledTimes(0)
+  expect(onExport).not.toHaveBeenCalled()
 })
 
 it('should call onExport when the from and the to are not null', () => {
@@ -53,7 +54,10 @@ it('should call onExport when the from and the to are not null', () => {
 
   userEvent.click(getByText('global.export.actionExport'))
 
-  expect(onExport).toHaveBeenCalled()
+  expect(onExport).toHaveBeenCalledWith({
+    from: '01/01/2020 à 00:00:00',
+    to: '31/12/2020 à 00:00:00',
+  })
 })
 
 it('should not call onExport when the from is greather than the to', () => {
@@ -64,5 +68,5 @@ it('should not call onExport when the from is greather than the to', () => {
 
   userEvent.click(getByText('global.export.actionExport'))
 
-  expect(onExport).toHaveBeenCalledTimes(0)
+  expect(onExport).not.toHaveBeenCalled()
 })
