@@ -28,8 +28,8 @@ it('should show a default input', () => {
       <Duplicable
         model={<Model />}
         addType={
-          <FlexBox key="add_btn" mt={2}>
-            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
           </FlexBox>
         }
       />,
@@ -91,8 +91,8 @@ it('should show no input', () => {
       <Duplicable
         model={<Model />}
         addType={
-          <FlexBox key="add_btn" mt={2}>
-            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
           </FlexBox>
         }
         canBeEmpty={true}
@@ -158,8 +158,8 @@ it('should show sent input', () => {
       <Duplicable
         model={<Model />}
         addType={
-          <FlexBox key="add_btn" mt={2}>
-            <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+          ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+            <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
           </FlexBox>
         }
         canBeEmpty={true}

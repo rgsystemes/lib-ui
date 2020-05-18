@@ -45,14 +45,13 @@ const Duplicable = ({
       })
     }
     {
-      React.cloneElement(addType, {
-        onClick: () => setDuplicated(
+      addType({
+        onAdd: () => setDuplicated(
           [
             ...duplicated,
             React.cloneElement(model, { key: nextKey, index: duplicated.length }),
           ],
         ),
-        ...addType.props,
       })
     }
   </>

@@ -22,8 +22,8 @@ export const emptyDuplicable = () => {
   return <Duplicable
     model={<Model />}
     addType={
-      <FlexBox key="add_btn" mt={2}>
-        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
       </FlexBox>
     }
   />
@@ -40,8 +40,8 @@ export const emptyableDuplicable = () => {
   return <Duplicable
     model={<Model />}
     addType={
-      <FlexBox key="add_btn" mt={2}>
-        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
       </FlexBox>
     }
     canBeEmpty={true}
@@ -59,8 +59,8 @@ export const duplicableWithData = () => {
   return <Duplicable
     model={<Model />}
     addType={
-      <FlexBox key="add_btn" mt={2}>
-        <ButtonNoBorder>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
+      ({ onAdd }) => <FlexBox key="add_btn" mt={2}>
+        <ButtonNoBorder onClick={onAdd}>{text('add_btn_text', 'Duplicate input')}</ButtonNoBorder>
       </FlexBox>
     }
     instancesProps={[{ value: 'toto' }, { value: 'tata' }]}
