@@ -22,7 +22,7 @@ export {
 export { default as Export } from './Export'
 export { default as List } from './List'
 export { default as EmptyPlaceholder } from './EmptyPlaceholder'
-export { default as Breadcrumb } from './Breadcrumb'
+export { default as Breadcrumb, Item } from './Breadcrumb'
 export { default as Filter } from './Filter'
 export { default as DateRange } from './DateRange'
 export { default as Search } from './Search'
