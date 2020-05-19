@@ -17,6 +17,7 @@ export const fullscreen = () => {
 
   const onValidateAction = action('validated')
   const onCancelAction = action('cancelled')
+  const onClickAction = action('clicked')
 
   const onClick = () => {
     setStripped(false)
@@ -39,10 +40,11 @@ export const fullscreen = () => {
   }
 
   let props = {
-    open:        open,
-    icon:        icon,
-    headerTitle: 'Header title',
-    title:       'Page title',
+    onClickTooltip: onClickAction,
+    open:           open,
+    icon:           icon,
+    headerTitle:    'Header title',
+    title:          'Page title',
     onCancel,
     onValidate,
   }

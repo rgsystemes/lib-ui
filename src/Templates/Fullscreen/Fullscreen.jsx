@@ -21,6 +21,9 @@ const dialogStyles = makeStyles(theme => ({
         textTransform: 'uppercase',
       },
     },
+    '& .pointer': {
+      cursor: 'pointer',
+    }
   },
 }))
 
@@ -36,13 +39,27 @@ const Fullscreen = ({
   headerTitle,
   title,
   tooltip,
+  onClickTooltip,
   children,
   onCancel,
   onValidate,
   validateText,
   ...props
-}) => (
-  <Dialog fullScreen classes={dialogStyles()} {...props} hideBackdrop>
+}) => {
+  let tooltipProps = {
+    title: tooltip,
+  }
+
+  if (onClickTooltip)
+    tooltipProps = {
+      ...tooltipProps,
+      ...{
+        className: 'pointer',
+        onClick: onClickTooltip,
+      },
+    }
+
+  return <Dialog fullScreen classes={dialogStyles()} {...props} hideBackdrop>
     <FlexBox flexDirection="column" gap={4} my={3} mx={8} height="100%" overflow="hidden">
       <FlexBox className="header">
         <FlexBox flexDirection="column" flexGrow={1} justifyContent="center">
@@ -56,7 +73,7 @@ const Fullscreen = ({
             <Typo fontSize="l" fontFamily="title">
               {title}
             </Typo>
-            {tooltip && <Tooltip title={tooltip}>
+            {tooltip && <Tooltip { ...tooltipProps }>
               <HelpOutline size={25} />
             </Tooltip>}
           </FlexBox>
@@ -82,6 +99,6 @@ const Fullscreen = ({
       </FlexBox>
     </FlexBox>
   </Dialog>
-)
+}
 
 export default Fullscreen
