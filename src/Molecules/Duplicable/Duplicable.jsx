@@ -1,59 +1,55 @@
 import React, { useState } from 'react'
-
-const computeNextKey = duplicated => {
-  let nextKey = 0
-
-  duplicated.map(duplicate => {
-    const key = parseInt(duplicate.key)
-
-    if ('key' in duplicate && key >= nextKey) {
-      nextKey = key + 1
-    }
-  })
-
-  return nextKey
-}
+import ButtonNoBorder from '../../Atoms/ButtonNoBorder'
+import FlexBox from '../../Templates/FlexBox'
+import { TrashAlt } from 'styled-icons/boxicons-solid/TrashAlt'
 
 const Duplicable = ({
-  model,
-  addType,
-  canBeEmpty = false,
-  instancesProps = [],
+  Model,
+  addText,
+  requireContent = false,
+  instancesCount = requireContent ? 1 : 0,
+  onRemove = () => {},
+  onAdd = () => {},
 }) => {
-  if (instancesProps.length === 0 && !canBeEmpty) {
-    instancesProps.push({})
+  const [{ lastIndex, indices }, setState] = useState({
+    lastIndex: instancesCount - 1,
+    indices:   [...Array(instancesCount).keys()],
+  })
+
+  const addDuplicata = () => {
+    setState({
+      lastIndex: lastIndex + 1,
+      indices:   [
+        ...indices,
+        lastIndex + 1,
+      ],
+    })
+    onAdd(lastIndex + 1)
   }
 
-  const [duplicated, setDuplicated] = useState(
-    instancesProps.map(
-      (instanceProps, index) => React.cloneElement(model, { ...instanceProps, key: index, index }),
-    ),
-  )
-
-  const nextKey = computeNextKey(duplicated)
-
-  const removeDuplicate = key => setDuplicated(
-    duplicated
-      .filter(duplicate => (!canBeEmpty && duplicated.length < 2) || duplicate.key !== key)
-      .map((filtered, index) => ({ ...filtered, index })),
-  )
+  const removeDuplicata = key => {
+    if (!requireContent || indices.length > 1) {
+      setState({
+        lastIndex: lastIndex,
+        indices:   indices.filter(index => index !== key),
+      })
+      onRemove(key)
+    }
+  }
 
   return <>
     {
-      duplicated.map(duplicate => {
-        return React.cloneElement(duplicate, { ...duplicate, onRemove: () => removeDuplicate(duplicate.key) })
-      })
+      indices.map(index => <FlexBox alignItems="center" mb={1} gap={1} key={index}>
+        <Model index={index} />
+        {
+          (!requireContent || indices.length > 1) &&
+          <FlexBox component={TrashAlt} size={24} cursor="pointer" onClick={() => removeDuplicata(index)}/>
+        }
+      </FlexBox>)
     }
-    {
-      addType({
-        onAdd: () => setDuplicated(
-          [
-            ...duplicated,
-            React.cloneElement(model, { key: nextKey, index: duplicated.length }),
-          ],
-        ),
-      })
-    }
+    <FlexBox key="add_btn" mt={2}>
+      <ButtonNoBorder onClick={addDuplicata}>{addText}</ButtonNoBorder>
+    </FlexBox>
   </>
 }
 
