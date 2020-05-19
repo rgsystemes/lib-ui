@@ -43,7 +43,13 @@ const Duplicable = ({
         <Model index={index} />
         {
           (!requireContent || indices.length > 1) &&
-          <FlexBox component={TrashAlt} size={24} cursor="pointer" onClick={() => removeDuplicata(index)}/>
+          <FlexBox
+            component={TrashAlt}
+            size={24}
+            cursor="pointer"
+            onClick={() => removeDuplicata(index)}
+            data-testid="InputRemover"
+          />
         }
       </FlexBox>)
     }
