@@ -53,10 +53,8 @@ const Fullscreen = ({
   if (onClickTooltip)
     tooltipProps = {
       ...tooltipProps,
-      ...{
-        className: 'pointer',
-        onClick: onClickTooltip,
-      },
+      className: 'pointer',
+      onClick: onClickTooltip,
     }
 
   return <Dialog fullScreen classes={dialogStyles()} {...props} hideBackdrop>
